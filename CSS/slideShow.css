@@ -1,0 +1,35 @@
+#slideshow{
+    max-width: 600px;
+    margin: auto;
+    margin-top: 102px;
+    display: flex;
+    overflow: hidden;
+}
+
+#run{
+    width: 600px;
+    display: flex;
+    transition: all 0.4s ease;
+}
+
+.img1 {
+    background-image: url('/assest/slideshow.jpg');
+    padding-top:400px;
+    min-width: 600px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.img2{
+    background-image: url('/assest/slideshow1.jpg');
+    padding-top:400px;
+    min-width: 600px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.img3{
+    background-image: url('/assest/Slidesho3.jpg');
+    padding-top:400px;
+    min-width: 600px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

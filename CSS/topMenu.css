@@ -1,0 +1,104 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+#search{
+    border-radius: 1000px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+}
+#search:focus{
+    outline: none;
+}
+#delete{
+    position: absolute;
+    right: 3%;
+    cursor: pointer;
+    padding: 3px;
+}
+
+#delete::before {
+    content:"";
+    background-color: none;
+    width: 20px;
+    height: 30px;
+    position: absolute;
+    top: -2px;
+    pointer: cursor;    
+}
+#delete:hover{
+    scale: 1.1;
+}
+#overlay{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: none;
+}
+#menu{
+    padding: 0:
+    border: none;
+    margin: 0;
+}
+#menu:hover #menudacap{
+    animation: scale 0.3s;
+    display: block;
+    transform-origin: top right;
+}
+#menudacap{
+    position: absolute;
+    right: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0 100px;
+    display: none;
+    border-radius: 17px;
+}
+
+#menudacap::before {
+    position: absolute;
+    content: "";
+    width: 70px;
+    height: 40px;
+    background-color: none;
+    right: 0.5px;
+    top: -30px;
+}
+#menu2:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+#cart{
+    cursor: pointer;
+}
+#cart:hover{
+    opacity: 0.7;
+}
+li{
+    list-style-type: none;
+    width: 100%;
+    white-space: nowrap;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+li:hover{
+    color: #Ecbc76;
+}
+@keyframes scale {
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
