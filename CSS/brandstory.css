@@ -2,10 +2,16 @@
     display: grid;  
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    background-color:rgb(242, 187, 223);
+    background-color:#C39A9A;
     padding: 0px;
-    margin: 0px;
+    
 }
+
+
+#story{
+    margin-left: 10%;
+}
+
 #imgBrand{
     width: 100%;
     text-align: center;
