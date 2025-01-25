@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuyển Trang (Query Parameters)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .page {
+      display: none;
+      font-size: 24px;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #333;
+      background: #fff;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .navigation {
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      background: #007bff;
+    }
+
+    .btn:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="page-1" class="page">Trang 1</div>
+  <div id="page-2" class="page">Trang 2</div>
+  <div id="page-3" class="page">Trang 3</div>
+  <div id="page-4" class="page">Trang 4</div>
+
+  <div class="navigation">
+    <button id="prev-btn" class="btn" disabled>Trước</button>
+    <button id="next-btn" class="btn">Tiếp theo</button>
+  </div>
+
+  <script>
+    // Các biến
+    const pages = document.querySelectorAll('.page');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const totalPages = pages.length;
+
+    // Lấy số trang từ URL
+    function getPageFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return parseInt(params.get('page')) || 1; // Mặc định là trang 1
+    }
+
+    // Cập nhật URL khi chuyển trang
+    function updateURL(page) {
+      const newURL = `${window.location.pathname}?page=${page}`;
+      window.history.pushState({ page }, '', newURL);
+    }
+
+    // Hiển thị trang hiện tại
+    function showPage(page) {
+      pages.forEach((pageElement, index) => {
+        pageElement.classList.toggle('active', index + 1 === page);
+      });
+
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+    }
+
+    // Xử lý sự kiện khi nhấn nút "Trước" hoặc "Tiếp theo"
+    let currentPage = getPageFromURL();
+    showPage(currentPage);
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+        updateURL(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+        updateURL(currentPage);
+      }
+    });
+
+    // Xử lý "back" hoặc "forward" của trình duyệt
+    window.addEventListener('popstate', (event) => {
+      currentPage = event.state?.page || 1;
+      showPage(currentPage);
+    });
+  </script>
+</body>
+</html>

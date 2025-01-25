@@ -24,7 +24,7 @@
     height: 30px;
     position: absolute;
     top: -2px;
-    pointer: cursor;    
+    cursor: pointer;  
 }
 #delete:hover{
     scale: 1.1;
@@ -40,7 +40,8 @@
     display: none;
 }
 #menu{
-    padding: 0:
+    padding: 0;
+
     border: none;
     margin: 0;
 }
@@ -85,6 +86,7 @@
 a{
     text-decoration: none;
     color: black;
+
 }
 li{
     list-style-type: none;
