@@ -9,10 +9,75 @@
     <link rel="stylesheet" href="./CSS/slideShow.css">
     <link rel="stylesheet" href="./CSS/brandStory.css">
     <link rel="stylesheet" href="./CSS/footer.css">
+    <link rel="stylesheet" href="./CSS/login.css">
+    <link rel="stylesheet" href="./CSS/register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body style="margin: 0 0; padding: 0 0;background-color: #FAEEE7;">
-    <div id="overlay"></div>
+    <div id="overlay">
+        <div id="login-form">
+            <div class="login-content">
+                Welcome to <span class="highlight-1">DOLCE</span>
+            </div>
+            <div class="signup">    
+                <span class="blur">No Account?</span>
+                <span class="lg-highlight-2">Sign up</span>
+            </div>
+            <form id=login-form-son>
+                <div class="login-username">
+                    <label for="username">Enter your username or email address</label><br>
+                    <input type="text" id="lg-username" placeholder="Username or email address"><br>
+                </div>
+               <div class="login-password">
+                    <label for="password">Enter your Password</label><br>
+                    <div class="password-container">
+                        <input type="password" id="lg-password" placeholder="Password">
+                        <i class="fa-solid fa-eye" id="toggle-password"></i>
+                    </div>
+                    <span class="highlight-3">Forgot Password</span>
+               </div>
+                <button type="submit" class="signin-btn">Sign in</button>
+            </form> 
+        </div>
+
+        <div id="register-form">
+            <div class="register-content">
+                Sign up
+            </div>
+            <div class="signin">    
+                <span class="blur">Have an Account?</span>
+                <span class="rg-highlight-2">Sign in</span>
+            </div>
+            <form id=register-form-son>
+                <div class="register-username">
+                    <label for="username">Enter your username or email address</label><br>
+                    <input type="text" id="rg-username" placeholder="Username or email address"><br>
+                </div>
+                <div class="register-info">
+                    <div class="username-info">
+                        <label for="info"> User name</label>
+                        <input type="text" id="rg-info" placeholder="User name">
+                    </div>
+                    <div class="contactnumber-info">
+                        <label for="info">Contact Number</label>
+                        <input type="text" id="rg-info" placeholder="Contact Numbers">
+                    </div>
+                </div>
+               <div class="register-password">
+                    <label for="password">Enter your Password</label><br>
+                    <div class="password-container">
+                        <input type="password" id="rg-password" placeholder="Password">
+                    </div>
+               </div>
+                <button type="submit" class="signup-btn">Sign up</button>
+            </form> 
+        </div>
+    </div>
     <div id="container">
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
             <nav
@@ -34,7 +99,7 @@
                             style="width: 50%;;background-color: #33272A;padding: 0; border: none;" alt="">
                         <ul id="menudacap">
                             <a href="#"><li>Trang chủ</li></a>
-                            <a href="#"><li>Đăng nhập</li></a>
+                            <a href="#"><li id="login-btn">Đăng nhập</li></a>
                             <a href="#"><li>Thực đơn</li></a>
                             <a href="#"><li style="border-bottom:none;">Tin tức</li></a>
                         </ul>
@@ -127,6 +192,7 @@
 
     <script src="./JS/clear.js"></script>
     <script src="./JS/slideShow.js"></script>
+    <script src="./JS/blocklogin.js"></script>
 </body>
 
 </html>

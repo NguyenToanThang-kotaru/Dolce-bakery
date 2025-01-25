@@ -1,0 +1,113 @@
+
+  
+#login-form {
+    background-color: #ffffff;
+    width: 400px;
+    height: 500px;
+    padding: 30px 20px;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 102px;
+}
+
+.highlight-1{
+    color: #915959;
+    font-size: 15px;
+}
+
+.lg-highlight-2{
+    color: #915959;
+    cursor: pointer;
+}
+
+.lg-highlight-2:hover{
+    color: #Ecbc76;
+}
+
+.blur{
+    color: #8d8d8d;
+}
+
+.login-content{
+    font-size: 15px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.signup{
+    display: flex;
+    font-size: 11px;
+    position: relative;
+    left: 325px;
+    bottom: 10px;
+    flex-direction: column;
+}
+
+#login-form-son{
+    font-size: 11px;
+    margin-top: 60px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#lg-username{
+    border: 1px solid #4285f4;
+    width: 355px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#lg-password{
+    border: 1px solid #a5a5a5;
+    width: 355px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.password-container i {
+    position: absolute;
+    left: 920px;
+    top: 50%;
+    cursor: pointer;
+    color: #8e8e8e;
+    font-size: 11px;
+  }
+
+.highlight-3{
+    color: #915959;
+    cursor: pointer;
+    position: relative;
+    top: 15px;
+    left: 72%;
+}
+
+.highlight-3:hover{
+    color: #Ecbc76;
+}
+
+#login-form-son button{
+    width: 370px;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #915959;
+    color: #ffffff;
+    font-size: 11px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#login-form-son button:hover{
+    transform: scale(1.01);
+    background-color: #Ecbc76;
+}
+
+#login-form-son button:active{
+    transform: scale(1.02);
+}
+
