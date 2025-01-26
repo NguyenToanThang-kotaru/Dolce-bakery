@@ -1,0 +1,112 @@
+  
+#register-form {
+    background-color: #ffffff;
+    width: 400px;
+    height: 500px;
+    padding: 30px 20px;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 102px;
+    z-index: 2;
+
+}
+
+.rg-highlight-2{
+    color: #915959;
+    cursor: pointer;
+}
+
+.rg-highlight-2:hover{
+    color: #Ecbc76;
+}
+
+.blur{
+    color: #8d8d8d;
+}
+
+.register-content{
+    font-size: 45px;
+    position: relative;
+    left: 10px;
+    top: 20px;
+}
+
+.signin{
+    display: flex;
+    font-size: 11px;
+    position: relative;
+    left: 290px;
+    bottom: 60px;
+    flex-direction: column;
+}
+
+#register-form-son{
+    font-size: 11px;
+    margin-top: 30px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#rg-username{
+    border: 1px solid #4285f4;
+    width: 355px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#rg-password{
+    border: 1px solid #adadad;
+    width: 355px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.highlight-3{
+    color: #915959;
+    cursor: pointer;
+    position: relative;
+    top: 15px;
+    left: 72%;
+}
+
+#register-form-son button{
+    width: 370px;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #915959;
+    color: #ffffff;
+    font-size: 11px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#register-form-son button:hover{
+    transform: scale(1.01);
+    background-color: #Ecbc76;
+}
+
+#register-form-son button:active{
+    transform: scale(1.02);
+}
+
+.register-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-info input{
+    border: 1px solid #adadad;
+    width: 150px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.contactnumber-info{
+    margin-left: 25px;
+}
