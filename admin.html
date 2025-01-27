@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bakery admin</title>
+  <link rel="stylesheet" href="./CSS/admin.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2 id="admin">Admin</h2>
+    <a href="#">Thống kê</a>
+    <a href="#" id="admin-oder">Đơn hàng</a>
+    <a href="#" id="admin-product">Sản phẩm</a>
+    <a href="#" id="admin-customer">Khách hàng</a>
+    <a href="#">Cài đặt</a>
+    <img src="./assest/Dolce.png" alt="hahaha">
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <div class="profile">
+        <span>Admin 1</span>
+        <img src="./assest/admin.jpg" alt="">
+      </div>
+    </div>
+    <div class="business-process">
+      <div class="card">
+        <h3>Số đơn hàng</h3>
+        <p>0</p>
+      </div>
+      <div class="card">
+        <h3>Doanh thu</h3>
+        <p>0</p>
+      </div>
+      <div class="card">
+        <h3>Tỷ lệ tăng trưởng</h3>
+        <p>0</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="oder-part">
+    <div class="order-header">
+      <h1>Quản lý Đơn Hàng</h1>
+      <button class="add-order-btn">Thêm đơn hàng mới</button>
+    </div>
+
+    <div class="order-table-container">
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Tên khách hàng</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+            <th>Ngày mua</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nguyễn </td>
+            <td>Bánh tiramisu socola</td>
+            <td>2</td>
+            <td>500,000 VND</td>
+            <td>2024</td>
+          </tr>
+          <tr>
+            <td>Mai</td>
+            <td>Bánh chưng</td>
+            <td>3</td>
+            <td>150,000 VND</td>
+            <td>2023</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="customer-part">
+
+  </div>
+
+  <div class="product-part">
+
+  </div>
+  <script src="./JS/admin.js"></script>
+</body>
+</html>
