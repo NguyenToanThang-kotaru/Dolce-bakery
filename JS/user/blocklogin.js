@@ -7,11 +7,13 @@ const lg_btn = document.querySelector("#login-btn");
 const close_eye = document.querySelector("#none-password");
 const open_eye = document.querySelector("#block-password");
 const lg_pass = document.querySelector("#lg-password");
+const menu = document.querySelector("#menu2");
 
 function pageLogin(){
     overlay.style.display = "block";
     login_form.style.display = "block";
     register_form.style.display = "none";
+    menu.style.display = "none";
 }
 
 lg_btn.addEventListener("click",pageLogin);
@@ -20,10 +22,12 @@ function pageRegister(){
     overlay.style.display = "block";
     login_form.style.display = "none";
     register_form.style.display = "block";
+    menu.style.display = "none";
 }
 
 function returnHome(){
     overlay.style.display = "none";
+    menu.style.display = "block";
 }
 
 function openEye(){

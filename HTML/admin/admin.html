@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bakery admin</title>
   <link rel="stylesheet" href="/CSS/admin/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -45,34 +46,36 @@
   <div class="oder-part">
     <div class="order-header">
       <h1>Quản lý Đơn Hàng</h1>
-      <button class="add-order-btn">Thêm đơn hàng mới</button>
     </div>
 
     <div class="order-table-container">
       <table class="order-table">
         <thead>
           <tr>
-            <th>Tên khách hàng</th>
-            <th>Sản phẩm</th>
+            <th>Tên KH</th>
+            <th>Mã KH</th>
             <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <th>Ngày mua</th>
+            <th>Xem chi tiết</th>
+            <th>Trạng thái</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Nguyễn </td>
-            <td>Bánh tiramisu socola</td>
+            <td>01</td>
             <td>2</td>
             <td>500,000 VND</td>
-            <td>2024</td>
+            <td><i class="fa-solid fa-circle-info"></i></td>
+            <td>Đã xử lý</td>
           </tr>
           <tr>
             <td>Mai</td>
-            <td>Bánh chưng</td>
+            <td>02</td>
             <td>3</td>
             <td>150,000 VND</td>
-            <td>2023</td>
+            <td><i class="fa-solid fa-circle-info"></i></td>
+            <td>Chưa xử lý</td>
           </tr>
         </tbody>
       </table>
@@ -80,11 +83,49 @@
   </div>
 
   <div class="customer-part">
-
+  
   </div>
 
   <div class="product-part">
-
+    <div class="order-header">
+      <h1>Danh sách Sản Phẩm</h1>
+      <i class="fa-solid fa-plus"></i>
+    </div>
+    <div class="product-table-container">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>*</th>
+            <th>Tên sản phẩm</th>
+            <th>Loại</th>
+            <th>Số lượng</th>
+            <th>Giá tiền</th>
+            <th>*</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="img-admin"><img src="../../assest/banhkem1.jpg" alt=""></td>
+            <td>Bánh kem 1</td>
+            <td>Bánh kem</td>
+            <td>10</td>
+            <td>500,000 VND</td>
+            <td><div class="fix-product">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="img-admin"><img src="../../assest/banhkem2.jpg" alt=""></td>
+            <td>Bánh kem 2</td>
+            <td>Bánh kem</td>
+            <td>20</td>
+            <td>150,000 VND</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <script src="/JS/admin/admin.js"></script>
 </body>
