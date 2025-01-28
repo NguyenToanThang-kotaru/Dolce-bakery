@@ -1,0 +1,268 @@
+@media(max-width: 768px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #slideshow {
+        display: none;
+    }
+
+    .promotion {
+        display: block;
+    }
+
+    body {
+        overflow-x: hidden;
+
+    }
+
+    .container-footer {
+        display: block;
+    }
+
+
+
+}
+
+@media(max-width:7680px) {
+    #CartPhone{
+        display: block;
+    }
+    #cart{
+        display: none;
+    }
+    #menu{
+        padding: 0;
+    
+        border: none;
+        margin: -30px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    #logo-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #links-section {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #links-section div {
+        margin: 10px;
+    }
+
+    #contact-section {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #social-section {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #links-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #links-section div {
+        margin: 5px 0;
+    }
+
+    #copyright-section {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    #mainMenu {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    #selection {
+        width: 80%;
+        flex-wrap: wrap;
+    }
+
+    .menuOption {
+        width: 45%; /* Chia đôi khi màn hình nhỏ */
+        margin: 10px;
+    }
+
+    #MenuTitle {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    #selection {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menuOption {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #MenuTitle {
+        width: 90%;
+    }
+
+    .menuOption h3 {
+        margin-top: 20px;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translateY(-50px);
+    }
+}
+
+@media (max-width: 768px) {
+    #brandStory {
+        grid-template-columns: 1fr; /* Chuyển về dạng cột */
+        text-align: center;
+    }
+
+    #story {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    #imgBrand img {
+        width: 50%; /* Tăng kích thước hình ảnh trên tablet */
+    }
+}
+
+/* 🌟 Responsive cho mobile */
+@media (max-width: 480px) {
+    #brandStory {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    #imgBrand img {
+        width: 70%; /* Giảm kích thước hình ảnh cho màn hình nhỏ */
+    }
+
+    #story {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #login-form {
+        width: 90%;
+        padding: 15px;
+        transform: translateY(100px);
+    }
+
+    #login-form-son {
+        margin-left: 0;
+    }
+
+    #lg-username, #lg-password {
+        width: 100%;
+    }
+
+    #login-form-son button {
+        width: 100%;
+    }
+
+    .highlight-3 {
+        left: auto;
+        right: 10px;
+        text-align: right;
+    }
+    .signup{
+        transform: translateX(-35px);
+    }
+    .signin{
+        transform: translateY(30px) translateX(-55px);
+    }
+    #register-form {
+        background-color: #ffffff;
+        width: 400px;
+        height: 500px;
+        padding: 30px 20px;
+        border-radius: 40px;
+        margin: 0 auto;
+        margin-top: 102px;
+        z-index: 2;
+        transform: translateY(100px);
+    
+    }
+}
+
+@media (max-width: 768px) {
+    #register-form {
+        width: 300px;
+        height: auto;
+        padding: 20px;
+        margin-top: 60px;
+    }
+
+    .register-content {
+        font-size: 35px;
+    }
+
+    #rg-username, #rg-password {
+        width: 90%;
+    }
+
+    #register-form-son button {
+        width: 90%;
+    }
+
+
+    .register-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .register-info input {
+        width: 100%;
+    }
+}
+
+/* 🌟 Responsive cho mobile */
+@media (max-width: 480px) {
+    #register-form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #register-form-son {
+        margin-left: 0;
+    }
+
+    #rg-username, #rg-password {
+        width: 100%;
+    }
+
+    #register-form-son button {
+        width: 100%;
+    }
+
+    .highlight-3 {
+        left: auto;
+        right: 10px;
+        text-align: right;
+    }
+
+    .register-content {
+        font-size: 28px;
+    }
+}
