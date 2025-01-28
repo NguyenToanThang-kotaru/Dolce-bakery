@@ -46,6 +46,10 @@
     border: none;
     margin: 0;
 }
+#menu2{
+    width: 50%;background-color: #33272A; border: none;
+}
+
 #menu:hover #menudacap{
     animation: scale 0.3s;
     display: block;

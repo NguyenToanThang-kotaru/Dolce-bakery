@@ -6,7 +6,9 @@
     overflow: hidden;
     display: block;
 }
-
+#rightMenu{
+    display: flex;align-items: center;width: 192.41px;text-align: right;
+}
 #run{
     width: 600px;
     display: flex;
