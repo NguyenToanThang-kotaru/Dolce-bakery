@@ -1,6 +1,6 @@
 #slideshow{
     max-width: 600px;
-    margin: auto;
+    margin: 0 auto;
     margin-top: 102px;
     display: flex;
     overflow: hidden;
