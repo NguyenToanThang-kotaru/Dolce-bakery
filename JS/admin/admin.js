@@ -55,9 +55,9 @@ function addForm(){
 }
 
 function returnProduct(){
-    product_table.style.display = "block";
+    product_table.removeAttribute("style");
     add_form.style.display = "none";
-    plus.style.display = "block";
+    plus.style.display = "block";   
 }
 plus.addEventListener("click",addForm);
 back.addEventListener("click",returnProduct);
