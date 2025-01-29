@@ -78,6 +78,11 @@
     right: 0.5px;
     top: -30px;
 }
+.signin-btn{
+    margin: 0 auto;
+    width: 80%;
+}
+
 #menu2:hover{
     opacity: 0.7;
     cursor: pointer;

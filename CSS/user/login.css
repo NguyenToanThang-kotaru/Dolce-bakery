@@ -42,6 +42,7 @@
     left: 325px;
     bottom: 10px;
     flex-direction: column;
+    transform: translateX(-20px);
 }
 
 #login-form-son{
@@ -91,7 +92,6 @@
 }
 
 #login-form-son button{
-    width: 370px;
     margin-top: 30px;
     padding: 15px;
     background-color: #915959;
