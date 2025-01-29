@@ -7,22 +7,13 @@ const lg_btn = document.querySelector("#login-btn");
 const close_eye = document.querySelector("#none-password");
 const open_eye = document.querySelector("#block-password");
 const lg_pass = document.querySelector("#lg-password");
-<<<<<<< HEAD
 const mndc = document.querySelector("#menudacap");
-=======
-const menu = document.querySelector("#menu2");
-
->>>>>>> 4fd0f6b878e27ff2d1e7db8a8403621158322df5
 function pageLogin(){
     overlay.style.display = "block";
     login_form.style.display = "block";
     register_form.style.display = "none";
-<<<<<<< HEAD
     // mndc.classList.add("noneblock");
     mndc.style.display = "none";
-=======
-    menu.style.display = "none";
->>>>>>> 4fd0f6b878e27ff2d1e7db8a8403621158322df5
 }
 
 lg_btn.addEventListener("click",pageLogin);
@@ -31,21 +22,12 @@ function pageRegister(){
     overlay.style.display = "block";
     login_form.style.display = "none";
     register_form.style.display = "block";
-<<<<<<< HEAD
-
-=======
-    menu.style.display = "none";
->>>>>>> 4fd0f6b878e27ff2d1e7db8a8403621158322df5
 }
 
 function returnHome(){
     overlay.style.display = "none";
-<<<<<<< HEAD
     mndc.style.removeProperty("display");
     
-=======
-    menu.style.display = "block";
->>>>>>> 4fd0f6b878e27ff2d1e7db8a8403621158322df5
 }
 
 function openEye(){
