@@ -44,10 +44,6 @@
   </div>
 
   <div class="oder-part">
-    <div class="order-header">
-      <h1>Quản lý Đơn Hàng</h1>
-    </div>
-
     <div class="order-table-container">
       <table class="order-table">
         <thead>
@@ -87,11 +83,8 @@
   </div>
 
   <div class="product-part">
-    <div class="order-header">
-      <h1>Danh sách Sản Phẩm</h1>
-      <i class="fa-solid fa-plus"></i>
-    </div>
     <div class="product-table-container">
+      <i class="fa-solid fa-plus" id="plus"></i>
       <table class="product-table">
         <thead>
           <tr>
@@ -121,10 +114,52 @@
             <td>Bánh kem</td>
             <td>20</td>
             <td>150,000 VND</td>
-            <td></td>
+            <td><div class="fix-product">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div></td>
           </tr>
         </tbody>
       </table>
+
+      <form class="add-form">
+        <i class="fa-solid fa-rotate-left" id="back"></i>   
+        <div class="form-group">
+          <label for="product-image" class="form-label">Ảnh sản phẩm</label>
+          <input type="file" id="product-image" name="product-image" accept="image/*" class="form-input">
+        </div>
+      
+        <div class="form-group">
+          <label for="product-name" class="form-label">Tên sản phẩm</label>
+          <input type="text" id="product-name" name="product-name" placeholder="Nhập tên sản phẩm" class="form-input">
+        </div>
+      
+        <div class="form-group">
+          <label for="product-type" class="form-label">Loại sản phẩm</label>
+          <select id="product-type" name="product-type" class="form-select">
+            <option value="">-- Chọn loại sản phẩm --</option>
+            <option value="cake">Bánh kem</option>
+            <option value="bread">Bánh mì</option>
+            <option value="cookie">Cookies</option>
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <label for="product-quantity" class="form-label">Số Lượng</label>
+          <input type="number" id="product-quantity" name="product-quantity" placeholder="Nhập số lượng" class="form-input">
+        </div>
+      
+        <div class="form-group">
+          <label for="product-price" class="form-label">Giá Tiền (VNĐ)</label>
+          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá tiền" class="form-input">
+        </div>
+      
+        <div class="form-group text-center">
+          <button type="submit" class="form-button">
+            Thêm Sản Phẩm
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <script src="/JS/admin/admin.js"></script>

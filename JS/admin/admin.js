@@ -41,3 +41,25 @@ admin_product.addEventListener("click",productToggle);
 admin_customer.addEventListener("click",customerToggle);
 admin.addEventListener("click",returnMain);
 
+// add product
+
+const add_form = document.querySelector(".add-form");
+const plus = document.querySelector("#plus");
+const product_table = document.querySelector(".product-table");
+const back = document.querySelector("#back");
+
+function addForm(){
+    product_table.style.display = "none";
+    add_form.style.display = "block";
+    plus.style.display = "none";
+}
+
+function returnProduct(){
+    product_table.style.display = "block";
+    add_form.style.display = "none";
+    plus.style.display = "block";
+}
+plus.addEventListener("click",addForm);
+back.addEventListener("click",returnProduct);
+
+
