@@ -33,7 +33,7 @@
 }
 .Product-img{
     border: 2px solid black;
-    width: 100px;
+    width: 150px;
     padding: 20px;
     margin: 20px;
     background-color: #b77777;
@@ -52,8 +52,8 @@
     
 }
 .Product-detail{
-    margin: 15px 10px;
-    border: 2px solid ;
+    margin: 30px 10px;
+    /* border: 2px solid ; */
     padding: 10px;
 }
 #quantity-container{
@@ -77,6 +77,8 @@
 }
 #delete-icon{
     font-size: 24px;
+    /* margin: 30px; */
+   justify-content: center;
 }
 #Title{
     font-size: large;
