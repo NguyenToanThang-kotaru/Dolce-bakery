@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="/CSS/user/topMenu.css">
     <link rel="stylesheet" href="/Trung-TestCase/cartshop.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
+
 </head>
+
 <body>
     <div id="container">
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
@@ -30,10 +32,18 @@
                         <img src="/assest/menu.png" id="menu2"
                             style="width: 50%;;background-color: #33272A;padding: 0; border: none;" alt="">
                         <ul id="menudacap">
-                            <a href="#"><li>Trang chủ</li></a>
-                            <a href="#"><li id="login-btn">Đăng nhập</li></a>
-                            <a href="#"><li>Thực đơn</li></a>
-                            <a href="#"><li style="border-bottom:none;">Tin tức</li></a>
+                            <a href="#">
+                                <li>Trang chủ</li>
+                            </a>
+                            <a href="#">
+                                <li id="login-btn">Đăng nhập</li>
+                            </a>
+                            <a href="#">
+                                <li>Thực đơn</li>
+                            </a>
+                            <a href="#">
+                                <li style="border-bottom:none;">Tin tức</li>
+                            </a>
                         </ul>
                     </div>
                 </div>
@@ -41,85 +51,89 @@
 
         </header>
 
-    <div id="shopcart-container">
-        <div id="cart-header">
-            <i class="fa-solid fa-arrow-left"></i>
-            <h1>Giỏ hàng</h1>
-        </div>
-        <div id="cart-body">
-            <p id="Title">Products</p>
-            <div class="main">
-                <div class="Product-img">
+        <div id="shopcart-container">
+            <div id="cart-header">
+                <i class="fa-solid fa-arrow-left" id="back-cart"></i>
+                <h1>Giỏ hàng</h1>
+            </div>
+            <div id="cart-body">
+                <p id="Title">Products</p>
+                <div id="list-PD">
+                    <div class="PDCart">
+                        <div id="PDCart1">
+                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <div id="PDCart-NP">
+                                <div id="PDCart-Name">Sản phẩm 1</div>
+                                <div id="PDCart-Price">100.000đ</div>
+                            </div>
+                        </div>
+                        <div id="PDCart2">
+                            <div id="quantity-container">
+                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
+                                <div id="PDCart-Quantity">1</div>
+                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
+                            </div>
+                            <div id="delete-icon">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="PDCart">
+                        <div id="PDCart1">
+                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <div id="PDCart-NP">
+                                <div id="PDCart-Name">Sản phẩm 1</div>
+                                <div id="PDCart-Price">100.000đ</div>
+                            </div>
+                        </div>
+                        <div id="PDCart2">
+                            <div id="quantity-container">
+                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
+                                <div id="PDCart-Quantity">1</div>
+                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
+                            </div>
+                            <div id="delete-icon">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="PDCart">
+                        <div id="PDCart1">
+                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <div id="PDCart-NP">
+                                <div id="PDCart-Name">Sản phẩm 1</div>
+                                <div id="PDCart-Price">100.000đ</div>
+                            </div>
+                        </div>
+                        <div id="PDCart2">
+                            <div id="quantity-container">
+                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
+                                <div id="PDCart-Quantity">1</div>
+                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
+                            </div>
+                            <div id="delete-icon">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-                <div class="Product- detail">
-                    <p >Sản phẩm 1</p>
-                    <p class="price">100.000đ</p>
-                </div>
-                <div id="quantity-container">
-                    <i class="fa-solid fa-minus"></i>
-                    <p>1</p>
-                    <i class="fa-solid fa-plus"></i>
-                    
-                </div>
-                <div id="delete-icon">
-                    <i class="fa-regular fa-trash-can"></i>
-                </div>
-                
-                
-            </div>
-            <div class="main">
-                <div class="Product-img">
 
-                </div>
-                <div class="Product- detail">
-                    <p >Sản phẩm 1</p>
-                    <p class="price">100.000đ</p>
-                </div>
-                <div id="quantity-container">
-                    <i class="fa-solid fa-minus"></i>
-                    <p>1</p>
-                    <i class="fa-solid fa-plus"></i>
-                    
-                </div>
-                <div id="delete-icon">
-                    <i class="fa-regular fa-trash-can"></i>
-                </div>
-                
-                
-            </div>
-            <div class="main">
-                <div class="Product-img">
 
-                </div>
-                <div class="Product- detail">
-                    <p >Sản phẩm 1</p>
-                    <p  class="price">100.000đ</p>
-                </div>
-                <div id="quantity-container">
-                    <i class="fa-solid fa-minus"></i>
-                    <p>1</p>
-                    <i class="fa-solid fa-plus"></i>
-                    
-                </div>
-                <div id="delete-icon">
-                    <i class="fa-regular fa-trash-can"></i>
-                </div>
-                
-                
             </div>
-            
-        </div>
-        <div id="cart-footer">
-            <div id="Total">
-                <p>Tạm tính:</p>
-                <p class="price-total">0đ</p>
+            <div id="cart-footer">
+                <div style="display: flex; margin-left: 1.5%;">
+                    <p>Tạm tính:</p>
+                    <p id="price-total">0đ</p>
+                </div>
+                <p id="buy">Mua Ngay</p>
             </div>
-            
-            <p class="Buy">Mua Ngay</p>
+
+
         </div>
-        
-        
-    </div>
 </body>
+
 </html>
