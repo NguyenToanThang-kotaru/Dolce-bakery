@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./CSS/topMenu.css">
-    <link rel="stylesheet" href="./CSS/slideShow.css">
-    <link rel="stylesheet" href="./CSS/brandStory.css">
-    <link rel="stylesheet" href="./CSS/footer.css">
-    <link rel="stylesheet" href="./CSS/login.css">
-    <link rel="stylesheet" href="./CSS/register.css">
+    <link rel="stylesheet" href="/CSS/user/topMenu.css">
+    <link rel="stylesheet" href="/CSS/user/slideShow.css">
+    <link rel="stylesheet" href="/CSS/user/brandStory.css">
+    <link rel="stylesheet" href="/CSS/user/footer.css">
+    <link rel="stylesheet" href="/CSS/user/login.css">
+    <link rel="stylesheet" href="/CSS/user/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -37,9 +37,9 @@
                     <label for="password">Enter your Password</label><br>
                     <div class="password-container">
                         <input type="password" id="lg-password" placeholder="Password">
-                        <i class="fa-solid fa-eye" id="toggle-password"></i>
+                        <i class="fa-solid fa-eye" id="block-password"></i>
+                        <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
-                    <span class="highlight-3">Forgot Password</span>
                </div>
                 <button type="submit" class="signin-btn">Sign in</button>
             </form> 
@@ -84,18 +84,18 @@
                 style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;">
                 <div style="display: flex; align-items: center; color: white; cursor: pointer; ">
                     <a href="#">
-                        <img src="./assest/Dolce.png" alt="" height="70px">
+                        <img src="/assest/Dolce.png" alt="" height="70px">
                     </a>
                     <h3 style="margin-left: 8px">Bakery Shop</h3>
                 </div>
                 <div id="mid" style="display: flex;align-items: center;position: relative;width: 30%;">
                     <input type="text" placeholder="Search" id="search">
-                    <div id="delete"><img src="./assest/Close.png" alt=""></div>
+                    <div id="delete"><img src="/assest/Close.png" alt=""></div>
                 </div>
                 <div style="display: flex;align-items: center;">
-                    <div id="cart"><img src="./assest/Shopping cart.png" width="50%"></div>
+                    <div id="cart"><img src="/assest/Shopping cart.png" width="50%"></div>
                     <div id="menu" style="position: relative;">
-                        <img src="./assest/menu.png" id="menu2"
+                        <img src="/assest/menu.png" id="menu2"
                             style="width: 50%;;background-color: #33272A;padding: 0; border: none;" alt="">
                         <ul id="menudacap">
                             <a href="#"><li>Trang chủ</li></a>
@@ -106,7 +106,6 @@
                     </div>
                 </div>
             </nav>
-
         </header>
         <div id="slideshow">
             <div id="run">
@@ -138,7 +137,7 @@
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">
                 <div id="logo-section">
-                    <img src="./assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
+                    <img src="/assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
                 </div>
                 <div id="links-section">
                     <div id="learn-more">
@@ -170,9 +169,9 @@
                 <div id="social-section">
                     <h3>Social</h3>
                     <div style="display: flex;">
-                        <a href="#"><img src="./assest/fb.png" alt="Facebook"></a>
-                        <a href="#"><img src="./assest/ins.png" alt="Twitter"></a>
-                        <a href="#"><img src="./assest/Twitter.png" alt="YouTube"></a>
+                        <a href="#"><img src="/assest/fb.png" alt="Facebook"></a>
+                        <a href="#"><img src="/assest/ins.png" alt="Twitter"></a>
+                        <a href="#"><img src="/assest/Twitter.png" alt="YouTube"></a>
                     </div>
                 </div>
             </div>
@@ -190,9 +189,9 @@
 
 
 
-    <script src="./JS/clear.js"></script>
-    <script src="./JS/slideShow.js"></script>
-    <script src="./JS/blocklogin.js"></script>
+    <script src="/JS/user/clear.js"></script>
+    <script src="/JS/user/slideShow.js"></script>
+    <script src="/JS/user/blocklogin.js"></script>
 </body>
 
 </html>
