@@ -58,6 +58,8 @@ const fix_btn_1 = document.querySelectorAll(".fix-btn-product");
 const delete_btn_1 = document.querySelectorAll(".delete-btn-product");
 const delete_acp_1 = document.querySelector("#delete-acp-product");
 const delete_ovl_1 = document.querySelector("#delete-overlay-product");
+const cancel_btn_1 = document.querySelector("#cancel-product");
+
 
 const add_form_2 = document.querySelector(".add-form-customer");
 const plus_2 = document.querySelector("#customer-plus");
@@ -68,6 +70,7 @@ const delete_ovl_2 = document.querySelector("#delete-overlay-customer");
 const back_2 = document.querySelectorAll(".back-customer");
 const delete_btn_2 = document.querySelectorAll(".delete-btn-customer");
 const fix_btn_2 = document.querySelectorAll(".fix-btn-customer");
+const cancel_btn_2 = document.querySelector("#cancel-customer");
 
 
 function addFormProduct(){
@@ -161,6 +164,8 @@ back_2.forEach(button =>{
 
 delete_acp_1.addEventListener("click",returnProduct);
 delete_acp_2.addEventListener("click",returnCustomer);
+cancel_btn_1.addEventListener("click",returnProduct);
+cancel_btn_2.addEventListener("click",returnCustomer);
 
 // profile
 
