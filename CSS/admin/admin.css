@@ -1,15 +1,14 @@
 
 * {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
   display: flex;
   min-height: 100vh;
-  background-color: whitesmoke;
 }
 
 .sidebar {
@@ -58,7 +57,7 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-top: 140px;
+  margin-top: 160px;
   margin-left: 50px;
 }
 
@@ -84,7 +83,7 @@ body {
 
 }
 
-.header .profile {
+.admin-header .profile {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -94,6 +93,11 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile img:hover{
+  transform: scale(1.1);
 }
 
 .business-process {
@@ -120,6 +124,86 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #16a085;
+}
+
+/* profile */
+
+.profile-part{
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.profile-container {
+  width: 60%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.profile-header {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.menu-profile span{
+  color: #c0392b;
+}
+
+.menu-profile {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.menu-profile li {
+  margin: 20px;
+}
+
+.menu-profile li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  padding: 8px;
+}
+
+.menu-profile li a:hover {
+  background-color: #f0f0f0;
+}
+
+.logout-btn-admin {
+  width: 150px;
+  padding: 10px;
+  background-color: #e74c3c;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 120px;
+  margin-left: 500px;
+}
+
+.logout-btn-admin:hover {
+  background-color: #c0392b;
 }
 
 /* oder part */
@@ -219,11 +303,6 @@ body {
   margin-bottom: 20px;
 }
 
-.order-table i:hover{
-  transform: scale(1.09);
-  color: #8b5a5a;
-}
-
 .product-table th, .product-table td {
   padding: 10px 15px;
   text-align: left;
@@ -246,16 +325,23 @@ body {
   font-size: 14px;
 }
 
-#plus{
+#product-plus{
   font-size: 20px;
   margin-bottom: 10px;
-  margin-left: 1000px;
   cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
 }
 
-#plus:hover{
-  color: #8b5a5a;
-  transform: scale(1.2);
+#product-plus:hover{
+  color: #ea9029;
+  transform: scale(1.1);
 }
 
 .product-table img{
@@ -280,7 +366,7 @@ body {
 
 /* add product */
 
-.add-form {
+.add-form-product, .fix-form-product {
   display: none;
   max-width: 800px;
   margin: 20px auto;
@@ -291,13 +377,13 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-form i{
+.add-form-product i, .fix-form-product i{
   margin-left: 740px;
   cursor: pointer;
 }
 
-.add-form i:hover{
-  color: #4f3c3c;
+.add-form-product i:hover,.fix-form-product i:hover{
+  color: #ef9b09;
   transform: scale(1.2);
 }
 
@@ -317,6 +403,7 @@ body {
 .form-input,
 .form-select {
   width: 100%;
+  background-color: #fef7ef;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -327,8 +414,8 @@ body {
 
 .form-input:focus,
 .form-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+  border-color: #dd82ee;
+  box-shadow: 0 0 3px rgba(204, 16, 229, 0.5);
 }
 
 .form-button {
@@ -348,11 +435,154 @@ body {
   background-color: #e16e03ee;
 }
 
+#delete-overlay-product{  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}
+
+.delete-container{
+  width: 300px;
+  height: 150px;
+  background-color: #feead7;
+  border-radius: 20px;
+  padding: 10px 40px;
+  margin: 0 auto;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.delete-container span{
+  color: #ee3e08;
+
+}
+
+.delete-container button{
+  padding: 5px 30px;
+  border-radius: 20px;
+  background-color: #8b5a5a;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.delete-container button:hover{
+  transform: scale(1.1);
+}
+
 
 /* customer part */
 .customer-part{
   flex: 1;
   background-color: #f4f0f4;
   display: none;
+}
+
+.customer-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
   overflow-y: auto;
+  margin-top: 50px;
+}
+
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+
+.customer-table th, .customer-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.customer-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+#customer-plus{
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+#customer-plus:hover{
+  color: #ea9029;
+  transform: scale(1.1);
+}
+
+.customer-table td{
+  background-color: #f9f5f0;
+}
+
+.customer-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.fix-customer{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.customer-table i:hover{
+  color: #8b5a5a;
+}
+
+
+.add-form-customer, .fix-form-customer {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-customer i, .fix-form-customer i{
+  margin-left: 740px;
+  cursor: pointer;
+}
+
+.add-form-customer i:hover,.fix-form-customer i:hover{
+  color: #ef9b09;
+  transform: scale(1.2);
+}
+
+#delete-overlay-customer{  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
 }
