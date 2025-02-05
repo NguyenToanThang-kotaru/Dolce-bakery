@@ -13,7 +13,7 @@
 <body>
   <div class="sidebar">
     <h2 id="admin">Admin</h2>
-    <a href="#">Thống kê</a>
+    <a href="#" id="admin-static">Thống kê</a>
     <a href="#" id="admin-oder">Đơn hàng</a>
     <a href="#" id="admin-product">Sản phẩm</a>
     <a href="#" id="admin-customer">Khách hàng</a>
@@ -39,6 +39,108 @@
       <div class="card">
         <h3>Tỷ lệ tăng trưởng</h3>
         <p>0</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="static-part">
+    <div class="static-container">
+      <div class="static-header">
+          <div class="static-time">
+            <span>Thời gian từ:</span>
+            <input type="date">
+            <span>-</span>
+            <input type="date">
+          </div>
+
+          <div class="static-product">
+            <span>Loại sản phẩm:</span>
+            <select name="" id="">
+              <option value="cake">Bánh kem</option>
+              <option value="bread">Bánh mì</option>
+              <option value="cookie">Cookies</option>
+            </select>
+          </div>
+
+          <div class="static-arrange">
+            <span>Sắp xếp</span>
+            <select name="" id="">
+              <option value="increase">Tăng dần</option>
+              <option value="decrease">Giảm dần</option>
+            </select>
+          </div>
+      </div>
+
+      <div class="static-main">
+        <div id="revenue">
+          Doanh thu: <span>0 VNĐ</span>
+        </div>
+        <div class="product-sold">
+          Sản phẩm bán: <span>0</span>
+        </div>
+        <div class="profit">
+          Lợi nhuận: <span>0 VNĐ</span>
+        </div>
+      </div>
+
+      <div class="best-product-utnow">
+        <h3>Sản phẩm bán chạy đến hiện tại</h3>
+        <table class="best-product-table-utnow">
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Số lượng bán</th>
+              <th>Doanh thu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bánh kem </td>
+              <td>100</td>
+              <td>100000 VNĐ</td>
+            </tr>
+            <tr>
+              <td>Bánh mì</td>
+              <td>200</td>
+              <td>3000000 VNĐ</td>
+            </tr>
+            <tr>
+              <td>Bánh qui</td>
+              <td>120</td>
+              <td>20000000 VNĐ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="best-product-instage">
+        <h3>Sản phẩm bán chạy trong thời gian trên</h3>
+        <table class="best-product-table-instage">
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Số lượng bán</th>
+              <th>Doanh thu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bánh kem </td>
+              <td>100</td>
+              <td>100000 VNĐ</td>
+            </tr>
+            <tr>
+              <td>Bánh mì</td>
+              <td>200</td>
+              <td>3000000 VNĐ</td>
+            </tr>
+            <tr>
+              <td>Bánh qui</td>
+              <td>120</td>
+              <td>20000000 VNĐ</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

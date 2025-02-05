@@ -1,21 +1,32 @@
 const oder_part = document.querySelector(".oder-part");
 const product_part = document.querySelector(".product-part");
 const customer_part = document.querySelector(".customer-part");
+const static_part = document.querySelector(".static-part");
 const admin_main = document.querySelector(".admin-main");
 const admin_oder = document.querySelector("#admin-oder");
 const admin_product = document.querySelector("#admin-product");
 const admin_customer = document.querySelector("#admin-customer");
+const admin_static = document.querySelector("#admin-static");
 const admin = document.querySelector("#admin");
 const profile_img =  document.querySelector("#profile");
 const profile_part = document.querySelector(".profile-part");
 
+function staticToggle(){
+    oder_part.style.display = "none";
+    admin_main.style.display = "none";
+    customer_part.style.display = "none";
+    product_part.style.display = "none";
+    profile_part.style.display = "none";
+    static_part.style.display = "block";
+}
 
 function oderToggle(){
     oder_part.style.display = "block";
     admin_main.style.display = "none";
     customer_part.style.display = "none";
     product_part.style.display = "none";
-    profile_part.style.display = "none";   
+    profile_part.style.display = "none";
+    static_part.style.display = "none";   
 }
 
 function customerToggle(){
@@ -24,6 +35,7 @@ function customerToggle(){
     admin_main.style.display = "none";
     product_part.style.display = "none";
     profile_part.style.display = "none"; 
+    static_part.style.display = "none";
 }
 
 function productToggle(){
@@ -31,7 +43,8 @@ function productToggle(){
     admin_main.style.display = "none";
     customer_part.style.display = "none";
     oder_part.style.display = "none";
-    profile_part.style.display = "none";   
+    profile_part.style.display = "none";
+    static_part.style.display = "none";   
 }
 
 function returnMain(){
@@ -40,11 +53,13 @@ function returnMain(){
     product_part.style.display = "none" 
     admin_main.style.display = "block";
     profile_part.style.display = "none";
+    static_part.style.display = "none";
 }
 
 admin_oder.addEventListener("click",oderToggle);
 admin_product.addEventListener("click",productToggle);
 admin_customer.addEventListener("click",customerToggle);
+admin_static.addEventListener("click",staticToggle);
 admin.addEventListener("click",returnMain);
 
 // add product

@@ -586,3 +586,127 @@ body {
   z-index: 1;
   display: none;
 }
+
+/* Static */
+.static-part{
+  flex: 100;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.static-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.static-header{
+  width: 100%;
+  background-color: #f4ede7;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: #6b4f4f;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.static-header input,.static-header select{
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.static-main{
+  width: 100%;
+  background-color: #f4ede7;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  color: #6b4f4f;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.static-main span{
+  color: red;
+}
+
+.best-product-utnow{
+  margin-top: 40px;
+}
+
+.static-container h3{
+  display: flex;
+  justify-content: center;
+}
+
+.best-product-table-utnow {
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(242, 3, 226, 0.1);
+}
+
+
+.best-product-table-utnow th, .best-product-table-utnow td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.best-product-table-utnow th {
+  background-color: #f4ede7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.best-product-table-utnow td{
+  background-color: #f9f5f0;
+}
+
+.best-product-table-utnow td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.best-product-table-instage {
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(242, 3, 226, 0.1);
+}
+
+
+.best-product-table-instage th, .best-product-table-instage td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.best-product-table-instage th {
+  background-color: #f4ede7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.best-product-table-instage td{
+  background-color: #f9f5f0;
+}
+
+.best-product-table-instage td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.best-product-instage{
+  margin-top: 40px;
+}
+
+
+
