@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/CSS/user/topMenu.css">
-    <link rel="stylesheet" href="/CSS/user/slideShow.css">
-    <link rel="stylesheet" href="/CSS/user/brandStory.css">
-    <link rel="stylesheet" href="/CSS/user/footer.css">
-    <link rel="stylesheet" href="/CSS/user/login.css">
-    <link rel="stylesheet" href="/CSS/user/register.css">
-    <link rel="stylesheet" href="/CSS/user/mainMenu.css">
-    <link rel="stylesheet" href="/CSS/user/responsive.css">
-    <link rel="stylesheet" href="/CSS/user/cartShop.css">
+    <title>Dolce Bakery</title>
+    <link rel="stylesheet" href="../../CSS/user/topMenu.css">
+    <link rel="stylesheet" href="../../CSS/user/slideShow.css">
+    <link rel="stylesheet" href="../../CSS/user/brandStory.css">
+    <link rel="stylesheet" href="../../CSS/user/footer.css">
+    <link rel="stylesheet" href="../../CSS/user/login.css">
+    <link rel="stylesheet" href="../../CSS/user/register.css">
+    <link rel="stylesheet" href="../../CSS/user/mainMenu.css">
+    <link rel="stylesheet" href="../../CSS/user/responsive.css">
+    <link rel="stylesheet" href="../../CSS/user/cartShop.css">  
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -56,11 +56,18 @@
                 <span class="blur">Have an Account?</span>
                 <span class="rg-highlight-2">Sign in</span>
             </div>
-            <form id=register-form-son>
+            <form id="register-form-son">
                 <div class="register-username">
-                    <label for="username">Enter your username or email address</label><br>
+                    <label for="username">Enter your username</label><br>
                     <input type="text" id="rg-username" placeholder="Username or email address"><br>
                 </div>
+
+                <div class="register-username">
+                    <label for="username">Enter your email</label><br>
+                    <input type="text" id="rg-email" placeholder="Username or email address"><br>
+                </div>
+
+
                 <div class="register-info">
                     <div class="username-info">
                         <label for="info"> User name</label>
@@ -77,7 +84,13 @@
                         <input type="password" id="rg-password" placeholder="Password">
                     </div>
                 </div>
-                <button type="submit" class="signup-btn">Sign up</button>
+                <div class="register-password">
+                    <label for="password">Enter your Password</label><br>
+                    <div class="password-container">
+                        <input type="password" id="rg-password" placeholder="Password">
+                    </div>
+                </div>
+                <button type="submit" id="signup-btn">Sign up</button>
             </form>
         </div>
     </div>
@@ -87,18 +100,18 @@
                 style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;flex-basis: 33.33%;">
                 <div style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
                     <a href="#">
-                        <img src="/assest/Dolce.png" alt="" height="70px">
+                        <img src="../../assest/Dolce.png" alt="" height="70px">
                     </a>
                     <h3 style="margin-left: 8px">Bakery Shop</h3>
                 </div>
                 <div id="mid" style="display: flex;align-items: center;width: 30%;position: relative;">
                     <input type="text" placeholder="Search" id="search">
-                    <div id="delete"><img src="/assest/Close.png" alt=""></div>
+                    <div id="delete"><img src="../..//assest/Close.png" alt=""></div>
                 </div>
                 <div id="rightMenu">
-                    <div id="cart" style="margin-left: 60px;"><img src="/assest/Shopping cart.png" width="50%"></div>
+                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%"></div>
                     <div id="menu">
-                        <img src="/assest/menu.png" id="menu2" alt="">
+                        <img src="../../assest/menu.png" id="menu2" alt="">
                         <ul id="menudacap">
                             <a href="#">
                                 <li>Trang chủ</li>
@@ -122,33 +135,33 @@
         </header>
         <div id="slideshow">
             <div id="run">
-                <div class="img1 img">
-                </div>
-                <div class="img2 img">
-                </div>
-                <div class="img3 img">
-                </div>
+                <img src="../../assest/slideshow.jpg" width="100%" class="img" alt="">
+                <img src="../../assest/slideshow1.jpg" width="100%" class="img" alt="">
+                <img src="../../assest/Slidesho3.jpg" width="100%" class="img" alt="">
             </div>
         </div>
 
-        <div class="promotion" style="margin-top: 102px;"><img src="/assest/slideshow.jpg"
+        <div class="promotion" style="margin-top: 102px;"><img src="../../assest/slideshow.jpg"
                 style="width: 100%;height: 100%;object-fit: cover;" alt=""></div>
-        <div class="promotion"><img src="/assest/slideshow1.jpg" style="width: 100%;height: 100%;object-fit: cover;"
+        <div class="promotion"><img src="../../assest/slideshow1.jpg" style="width: 100%;height: 100%;object-fit: cover;"
             alt=""></div>
-        <div class="promotion"><img src="/assest/slidesho3.jpg" style="width: 100%;height: 100%;object-fit: cover;"
+        <div class="promotion"><img src="../../assest/slidesho3.jpg" style="width: 100%;height: 100%;object-fit: cover;"
                 alt=""></div>
 
                 
         <div id="mainMenu">
             <h1 id="MenuTitle">Menu</h1>
             <div id="selection">
-                <div class="menuOption" id="croissant">
+                <div class="menuOption">
+                    <img src="../../assest/croisant Icon.png" width="100%" alt="">
                     <h3>Bánh mì</h3>
                 </div>
-                <div class="menuOption" id="happyBirtday">
+                <div class="menuOption">
+                    <img src="../../assest/HPBD ICON.png" width="100%" alt="">
                     <h3>Bánh kem</h3>
                 </div>
-                <div class="menuOption" id="mouse">
+                <div class="menuOption">
+                    <img src="../../assest/Mouse Icon.png" width="80%" alt="">
                     <h3>Cookies</h3>
                 </div>
             </div>
@@ -160,7 +173,7 @@
                     minima nesciunt mollitia accusantium aspernatur sapiente, voluptatibus iusto doloribus aliquam modi
                     distinctio asperiores ipsum cumque quibusdam assumenda?</h3>
             </div>
-            <div id="imgBrand"><img src="/assest/story.png" width="30%"></div>
+            <div id="imgBrand"><img src="../../assest/story.png" width="30%"></div>
         </div>
         <div id="shopcart-container">
             <div id="cart-header">
@@ -172,7 +185,7 @@
                 <div id="list-PD">
                     <div class="PDCart">
                         <div id="PDCart1">
-                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
                             <div id="PDCart-NP">
                                 <div id="PDCart-Name">Sản phẩm 1</div>
                                 <div id="PDCart-Price">100.000đ</div>
@@ -193,7 +206,7 @@
         
                     <div class="PDCart">
                         <div id="PDCart1">
-                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
                             <div id="PDCart-NP">
                                 <div id="PDCart-Name">Sản phẩm 1</div>
                                 <div id="PDCart-Price">100.000đ</div>
@@ -213,7 +226,7 @@
         
                     <div class="PDCart">
                         <div id="PDCart1">
-                            <img src="/assest/Dolce.png" width="8%" height="100%" alt="">
+                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
                             <div id="PDCart-NP">
                                 <div id="PDCart-Name">Sản phẩm 1</div>
                                 <div id="PDCart-Price">100.000đ</div>
@@ -244,7 +257,7 @@
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">
                 <div id="logo-section">
-                    <img src="/assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
+                    <img src="../../assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
                 </div>
                 <div id="links-section">
                     <div id="learn-more">
@@ -276,9 +289,9 @@
                 <div id="social-section">
                     <h3>Social</h3>
                     <div style="display: flex;">
-                        <a href="#"><img src="/assest/fb.png" alt="Facebook"></a>
-                        <a href="#"><img src="/assest/ins.png" alt="Twitter"></a>
-                        <a href="#"><img src="/assest/Twitter.png" alt="YouTube"></a>
+                        <a href="#"><img src="../../assest/fb.png" alt="Facebook"></a>
+                        <a href="#"><img src="../../assest/ins.png" alt="Twitter"></a>
+                        <a href="#"><img src="../../assest/Twitter.png" alt="YouTube"></a>
                     </div>
                 </div>
             </div>
@@ -293,10 +306,10 @@
 
 
 
-    <script src="/JS/user/clear.js"></script>
-    <script src="/JS/user/slideShow.js"></script>
-    <script src="/JS/user/blocklogin.js"></script>
-    <script src="/JS/user/blockCart.js"></script>
+    <script src="../../JS/user/clear.js"></script>
+    <script src="../../JS/user/slideShow.js"></script>
+    <script src="../../JS/user/blocklogin.js"></script>
+    <script src="../../JS/user/blockCart.js"></script>
 </body>
 
 </html>

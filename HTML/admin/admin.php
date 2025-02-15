@@ -193,13 +193,7 @@
         </div>
       </form>
 
-      <div id="delete-overlay-product">
-        <div class="delete-container">
-          <span>Bạn muốn xóa sản phẩm này?</span>
-          <button id="delete-acp-product">Xác nhận</button>
-          <button id="cancel-product">Hủy</button>
-        </div>
-      </div>
+      
     </div>
   </div>
 
