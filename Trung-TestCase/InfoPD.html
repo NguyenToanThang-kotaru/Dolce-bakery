@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/CSS/user/topMenu.css">
+        <link rel="stylesheet" href="/CSS/user/slideShow.css">
+        <link rel="stylesheet" href="/CSS/user/brandStory.css">
+        <link rel="stylesheet" href="/CSS/user/footer.css">
+        <link rel="stylesheet" href="/CSS/user/login.css">
+        <link rel="stylesheet" href="/CSS/user/register.css">
+        <link rel="stylesheet" href="InfoPD.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    </head>
+<body>
+    <div id="container">
+        <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
+            <nav
+                style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; color: white; cursor: pointer; ">
+                    <a href="#">
+                        <img src="/assest/Dolce.png" alt="" height="70px">
+                    </a>
+                    <h3 style="margin-left: 8px">Bakery Shop</h3>
+                </div>
+                <div id="mid" style="display: flex;align-items: center;position: relative;width: 30%;">
+                    <input type="text" placeholder="Search" id="search">
+                    <div id="delete"><img src="/assest/Close.png" alt=""></div>
+                </div>
+                <div style="display: flex;align-items: center;">
+                    <div id="cart"><img src="/assest/Shopping cart.png" width="50%"></div>
+                    <div id="menu" style="position: relative;">
+                        <img src="/assest/menu.png" id="menu2"
+                            style="width: 50%;;background-color: #33272A;padding: 0; border: none;" alt="">
+                        <ul id="menudacap">
+                            <a href="#"><li>Trang chủ</li></a>
+                            <a href="#"><li id="login-btn">Đăng nhập</li></a>
+                            <a href="#"><li>Thực đơn</li></a>
+                            <a href="#"><li style="border-bottom:none;">Tin tức</li></a>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <div id="InfoPD-container">
+            <div id="Left">
+                <div id="PD-imgage">
+                 <img src="/assest/banhkem2.jpg">
+                </div>
+
+            </div>
+            <div id="Right">
+                <div class="PD-name">
+                    <h1 >Bánh kem 1</h1>
+                </div>
+                <div id="Decribe">
+                 <p class="PD-decribe">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus corporis error aliquam velit eius facilis eveniet veniam tempore dolores ipsam. Beatae maiores nostrum, doloribus ex incidunt repudiandae libero iste adipisci?</p>
+                <div id="Quantity-Price">
+                    <p class="Price">100.000đ</p>
+                    <div class="QuantityPD-container">
+                        <i class="fa-solid fa-minus"></i>
+                        <p>1</p>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+                <div id="button">
+                    <button  class ="add-cart" type="submit">Thêm vào giỏ hàng</button>
+                    <button class="Buy" type="submit">Mua Ngay</button>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        
+
+        
+    </div>
+    <footer class="container-footer">
+        <div style="display: flex;justify-content: space-between;width: 100%;">
+            <div id="logo-section">
+                <img src="/assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
+            </div>
+            <div id="links-section">
+                <div id="learn-more">
+                    <h3>Learn More</h3>
+                    <ul>
+                        <li><a href="#">About Lift</a></li>
+                        <li><a href="#">Press Releases</a></li>
+                        <li><a href="#">Environment</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div id="tickets-booking">
+                    <h3>Tickets & Booking</h3>
+                    <ul>
+                        <li><a href="#">Lift Tickets</a></li>
+                        <li><a href="#">Season Passes</a></li>
+                        <li><a href="#">Vacation Packages</a></li>
+                    </ul>
+                </div>
+                <div id="contact-section">
+                    <h3>Contact Us</h3>
+                    <p>Address: XX/ XX/ XX/ HCM</p>
+                    <p>Phone: <a href="#" style="color: red;">123-456-7890</a></p>
+                </div>
+
+
+</body>
+</html>

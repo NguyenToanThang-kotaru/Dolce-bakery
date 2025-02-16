@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+#InfoPD-container{
+    
+    margin: 105px auto;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    
+}
+#Left{
+     width: 80%;
+    /* height: 500px; */
+    /* background-color: aqua; */
+    margin: 20px;
+}
+#PD-imgage img{
+    width: 100%;
+    height: 500px;
+}
+
+#Right{
+    margin: 10px;
+    padding: 10px;
+}
+.PD-name{
+    padding: 10px;
+    text-align: center;
+}
+#Quantity-Price{
+    justify-content: center;
+}
+.Price{
+    text-align: center;
+    margin-top: 100px;
+    font-size: xx-large;
+    color: red;
+    margin-bottom: 20px;
+}
+.QuantityPD-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    
+}
+.QuantityPD-container i{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+.QuantityPD-container i:hover{
+    background-color: #f97316;;
+}
+.QuantityPD-container p{
+    
+    margin: 0 20px; 
+    font-size: 18px;
+    font-weight: bold;    
+
+}
+#button{
+    margin-top: 130px;
+    text-align: center;
+    
+}
+.add-cart{
+    width: 30%;
+    margin-right: 100px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 60px;
+   
+    
+}
+.Buy{
+    width: 30%;
+    margin-right: 50px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 60px;
+
+}
+.add-cart:hover{
+    color: yellow;
+    background-color: #e5aa80;
+    font-weight: bold;
+}
+.Buy:hover{
+    color: yellow;
+    background-color: #e5aa80;
+    font-weight: bold;
+
+}
