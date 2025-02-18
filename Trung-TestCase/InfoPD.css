@@ -76,30 +76,39 @@
     
 }
 .add-cart{
-    width: 30%;
+    width: 50%;
     margin-right: 100px;
     padding: 20px;
-    border: 1px solid black;
-    border-radius: 60px;
-   
+    text-wrap: nowrap;
+    border: none;
+    box-shadow: 2px 2px 5px grey ;
+    
     
 }
 .Buy{
-    width: 30%;
+    width: 50%;
     margin-right: 50px;
     padding: 20px;
-    border: 1px solid black;
-    border-radius: 60px;
-
+    border: none;
+    box-shadow: 2px 2px 5px grey ;
+    
 }
 .add-cart:hover{
     color: yellow;
     background-color: #e5aa80;
-    font-weight: bold;
+    scale: 1.2;
+    transition: 0.3s;
+    box-shadow: none;
+    border: none;
+    
 }
 .Buy:hover{
     color: yellow;
     background-color: #e5aa80;
-    font-weight: bold;
+    scale: 1.2;
+    transition: 0.3s;
+    box-shadow: none;
+    border: none;
+    
 
 }
