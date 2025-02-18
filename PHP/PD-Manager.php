@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row['quantity'] . "</td>";
         echo "<td>" . number_format($row['price'], 0, ',', '.') . " VND</td>";
         echo "<td><div class='fix-product'>
-              <i class='fa-solid fa-pen-to-square fix-btn-product'></i>
+              <i class='fa-solid fa-pen-to-square fix-btn-product' data-id='$id'></i>
               <i class='fa-solid fa-trash delete-btn-product' data-id='$id'></i>
             </div></td>";
         echo "</tr>";
@@ -34,6 +34,10 @@ $conn->close();
     </div>
 </div>
 
+
+
+
+
 <script>
     document.querySelectorAll('.delete-btn-product').forEach(button => {
         button.addEventListener('click', function() {
@@ -47,5 +51,13 @@ $conn->close();
                 deleteOverlay.style.display = 'none';
             };
         });
+    });
+
+    document.querySelectorAll('.fix-btn-product').forEach(button =>{
+        
+        button.addEventListener('click',function(){
+            let productId = this.getAttribute('data-id');
+            document.getElementById('product-id').value = productId
+        })
     });
 </script>

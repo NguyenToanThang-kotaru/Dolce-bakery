@@ -153,9 +153,10 @@
         <div class="form-group text-center">
           <button type="submit" class="form-button">Thêm Sản Phẩm</button>
         </div>
-      </form>
+      </form> 
 
-      <form class="fix-form-product">
+      <form class="fix-form-product" action="../../PHP/PD-edit.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="product-id" name="product-id">
         <i class="fa-solid fa-rotate-left back-product"></i>
         <div class="form-group">
           <label for="product-image" class="form-label">*Ảnh sản phẩm</label>
@@ -189,7 +190,7 @@
         </div>
 
         <div class="form-group text-center">
-          <button type="submit" class="form-button">Hoàn tất</button>
+          <button type="submit" id="accept-fixPD">Hoàn tất</button>
         </div>
       </form>
 
