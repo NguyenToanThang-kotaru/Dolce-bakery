@@ -19,13 +19,11 @@ if ($result->num_rows > 0) {
             </div></td>";
         echo "</tr>";
     }
-
 } else {
     echo "<tr><td style= 'text-align: center;'  colspan='6'>Không có sản phẩm nào</td></tr>";
 }
 $conn->close();
 ?>
-
 <div id='delete-overlay-product'>
     <div class='delete-container'>
         <span>Bạn muốn xóa sản phẩm này?</span>
@@ -33,10 +31,6 @@ $conn->close();
         <button id='cancel-product'>Hủy</button>
     </div>
 </div>
-
-
-
-
 
 <script>
     document.querySelectorAll('.delete-btn-product').forEach(button => {
@@ -52,7 +46,6 @@ $conn->close();
             };
         });
     });
-
     document.querySelectorAll('.fix-btn-product').forEach(button =>{
         
         button.addEventListener('click',function(){

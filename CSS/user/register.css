@@ -8,6 +8,8 @@
     margin: 0 auto;
     margin-top: 102px;
     z-index: 2;
+    max-height: 700px;
+    overflow-x: hidden;
 }
 
 .blur{
