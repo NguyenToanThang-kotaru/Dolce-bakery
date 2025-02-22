@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../../CSS/user/register.css">
     <link rel="stylesheet" href="../../CSS/user/mainMenu.css">
     <link rel="stylesheet" href="../../CSS/user/responsive.css">
-    <link rel="stylesheet" href="../../CSS/user/cartShop.css">  
+    <link rel="stylesheet" href="../../CSS/user/cartShop.css">
+    <link rel="stylesheet" href="../../CSS/user/catelouge.css">  
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -34,12 +35,12 @@
             <form id=login-form-son>
                 <div class="login-username">
                     <label for="username">Enter your username or email address</label><br>
-                    <input type="text" id="lg-username" placeholder="Username or email address"><br>
+                    <input type="text" class="username" placeholder="Username or email address"><br>
                 </div>
                 <div class="login-password">
                     <label for="password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" id="lg-password" placeholder="Password">
+                        <input type="password" class="password" id="lg-password" placeholder="Password">
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
@@ -59,35 +60,35 @@
             <form id="register-form-son">
                 <div class="register-username">
                     <label for="username">Enter your username</label><br>
-                    <input type="text" id="rg-username" placeholder="Username or email address"><br>
+                    <input type="text" class="username" placeholder="Username or email address"><br>
                 </div>
 
                 <div class="register-username">
                     <label for="username">Enter your email</label><br>
-                    <input type="text" id="rg-username" placeholder="Username or email address"><br>
+                    <input type="text" class="username" placeholder="Username or email address"><br>
                 </div>
 
 
                 <div class="register-info">
                     <div class="username-info">
                         <label for="info"> User name</label>
-                        <input type="text" id="rg-info" placeholder="User name">
+                        <input type="text" class="rg-info" placeholder="User name">
                     </div>
                     <div class="contactnumber-info">
                         <label for="info">Contact Number</label>
-                        <input type="text" id="rg-info" placeholder="Contact Numbers">
+                        <input type="text" class="rg-info" placeholder="Contact Numbers">
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" id="rg-password" placeholder="Password">
+                        <input type="password" class="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="register-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="password">Enter your Password Again</label><br>
                     <div class="password-container">
-                        <input type="password" id="rg-password" placeholder="Password">
+                        <input type="password" class="password" placeholder="Password">
                     </div>
                 </div>
                 <button type="submit" id="signup-btn">Sign up</button>
@@ -100,7 +101,7 @@
                 style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;flex-basis: 33.33%;">
                 <div style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
                     <a href="#">
-                        <img src="../../assest/Dolce.png" alt="" height="70px">
+                        <img src="../../assest/Dolce.png" alt="" height="70px" id="return-mainshop">
                     </a>
                     <h3 style="margin-left: 8px">Bakery Shop</h3>
                 </div>
@@ -133,6 +134,334 @@
                 </div>
             </nav>
         </header>
+
+        <div class="bread-catelouge-container">
+            <div class="show-product" id="product-list">
+                <div class="title">
+                    <img src="../../assest/Filter.png" alt="">
+                    <div class="type">Bread</div>
+                </div>
+                <div class="product-container">
+    
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                    
+    
+           
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                    
+    
+            
+                        <div class="bread-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                </div>
+                
+              
+            </div>
+
+            <div class="bread-pagination">
+            </div>
+        </div>
+        <div class="cake-catelouge-container">
+            <div class="show-product" id="product-list">
+                <div class="title">
+                    <img src="../../assest/Filter.png" alt="">
+                    <div class="type">Cake</div>
+                </div>
+                <div class="product-container">
+    
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                    
+    
+           
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                        <div class="cake-product">
+                            <div class="product-img">
+                                <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                            </div>
+                            <div class="product-name">Kem Cake</div>
+                            <div class="product-end">
+                                <div class="price">100,000 đ</div>
+                                <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                            </div>
+                        </div>
+                    
+    
+            
+                        
+                </div>
+                
+              
+            </div>
+
+            <div class="cake-pagination">
+            </div>
+    </div>
+    <div class="cookie-catelouge-container">
+        <div class="show-product" id="product-list">
+            <div class="title">
+                <img src="../../assest/Filter.png" alt="">
+                <div class="type">Cookie</div>
+            </div>
+            <div class="product-container">
+
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                
+
+       
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+                
+
+        
+                    <div class="cookie-product">
+                        <div class="product-img">
+                            <div class="img-effect"><img src="../../assest/bread1.png" alt=""></div>
+                        </div>
+                        <div class="product-name">Kem Cake</div>
+                        <div class="product-end">
+                            <div class="price">100,000 đ</div>
+                            <div class="add-cart"><img src="../../assest/cart.png" alt=""></div> 
+                        </div>
+                    </div>
+            </div>
+            
+          
+        </div>
+
+        <div class="cookie-pagination">
+        </div>
+</div>
         <div id="slideshow">
             <div id="run">
                 <img src="../../assest/slideshow.jpg" width="100%" class="img" alt="">
@@ -153,19 +482,21 @@
             <h1 id="MenuTitle">Menu</h1>
             <div id="selection">
                 <div class="menuOption">
-                    <img src="../../assest/croisant Icon.png" width="100%" alt="">
+                    <img src="../../assest/croisant Icon.png" width="100%" alt="" id="bread-part">
                     <h3>Bánh mì</h3>
                 </div>
                 <div class="menuOption">
-                    <img src="../../assest/HPBD ICON.png" width="100%" alt="">
+                    <img src="../../assest/HPBD ICON.png" width="100%" alt="" id="cake-part">
                     <h3>Bánh kem</h3>
                 </div>
                 <div class="menuOption">
-                    <img src="../../assest/Mouse Icon.png" width="80%" alt="">
+                    <img src="../../assest/Mouse Icon.png" width="80%" alt="" id="cookie-part">
                     <h3>Cookies</h3>
                 </div>
             </div>
         </div>
+        
+
         <div id="brandStory">
             <div id="story">
                 <h1>Brand Story</h1>
@@ -310,6 +641,7 @@
     <script src="../../JS/user/slideShow.js"></script>
     <script src="../../JS/user/blocklogin.js"></script>
     <script src="../../JS/user/blockCart.js"></script>
+    <script src="../../JS/user/pagination.js"></script>
 </body>
 
 </html>
