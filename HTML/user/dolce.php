@@ -349,8 +349,8 @@
 
             <div class="cake-pagination">
             </div>
-    </div>
-    <div class="cookie-catelouge-container">
+        </div>
+        <div class="cookie-catelouge-container">
         <div class="show-product" id="product-list">
             <div class="title">
                 <img src="../../assest/Filter.png" alt="">
