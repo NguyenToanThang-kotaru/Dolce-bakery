@@ -24,6 +24,7 @@
 
 <body style="margin: 0 0; padding: 0 0;background-color: #FAEEE7;">
     <div id="overlay">
+        <!-- FORM ĐĂNG NHẬP -->
         <div id="login-form">
             <div class="login-content">
                 Welcome to <span class="highlight-1">DOLCE</span>
@@ -32,66 +33,62 @@
                 <span class="blur">No Account?</span>
                 <span class="lg-highlight-2">Sign up</span>
             </div>
-            <form id=login-form-son>
+
+            <form id="login-form-son" name="login-form-son" action="../../PHP/users/UserCtrl.php" method="POST">
                 <div class="login-username">
-                    <label for="username">Enter your username or email address</label><br>
-                    <input type="text" name="" class="username" placeholder="Username or email address"><br>
+                    <label for="lg-username">Enter your username or email address</label><br>
+                    <input type="text" id="lg-username" name="lg-username" placeholder="Username or email address" required><br>
                 </div>
                 <div class="login-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="lg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" class="password" id="lg-password" placeholder="Password">
+                        <input type="password" id="lg-password" name="lg-password" placeholder="Password" required>
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
                 </div>
-                <button type="submit" class="signin-btn">Sign in</button>
+                <button type="submit" class="signin-btn" name="login-form-son">Sign in</button>
             </form>
         </div>
 
+        <!-- FORM ĐĂNG KÝ -->
         <div id="register-form">
-            <div class="register-content">
-                Sign up
-            </div>
+            <div class="register-content">Sign up</div>
             <div class="signin">
                 <span class="blur">Have an Account?</span>
                 <span class="rg-highlight-2">Sign in</span>
             </div>
-            <form id="register-form-son">
+
+            <form id="register-form-son" name = "register-form-son"action="../../PHP/users/UserCtrl.php" method="POST">
                 <div class="register-username">
-                    <label for="username">Enter your username</label><br>
-                    <input type="text" name="username" class="username" placeholder="Username or email address"><br>
-                </div>
+                    <label for="rg-username">Enter your username</label><br>
+                    <input type="text" id="rg-username" name="rg-username" placeholder="Username" required><br>
+                </div> 
 
                 <div class="register-username">
-                    <label for="username">Enter your email</label><br>
-                    <input type="text" class="username" placeholder="Username or email address"><br>
+                    <label for="rg-email">Enter your email</label><br>
+                    <input type="email" id="rg-email" name="rg-email" placeholder="Email address" required><br>
                 </div>
-
 
                 <div class="register-info">
                     <div class="username-info">
-                        <label for="info"> User name</label>
-                        <input type="text" class="rg-info" placeholder="User name">
+                        <label for="rg-fullName">User name</label>
+                        <input type="text" id="rg-fullName" name="rg-fullName" placeholder="User name" required>
                     </div>
                     <div class="contactnumber-info">
-                        <label for="info">Contact Number</label>
-                        <input type="text" class="rg-info" placeholder="Contact Numbers">
+                        <label for="rg-nbPhone">Contact Number</label>
+                        <input type="text" id="rg-nbPhone" name="rg-phone" placeholder="Contact Number" required>
                     </div>
                 </div>
+
                 <div class="register-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="rg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" class="password" placeholder="Password">
+                        <input type="password" id="rg-password" name="rg-password" placeholder="Password" required>
                     </div>
                 </div>
-                <div class="register-password">
-                    <label for="password">Enter your Password Again</label><br>
-                    <div class="password-container">
-                        <input type="password" class="password" placeholder="Password">
-                    </div>
-                </div>
-                <button type="submit" id="signup-btn">Sign up</button>
+
+                <button type="submit" id="signup-btn"name="register-form-son">Sign up</button>
             </form>
         </div>
     </div>
