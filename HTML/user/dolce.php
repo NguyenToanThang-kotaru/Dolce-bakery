@@ -13,16 +13,17 @@
     <link rel="stylesheet" href="../../CSS/user/register.css">
     <link rel="stylesheet" href="../../CSS/user/mainMenu.css">
     <link rel="stylesheet" href="../../CSS/user/responsive.css">
-    <link rel="stylesheet" href="../../CSS/user/cartShop.css">  
+    <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body style="margin: 0 0; padding: 0 0;background-color: #FAEEE7;">
     <div id="overlay">
+        <!-- FORM ĐĂNG NHẬP -->
         <div id="login-form">
             <div class="login-content">
                 Welcome to <span class="highlight-1">DOLCE</span>
@@ -31,66 +32,62 @@
                 <span class="blur">No Account?</span>
                 <span class="lg-highlight-2">Sign up</span>
             </div>
-            <form id=login-form-son>
+
+            <form id="login-form-son" name="login-form-son" action="../../PHP/users/UserCtrl.php" method="POST">
                 <div class="login-username">
-                    <label for="username">Enter your username or email address</label><br>
-                    <input type="text" id="lg-username" placeholder="Username or email address"><br>
+                    <label for="lg-username">Enter your username or email address</label><br>
+                    <input type="text" id="lg-username" name="lg-username" placeholder="Username or email address" required><br>
                 </div>
                 <div class="login-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="lg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" id="lg-password" placeholder="Password">
+                        <input type="password" id="lg-password" name="lg-password" placeholder="Password" required>
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
                 </div>
-                <button type="submit" class="signin-btn">Sign in</button>
+                <button type="submit" class="signin-btn" name="login-form-son">Sign in</button>
             </form>
         </div>
 
+        <!-- FORM ĐĂNG KÝ -->
         <div id="register-form">
-            <div class="register-content">
-                Sign up
-            </div>
+            <div class="register-content">Sign up</div>
             <div class="signin">
                 <span class="blur">Have an Account?</span>
                 <span class="rg-highlight-2">Sign in</span>
             </div>
-            <form id="register-form-son">
+
+            <form id="register-form-son" name = "register-form-son"action="../../PHP/users/UserCtrl.php" method="POST">
                 <div class="register-username">
-                    <label for="username">Enter your username</label><br>
-                    <input type="text" id="rg-username" placeholder="Username or email address"><br>
-                </div>
+                    <label for="rg-username">Enter your username</label><br>
+                    <input type="text" id="rg-username" name="rg-username" placeholder="Username" required><br>
+                </div> 
 
                 <div class="register-username">
-                    <label for="username">Enter your email</label><br>
-                    <input type="text" id="rg-username" placeholder="Username or email address"><br>
+                    <label for="rg-email">Enter your email</label><br>
+                    <input type="email" id="rg-email" name="rg-email" placeholder="Email address" required><br>
                 </div>
-
 
                 <div class="register-info">
                     <div class="username-info">
-                        <label for="info"> User name</label>
-                        <input type="text" id="rg-info" placeholder="User name">
+                        <label for="rg-fullName">User name</label>
+                        <input type="text" id="rg-fullName" name="rg-fullName" placeholder="User name" required>
                     </div>
                     <div class="contactnumber-info">
-                        <label for="info">Contact Number</label>
-                        <input type="text" id="rg-info" placeholder="Contact Numbers">
+                        <label for="rg-nbPhone">Contact Number</label>
+                        <input type="text" id="rg-nbPhone" name="rg-phone" placeholder="Contact Number" required>
                     </div>
                 </div>
+
                 <div class="register-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="rg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" id="rg-password" placeholder="Password">
+                        <input type="password" id="rg-password" name="rg-password" placeholder="Password" required>
                     </div>
                 </div>
-                <div class="register-password">
-                    <label for="password">Enter your Password</label><br>
-                    <div class="password-container">
-                        <input type="password" id="rg-password" placeholder="Password">
-                    </div>
-                </div>
-                <button type="submit" id="signup-btn">Sign up</button>
+
+                <button type="submit" id="signup-btn"name="register-form-son">Sign up</button>
             </form>
         </div>
     </div>
@@ -109,7 +106,8 @@
                     <div id="delete"><img src="../..//assest/Close.png" alt=""></div>
                 </div>
                 <div id="rightMenu">
-                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%"></div>
+                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%">
+                    </div>
                     <div id="menu">
                         <img src="../../assest/menu.png" id="menu2" alt="">
                         <ul id="menudacap">
@@ -143,12 +141,12 @@
 
         <div class="promotion" style="margin-top: 102px;"><img src="../../assest/slideshow.jpg"
                 style="width: 100%;height: 100%;object-fit: cover;" alt=""></div>
-        <div class="promotion"><img src="../../assest/slideshow1.jpg" style="width: 100%;height: 100%;object-fit: cover;"
-            alt=""></div>
+        <div class="promotion"><img src="../../assest/slideshow1.jpg"
+                style="width: 100%;height: 100%;object-fit: cover;" alt=""></div>
         <div class="promotion"><img src="../../assest/slidesho3.jpg" style="width: 100%;height: 100%;object-fit: cover;"
                 alt=""></div>
 
-                
+
         <div id="mainMenu">
             <h1 id="MenuTitle">Menu</h1>
             <div id="selection">
@@ -202,8 +200,8 @@
                             </div>
                         </div>
                     </div>
-        
-        
+
+
                     <div class="PDCart">
                         <div id="PDCart1">
                             <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
@@ -223,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="PDCart">
                         <div id="PDCart1">
                             <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
