@@ -8,12 +8,9 @@
         $imagePath = $_SERVER['DOCUMENT_ROOT'] . $row['image'];
         $PD_delete=("DELETE FROM products where id = $id");
         if ($conn->query($PD_delete) === TRUE) {
-            if ($row) {
+            if ($row['image'] != "/Dolce-bakery/assest/PD-Manager/Default.jpg") {
                 unlink($imagePath);
-            } else {
-                die("Không tìm thấy sản phẩm hoặc lỗi truy vấn!");
-            }
-            
+            }            
             header("Location: ../HTML/admin/admin.php");
             echo "Sản phẩm đã được xóa thành công!";
             exit();

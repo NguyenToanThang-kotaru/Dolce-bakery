@@ -97,11 +97,7 @@
       </table>
     </div>
   </div>
-<<<<<<< HEAD:HTML/admin/admin.php
   <!-- ----------------------------PRODUCT----------------------------- -->
-=======
-<!-- ----------------------------PRODUCT----------------------------- --> 
->>>>>>> db305ea847dd133f09ab7347026568e867556258:HTML/admin/admin.html
   <div class="product-part">
     <div class="product-table-container">
       <div id="product-plus">Thêm sản phẩm</div>
@@ -247,7 +243,7 @@
             </td>
           </tr>
         </tbody>
-      </table>z
+      </table>
 
       <form class="add-form-customer">
         <i class="fa-solid fa-rotate-left back-customer"></i>

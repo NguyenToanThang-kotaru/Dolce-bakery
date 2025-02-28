@@ -57,38 +57,39 @@
                 <span class="blur">Have an Account?</span>
                 <span class="rg-highlight-2">Sign in</span>
             </div>
-            <form id="register-form-son">
+            <form id="register-form-son" name = "register-form-son" action="../../PHP/users/UserCtrl.php" method="POST">
+            <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
-                    <label for="username">Enter your username</label><br>
-                    <input type="text" name="username" class="username" placeholder="Username or email address"><br>
+                    <label for="rg-username">Enter your username</label><br>
+                    <input type="text" name="rg-username" class="username" placeholder="Username or email address" required><br>
                 </div>
 
                 <div class="register-username">
-                    <label for="username">Enter your email</label><br>
-                    <input type="text" class="username" placeholder="Username or email address"><br>
+                    <label for="rg-email">Enter your email</label><br>
+                    <input type="text" name="rg-email" class="username" placeholder="Username or email address" required><br>
                 </div>
 
 
                 <div class="register-info">
                     <div class="username-info">
-                        <label for="info"> User name</label>
-                        <input type="text" class="rg-info" placeholder="User name">
+                        <label for="rg-fullName"> Enter your full name</label>
+                        <input type="text" name="rg-fullName" class="rg-info" placeholder="User name" required>
                     </div>
                     <div class="contactnumber-info">
-                        <label for="info">Contact Number</label>
-                        <input type="text" class="rg-info" placeholder="Contact Numbers">
+                        <label for="rg-phone">Contact Number</label>
+                        <input type="text" name="rg-phone" class="rg-info" placeholder="Contact Numbers" required>
                     </div>
                 </div>
                 <div class="register-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="rg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" class="password" placeholder="Password">
+                        <input type="password" name="rg-password" class="password" placeholder="Password" required>
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="password">Enter your Password Again</label><br>
                     <div class="password-container">
-                        <input type="password" class="password" placeholder="Password">
+                        <input type="password" class="password" placeholder="Password" required>
                     </div>
                 </div>
                 <button type="submit" id="signup-btn">Sign up</button>

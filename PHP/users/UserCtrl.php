@@ -27,13 +27,15 @@
                             VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
     
             if($conn->query($insertQuery) === TRUE){
-                echo "Đăng ký thành công!";
+                header("Location: ../../HTML/user/dolce.php");
             } else {
                 echo "Lỗi: " . $conn->error;
             }
         }
     }
-    
+    else{
+        echo "Lỗi: khong post" ;
+    }
 
 
     if(isset($_POST['login-form-son']))
@@ -60,4 +62,6 @@
         }
         
     }
+
+
 ?>

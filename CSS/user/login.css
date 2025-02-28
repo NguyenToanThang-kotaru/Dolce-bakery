@@ -5,9 +5,9 @@
     width: 400px;
     height: 500px;
     padding: 30px 20px;
-    border-radius: 40px;
+    border-radius: 20px;
     margin: 0 auto;
-    margin-top: 102px;
+    margin-top: 130px;
 }
 
 .highlight-1{
@@ -55,7 +55,7 @@
 }
 
 .username{
-    border: 1px solid #4285f4;
+    border: 1px solid #a5a5a5;
     width: 355px;
     padding: 12px;
     border-radius: 10px;
