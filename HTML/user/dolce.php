@@ -33,6 +33,7 @@
                 <span class="lg-highlight-2">Sign up</span>
             </div>
             <form id=login-form-son>
+                <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
                     <label for="username">Enter your username or email address</label><br>
                     <input type="text" name="" class="username" placeholder="Username or email address"><br>
@@ -58,7 +59,7 @@
                 <span class="rg-highlight-2">Sign in</span>
             </div>
             <form id="register-form-son" name = "register-form-son" action="../../PHP/users/UserCtrl.php" method="POST">
-            <input type="hidden" name="register-form-son" value="1">
+                <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
                     <label for="rg-username">Enter your username</label><br>
                     <input type="text" name="rg-username" class="username" placeholder="Username or email address" required><br>
