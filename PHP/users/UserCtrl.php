@@ -54,7 +54,7 @@
             if($row['role'] == 2) {
                 header("Location: ../../HTML/admin/admin.php");
             } else {
-                header("Location: ../../HTML/user/dolce.php"); 
+                header("Location: ../../HTML/user/dolce.php#logined"); 
             }
             exit();
         } else {

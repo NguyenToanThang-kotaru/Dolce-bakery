@@ -32,16 +32,16 @@
                 <span class="blur">No Account?</span>
                 <span class="lg-highlight-2">Sign up</span>
             </div>
-            <form id=login-form-son>
+            <form id=login-form-son name="login-form-son" action="../../PHP/users/UserCtrl.php" method="POST">
                 <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
-                    <label for="username">Enter your username or email address</label><br>
-                    <input type="text" name="" class="username" placeholder="Username or email address"><br>
+                    <label for="lg-username">Enter your username or email address</label><br>
+                    <input type="text" name="lg-username" class="username" placeholder="Username or email address"><br>
                 </div>
                 <div class="login-password">
-                    <label for="password">Enter your Password</label><br>
+                    <label for="lg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" class="password" id="lg-password" placeholder="Password">
+                        <input type="password" name="lg-password" class="password" id="lg-password" placeholder="Password">
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
