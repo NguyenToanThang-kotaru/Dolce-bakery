@@ -351,9 +351,27 @@
             </div>
         </div>
         <div class="cookie-catelouge-container">
+        <div id="filter-popup">
+            <div class = "price-range">
+                <h3 style= "color: red;">Giá</h3>
+                <div class="slider-value">
+                    <span id= "min-value">300.000đ</span>
+                    <span id = "max-value">3.000.000đ</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" id="min-price" min="500000" max="80000000" step="50000" value="500000">
+                    <input type="range" id="max-price" min="500000" max="80000000" step="50000" value="80000000">
+                </div>
+            </div>
+            <div class="price-arrange">
+                    <span>Giá tăng dần</span>
+                    <span>Giá giảm dần</span>
+            </div>
+            <div class="filter-arrow"></div>
+        </div>
         <div class="show-product" id="product-list">
             <div class="title">
-                <img src="../../assest/Filter.png" alt="">
+                <img src="../../assest/Filter.png" alt="" id = "filter-icon" onclick = "togglePopup(event)">
                 <div class="type">Cookie</div>
             </div>
             <div class="product-container">
