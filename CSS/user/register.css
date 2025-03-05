@@ -2,22 +2,16 @@
 #register-form {
     background-color: #ffffff;
     width: 400px;
-    height: 500px;
+    height: fit-content;
     padding: 30px 20px;
-    border-radius: 40px;
+    border-radius: 20px;
     margin: 0 auto;
-    margin-top: 102px;
+    margin-top: 130px;
     z-index: 2;
-
-}
-
-.rg-highlight-2{
-    color: #915959;
-    cursor: pointer;
-}
-
-.rg-highlight-2:hover{
-    color: #Ecbc76;
+    height: 500px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    overflow-x: hidden;
 }
 
 .blur{
@@ -49,21 +43,6 @@
     gap: 30px;
 }
 
-#rg-username{
-    border: 1px solid #4285f4;
-    width: 355px;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-#rg-password{
-    border: 1px solid #adadad;
-    width: 355px;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
 
 .highlight-3{
     color: #915959;
@@ -72,9 +51,7 @@
     top: 15px;
     left: 72%;
 }
-
-#register-form-son button{
-    margin-top: 20px;
+#signup-btn{    
     padding: 15px;
     background-color: #915959;
     color: #ffffff;
@@ -84,12 +61,12 @@
     cursor: pointer;    
 }
 
-#register-form-son button:hover{
+#signup-btn:hover{
     transform: scale(1.01);
     background-color: #Ecbc76;
 }
 
-#register-form-son button:active{
+#signup-btn:active{
     transform: scale(1.02);
 }
 

@@ -16,21 +16,23 @@
 }
 
 .img1 {
-    background-image: url('/assest/slideshow.jpg');
+    background-image: url('../../assest/slideshow.jpg');
     padding-top:400px;
     min-width: 600px;
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
 }
 .img2{
-    background-image: url('/assest/slideshow1.jpg');
+    background-image: url('../../assest/slideshow1.jpg');
     padding-top:400px;
     min-width: 600px;
+    height: 150%;
     background-size: contain;
     background-repeat: no-repeat;
 }
 .img3{
-    background-image: url('/assest/Slidesho3.jpg');
+    background-image: url('../../assest/Slidesho3.jpg');
     padding-top:400px;
     min-width: 600px;
     background-size: contain;

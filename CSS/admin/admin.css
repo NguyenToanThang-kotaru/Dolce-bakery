@@ -11,6 +11,10 @@ body {
   min-height: 100vh;
 }
 
+#margin0auto{
+  margin: 0 auto;
+}
+
 .sidebar {
   width: 300px;
   border-right: 6px solid;
