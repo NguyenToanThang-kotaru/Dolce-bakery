@@ -36,12 +36,12 @@
                 <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
                     <label for="lg-username">Enter your username or email address</label><br>
-                    <input type="text" name="lg-username" class="username" placeholder="Username or email address"><br>
+                    <input type="text" name="lg-username" class="username lg-username" placeholder="Username or email address"><br>
                 </div>
                 <div class="login-password">
                     <label for="lg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" name="lg-password" class="password" id="lg-password" placeholder="Password">
+                        <input type="password" name="lg-password" class="password lg-password" placeholder="Password">
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
@@ -62,29 +62,29 @@
                 <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
                     <label for="rg-username">Enter your username</label><br>
-                    <input type="text" name="rg-username" class="username" placeholder="Username or email address" required><br>
+                    <input type="text" name="rg-username" class="username rg-username" placeholder="Username or email address" required><br>
                 </div>
 
                 <div class="register-username">
                     <label for="rg-email">Enter your email</label><br>
-                    <input type="text" name="rg-email" class="username" placeholder="Username or email address" required><br>
+                    <input type="text" name="rg-email" class="username rg-email" placeholder="Username or email address" required><br>
                 </div>
 
 
                 <div class="register-info">
                     <div class="username-info">
                         <label for="rg-fullName"> Enter your full name</label>
-                        <input type="text" name="rg-fullName" class="rg-info" placeholder="User name" required>
+                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name" required>
                     </div>
                     <div class="contactnumber-info">
                         <label for="rg-phone">Contact Number</label>
-                        <input type="text" name="rg-phone" class="rg-info" placeholder="Contact Numbers" required>
+                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers" required>
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="rg-password">Enter your Password</label><br>
                     <div class="password-container">
-                        <input type="password" name="rg-password" class="password" placeholder="Password" required>
+                        <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
                     </div>
                 </div>
                 <div class="register-password">
@@ -644,6 +644,9 @@
     <script src="../../JS/user/blocklogin.js"></script>
     <script src="../../JS/user/blockCart.js"></script>
     <script src="../../JS/user/pagination.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../JS/user/userAjax.js"></script>
 </body>
 
 </html>
