@@ -103,7 +103,7 @@ $(document).ready(function () {
             success: function (response) {
                 alert(response);
                 if (response.includes("Đăng nhập thành công")) {
-                    
+                    //kiểm tra xem trang login chưa
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
                     window.location.href = "../../HTML/user/dolce.php";
@@ -125,6 +125,7 @@ $(document).ready(function () {
             }
         });
     });
+    //ẩn hiện đăng xuất thông tin
     function checkLoginStatus() {
         if (localStorage.getItem("isLoggedIn") === "true") {
             $("#login-btn").hide();
@@ -136,7 +137,7 @@ $(document).ready(function () {
             $("#log-out").hide();
         }
     }
-
+    //bấm logout thì trả về trạng thái ban đầu
     checkLoginStatus(); 
     $("#log-out").click(function () {
         localStorage.removeItem("isLoggedIn");
