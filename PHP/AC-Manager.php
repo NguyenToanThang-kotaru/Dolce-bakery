@@ -7,13 +7,13 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $status = $row['status'];  // Lấy trạng thái của tài khoản
-        $userId = $row['user_id'];
+        $userId = $row['id'];
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['userName']) . "</td>";
         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>
-                <select class='account-status' data-userid='" . $row['user_id'] . "'>
+                <select class='account-status' data-userid='" . $row['id'] . "'>
                     <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>
                     <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
                 </select>

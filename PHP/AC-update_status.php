@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt = $conn->prepare("UPDATE users SET status = ? WHERE user_id = ?");
+    $stmt = $conn->prepare("UPDATE users SET status = ? WHERE id = ?");
     if (!$stmt) {
         echo "Lỗi chuẩn bị truy vấn: " . $conn->error;
         exit();
