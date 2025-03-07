@@ -50,6 +50,11 @@
             $row = $result->fetch_assoc();
             $_SESSION['userName'] = $row['userName'];
             $_SESSION['role'] = $row['role'];
+
+            if ($row['status'] == 2) {
+                echo "Tài khoản của bạn đã bị khóa!";
+                exit();
+            }
     
             if($row['role'] == 2) {
                 header("Location: ../../HTML/admin/admin.php");
