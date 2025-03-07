@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../../CSS/user/responsive.css">
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">  
+    <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -123,6 +124,9 @@
                                 <li id="login-btn">Đăng nhập</li>
                             </a>
                             <a href="#">
+                                <li style="display: none;"  id="infor">Thông tin</li>
+                            </a>
+                            <a href="#">
                                 <li>Thực đơn</li>
                             </a>
                             <a href="#">
@@ -130,6 +134,10 @@
                             </a>
                             <a href="#">
                                 <li id="CartPhone">Giỏ hàng</li>
+                            </a>
+                            <a href="#">
+                                <li style="border-bottom:none; border-top: 1px solid black;display:none" id="log-out">Đăng xuất</li>
+                                
                             </a>
                         </ul>
                     </div>
@@ -586,6 +594,46 @@
                 <p id="buy">Mua Ngay</p>
             </div>
         </div>
+        <!-- ------------------------------------infor-------------------------------------- -->
+        <div id="overlayInfo">
+            <div id="InfoUser-container">
+                <div class="InfoUser-Title">
+                    <i id="Back"class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <h1 class="Title">Thông tin</h1>
+                
+                </div>
+            <div class="InfoUser_Detail">
+                <div class="row">
+                    <label for="account" class="Detail">Tài khoản: </label>
+                    <span>Nguyen Van A</span>
+                </div>
+                <div class="row">
+                    <label for="fullname" class="Detail" >Họ và tên: </label>
+                    <span>Nguyễn Văn A</span>
+
+                </div>
+                
+                <div class="row">
+                    <label for="email" class="Detail" >Email:</label>
+                    <span>email@gmail.com</span>
+
+                </div>
+                    
+                <div class="row">
+                    <label for="phone" class="Detail" >Số điện thoại: </label>
+                    <span>1234567890</span>
+                </div>
+            </div>
+            <div id="Buy-history">
+                <div class="History">Lịch sử mua hàng</div>
+            </div>
+            </div>
+
+        </div>
+        
+            
+        
+        
         <!-- -------------------------------------FOoter------------------------------------- -->
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">
@@ -647,6 +695,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
+    <script src="../../JS/user/blockInfo.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,133 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+#shopcart-container{
+    
+    border: none;
+    padding: 10px;
+    width: 60%;
+    margin: 120px auto;
+    border-radius: 10px;
+    background-color: #f6f4f4;
+
+}
+#cart-header{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    font-size: 24px;
+}
+#cart-header h1{
+    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap; 
+    font-size: 30px;
+}
+.Product-img{
+    border: 2px solid black;
+    width: 150px;
+    padding: 20px;
+    margin: 20px 5px;
+    background-color: #b77777;
+}
+.main{
+    display: flex;
+    border: 2px solid black;
+    width: 80%;
+    margin: 15px auto;
+    padding: 5px;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    border-radius: 15px;
+    background-color: #ffffff;
+    
+    
+}
+.Product-detail{
+    margin: 30px 10px;
+    /* border: 2px solid ; */
+    padding: 10px;
+    
+}
+#quantity-container{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center; 
+    width: 30%;
+    justify-content: center;
+    margin: 15px;
+    padding: 5px;
+    gap: 10px;
+    margin-left: 290px;
+}
+#quantity-container i{
+    font-size: 24px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+#quantity-container p{
+    font-size: 24px;
+}
+#delete-icon{
+    font-size: 24px;
+    margin-top: 70px;
+}
+#Title{
+    font-size: large;
+    font-weight: bold;
+    margin: 15px;
+    margin-left: 120px;
+   
+}
+#cart-footer{
+    display: flex;
+    border: 2px solid black;
+    width: 40%;
+    margin:150px auto;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+#Total{
+    display: flex;
+    align-items: center;
+}
+.Buy{
+    /* text-align: right; */
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    background-color: #adacac;
+    margin-left: 240px;
+    
+}
+.price-total{
+    gap:5px;
+    margin:5px;
+    color:#ff0000;
+}
+#quantity-container i:hover{
+    cursor: pointer;
+    background-color: #f97316;
+    color: white;
+}
+.price{
+    color: #f11b1b;
+}
+.Buy:hover{
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #ff0000;
+}

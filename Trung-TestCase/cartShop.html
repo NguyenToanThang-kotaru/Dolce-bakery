@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/user/topMenu.css">
+    <link rel="stylesheet" href="/Trung-TestCase/cartshop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+</head>
+<body>
+    <div id="container">
+        <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
+            <nav
+                style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; color: white; cursor: pointer; ">
+                    <a href="#">
+                        <img src="/assest/Dolce.png" alt="" height="70px">
+                    </a>
+                    <h3 style="margin-left: 8px">Bakery Shop</h3>
+                </div>
+                <div id="mid" style="display: flex;align-items: center;position: relative;width: 30%;">
+                    <input type="text" placeholder="Search" id="search">
+                    <div id="delete"><img src="/assest/Close.png" alt=""></div>
+                </div>
+                <div style="display: flex;align-items: center;">
+                    <div id="cart"><img src="/assest/Shopping cart.png" width="50%"></div>
+                    <div id="menu" style="position: relative;">
+                        <img src="/assest/menu.png" id="menu2"
+                            style="width: 50%;;background-color: #33272A;padding: 0; border: none;" alt="">
+                        <ul id="menudacap">
+                            <a href="#"><li>Trang chủ</li></a>
+                            <a href="#"><li id="login-btn">Đăng nhập</li></a>
+                            <a href="#"><li>Thực đơn</li></a>
+                            <a href="#"><li style="border-bottom:none;">Tin tức</li></a>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+    <div id="shopcart-container">
+        <div id="cart-header">
+            <i class="fa-solid fa-arrow-left"></i>
+            <h1>Giỏ hàng</h1>
+        </div>
+        <div id="cart-body">
+            <p id="Title">Products</p>
+            <div class="main">
+                <div class="Product-img">
+
+                </div>
+                <div class="Product-detail">
+                    <p >Sản phẩm 1</p>
+                    <p class="price">100.000đ</p>
+                </div>
+                <div id="quantity-container">
+                    <i class="fa-solid fa-minus"></i>
+                    <p>1</p>
+                    <i class="fa-solid fa-plus"></i>
+                    
+                </div>
+                <div id="delete-icon">
+                    <i class="fa-regular fa-trash-can"></i>
+                </div>
+                
+                
+            </div>
+            <div class="main">
+                <div class="Product-img">
+
+                </div>
+                <div class="Product-detail">
+                    <p >Sản phẩm 1</p>
+                    <p class="price">100.000đ</p>
+                </div>
+                <div id="quantity-container">
+                    <i class="fa-solid fa-minus"></i>
+                    <p>1</p>
+                    <i class="fa-solid fa-plus"></i>
+                    
+                </div>
+                <div id="delete-icon">
+                    <i class="fa-regular fa-trash-can"></i>
+                </div>
+                
+                
+            </div>
+            <div class="main">
+                <div class="Product-img">
+
+                </div>
+                <div class="Product-detail">
+                    <p >Sản phẩm 1</p>
+                    <p  class="price">100.000đ</p>
+                </div>
+                <div id="quantity-container">
+                    <i class="fa-solid fa-minus"></i>
+                    <p>1</p>
+                    <i class="fa-solid fa-plus"></i>
+                    
+                </div>
+                <div id="delete-icon">
+                    <i class="fa-regular fa-trash-can"></i>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+        <div id="cart-footer">
+            <div id="Total">
+                <p>Tạm tính:</p>
+                <p class="price-total">0đ</p>
+            </div>
+            
+            <p class="Buy">Mua Ngay</p>
+        </div>
+        
+        
+    </div>
+</body>
+</html>
