@@ -121,6 +121,7 @@ $(document).ready(function () {
         event.preventDefault();
         var userName = $('.lg-username').val();
         var passWord = $('.lg-password').val();
+
         $.ajax({
             type: "POST",
             url: "../../PHP/users/UserCtrl.php",
@@ -142,15 +143,7 @@ $(document).ready(function () {
 			
                     // $("#login-btn").hide();
                     // $("#infor").show();
-                    
-			
                 }
-		
-
-		
-		
-
-		
             }
         });
     });

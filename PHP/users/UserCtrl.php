@@ -51,7 +51,7 @@
         $userName = $_POST['lg-username'];
         $passwd = $_POST['lg-password'];
     
-        $sql = "SELECT * FROM users WHERE userName = '$userName' and password = '$passwd'";
+        $sql = "SELECT * FROM users WHERE (userName = '$userName' OR email='$userName') and password = '$passwd'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             session_start();
