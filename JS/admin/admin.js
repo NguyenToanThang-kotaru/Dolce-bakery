@@ -258,7 +258,7 @@ const act_status = document.querySelectorAll(".account-status");
 function ChangeStatus(event){
     let select = event.target;
 
-    if(select.value == "lock"){
+    if(select.value == "2"){
         select.style.boxShadow = "0 0 5px 1px red";
     }
     else{

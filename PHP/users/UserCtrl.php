@@ -68,6 +68,11 @@
             $row = $result->fetch_assoc();
             $_SESSION['userName'] = $row['userName'];
             $_SESSION['role'] = $row['role'];
+
+            if ($row['status'] == 2) {
+                echo "Tài khoản của bạn đã bị khóa!";
+                exit();
+            }
     
             echo "Đăng nhập thành công";
         } else {
