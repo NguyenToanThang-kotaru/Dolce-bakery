@@ -17,28 +17,10 @@
     width: 100%;
     cursor: pointer;
     margin: 30px;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-#croissant{
-    background-image: url('/assest/croisant\ Icon.png');
-    padding-top:100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-
-}
-
-#happyBirtday{
-    background-image: url('/assest/HPBD\ ICON.png');
-    padding-top:100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-#mouse{
-    background-image: url('/assest/Mouse\ Icon.png');
-    padding-top:100px;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 #selection div:hover{

@@ -29,28 +29,33 @@ cart.addEventListener("click",()=>{
     if(flagBlockCart==1){
         noneShopCart();
         flagBlockCart = 0;
-        console.log("0");
+        console.log(flagBlockCart);
     }
     else{
-        blockShopCart();
         flagBlockCart = 1;
+        console.log(flagBlockCart);
+        blockShopCart();
     }
 })
+
+backCart.addEventListener("click",()=>{
+    if(flagBlockCart==1){
+        flagBlockCart = 0;
+        noneShopCart();
+        console.log(flagBlockCart);
+    }
+})
+
+
 
 CartPhone.addEventListener("click",()=>{
     if(flagBlockCart==1){
         noneShopCart();
         flagBlockCart = 0;
-        console.log("0");
+        console.log(flagBlockCart);
     }
     else{
         blockShopCart();
         flagBlockCart = 1;
     }
-})
-
-
-
-backCart.addEventListener("click",()=>{
-    noneShopCart();
 })

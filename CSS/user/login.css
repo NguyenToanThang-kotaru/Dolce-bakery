@@ -5,9 +5,9 @@
     width: 400px;
     height: 500px;
     padding: 30px 20px;
-    border-radius: 40px;
+    border-radius: 20px;
     margin: 0 auto;
-    margin-top: 102px;
+    margin-top: 130px;
 }
 
 .highlight-1{
@@ -54,15 +54,15 @@
     gap: 30px;
 }
 
-#lg-username{
-    border: 1px solid #4285f4;
+.username{
+    border: 1px solid #a5a5a5;
     width: 355px;
     padding: 12px;
     border-radius: 10px;
     margin-top: 10px;
 }
 
-#lg-password{
+.password{
     border: 1px solid #a5a5a5;
     width: 355px;
     padding: 12px;
@@ -72,11 +72,17 @@
 
 .password-container i {
     position: absolute;
-    left: 920px;
-    top: 50%;
+    right: 10px;
+    top: 25px;
     cursor: pointer;
     color: #8e8e8e;
     font-size: 11px;
+  }
+
+  .password-container{
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
 .highlight-3{
