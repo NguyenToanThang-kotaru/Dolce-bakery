@@ -54,3 +54,5 @@ $conn->close();
         })
     });
 </script>
+
+<!-- upload product -->

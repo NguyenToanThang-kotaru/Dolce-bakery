@@ -590,3 +590,157 @@ body {
   z-index: 1;
   display: none;
 }
+
+/* account part */
+.account-part{
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.account-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.account-status{
+  padding: 2px;
+  border: 0px solid rgb(17, 17, 17);
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70); 
+}
+
+.account-table th, .account-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.account-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+#account-plus{
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+#account-plus:hover{
+  color: #ea9029;
+  transform: scale(1.1);
+}
+
+.account-table td{
+  background-color: #f9f5f0;
+}
+
+.account-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.fix-account{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.account-table i:hover{
+  color: #8b5a5a;
+}
+
+
+.add-form-account, .fix-form-account {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-account i, .fix-form-account i{
+  margin-left: 740px;
+  cursor: pointer;
+}
+
+.add-form-account i:hover,.fix-form-account i:hover{
+  color: #ef9b09;
+  transform: scale(1.2);
+}
+
+#delete-overlay-account {  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}
+
+/*  */
+.role-container{
+  width: 30%;
+  border: 0px solid rgb(109, 105, 105);
+  box-shadow: 0 0 8px 1px rgb(160, 159, 159);
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  padding: 10px;
+}
+
+.check-role{
+  margin-top: 10px;
+}
+
+#role-popup{
+  position: absolute;
+  background: #eed9ba;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px 2px rgba(141, 82, 236, 0.2);
+  display: none;    
+  z-index: 2;
+}
+
+.popup-arrow {
+  position: absolute;
+  top: -10px;
+  left: 8%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #eed9ba;
+}
