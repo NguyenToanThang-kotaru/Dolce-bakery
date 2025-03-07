@@ -72,7 +72,7 @@ $(document).ready(function () {
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         var phoneRegex = /^0\d{9}$/;
         var passwordRegex = /^.{8,}$/;
-
+        var fullnameRegex = /^[a-zA-Z\s]+$/;
         // Kiểm tra từng trường
         if (!usernameRegex.test(userName)) {
             alert("Tên đăng nhập không được chứa ký tự đặc biệt.");
@@ -80,6 +80,10 @@ $(document).ready(function () {
         }
         if (!emailRegex.test(email)) {
             alert("Email không hợp lệ.");
+            return;
+        }
+        if(!fullnameRegex.test(fullName)){
+            alert("Tên không hợp lệ.");
             return;
         }
         if (!phoneRegex.test(phone)) {
