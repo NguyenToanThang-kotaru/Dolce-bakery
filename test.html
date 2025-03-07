@@ -1,124 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chuyển Trang (Query Parameters)</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Thu Gọn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .page {
-      display: none;
-      font-size: 24px;
-      text-align: center;
-      padding: 20px;
-      border: 2px solid #333;
-      background: #fff;
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
 
-    .page.active {
-      display: block;
-    }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #333;
+            color: white;
+            padding: 15px;
+            transition: width 0.3s;
+            overflow: hidden;
+        }
 
-    .navigation {
-      margin-top: 20px;
-    }
+        .sidebar h2 {
+            white-space: nowrap;
+        }
 
-    .btn {
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      background: #007bff;
-    }
+        .sidebar.closed {
+            width: 60px;
+        }
 
-    .btn:disabled {
-      background: #cccccc;
-      cursor: not-allowed;
-    }
-  </style>
+        /* Nút Toggle */
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 260px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: left 0.3s;
+        }
+
+        /* Khi sidebar đóng thì nút lùi vào */
+        .sidebar.closed + .toggle-btn {
+            left: 70px;
+        }
+
+        /* Nội dung chính */
+        .content {
+            flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        /* Khi sidebar đóng thì nội dung mở rộng */
+        .sidebar.closed ~ .content {
+            margin-left: -190px;
+        }
+    </style>
 </head>
 <body>
-  <div id="page-1" class="page">Trang 1</div>
-  <div id="page-2" class="page">Trang 2</div>
-  <div id="page-3" class="page">Trang 3</div>
-  <div id="page-4" class="page">Trang 4</div>
 
-  <div class="navigation">
-    <button id="prev-btn" class="btn" disabled>Trước</button>
-    <button id="next-btn" class="btn">Tiếp theo</button>
-  </div>
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <p>Item 1</p>
+        <p>Item 2</p>
+        <p>Item 3</p>
+    </div>
 
-  <script>
-    // Các biến
-    const pages = document.querySelectorAll('.page');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const totalPages = pages.length;
+    <button class="toggle-btn" id="toggleBtn">☰</button>
 
-    // Lấy số trang từ URL
-    function getPageFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get('page')) || 1; // Mặc định là trang 1
-    }
+    <div class="content">
+        <h1>Nội dung chính</h1>
+        <p>Đây là phần nội dung. Khi sidebar thu gọn, phần này sẽ mở rộng.</p>
+    </div>
 
-    // Cập nhật URL khi chuyển trang
-    function updateURL(page) {
-      const newURL = `${window.location.pathname}?page=${page}`;
-      window.history.pushState({ page }, '', newURL);
-    }
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const toggleBtn = document.getElementById("toggleBtn");
 
-    // Hiển thị trang hiện tại
-    function showPage(page) {
-      pages.forEach((pageElement, index) => {
-        pageElement.classList.toggle('active', index + 1 === page);
-      });
+        toggleBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("closed");
+        });
+    </script>
 
-      prevBtn.disabled = page === 1;
-      nextBtn.disabled = page === totalPages;
-    }
-
-    // Xử lý sự kiện khi nhấn nút "Trước" hoặc "Tiếp theo"
-    let currentPage = getPageFromURL();
-    showPage(currentPage);
-
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-        updateURL(currentPage);
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-        updateURL(currentPage);
-      }
-    });
-
-    // Xử lý "back" hoặc "forward" của trình duyệt
-    window.addEventListener('popstate', (event) => {
-      currentPage = event.state?.page || 1;
-      showPage(currentPage);
-    });
-  </script>
 </body>
 </html>

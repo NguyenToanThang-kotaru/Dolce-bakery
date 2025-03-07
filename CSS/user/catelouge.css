@@ -15,79 +15,59 @@
 }   
 
 
-.show-product{   
-    display: flex;
-    flex-direction: column;
-    min-height: 820px;
-    min-width: 1280px;                                                   
-    margin-top: 40px;
-    padding: 20px;
-    margin-bottom: 40px;
-    background-color: #ffff;
-    padding-left: 20px;
-    padding-right:20px;
-    box-shadow: 0px 5px 30px 0px #B26161;
-    border-radius: 40px;
-}
+
 
 .title{
-    display: flex;
     color: #C09898;
     font-weight: bold;
     font-size: 25px;
+    margin: 0 auto;
 }
 
-.title img{
-    width: 40px;
-    margin-right: 137px;
-    cursor: pointer;
-}
-
-.title img:hover{
-    transform: scale(1.1);
-}
-
-.type{
-    margin-left: 385px;
-}
 
 .product-container{
     display: flex;
-    max-width: 1200px;
+    max-width: 1000px;
+    min-height: 700px;
     flex-wrap: wrap;
-    margin-left: 40px;
-    gap: 70px;
-    padding: 20px;
-    margin-top: 30px;
-    padding-left: 50px;
-    padding-right: 50px;
+    gap: 30px;
+    padding: 10px;
+    margin-top: 20px;
+    padding-left: 70px;
+    padding-right: 70px;
+    justify-content: space-between;
+    
 }
+
 
 .bread-product , .cake-product , .cookie-product{
     display: flex;
     flex-direction: column;
-    width: 200px;
-    height:  300px;
+    width: 20%;
+    height:  40%;
     background-color: #FFEBD8;
 }
-
+.cookie-product{
+    position: relative;
+}
 
 .product-img{
     background-color: #F186DF;
     height: 200px;
+    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.img-effect{
+.img-effect{ 
     background-color: #fff;
-    padding: 20px;
+    padding: 25px 10px 25px 10px;
 }
 
 .product-img img{
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 50%;
     cursor: pointer;
 }
 
@@ -121,7 +101,7 @@
     width: 100px;
     height: 50px;
     color: #ffff;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -143,7 +123,7 @@
 }
 
 .product-end img{
-    width: 35px;
+    width: 28px;
     cursor: pointer;
 }
 
@@ -172,42 +152,13 @@
     font-weight: bold;
 }
 
-/* filter */
-#filter-popup{
-    width: 25%;
-    height: 40%;
-    position: absolute;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(5px);
-    font-size: 14px;
-    font-weight: 500;
-    color: #555;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 8px 2px rgba(141, 82, 236, 0.2);
-    display: none;    
-    z-index: 2;
-  }
-  
-  .filter-arrow {
-    position: absolute;
-    top: -10px;
-    left: 5%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid rgba(0,0,0,0.3);
-  }
-
   /* slider-value */
 
 
   .price-range{
     margin: 0 auto;
     margin-top: 20px;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);   
@@ -216,13 +167,22 @@
 }
 
 .slider-value {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     font-size: 16px;
     font-weight: bold;
-    color: #3b5998; /* Màu xanh đậm */
+    color: #94b1f0; 
 }
 
+.slider-value span{
+    border: 1px solid gray;
+    width: 120px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 .slider-container {
     position: relative;
@@ -250,38 +210,114 @@
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: #3b5998;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
     position: relative;
-    transform: translateY(-7px)
+    transform: translateY(-5px)
 }
-
-.price-arrange{
-    color: #fff;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 20px;
-    width: 90%;
-    padding: 10px;
-    background: transparent;
-    backdrop-filter: blur(5px);   
-    border-radius: 8px;
+.filter-title{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+
 }
 
-.price-arrange span{
+.option-price{
+    margin-bottom: 10px;
+}
+
+.level-price input[type = "checkbox"]{
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #3b5998;
-    padding: 10px;
-    border-radius: 5px;
 }
 
-.price-arrange span:hover{
-    transform: scale(1.05);
+.level-price input:hover{
+    transform: scale(1.1);
+}
+
+.filter{
+    display: flex;
+    min-width: 25%;
+    flex-direction: column;
+    padding: 20px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 30px;
+    position: fixed;
+    left: -600px;
+    transition: 0.5s;
+}   
+.filter.active{
+    left: 0;
+}
+
+.filtershow{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 1;
+    position: absolute;
+    left: 20px;
+    top: 150px;
+}
+
+.filtershow:hover{
+    transform: scale(1.1);
+}
+   
+
+.product-filter{
+    /* display: flex; */
+    margin-top: 40px;
+    transition: margin 0.5s ease-in-out;
+    /* position: relative; */
+}
+
+.show-product{      
+    display: flex;
+    position: relative;
+    flex-direction: column;     
+    min-height: 780px;
+    max-height: 780px;
+    min-width: 1000px;
+    max-width: 1000px;                                                   
+    padding: 20px;
+    margin-bottom: 40px;
+    background-color: #ffff;
+    padding-left: 20px;
+    padding-right:20px; 
+    box-shadow: 0px 5px 30px 0px #B26161;
+    border-radius: 40px;
+
+}
+
+.arrange-filter{
+    position: absolute;
+    right: 50px;
+    top: 25px;
+}
+
+.arrange-filter select{
+    padding: 5px;
+    border-radius: 15px;
+}   
+
+.acp-filter{
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px 0px #555252;
+    margin-left: 44%;
+    cursor: pointer;
+}
+
+.acp-filter:hover{
+    background-color: rgb(150, 150, 142);
 }

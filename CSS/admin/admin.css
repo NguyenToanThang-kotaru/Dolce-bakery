@@ -736,7 +736,7 @@ body {
 .popup-arrow {
   position: absolute;
   top: -10px;
-  left: 15%;
+  left: 8%;
   transform: translateX(-50%);
   width: 0;
   height: 0;

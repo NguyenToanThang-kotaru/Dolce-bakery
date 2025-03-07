@@ -278,8 +278,8 @@ function togglePopup(event) {
     let icon = event.target;
 
     let rect = icon.getBoundingClientRect();
-    let top = rect.bottom + window.scrollY + 8;
-    let left = rect.left + window.scrollX;
+    let top = rect.bottom + window.scrollY + 10;
+    let left = rect.left + window.scrollX;  
 
     popup.style.top = `${top}px`;
     popup.style.left = `${left}px`;
