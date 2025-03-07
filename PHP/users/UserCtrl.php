@@ -7,22 +7,33 @@
         $fullName = $_POST['rg-fullName'];
         $phone = $_POST['rg-phone'];
         $passwd = $_POST['rg-password'];
+    
+        // Kiểm tra bằng RegEx
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
+            // echo "Tên đăng nhập không hợp lệ!";
+            exit();
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // echo "Email không hợp lệ!";
+            exit();
+        }
 
-        // Kiểm tra số điện thoại
-        if (!ctype_digit($phone) || strlen($phone) != 10) {
-            echo "Số điện thoại không hợp lệ!";
+        if (!preg_match("/^0\d{9}$/", $phone)) {
+            // echo "Số điện thoại không hợp lệ!";
+            exit();
+        }
+        if (!preg_match("/^.{8,}$/", $passwd)) {
+            // echo "Mật khẩu không hợp lệ!";
             exit();
         }
     
-    
-        // Kiểm tra email đã tồn tại chưa
+        // Kiểm tra email đã tồn tại
         $checkEmail = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($checkEmail);
-    
+        
         if ($result->num_rows > 0) {
             echo "Email đã tồn tại!";
         } else {
-            // Chèn dữ liệu vào bảng users 
             $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
                             VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
             if ($conn->query($insertQuery) === TRUE) {
@@ -33,6 +44,7 @@
         }
         exit();
     }
+    
 
 
     if (isset($_POST['login-form-son'])) {

@@ -58,8 +58,8 @@ $(document).ready(function () {
     
         
     // Đăng ký'
-    $("#register-form-son").submit(function (event) {
-        event.preventDefault(); 
+     $("#register-form-son").submit(function (event) {
+        event.preventDefault();
 
         var userName = $('.rg-username').val();
         var email = $('.rg-email').val();
@@ -67,6 +67,31 @@ $(document).ready(function () {
         var phone = $('.rg-phone').val();
         var passWord = $('.rg-password').val();
 
+        // Biểu thức chính quy
+        var usernameRegex = /^[a-zA-Z0-9_]+$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var phoneRegex = /^0\d{9}$/;
+        var passwordRegex = /^.{8,}$/;
+
+        // Kiểm tra từng trường
+        if (!usernameRegex.test(userName)) {
+            alert("Tên đăng nhập không được chứa ký tự đặc biệt.");
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            alert("Email không hợp lệ.");
+            return;
+        }
+        if (!phoneRegex.test(phone)) {
+            alert("Số điện thoại không hợp lệ.");
+            return;
+        }
+        if (!passwordRegex.test(passWord)) {
+            alert("Mật khẩu phải có ít nhất 8 ký tự.");
+            return;
+        }
+
+        // Nếu tất cả hợp lệ, gửi dữ liệu qua AJAX
         $.ajax({
             type: "POST",
             url: "../../PHP/users/UserCtrl.php",
@@ -79,7 +104,7 @@ $(document).ready(function () {
                 "rg-password": passWord
             },
             success: function (response) {
-                alert(response); 
+                alert(response);
                 if (response.includes("Đăng ký thành công")) {
                     window.location.href = "../../HTML/user/dolce.php"; 
                 }
