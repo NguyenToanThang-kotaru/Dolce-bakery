@@ -131,6 +131,7 @@ const product = 8;
     const bread_catelouge = document.querySelector(".bread-catelouge-container");
     const cake_catelouge = document.querySelector(".cake-catelouge-container");
     const cookie_catelouge = document.querySelector(".cookie-catelouge-container");
+    const cart_shop = document.querySelector("#shopcart-container");
 
     const bread = document.querySelector("#bread-part");
     const cake = document.querySelector("#cake-part");
@@ -165,8 +166,9 @@ const product = 8;
 
     function returnShop(){
       bread_catelouge.style.display = "none";
-      cake_catelouge.style.display = "none";
+      cake_catelouge.style.display = "none";  
       cookie_catelouge.style.display = "none";
+      cart_shop.style.display = "none"
       slide.style.display = "flex";
       mainmenu.style.display = "flex";
       brandstory.style.display = "flex";
@@ -178,3 +180,23 @@ const product = 8;
 
     return_mainshop.addEventListener("click",returnShop);
   
+//filter
+function togglePopup(event) {
+  let popup = document.getElementById("filter-popup");
+  let icon = event.target;
+
+  let rect = icon.getBoundingClientRect();
+  let top = rect.bottom + window.scrollY + 8;
+  let left = rect.left + window.scrollX;
+
+  popup.style.top = `${top}px`;
+  popup.style.left = `${left}px`;
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+
+  document.addEventListener("click", function hidePopup(e) {
+      if (!popup.contains(e.target) && e.target !== icon) {
+          popup.style.display = "none";
+          document.removeEventListener("click", hidePopup);
+      }
+  });
+} 

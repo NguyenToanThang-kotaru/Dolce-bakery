@@ -6,11 +6,17 @@ const shopcartContainer = document.getElementById("shopcart-container");
 const backCart= document.getElementById("back-cart")
 const CartPhone = document.getElementById("CartPhone");
 const promotion = document.getElementsByClassName("promotion");
+const bread_catelouge1 = document.querySelector(".bread-catelouge-container");
+const cake_catelouge1 = document.querySelector(".cake-catelouge-container");
+const cookie_catelouge1 = document.querySelector(".cookie-catelouge-container");
 let flagBlockCart = 0;
 function blockShopCart(){
     slideshow.style.display="none";
     mainMenu.style.display="none";
     brandStory.style.display="none";
+    cake_catelouge1.style.display = "none";
+    bread_catelouge1.style.display = "none";
+    cookie_catelouge1.style.display  ="none";
     shopcartContainer.style.display = "block";
     for(let i = 0; i<promotion.length;i++){
         promotion[i].style.display = "none"

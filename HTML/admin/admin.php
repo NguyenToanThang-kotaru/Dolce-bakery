@@ -17,6 +17,8 @@
     <a href="#" id="admin-oder">Đơn hàng</a>
     <a href="#" id="admin-product">Sản phẩm</a>
     <a href="#" id="admin-customer">Khách hàng</a>
+    <a href="#" id="admin-account">Quản lí tài khoản</a>
+    
     <img src="../../assest/Dolce.png" alt="hahaha" />
   </div>
 
@@ -190,10 +192,9 @@
         </div>
 
         <div class="form-group text-center">
-          <button type="submit" id="accept-fixPD">Hoàn tất</button>
+          <button type="submit" id="accept-fixPD" class = "form-button">Hoàn tất</button>
         </div>
       </form>
-
       
     </div>
   </div>
@@ -323,6 +324,188 @@
           <button id="cancel-customer">Hủy</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="account-part">
+    <div class="account-table-container">
+      <div id="account-plus">Thêm tài khoản</div>
+      <table class="account-table">
+        <thead>
+          <tr>
+            <th style="text-align: center">Tên đăng nhập</th>
+            <th>Mật khẩu</th>
+            <th>Email</th>
+            <th>Trạng thái</th>
+            <th>Quyền</th>
+            <th>Cài đặt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>addddd</td>
+            <td>123456</td>
+            <td>Nguyễn@gmail.com</td>
+            <td><select name="" class="account-status">
+              <option value= "onl" selected>Đang hoạt động</option>
+              <option value="lock" >Đã khóa</option>
+            </select></td>
+            <td><img src="../../assest/note.png" alt=""  class = "role-active"  onclick = "togglePopup(event)" style = "width: 15%; cursor: pointer;"></td> 
+            <td>
+              <div class="fix-account">
+                <i class="fa-solid fa-pen-to-square fix-btn-account"></i>
+                <i class="fa-solid fa-trash delete-btn-account"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>sssssss</td>
+            <td>123</td>
+            <td>Mai@gmail.com</td>
+            <td><select name="" class="account-status">
+              <option value="onl" selected>Đang hoạt động</option>
+              <option value="lock" >Đã khóa</option>
+            </select></td>
+            <td><img src="../../assest/note.png" alt="" class = "role-active" onclick = "togglePopup(event)" style = "width: 15%; cursor: pointer;"></td>
+            <td>
+              <div class="fix-account">
+                <i class="fa-solid fa-pen-to-square fix-btn-account"></i>
+                <i class="fa-solid fa-trash delete-btn-account"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="role-popup">
+        <div class ="check-role">
+              <input type="checkbox" id ="prd-mng">
+              <label for="prd-mng" >Quản lí sản phẩm</label>
+           </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ctm-mng">
+              <label for="ctm-mng">Quản lí khách hàng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ncc-mng" >
+              <label for="ncc-mng">Quản lí nhà cung cấp</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="act-mng">
+              <label for="act-mng">Quản lí người dùng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="none-mng">
+              <label for="none-mng">None</label>
+            </div>
+            <div class="popup-arrow"></div>
+      </div>
+
+      <form class="add-form-account" action="../../PHP/PD-Add.php" method="POST" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-account"></i>
+        <div class="form-group">
+          <label for="account-name" class="form-label">Tên đăng nhập</label>
+          <input type="text" id="account-name" name="account-name" placeholder="Nhập tên" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-pass" class="form-label">Mật khẩu</label>
+          <input type="text" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-email" class="form-label">Email</label>
+          <input type="text" id="account-email" name="account-email" placeholder="Nhập email" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-role" class="form-label" style = "color: red;">Cấp quyền</label>
+          <div class = role-container>
+           <div class ="check-role">
+              <input type="checkbox" id ="prd-mng">
+              <label for="prd-mng" >Quản lí sản phẩm</label>
+           </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ctm-mng">
+              <label for="ctm-mng">Quản lí khách hàng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ncc-mng" >
+              <label for="ncc-mng">Quản lí nhà cung cấp</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="act-mng">
+              <label for="act-mng">Quản lí người dùng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="none-mng">
+              <label for="none-mng">None</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button">Thêm tài khoản</button>
+        </div>
+      </form> 
+
+      <form class="fix-form-account" action="../../PHP/PD-edit.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="product-id" name="product-id">
+        <i class="fa-solid fa-rotate-left back-account"></i>
+        <div class="form-group">
+          <label for="account-name" class="form-label">Tên đăng nhập</label>
+          <input type="text" id="account-name" name="account-name" placeholder="Nhập tên" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-pass" class="form-label">Mật khẩu</label>
+          <input type="text" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-email" class="form-label">Email</label>
+          <input type="text" id="account-email" name="account-email" placeholder="Nhập email" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-role" class="form-label" style = "color: red;">Cấp quyền</label>
+          <div class = role-container>
+           <div class ="check-role">
+              <input type="checkbox" id ="prd-mng">
+              <label for="prd-mng" >Quản lí sản phẩm</label>
+           </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ctm-mng">
+              <label for="ctm-mng">Quản lí khách hàng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id ="ncc-mng" >
+              <label for="ncc-mng">Quản lí nhà cung cấp</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="act-mng">
+              <label for="act-mng">Quản lí người dùng</label>
+            </div>
+            <div class ="check-role">
+              <input type="checkbox" id="none-mng">
+              <label for="none-mng">None</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button">Hoàn tất</button>
+        </div>
+      </form>
+      <div id="delete-overlay-account">
+        <div class="delete-container">
+          <span>Bạn muốn xóa tài khoản này?</span>
+          <button id="delete-acp-account">Xác nhận</button>
+          <button id="cancel-account">Hủy</button>  
+        </div>
+      </div>
+
+      
     </div>
   </div>
   <script src="../../JS/admin/admin.js"></script>
