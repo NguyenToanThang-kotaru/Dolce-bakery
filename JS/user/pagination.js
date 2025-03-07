@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const filterbtn = document.querySelector(".acp-filter");
   
 
-  const originalProducts = Array.from(document.querySelectorAll(".cookie-product"));
+  // const originalProducts = Array.from(document.querySelectorAll(".cookie-product"));
 
   minPrice.addEventListener("input", updateDisplay);
   maxPrice.addEventListener("input", updateDisplay);
