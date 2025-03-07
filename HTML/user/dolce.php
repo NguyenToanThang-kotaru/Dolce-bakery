@@ -123,6 +123,9 @@
                                 <li id="login-btn">Đăng nhập</li>
                             </a>
                             <a href="#">
+                                <li style="display: none;"  id="infor">Thông tin</li>
+                            </a>
+                            <a href="#">
                                 <li>Thực đơn</li>
                             </a>
                             <a href="#">
@@ -130,6 +133,10 @@
                             </a>
                             <a href="#">
                                 <li id="CartPhone">Giỏ hàng</li>
+                            </a>
+                            <a href="#">
+                                <li style="border-bottom:none; border-top: 1px solid black;display:none" id="log-out">Đăng xuất</li>
+                                
                             </a>
                         </ul>
                     </div>
