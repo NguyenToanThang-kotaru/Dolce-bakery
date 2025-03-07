@@ -109,6 +109,9 @@ $(document).ready(function () {
             },
             success: function (response) {
                 alert(response);
+                if(response.includes("Username đã tồn tại")) {
+                    window.location.href = "../../HTML/user/dolce.php"; 
+                }
                 if (response.includes("Đăng ký thành công")) {
                     window.location.href = "../../HTML/user/dolce.php"; 
                 }

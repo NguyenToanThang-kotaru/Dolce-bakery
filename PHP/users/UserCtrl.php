@@ -28,12 +28,22 @@
         }
     
         // Kiểm tra email đã tồn tại
-        $checkEmail = "SELECT * FROM users WHERE email = '$email'";
+        $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
         $result = $conn->query($checkEmail);
+        if($result->num_rows>0){
+            $row = $result->fetch_assoc();
+    
+            if ($row['email'] == $email) {
+                echo "Email đã tồn tại!";
+                exit();
+            }
         
-        if ($result->num_rows > 0) {
-            echo "Email đã tồn tại!";
-        } else {
+            if ($row['userName'] == $userName) {
+                echo "Tên đăng nhập đã tồn tại!";
+                exit();
+            }
+        }
+        else {
             $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
                             VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
             if ($conn->query($insertQuery) === TRUE) {
