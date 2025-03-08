@@ -174,18 +174,18 @@
     
                         </div>
                         <div class="price-range">
-                            <span>Nhập khoảng giá phù hợp:</span>
+                            <!-- <span>Nhập khoảng giá phù hợp:</span>
                             <div class="slider-value">
-                                <span id="min-value">300.000đ</span>
+                                <span id="min-value">25.000đ</span>
                                 <span style="border: none; width: 50px;">~</span>
-                                <span id="max-value">3.000.000đ</span>
-                            </div>
-                            <div class="slider-container">
-                                <input type="range" id="min-price" min="300000" max="3000000" step="50000" value="300000">
-                                <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
-                            </div>
+                                <span id="max-value">1.000.000đ</span>
+                            </div> -->
+                            <!-- <div class="slider-container">
+                                <input type="range" id="min-price" min="25000" max="1000000" step="10000" value="25000">
+                                <input type="range" id="max-price" min="25000" max="1000000" step="10000" value="1000000">
+                            </div> -->
     
-                            <span class="acp-filter" onclick="FilterClick('bread')">Done</span>
+                            <span class="acp-filter" onclick="render_filter()">Done</span>
                         </div>
                     </div>
                 <div class="show-product" id="product-list">
@@ -235,16 +235,16 @@
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
-                            <span id="min-value">300.000đ</span>
+                            <span id="min-value">25.000đ</span>
                             <span style="border: none; width: 50px;">~</span>
-                            <span id="max-value">3.000.000đ</span>
+                            <span id="max-value">1.000.000đ</span>
                         </div>
                         <div class="slider-container">
-                            <input type="range" id="min-price" min="300000" max="3000000" step="50000" value="300000">
-                            <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
+                            <input type="range" id="min-price" min="25000" max="1000000" step="10000" value="25000">
+                            <input type="range" id="max-price" min="25000" max="1000000" step="10000" value="1000000">
                         </div>
-    
-                        <span class="acp-filter" onclick="FilterClick('cake')">Done</span>
+
+                        <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
                 </div>
                 
@@ -310,7 +310,7 @@
                             <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
                         </div>
 
-                        <span class="acp-filter" onclick="FilterClick('cookie')">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
                 </div>
 
@@ -557,7 +557,7 @@
     <script src="../../JS/user/slideShow.js"></script>
     <script src="../../JS/user/blocklogin.js"></script>
     <script src="../../JS/user/blockCart.js"></script>
-    <script src="../../JS/user/pagination.js"></script>
+    <script defer src="../../JS/user/pagination.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
