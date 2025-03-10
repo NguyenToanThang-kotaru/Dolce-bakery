@@ -412,7 +412,7 @@
 
      
 
-      <form class="add-form-account" action="../../PHP/PD-Add.php" method="POST" enctype="multipart/form-data">
+      <form class="add-form-account" action="../../PHP/AC-Add.php" method="POST" enctype="multipart/form-data">
         <i class="fa-solid fa-rotate-left back-account"></i>
         <div class="form-group">
           <label for="account-name" class="form-label">Tên đăng nhập</label>
@@ -461,8 +461,8 @@
         </div>
       </form> 
 
-      <form class="fix-form-account" action="../../PHP/PD-edit.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" id="product-id" name="product-id">
+      <form class="fix-form-account" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="account-id" name="account-id">
         <i class="fa-solid fa-rotate-left back-account"></i>
         <div class="form-group">
           <label for="account-name" class="form-label">Tên đăng nhập</label>
@@ -509,13 +509,7 @@
           <button type="submit" class="form-button">Hoàn tất</button>
         </div>
       </form>
-      <div id="delete-overlay-account">
-        <div class="delete-container">
-          <span>Bạn muốn xóa tài khoản này?</span>
-          <button id="delete-acp-account">Xác nhận</button>
-          <button id="cancel-account">Hủy</button>  
-        </div>
-      </div>
+      
 
       
     </div>
