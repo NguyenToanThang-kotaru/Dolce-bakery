@@ -24,7 +24,7 @@
 //                 alert(response); 
 //                 if (response.includes("Đăng ký thành công")) {
 //                     window.location.href = "../../HTML/user/dolce.php"; 
-                    
+
 //                 }
 //             }
 //         });
@@ -54,11 +54,11 @@
 // });
 
 $(document).ready(function () {
-    
-    
-        
+
+
+
     // Đăng ký'
-     $("#register-form-son").submit(function (event) {
+    $("#register-form-son").submit(function (event) {
         event.preventDefault();
 
         var userName = $('.rg-username').val();
@@ -73,25 +73,33 @@ $(document).ready(function () {
         var phoneRegex = /^0\d{9}$/;
         var passwordRegex = /^.{8,}$/;
         var fullnameRegex = /^[a-zA-Z\s]+$/;
+
+
         // Kiểm tra từng trường
+        let newMsg;
         if (!usernameRegex.test(userName)) {
-            alert("Tên đăng nhập không được chứa ký tự đặc biệt.");
+            newMsg = "Tên đăng nhập không được chứa ký tự đặc biệt.";
+            showToast(invalidMsg, newMsg);
             return;
         }
         if (!emailRegex.test(email)) {
-            alert("Email không hợp lệ.");
+            newMsg = "Email không hợp lệ.";
+            showToast(invalidMsg, newMsg);
             return;
         }
-        if(!fullnameRegex.test(fullName)){
-            alert("Tên không hợp lệ.");
+        if (!fullnameRegex.test(fullName)) {
+            newMsg = "Tên không hợp lệ.";
+            showToast(invalidMsg, newMsg);
             return;
         }
         if (!phoneRegex.test(phone)) {
-            alert("Số điện thoại không hợp lệ.");
+            newMsg = "Số điện thoại không hợp lệ.";
+            showToast(invalidMsg, newMsg);
             return;
         }
         if (!passwordRegex.test(passWord)) {
-            alert("Mật khẩu phải có ít nhất 8 ký tự.");
+            newMsg = "Mật khẩu phải có ít nhất 8 ký tự.";
+            showToast(invalidMsg, newMsg);
             return;
         }
 
@@ -108,12 +116,21 @@ $(document).ready(function () {
                 "rg-password": passWord
             },
             success: function (response) {
-                alert(response);
-                if(response.includes("Username đã tồn tại")) {
-                    window.location.href = "../../HTML/user/dolce.php"; 
-                }
+                // alert(response);
+                // if (response.includes("Username đã tồn tại")) {
+                //     window.location.href = "../../HTML/user/dolce.php";
+                // }
+                // if (response.includes("Đăng ký thành công")) {
+                //     window.location.href = "../../HTML/user/dolce.php";
+                // }
+
                 if (response.includes("Đăng ký thành công")) {
-                    window.location.href = "../../HTML/user/dolce.php"; 
+                    showToast(successMsg, response);
+                    setTimeout(() => {
+                        window.location.href = "../../HTML/user/dolce.php";
+                    }, 2000);
+                } else if (response.includes("Username đã tồn tại") || response.includes("Email đã tồn tại")) {
+                    showToast(invalidMsg, response);
                 }
             }
         });
@@ -134,16 +151,21 @@ $(document).ready(function () {
                 "lg-password": passWord
             },
             success: function (response) {
-                alert(response);
+                // alert(response);
                 if (response.includes("Đăng nhập thành công")) {
+                    // Hien bảng đăng nhập thành công
+                    showToast(successMsg, response);
+                    setTimeout(() => {
+                        window.location.href = "../../HTML/user/dolce.php";
+                    }, 2000);
                     //kiểm tra xem trang login chưa
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
-                    window.location.href = "../../HTML/user/dolce.php";
+                    // window.location.href = "../../HTML/user/dolce.php";
                     // $("#login-btn").hide();
                     // $("#infor").show();
-                    
-			
+
+
                     // $("#login-btn").hide();
                     // $("#infor").show();
                 }
@@ -163,10 +185,33 @@ $(document).ready(function () {
         }
     }
     //bấm logout thì trả về trạng thái ban đầu
-    checkLoginStatus(); 
+    checkLoginStatus();
     $("#log-out").click(function () {
         localStorage.removeItem("isLoggedIn");
         window.location.href = "../../HTML/user/dolce.php";
         // checkLoginStatus(); 
     });
 });
+
+// Notification of regist and signin
+let toastBox = document.getElementById('toastBox');
+let successMsg = '<i class="fa-solid fa-circle-check"></i> Successfully submitted';
+let invalidMsg = '<i class="fa-solid fa-circle-exclamation"></i> Invalid input, check again';
+function showToast(msg, newMsg) {
+    let toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = msg + "<br>" + newMsg;
+    toastBox.appendChild(toast);
+
+    if (msg.includes('error')) {
+        toast.classList.add('error');
+    }
+
+    if (msg.includes('Invalid')) {
+        toast.classList.add('invalid');
+    }
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}

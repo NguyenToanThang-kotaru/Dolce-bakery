@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
+    <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
+    <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -101,6 +103,7 @@
                 <button type="submit" id="signup-btn">Sign up</button>
             </form>
         </div>
+        <div id="toastBox"></div>
     </div>
     <div id="container">
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
