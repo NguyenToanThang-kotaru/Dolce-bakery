@@ -487,7 +487,7 @@
                     
                 <div class="row">
                     <label for="phone" class="Detail" >Số điện thoại: </label>
-                    <span>1234567890</span>
+                    <span></span>
                 </div>
             </div>
             <div id="Buy-history">

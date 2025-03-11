@@ -167,7 +167,7 @@ $(document).ready(function () {
             
             <div class="row">
                 <label for="phone" class="Detail" >Số điện thoại: </label>
-                <span>1234</span>
+                <span>${data.numberPhone}</span>
             </div>
             `;
 
