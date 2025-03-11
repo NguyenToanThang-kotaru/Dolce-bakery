@@ -471,17 +471,17 @@
             <div class="InfoUser_Detail">
                 <div class="row">
                     <label for="account" class="Detail">Tài khoản: </label>
-                    <span>Nguyen Van A</span>
+                    <span></span>
                 </div>
                 <div class="row">
                     <label for="fullname" class="Detail" >Họ và tên: </label>
-                    <span>Nguyễn Văn A</span>
+                    <span></span>
 
                 </div>
                 
                 <div class="row">
                     <label for="email" class="Detail" >Email:</label>
-                    <span>email@gmail.com</span>
+                    <span></span>
 
                 </div>
                     

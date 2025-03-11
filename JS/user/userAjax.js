@@ -24,7 +24,7 @@
 //                 alert(response); 
 //                 if (response.includes("Đăng ký thành công")) {
 //                     window.location.href = "../../HTML/user/dolce.php"; 
-                    
+
 //                 }
 //             }
 //         });
@@ -54,11 +54,11 @@
 // });
 
 $(document).ready(function () {
-    
-    
-        
+
+
+
     // Đăng ký'
-     $("#register-form-son").submit(function (event) {
+    $("#register-form-son").submit(function (event) {
         event.preventDefault();
 
         var userName = $('.rg-username').val();
@@ -109,11 +109,8 @@ $(document).ready(function () {
             },
             success: function (response) {
                 alert(response);
-                if(response.includes("Username đã tồn tại")) {
-                    window.location.href = "../../HTML/user/dolce.php"; 
-                }
                 if (response.includes("Đăng ký thành công")) {
-                    window.location.href = "../../HTML/user/dolce.php"; 
+                    window.location.href = "../../HTML/user/dolce.php";
                 }
             }
         });
@@ -134,22 +131,55 @@ $(document).ready(function () {
                 "lg-password": passWord
             },
             success: function (response) {
-                alert(response);
-                if (response.includes("Đăng nhập thành công")) {
+
+                // alert(response);
+
+
+                if (response) {
                     //kiểm tra xem trang login chưa
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
-                    window.location.href = "../../HTML/user/dolce.php";
-                    // $("#login-btn").hide();
-                    // $("#infor").show();
-                    
-			
-                    // $("#login-btn").hide();
-                    // $("#infor").show();
+                    // window.location.href = "../../HTML/user/dolce.php";
+
+
+
                 }
+                let data = JSON.parse(response);
+                console.log("Parsed data:", data);
+                let html = '';
+
+                html += `
+                <div class="row">
+                <label for="account" class="Detail">Tài khoản: </label>
+                <span>${data.userName}</span>
+            </div>
+            <div class="row">
+                <label for="fullname" class="Detail" >Họ và tên: </label>
+                <span>${data.fullName}</span>
+
+            </div>
+        
+            <div class="row">
+                <label for="email" class="Detail" >Email:</label>
+                <span>${data.email}</span>
+
+            </div>
+            
+            <div class="row">
+                <label for="phone" class="Detail" >Số điện thoại: </label>
+                <span>1234</span>
+            </div>
+            `;
+
+
+                document.querySelector('.InfoUser_Detail').innerHTML = html;
+
+
             }
+
         });
     });
+
     //ẩn hiện đăng xuất thông tin
     function checkLoginStatus() {
         if (localStorage.getItem("isLoggedIn") === "true") {
@@ -163,7 +193,7 @@ $(document).ready(function () {
         }
     }
     //bấm logout thì trả về trạng thái ban đầu
-    checkLoginStatus(); 
+    checkLoginStatus();
     $("#log-out").click(function () {
         localStorage.removeItem("isLoggedIn");
         window.location.href = "../../HTML/user/dolce.php";
