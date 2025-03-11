@@ -1,16 +1,16 @@
 const product = 8;
 
-const product_frame1 = document.querySelectorAll(".bread-product");
-const pagination1 = document.querySelector(".bread-pagination");
-const totalPage1 = Math.ceil(product_frame1.length / product);
+let product_frame1 = document.querySelectorAll(".bread-product");
+let pagination1 = document.querySelector(".bread-pagination");
+let totalPage1 = Math.ceil(product_frame1.length / product);
 
-const product_frame2 = document.querySelectorAll(".cake-product");
-const pagination2 = document.querySelector(".cake-pagination");
-const totalPage2 = Math.ceil(product_frame2.length / product);
+let product_frame2 = document.querySelectorAll(".cake-product");
+let pagination2 = document.querySelector(".cake-pagination");
+let totalPage2 = Math.ceil(product_frame2.length / product);
 
-const product_frame3 = document.querySelectorAll(".cookie-product");
-const pagination3 = document.querySelector(".cookie-pagination");
-const totalPage3 = Math.ceil(product_frame3.length / product);
+let product_frame3 = document.querySelectorAll(".cookie-product");
+let pagination3 = document.querySelector(".cookie-pagination");
+let totalPage3 = Math.ceil(product_frame3.length / product);
 
 
 function showPage1(pageNumber) {
@@ -227,65 +227,124 @@ function toggleFilter(category) {
 
 
 //slider-value
-const minPrice = document.getElementById("min-price");
-const maxPrice = document.getElementById("max-price");
-// const minPrice_bread = document.getElementById("min-price");
-// const maxPrice_bread = document.getElementById("max-price");
-// const minPrice_cake = document.getElementById("min-price");
-// const maxPrice_cake = document.getElementById("max-price");
-// const minPrice_cookie = document.getElementById("min-price");
-// const maxPrice_cookie = document.getElementById("max-price");
-const minValueDisplay = document.getElementById("min-value");
-const maxValueDisplay = document.getElementById("max-value");
+const minPrice_bread = document.getElementById("min-price-bread");
+const maxPrice_bread = document.getElementById("max-price-bread");
+
+const minPrice_cake = document.getElementById("min-price-cake");
+const maxPrice_cake = document.getElementById("max-price-cake");
+
+const minPrice_cookie = document.getElementById("min-price-cookie");
+const maxPrice_cookie = document.getElementById("max-price-cookie");
+
+const minValueDisplay_bread = document.getElementById("min-value-bread");
+const maxValueDisplay_bread = document.getElementById("max-value-bread");
+
+const minValueDisplay_cake = document.getElementById("min-value-cake");
+const maxValueDisplay_cake = document.getElementById("max-value-cake");
+
+const minValueDisplay_cookie = document.getElementById("min-value-cookie");
+const maxValueDisplay_cookie = document.getElementById("max-value-cookie");
 const filterbtn = document.querySelector(".acp-filter");
 
 
 // const originalProducts = Array.from(document.querySelectorAll(".cookie-product"));
 
-minPrice.addEventListener("input", updateDisplay);
-maxPrice.addEventListener("input", updateDisplay);
+minPrice_bread.addEventListener("input", updateDisplayBreadSlider);
+maxPrice_bread.addEventListener("input", updateDisplayBreadSlider);
 
-function updateDisplay() {
-  let minVal = parseInt(minPrice.value);
-  let maxVal = parseInt(maxPrice.value);
+minPrice_cake.addEventListener("input", updateDisplayCakeSlider);
+maxPrice_cake.addEventListener("input", updateDisplayCakeSlider);
+
+minPrice_cookie.addEventListener("input", updateDisplayCookieSlider);
+maxPrice_cookie.addEventListener("input", updateDisplayCookieSlider);
+
+function updateDisplayBreadSlider() {
+  let minVal = parseInt(minPrice_bread.value);
+  let maxVal = parseInt(maxPrice_bread.value);
 
   if (minVal > maxVal - 50000) {
-    minPrice.value = maxVal - 50000;
-    minVal = parseInt(minPrice.value);
+    minPrice_bread.value = maxVal - 50000;
+    minVal = parseInt(minPrice_bread.value);
   }
 
   if (maxVal < minVal + 50000) {
-    maxPrice.value = minVal + 50000;
-    maxVal = parseInt(maxPrice.value);
+    maxPrice_bread.value = minVal + 50000;
+    maxVal = parseInt(maxPrice_bread.value);
   }
 
-  minValueDisplay.textContent = minVal.toLocaleString("vi-VN") + "đ";
-  maxValueDisplay.textContent = maxVal.toLocaleString("vi-VN") + "đ";
-  console.log("abc")
+  minValueDisplay_bread.textContent = minVal.toLocaleString("vi-VN") + "đ";
+  maxValueDisplay_bread.textContent = maxVal.toLocaleString("vi-VN") + "đ";
 }
 
-function render_filter() {
-  console.log("1")
-  let minVal = parseInt(minPrice.value);
-  let maxVal = parseInt(maxPrice.value);
+// ------------------------
 
-  // Kiểm tra danh mục đang hiển thị
+
+function updateDisplayCakeSlider() {
+  let minVal = parseInt(minPrice_cake.value);
+  let maxVal = parseInt(maxPrice_cake.value);
+
+  if (minVal > maxVal - 50000) {
+    minPrice_cake.value = maxVal - 50000;
+    minVal = parseInt(minPrice_cake.value);
+  }
+
+  if (maxVal < minVal + 50000) {
+    maxPrice_cake.value = minVal + 50000;
+    maxVal = parseInt(maxPrice_cake.value);
+  }
+
+  minValueDisplay_cake.textContent = minVal.toLocaleString("vi-VN") + "đ";
+  maxValueDisplay_cake.textContent = maxVal.toLocaleString("vi-VN") + "đ";
+}
+
+// -----------------------------
+
+
+function updateDisplayCookieSlider() {
+  let minVal = parseInt(minPrice_cookie.value);
+  let maxVal = parseInt(maxPrice_cookie.value);
+
+  if (minVal > maxVal - 20000) {
+    minPrice_cookie.value = maxVal - 20000;
+    minVal = parseInt(minPrice_cookie.value);
+  }
+
+  if (maxVal < minVal + 20000) {
+    maxPrice_cookie.value = minVal + 20000;
+    maxVal = parseInt(maxPrice_cookie.value);
+  }
+
+  minValueDisplay_cookie.textContent = minVal.toLocaleString("vi-VN") + "đ";
+  maxValueDisplay_cookie.textContent = maxVal.toLocaleString("vi-VN") + "đ";
+}
+
+function render_filter() {  
+  let minVal, maxVal;
   let activeCategory = "";
+
   if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
     activeCategory = "cake";
-  }
-  else if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
+    minVal = parseInt(minPrice_cake.value);
+    maxVal = parseInt(maxPrice_cake.value);
+  } else if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
     activeCategory = "bread";
+    minVal = parseInt(minPrice_bread.value);
+    maxVal = parseInt(maxPrice_bread.value);
+  } else {
+    activeCategory = "cookie"; 
+    minVal = parseInt(minPrice_cookie.value);
+    maxVal = parseInt(maxPrice_cookie.value);
   }
 
-  else {
-    activeCategory = "cookie"; // Mặc định là cookie nếu không xác định được
-  }
-
-  console.log("Danh mục đang được lọc:", activeCategory);
   filterProductByPrice(minVal, maxVal, activeCategory);
-};
+}
 
+
+const originalProductLists = {
+  bread: Array.from(document.querySelectorAll(".bread-product")),
+  cake: Array.from(document.querySelectorAll(".cake-product")),
+  cookie: Array.from(document.querySelectorAll(".cookie-product"))
+};
 
 function filterProductByPrice(minVal, maxVal, category) {
   let productSelector = "";
@@ -301,10 +360,9 @@ function filterProductByPrice(minVal, maxVal, category) {
     productSelector = ".cookie-product";
     containerSelector = "#cookie-container";
   }
-  console.log(productSelector)
-  console.log(containerSelector)
+
   const product_container = document.querySelector(containerSelector);
-  const originalProducts = Array.from(document.querySelectorAll(productSelector));
+  const originalProducts = originalProductLists[category];
 
 
   const filteredProducts = originalProducts.filter(product => {
@@ -313,26 +371,195 @@ function filterProductByPrice(minVal, maxVal, category) {
     return price >= minVal && price <= maxVal;
   });
 
-  console.log("Số sản phẩm sau khi lọc:", filteredProducts.length);
   updateProduct(filteredProducts, product_container);
 }
 
 
 function updateProduct(products, product_container) {
-  console.log("Container sản phẩm trước khi xóa:", product_container.innerHTML);
-
   // Xóa tất cả sản phẩm cũ
   while (product_container.firstChild) {
     product_container.removeChild(product_container.firstChild);
   }
 
-  // Thêm sản phẩm đã lọc vào
+  // Thêm sản phẩm đã lọc vào container
   products.forEach(product => {
     let clone = product.cloneNode(true);
     clone.style.display = "flex";
     product_container.appendChild(clone);
   });
 
-  console.log("Container sản phẩm sau khi cập nhật:", product_container.innerHTML);
+  // Xác định category đang hiển thị dựa vào display: flex
+  let category = "";
+  if (product_container.id === "bread-container") {
+    category = "bread";
+  } else if (product_container.id === "cake-container") {
+    category = "cake";
+  } else if (product_container.id === "cookie-container") {
+    category = "cookie";
+  }
+
+  console.log(category);
+
+  // Cập nhật lại danh sách sản phẩm & số trang sau khi lọc
+  if (category === "bread") {
+    product_frame1 = document.querySelectorAll(".bread-product"); // Cập nhật danh sách sau lọc
+    totalPage1 = Math.ceil(product_frame1.length / product);
+    showPage1(1, product_frame1);
+  } else if (category === "cake") {
+    product_frame2 = document.querySelectorAll(".cake-product");
+    totalPage2 = Math.ceil(product_frame2.length / product);
+    showPage2(1, product_frame2);
+  } else if (category === "cookie") {
+    product_frame3 = document.querySelectorAll(".cookie-product");
+    totalPage3 = Math.ceil(product_frame3.length / product);
+    showPage3(1, product_frame3);
+  }
 }
 
+
+// check box
+document.querySelectorAll(".option-price input[type='checkbox']").forEach(checkbox => {
+  checkbox.addEventListener("change", render_filter_by_price);
+});
+
+function render_filter_by_price() {
+  let activeCategory = "";
+
+  if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
+      activeCategory = "cake";
+  } else if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
+      activeCategory = "bread";
+  } else {
+      activeCategory = "cookie";
+  }
+
+  // Lấy danh sách khoảng giá đã chọn
+  let selectedRanges = Array.from(document.querySelectorAll(".option-price input[type='checkbox']:checked"))
+      .map(checkbox => {
+          let [min, max] = checkbox.value.split("-").map(Number);
+          return { min, max };
+      });
+
+  filterProductByPriceRange(selectedRanges, activeCategory);
+}
+
+
+function filterProductByPriceRange(priceRanges, category) {
+  let productSelector = "";
+  let containerSelector = "";
+
+  if (category === "bread") {
+      productSelector = ".bread-product";
+      containerSelector = "#bread-container";
+  } else if (category === "cake") {
+      productSelector = ".cake-product";
+      containerSelector = "#cake-container";
+  } else if (category === "cookie") {
+      productSelector = ".cookie-product";
+      containerSelector = "#cookie-container";
+  }
+
+  const product_container = document.querySelector(containerSelector);
+  const originalProducts = originalProductLists[category];
+
+  const filteredProducts = Array.from(originalProducts).filter(product => {
+      let priceText = product.querySelector(".price").textContent.trim();
+      let price = parseInt(priceText.replace(/\D/g, ""), 10);
+
+      return priceRanges.some(range => price >= range.min && price <= range.max);
+  });
+
+  updateProduct(filteredProducts, product_container);
+}
+
+//arange impession
+document.querySelectorAll(".arrange-sl").forEach(select => {
+  select.addEventListener("change", function () {
+      const selectedValue = this.value;
+      console.log("Lựa chọn: ", selectedValue);
+
+      let productSelector = "";
+      let containerSelector = "";
+
+      if (document.querySelector(".bread-catelouge-container")?.style.display === "flex") {
+          productSelector = ".bread-product";
+          containerSelector = "#bread-container";
+      } else if (document.querySelector(".cake-catelouge-container")?.style.display === "flex") {
+          productSelector = ".cake-product";
+          containerSelector = "#cake-container";
+      } else if (document.querySelector(".cake-catelouge-container")?.style.display === "flex") {
+          productSelector = ".cookie-product";
+          containerSelector = "#cookie-container";
+      }
+
+      if (!productSelector) {
+          console.log("Không xác định danh mục nào đang hiển thị!");
+          return; 
+      }
+
+      let product_container = document.querySelector(containerSelector);
+      let productList = Array.from(document.querySelectorAll(productSelector))
+          .filter(product => product.style.display !== "none"); // Lọc sản phẩm hiển thị
+
+      console.log("Danh sách sản phẩm trước khi sắp xếp:", productList);
+
+      let sortedProducts = productList.sort((a, b) => {
+          let priceA = parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""), 10);
+          let priceB = parseInt(b.querySelector(".price").textContent.replace(/\D/g, ""), 10);
+          return selectedValue === "up" ? priceB - priceA : priceA - priceB;
+      });
+
+      console.log("Danh sách sản phẩm sau khi sắp xếp:", sortedProducts);
+
+      updateProduct(sortedProducts, product_container);
+  });
+});
+
+// search oninput
+document.getElementById("search").addEventListener("input", function () {
+  let keyword = this.value.trim().toLowerCase();
+  let activeCategory = "";
+
+  // Xác định danh mục nào đang hiển thị
+  if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
+      activeCategory = "cake";
+  } else if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
+      activeCategory = "bread";
+  } else {
+      activeCategory = "cookie";
+  }
+
+  // Chọn tất cả sản phẩm trong danh mục đang hiển thị
+  let productSelector = `.${activeCategory}-product`;
+  let products = document.querySelectorAll(productSelector);
+  let hasResult = false;
+
+  products.forEach(product => {
+      let productName = product.querySelector(".product-name").textContent.trim().toLowerCase();
+      if (productName.includes(keyword)) {
+          product.style.display = "flex"; // Hiển thị sản phẩm phù hợp
+          hasResult = true;
+      } else {
+          product.style.display = "none"; // Ẩn sản phẩm không phù hợp
+      }
+  });
+
+  // Hiển thị thông báo nếu không có sản phẩm nào phù hợp
+  let containerSelector = `#${activeCategory}-container`;
+  let container = document.querySelector(containerSelector);
+  let noResultMsg = container.querySelector(".no-result-msg");
+
+  if (!hasResult) {
+      if (!noResultMsg) {
+          noResultMsg = document.createElement("p");
+          noResultMsg.className = "no-result-msg";
+          noResultMsg.textContent = "Không có sản phẩm nào phù hợp.";
+          noResultMsg.style.textAlign = "center";
+          container.appendChild(noResultMsg);
+      }
+  } else {
+      if (noResultMsg) {
+          noResultMsg.remove();
+      }
+  }
+});

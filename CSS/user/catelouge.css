@@ -221,7 +221,8 @@
     cursor: pointer;
     pointer-events: all;
     position: relative;
-    transform: translateY(-5px)
+    transform: translateY(-5px);
+
 }
 .filter-title{
     display: flex;
@@ -241,6 +242,10 @@
     width: 15px;
     height: 15px;
     cursor: pointer;
+}
+
+.level-price h4{
+    margin: 10px 0 10px 10px;
 }
 
 .level-price input:hover{

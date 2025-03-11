@@ -402,6 +402,7 @@
         <label for="act-mng">Quản lí người dùng</label>
       </div>
       <div class ="check-role">
+        
         <input class="permission-checkbox" name="permissions[]" type="checkbox" id="none-mng" value="1" data-userid="<?= $userId ?>" >
         <label for="none-mng">None</label>
       </div>
