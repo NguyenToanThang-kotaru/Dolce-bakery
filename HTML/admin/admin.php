@@ -19,6 +19,7 @@
     <a href="#" id="admin-product">Sản phẩm</a>
     <a href="#" id="admin-customer">Khách hàng</a>
     <a href="#" id="admin-account">Quản lí tài khoản</a>
+    <a href="#" id="admin-role">Quản lí quyền</a>
     
     <img src="../../assest/Dolce.png" alt="hahaha" />
   </div>
@@ -330,7 +331,7 @@
 
   <div class="account-part">
     <div class="account-table-container">
-      <div id="account-plus">Thêm tài khoản</div>
+     <div id="account-plus">Thêm tài khoản</div>
       <table class="account-table">
         <thead>
           <tr>
@@ -381,33 +382,14 @@
         </tbody>
       </table>
 
-    
+      <div id="role-popup">  
+        <div>Chức năng 1</div>
+        <div>Chức năng 2</div>
+        <div>Chức năng 3</div>
+       <div class="popup-arrow">
+       </div>
+      </div>
       
-      <div id="role-popup">
-  
-  <div class ="check-role">
-        <input class="permission-checkbox" name="permissions[]" type="checkbox" id ="prd-mng" value="5" data-userid="<?= $userId ?>" >
-        <label for="prd-mng" >Quản lí sản phẩm</label>
-     </div>
-      <div class ="check-role">
-        <input class="permission-checkbox" name="permissions[]" type="checkbox" id ="ctm-mng" value="4" data-userid="<?= $userId ?>" >
-        <label for="ctm-mng">Quản lí khách hàng</label>
-      </div>
-      <div class ="check-role">
-        <input class="permission-checkbox" name="permissions[]" type="checkbox" id ="ncc-mng" value="3" data-userid="<?= $userId ?>" >
-        <label for="ncc-mng">Quản lí nhà cung cấp</label>
-      </div>
-      <div class ="check-role">
-        <input class="permission-checkbox" name="permissions[]" type="checkbox" id="act-mng" value="2" data-userid="<?= $userId ?>" >
-        <label for="act-mng">Quản lí người dùng</label>
-      </div>
-      <div class ="check-role">
-        
-        <input class="permission-checkbox" name="permissions[]" type="checkbox" id="none-mng" value="1" data-userid="<?= $userId ?>" >
-        <label for="none-mng">None</label>
-      </div>
-      <div class="popup-arrow"></div>
-</div>
 
      
 
@@ -435,26 +417,14 @@
       <div class="form-group">
           <label for="account-role" class="form-label" style="color: red;">Cấp quyền</label>
         <div class="role-container">
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="5" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí sản phẩm</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="4" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí khách hàng</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="3" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí nhà cung cấp</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="2" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí người dùng</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="1" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>None</label>
-          </div>
+        <select name="permissions[]" class="permission-select" data-user="<?= $userId ?>">
+          <option value="1">Quyền A</option>
+          <option value="2">Quyền B</option>
+          <option value="3">Quyền C</option>
+          <option value="4">Quyền D</option>
+          <option value="5">None</option>
+        </select>
+
         </div>
       </div>
         <div class="form-group text-center">
@@ -483,6 +453,113 @@
         <div class="form-group">
           <label for="account-role" class="form-label" style = "color: red;">Cấp quyền</label>
           <div class = role-container>
+          <select name="permissions[]" class="permission-select" data-user="<?= $userId ?>">
+          <option value="1">Quyền A</option>
+          <option value="2">Quyền B</option>
+          <option value="3">Quyền C</option>
+          <option value="4">Quyền D</option>
+          <option value="5">None</option>
+        </select>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button">Hoàn tất</button>
+        </div>
+      </form>
+      
+
+      
+    </div>
+  </div>
+
+  <!-- ROLEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+   
+  <div class="role-part">
+    <div class="role-table-container">
+     <div id="role-plus">Thêm quyền</div>
+      <table class="role-table">
+        <thead>
+          <tr>
+            <th style="text-align: center">Quyền</th>
+            <th>Chức năng</th>
+            <th>Tài khoản</th>
+            <th>Cài đặt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quyền A</td>
+            <td class ="function"><span>Quản lí khách hàng</span>
+            <span>Quản lí kho</span>
+         </td>
+            <td>User1</td>
+            <td>
+              <div class="fix-role">
+                <i class="fa-solid fa-pen-to-square fix-btn-role"></i>
+                <i class="fa-solid fa-trash delete-btn-role"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Quyền B</td>
+            <td class = "function"><span>Quản lí nhà cung cấp</span>
+          <span>Quản lí tài khoản</span></td>
+            <td>User2</td>
+            <td>
+              <div class="fix-role">
+                <i class="fa-solid fa-pen-to-square fix-btn-role"></i>
+                <i class="fa-solid fa-trash delete-btn-role"></i>
+              </div>
+            </td>
+          </tr> 
+        </tbody>
+      </table>
+
+      <form class="add-form-role" action="../../PHP/AC-Add.php" method="POST" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-role"></i>
+        <div class="form-group">
+          <label for="role-name" class="form-label">Tên quyền</label>
+          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
+        </div>
+        
+      <div class="form-group">
+          <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
+        <div class="role-container">
+          <div class="check-role">
+            <input type="checkbox" class="permission-checkbox" value="5" name="permissions[]" data-user="<?= $userId ?>" >
+            <label>Quản lí sản phẩm</label>
+          </div>
+          <div class="check-role">
+            <input type="checkbox" class="permission-checkbox" value="4" name="permissions[]" data-user="<?= $userId ?>" >
+            <label>Quản lí khách hàng</label>
+          </div>
+          <div class="check-role">
+            <input type="checkbox" class="permission-checkbox" value="3" name="permissions[]" data-user="<?= $userId ?>" >
+            <label>Quản lí nhà cung cấp</label>
+          </div>
+          <div class="check-role">
+            <input type="checkbox" class="permission-checkbox" value="2" name="permissions[]" data-user="<?= $userId ?>" >
+            <label>Quản lí người dùng</label>
+          </div>
+        </div>
+      </div>
+        <div class="form-group text-center">
+          <button type="submit" class="form-button">Thêm quyền</button>
+        </div>
+      </form> 
+
+      <form class="fix-form-role" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="role-id" name="role-id">
+        <i class="fa-solid fa-rotate-left back-role"></i>
+        <div class="form-group">
+          <label for="role-name" class="form-label">Tên quyền</label>
+          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="account-role" class="form-label" style = "color: red;">Chức năng</label>
+          <div class = role-container>
            <div class ="check-role">
               <input type="checkbox" id ="prd-mng">
               <label for="prd-mng" >Quản lí sản phẩm</label>
@@ -499,10 +576,6 @@
               <input type="checkbox" id="act-mng">
               <label for="act-mng">Quản lí người dùng</label>
             </div>
-            <div class ="check-role">
-              <input type="checkbox" id="none-mng">
-              <label for="none-mng">None</label>
-            </div>
           </div>
         </div>
 
@@ -510,11 +583,21 @@
           <button type="submit" class="form-button">Hoàn tất</button>
         </div>
       </form>
+
+      <div id="delete-overlay-role">
+        <div class="delete-container">
+          <span>Bạn muốn xóa quyền này?</span>
+          <button id="delete-acp-role">Xác nhận</button>
+          <button id="cancel-role">Hủy</button>
+        </div>
+      </div>
       
 
       
     </div>
   </div>
+
+
   <script src="../../JS/admin/admin.js"></script>
   <script src="../../JS/admin/AC-changestatus.js"></script>
   

@@ -8,10 +8,12 @@ const admin_oder = document.querySelector("#admin-oder");
 const admin_product = document.querySelector("#admin-product");
 const admin_customer = document.querySelector("#admin-customer");
 const admin_account = document.querySelector("#admin-account");
+const admin_role = document.querySelector("#admin-role");
 const admin = document.querySelector("#admin");
 const profile_img =  document.querySelector("#profile");
 const profile_part = document.querySelector(".profile-part");
 const account_part = document.querySelector(".account-part");
+const role_part = document.querySelector(".role-part");
 
 
 function oderToggle(){
@@ -20,7 +22,8 @@ function oderToggle(){
     customer_part.style.display = "none";
     product_part.style.display = "none";
     profile_part.style.display = "none";
-    account_part.style.display = "none";   
+    account_part.style.display = "none";
+    role_part.style.display = "none";     
 }
 
 function customerToggle(){
@@ -30,6 +33,7 @@ function customerToggle(){
     product_part.style.display = "none";
     profile_part.style.display = "none"; 
     account_part.style.display = "none";
+    role_part.style.display = "none";
 }
 
 function productToggle(){
@@ -38,7 +42,8 @@ function productToggle(){
     customer_part.style.display = "none";
     oder_part.style.display = "none";
     profile_part.style.display = "none"; 
-    account_part.style.display = "none";  
+    account_part.style.display = "none";
+    role_part.style.display = "none";  
 }
 
 function returnMain(){
@@ -48,6 +53,7 @@ function returnMain(){
     admin_main.style.display = "block";
     profile_part.style.display = "none";
     account_part.style.display = "none";
+    role_part.style.display = "none";
 }
 
 function accountToggle(){
@@ -57,6 +63,17 @@ function accountToggle(){
     admin_main.style.display = "none";
     profile_part.style.display = "none";
     account_part.style.display = "block";
+    role_part.style.display = "none";
+}
+
+function roleToggle(){
+    oder_part.style.display = "none";
+    customer_part.style.display = "none";
+    product_part.style.display = "none" 
+    admin_main.style.display = "none";
+    profile_part.style.display = "none";
+    account_part.style.display = "none";
+    role_part.style.display = "block";
 }
 
 admin_oder.addEventListener("click",oderToggle);
@@ -64,7 +81,7 @@ admin_product.addEventListener("click",productToggle);
 admin_customer.addEventListener("click",customerToggle);
 admin.addEventListener("click",returnMain);
 admin_account.addEventListener("click",accountToggle);
-
+admin_role.addEventListener("click",roleToggle);
 // add product
 
 const add_form_1 = document.querySelector(".add-form-product");
@@ -101,6 +118,17 @@ const delete_btn_3 = document.querySelectorAll(".delete-btn-account");
 const fix_btn_3 = document.querySelectorAll(".fix-btn-account");
 const cancel_btn_3 = document.querySelector("#cancel-account");
 
+const add_form_4 = document.querySelector(".add-form-role");
+const plus_4 = document.querySelector("#role-plus");
+const role_table = document.querySelector(".role-table");
+const fix_form_4 = document.querySelector(".fix-form-role");
+const delete_acp_4 = document.querySelector("#delete-acp-role");
+const delete_ovl_4 = document.querySelector("#delete-overlay-role");
+const back_4 = document.querySelectorAll(".back-role");
+const delete_btn_4 = document.querySelectorAll(".delete-btn-role");
+const fix_btn_4 = document.querySelectorAll(".fix-btn-role");
+const cancel_btn_4 = document.querySelector("#cancel-role");
+
 
 function addFormProduct(){
     product_table.style.display = "none";
@@ -128,6 +156,15 @@ function addFormAccount(){
     profile_part.style.display = "none";
 }
 
+function addFormRole(){
+    role_table.style.display = "none";
+    add_form_4.style.display = "block";
+    plus_4.style.display = "none";
+    fix_form_4.style.display = "none";
+    profile_part.style.display = "none";
+
+}
+
 function fixFormProduct(){
     product_table.style.display = "none";
     fix_form_1.style.display = "block";
@@ -152,6 +189,15 @@ function fixFormAccount(){
     add_form_3.style.display = "none";
     profile_part.style.display = "none";
 }
+
+function fixFormRole(){
+    role_table.style.display = "none";
+    fix_form_4.style.display = "block";
+    plus_4.style.display = "none";
+    add_form_4.style.display = "none";
+    profile_part.style.display = "none";
+}
+
 
 function returnProduct(){
     product_table.removeAttribute("style");
@@ -180,6 +226,15 @@ function returnAcount(){
     profile_part.style.display = "none";
 }
 
+function returnRole(){
+    role_table.removeAttribute("style");
+    add_form_4.style.display = "none";
+    plus_4.style.display = "block";
+    fix_form_4.style.display = "none";
+    delete_ovl_4.style.display = "none";
+    profile_part.style.display = "none";
+}
+
 function showNofiProduct(){
     delete_ovl_1.style.display = "block";
 }
@@ -192,9 +247,14 @@ function showNofiAccount(){
     delete_ovl_3.style.display = "block";
 }
 
+function showNofiRole(){
+    delete_ovl_4.style.display = "block";
+}
+
 plus_1.addEventListener("click",addFormProduct);
 plus_2.addEventListener("click",addFormCustomer);
 plus_3.addEventListener("click",addFormAccount);
+plus_4.addEventListener("click",addFormRole);
 
 delete_btn_1.forEach(button =>{
     button.addEventListener("click",showNofiProduct);
@@ -208,6 +268,10 @@ delete_btn_3.forEach(button =>{
     button.addEventListener("click",showNofiAccount);
 })
 
+delete_btn_4.forEach(button =>{
+    button.addEventListener("click",showNofiRole);
+})
+
 fix_btn_1.forEach(button =>{
     button.addEventListener("click",fixFormProduct);
 })
@@ -218,6 +282,10 @@ fix_btn_2.forEach(button =>{
 
 fix_btn_3.forEach(button =>{
     button.addEventListener("click",fixFormAccount);
+})
+
+fix_btn_4.forEach(button =>{
+    button.addEventListener("click",fixFormRole);
 })
 
 back_1.forEach(button =>{
@@ -233,13 +301,19 @@ back_3.forEach(button =>{
     button.addEventListener("click",returnAcount);
 })
 
+back_4.forEach(button =>{
+    button.addEventListener("click",returnRole);
+})
+
 delete_acp_1.addEventListener("click",returnProduct);
 delete_acp_2.addEventListener("click",returnCustomer);
 delete_acp_3.addEventListener("click",returnAcount);
+delete_acp_4.addEventListener("click",returnRole);
 
 cancel_btn_1.addEventListener("click",returnProduct);
 cancel_btn_2.addEventListener("click",returnCustomer);
 cancel_btn_3.addEventListener("click",returnAcount);
+cancel_btn_4.addEventListener("click",returnRole);
 
 // profile
 

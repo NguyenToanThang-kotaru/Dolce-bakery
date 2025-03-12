@@ -19,7 +19,10 @@ if ($result->num_rows > 0) {
                 </select>
               </td>";
          echo "<td>
-         <img src='../../assest/note.png' alt='' class='role-active' onclick='togglePopup(event)' style='width: 15%; cursor: pointer;'>
+         <div class = 'role-dad'>
+             <img src='../../assest/note.png' alt='' class='role-active' onclick='togglePopup(event)' style='width: 15%;  cursor: pointer;'>
+             <span class ='role'>Quyền A</span>
+         </div>
          </td>";
          echo "<td>
          <div class='fix-account'>
