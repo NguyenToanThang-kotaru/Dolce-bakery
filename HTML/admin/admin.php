@@ -477,23 +477,54 @@
    
   <div class="role-part">
     <div class="role-table-container">
+    <div id="account-overlay-role">
+        <div class="account-role-container">
+          <img src="../../assest/Chevron down.png" alt="">
+          <div class="list-user-role">
+            <div class="user-role">user1</div>
+            <div class="user-role">user2</div>
+            <div class ="user-role">user4</div>
+            <div class ="user-role">user5</div>
+            <div class ="user-role">user6</div>
+            <div class ="user-role">user7</div>
+            <div class ="user-role">user8</div>
+            <div class ="user-role">user9</div>
+            <div class ="user-role">usera</div>
+            <div class ="user-role">userb</div>
+            <div class ="user-role">userc</div>
+            <div class ="user-role">userd</div>
+            <div class ="user-role">usere</div>
+            <div class ="user-role">userf</div>
+            <div class ="user-role">userg</div>
+            <div class ="user-role">userh</div>
+            <div class ="user-role">userj</div>
+          </div>
+        </div>
+      </div>
      <div id="role-plus">Thêm quyền</div>
+
       <table class="role-table">
         <thead>
           <tr>
             <th style="text-align: center">Quyền</th>
             <th>Chức năng</th>
-            <th>Tài khoản</th>
+            <th>Số lượng TK</th>
+            <th>Danh sách tài khoản</th>
             <th>Cài đặt</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Quyền A</td>
-            <td class ="function"><span>Quản lí khách hàng</span>
-            <span>Quản lí kho</span>
+            <td class ="list-role-function">
+            <div class ="role-function">Quản lí sản phẩm</div>
+            <div class ="role-function">Quản lí tài kho</div>
          </td>
-            <td>User1</td>
+         <td>
+          4
+         </td>
+            <td class="role-account">
+              <img src="../../assest/Download cloud.png" alt="" class = "show-userrole">
             <td>
               <div class="fix-role">
                 <i class="fa-solid fa-pen-to-square fix-btn-role"></i>
@@ -503,9 +534,15 @@
           </tr>
           <tr>
             <td>Quyền B</td>
-            <td class = "function"><span>Quản lí nhà cung cấp</span>
-          <span>Quản lí tài khoản</span></td>
-            <td>User2</td>
+            <td class = "list-role-function">
+              <div class ="role-function">Quản lí nhà cung cấp</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+            </td>
+              <td>
+                5
+              </td>
+            <td class = "role-account">
+              <img src="../../assest/Download cloud.png" alt="" class="show-userrole">
             <td>
               <div class="fix-role">
                 <i class="fa-solid fa-pen-to-square fix-btn-role"></i>

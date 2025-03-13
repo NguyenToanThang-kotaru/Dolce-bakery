@@ -128,6 +128,8 @@ const back_4 = document.querySelectorAll(".back-role");
 const delete_btn_4 = document.querySelectorAll(".delete-btn-role");
 const fix_btn_4 = document.querySelectorAll(".fix-btn-role");
 const cancel_btn_4 = document.querySelector("#cancel-role");
+const account_ovl_4 = document.querySelector("#account-overlay-role");
+const show_userrole = document.querySelectorAll(".show-userrole");
 
 
 function addFormProduct(){
@@ -233,6 +235,7 @@ function returnRole(){
     fix_form_4.style.display = "none";
     delete_ovl_4.style.display = "none";
     profile_part.style.display = "none";
+    account_ovl_4.style.display = "none";
 }
 
 function showNofiProduct(){
@@ -249,6 +252,10 @@ function showNofiAccount(){
 
 function showNofiRole(){
     delete_ovl_4.style.display = "block";
+}
+
+function showUserRole(){
+    account_ovl_4.style.display = "block";
 }
 
 plus_1.addEventListener("click",addFormProduct);
@@ -304,6 +311,16 @@ back_3.forEach(button =>{
 back_4.forEach(button =>{
     button.addEventListener("click",returnRole);
 })
+
+show_userrole.forEach(button =>{
+    button.addEventListener("click",showUserRole);
+})
+
+account_ovl_4.addEventListener("click", function (event) {
+    if (event.target === account_ovl_4) {
+        returnRole();
+    }
+});
 
 delete_acp_1.addEventListener("click",returnProduct);
 delete_acp_2.addEventListener("click",returnCustomer);

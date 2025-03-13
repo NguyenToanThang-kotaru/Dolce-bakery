@@ -856,11 +856,73 @@ body {
   border-bottom: 10px solid #eed9ba;
 }
 
-.function{
+.list-role-function{
   display: flex;
   flex-direction: column;
 }
 
-.function span{
+.role-function{
   margin-bottom: 5px;
 }
+
+.role-account img{
+  width: 8%;
+  height: 8%;
+  cursor: pointer;
+}
+
+.role-account img:hover{
+  transform: scale(1.1);
+}
+
+#account-overlay-role{  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}
+
+.account-role-container{
+  width: 20%; 
+  height: 40%;
+  background-color: #feead7;
+  border-radius: 20px;
+  padding: 10px 40px;
+  margin: 0 auto;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items:center ;
+  box-shadow: 0 0 20px 10px rgba(49, 23, 1, 0.2);
+}
+
+.account-role-container img{
+  width: 60%;
+  height: 15% ;
+}
+
+.list-user-role{
+  background-color: hwb(0 100% 0%);
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  overflow-y: auto;
+  box-shadow: 0 0 20px 10px rgba(83, 10, 61, 0.2);
+}
+
+.user-role{
+  width: 100%;
+}
+
+.user-role:hover{
+  background-color: thistle;
+}
+
