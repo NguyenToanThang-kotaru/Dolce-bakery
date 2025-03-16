@@ -41,6 +41,7 @@
                 <div class="login-username">
                     <label for="lg-username">Enter your username or email address</label><br>
                     <input type="text" name="lg-username" class="username lg-username" placeholder="Username or email address"><br>
+                    <div class="error-msg"></div>
                 </div>
                 <div class="login-password">
                     <label for="lg-password">Enter your Password</label><br>
@@ -50,6 +51,7 @@
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
+                    <div class="error-msg"></div>
                 </div>
                 <button type="submit" class="signin-btn">Sign in</button>
             </form>
@@ -69,12 +71,14 @@
                     <label for="rg-username">Enter your username</label><br>
                     <input type="text" name="rg-username" class="username rg-username" placeholder="Username or email address"
                         required><br>
+                    <div class="error-msg"></div>
                 </div>
 
                 <div class="register-username">
                     <label for="rg-email">Enter your email</label><br>
                     <input type="text" name="rg-email" class="username rg-email" placeholder="Username or email address"
                         required><br>
+                    <div class="error-msg"></div>
                 </div>
 
 
@@ -82,28 +86,27 @@
                     <div class="username-info">
                         <label for="rg-fullName"> Enter your full name</label>
                         <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name" required>
+                        <div class="error-msg"></div>
                     </div>
                     <div class="contactnumber-info">
                         <label for="rg-phone">Contact Number</label>
                         <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers" required>
+                        <div class="error-msg"></div>
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="rg-password">Enter your Password</label><br>
-                    <div class="password-container">
-                        <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
-                    </div>
+                    <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
+                    <div class="error-msg"></div>
                 </div>
                 <div class="register-password">
                     <label for="password">Enter your Password Again</label><br>
-                    <div class="password-container">
-                        <input type="password" class="password" placeholder="Password" required>
-                    </div>
+                    <input type="password" class="password rg-confirm-password" placeholder="Password" required>
+                    <div class="error-msg"></div>
                 </div>
                 <button type="submit" id="signup-btn">Sign up</button>
             </form>
         </div>
-        <div id="toastBox"></div>
     </div>
     <div id="container">
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">

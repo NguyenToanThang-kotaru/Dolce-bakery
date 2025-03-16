@@ -60,7 +60,8 @@ $(document).ready(function () {
     // Đăng ký'
     $("#register-form-son").submit(function (event) {
         event.preventDefault();
-
+        var registerForm = document.querySelector("#register-form-son");
+        clearErrors(registerForm);
         var userName = $('.rg-username').val();
         var email = $('.rg-email').val();
         var fullName = $('.rg-fullName').val();
@@ -74,35 +75,45 @@ $(document).ready(function () {
         var passwordRegex = /^.{8,}$/;
         var fullnameRegex = /^[a-zA-Z\s]+$/;
 
-
+        var rgUserName = document.querySelector(".rg-username");
+        var rgEmail = document.querySelector(".rg-email");
+        var rgFullName = document.querySelector(".rg-fullName");
+        var rgPhone = document.querySelector(".rg-phone");
+        var rgPassword = document.querySelector(".rg-password");
+        var rgConfirmPassword = document.querySelector(".rg-confirm-password");
         // Kiểm tra từng trường
-        let newMsg;
+        // let newMsg;
+
         if (!usernameRegex.test(userName)) {
-            newMsg = "Tên đăng nhập không được chứa ký tự đặc biệt.";
-            showToast(invalidMsg, newMsg);
+            showError(rgUserName, "Tên đăng nhập không được chứa ký tự đặc biệt.");
+            rgUserName.focus();
             return;
         }
         if (!emailRegex.test(email)) {
-            newMsg = "Email không hợp lệ.";
-            showToast(invalidMsg, newMsg);
+            showError(rgEmail, "Email không hợp lệ.");
+            rgEmail.focus();
             return;
         }
         if (!fullnameRegex.test(fullName)) {
-            newMsg = "Tên không hợp lệ.";
-            showToast(invalidMsg, newMsg);
+            showError(rgFullName, "Tên không hợp lệ.");
+            rgFullName.focus();
             return;
         }
         if (!phoneRegex.test(phone)) {
-            newMsg = "Số điện thoại không hợp lệ.";
-            showToast(invalidMsg, newMsg);
+            showError(rgPhone, "Số điện thoại không hợp lệ.");
+            rgPhone.focus();
             return;
         }
         if (!passwordRegex.test(passWord)) {
-            newMsg = "Mật khẩu phải có ít nhất 8 ký tự.";
-            showToast(invalidMsg, newMsg);
+            showError(rgPassword, "Mật khẩu phải có ít nhất 8 ký tự.");
+            rgPassword.focus();
             return;
         }
-
+        if (rgConfirmPassword.value !== rgPassword.value) {
+            showError(rgConfirmPassword, "Mật khẩu nhập lại không khớp.");
+            rgConfirmPassword.focus();
+            return;
+        }
         // Nếu tất cả hợp lệ, gửi dữ liệu qua AJAX
         $.ajax({
             type: "POST",
@@ -117,12 +128,15 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.includes("Đăng ký thành công")) {
-                    showToast(successMsg, response);
-                    setTimeout(() => {
-                        window.location.href = "../../HTML/user/dolce.php";
-                    }, 2000);
-                } else if (response.includes("Username đã tồn tại") || response.includes("Email đã tồn tại")) {
-                    showToast(invalidMsg, response);
+                    window.location.href = "../../HTML/user/dolce.php";
+                }
+                else if (response.includes("Tên đăng nhập đã tồn tại")) {
+                    showError(rgUserName, response);
+                    rgUserName.focus();
+                }
+                else if (response.includes("Email đã tồn tại")) {
+                    showError(rgEmail, response);
+                    rgEmail.focus();
                 }
             }
         });
@@ -143,12 +157,28 @@ $(document).ready(function () {
                 "lg-password": passWord
             },
             success: function (response) {
+                var loginForm = document.querySelector("#login-form-son");
+                clearErrors(loginForm);
+
                 if (response) {
-                    let newMsg = "Đăng nhập thành công";
-                    showToast(successMsg, newMsg);
-                    setTimeout(() => {
-                        // window.location.href = "../../HTML/user/dolce.php";
-                    }, 2000);
+                    if (response.includes("Không tồn tại người dùng")) {
+                        var username = document.querySelector(".lg-username");
+                        showError(username, "Không tồn tại người dùng!")
+                        username.focus();
+                        return;
+                    }
+                    else if (response.includes("Sai mật khẩu!")) {
+                        var pwdContainer = document.querySelector(".password-container");
+                        var passWord = document.querySelector(".lg-password");
+                        showError(pwdContainer, "Sai mật khẩu!")
+                        passWord.focus();
+                        return;
+                    }
+                    // let newMsg = "Đăng nhập thành công";
+                    // showToast(successMsg, newMsg);
+                    // setTimeout(() => {
+                    window.location.href = "../../HTML/user/dolce.php";
+                    // }, 2000);
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
                 }
@@ -204,24 +234,16 @@ $(document).ready(function () {
 });
 
 // Notification of regist and signin
-let toastBox = document.getElementById('toastBox');
-let successMsg = '<i class="fa-solid fa-circle-check"></i> Successfully submitted';
-let invalidMsg = '<i class="fa-solid fa-circle-exclamation"></i> Invalid input, check again';
-function showToast(msg, newMsg) {
-    let toast = document.createElement('div');
-    toast.classList.add('toast');
-    toast.innerHTML = msg + "<br>" + newMsg;
-    toastBox.appendChild(toast);
+function showError(input, message) {
+    var errorDiv = input.parentNode.querySelector(".error-msg");
+    var symbolError = '<i class="fa-solid fa-circle-xmark"></i>';
+    errorDiv.innerHTML = symbolError + " " + message;
+    errorDiv.classList.add("show");
+}
 
-    if (msg.includes('error')) {
-        toast.classList.add('error');
-    }
-
-    if (msg.includes('Invalid')) {
-        toast.classList.add('invalid');
-    }
-
-    setTimeout(() => {
-        toast.remove();
-    }, 2000);
+function clearErrors(form) {
+    form.querySelectorAll(".error-msg").forEach((errorDiv) => {
+        errorDiv.innerHTML = "";
+        errorDiv.classList.remove("show");
+    });
 }
