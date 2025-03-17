@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
+    <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -112,9 +113,10 @@
                     </a>
                     <h3 style="margin-left: 8px">Bakery Shop</h3>
                 </div>
-                <div id="mid" style="display: flex;align-items: center;width: 30%;position: relative;">
+                <div id="mid" style="display: flex;align-items: center;width: 30%;position: relative; flex-direction: column;">
                     <input type="text" placeholder="Search" id="search">
                     <div id="delete"><img src="../..//assest/Close.png" alt=""></div>
+                    <div id = "suggestion"></div>
                 </div>
                 <div id="rightMenu">
                     <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%">
@@ -149,6 +151,36 @@
                 </div>
             </nav>
         </header>
+
+        <div id="InfoPD-container">
+            <div id="Left">
+                <div id="PD-imgage">
+                 <img src="../../assest/PD-Manager">
+                </div>
+
+            </div>
+            <div id="Right">
+                <div class="PD-name">
+                    <h1 >Bánh kem 1</h1>
+                </div>
+                <div id="Decribe">
+                 <p class="PD-decribe">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus corporis error aliquam velit eius facilis eveniet veniam tempore dolores ipsam. Beatae maiores nostrum, doloribus ex incidunt repudiandae libero iste adipisci?</p>
+                </div>
+                <div id="Quantity-Price">
+                    <p class="Price">100.000đ</p>
+                    <div class="QuantityPD-container">
+                        <i class="fa-solid fa-minus"></i>
+                        <p>1</p>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+                <div id="button">
+                    <button  class ="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
+                    <button class="Buy" type="submit">Mua Ngay</button>
+                </div>
+            </div>
+            
+        </div>
 
         <div class="bread-catelouge-container">
 
