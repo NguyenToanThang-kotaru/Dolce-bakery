@@ -344,51 +344,14 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td>addddd</td>
-            <td>123456</td>
-            <td>Nguyễn@gmail.com</td>
-            <td><select name="" class="account-status">
-              <option value= "onl" selected>Đang hoạt động</option>
-              <option value="lock" >Đã khóa</option>
-            </select></td>
-            <td><img src="../../assest/note.png" alt=""  class = "role-active"  onclick = "togglePopup(event)" style = "width: 15%; cursor: pointer;"></td> 
-            <td>
-              <div class="fix-account">
-                <i class="fa-solid fa-pen-to-square fix-btn-account"></i>
-                <i class="fa-solid fa-trash delete-btn-account"></i>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>sssssss</td>
-            <td>123</td>
-            <td>Mai@gmail.com</td>
-            <td><select name="" class="account-status">
-              <option value="onl" selected>Đang hoạt động</option>
-              <option value="lock" >Đã khóa</option>
-            </select></td>
-            <td><img src="../../assest/note.png" alt="" class = "role-active" onclick = "togglePopup(event)" style = "width: 15%; cursor: pointer;"></td>
-            <td>
-              <div class="fix-account">
-                <i class="fa-solid fa-pen-to-square fix-btn-account"></i>
-                <i class="fa-solid fa-trash delete-btn-account"></i>
-              </div>
-            </td>
-          </tr> -->
+          
           <?php
             include '../../PHP/AC-Manager.php';
            ?>
         </tbody>
       </table>
 
-      <div id="role-popup">  
-        <div>Chức năng 1</div>
-        <div>Chức năng 2</div>
-        <div>Chức năng 3</div>
-       <div class="popup-arrow">
-       </div>
-      </div>
+      
       
 
      
@@ -477,7 +440,7 @@
    
   <div class="role-part">
     <div class="role-table-container">
-    <div id="account-overlay-role">
+    <!-- <div id="account-overlay-role">
         <div class="account-role-container">
           <img src="../../assest/Chevron down.png" alt="">
           <div class="list-user-role">
@@ -500,7 +463,8 @@
             <div class ="user-role">userj</div>
           </div>
         </div>
-      </div>
+      </div> -->
+      
      <div id="role-plus">Thêm quyền</div>
 
       <table class="role-table">
@@ -514,7 +478,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>Quyền A</td>
             <td class ="list-role-function">
             <div class ="role-function">Quản lí sản phẩm</div>
@@ -549,11 +513,14 @@
                 <i class="fa-solid fa-trash delete-btn-role"></i>
               </div>
             </td>
-          </tr> 
+          </tr>  -->
+          <?php
+            include '../../PHP/PM-Manager.php';
+           ?>
         </tbody>
       </table>
 
-      <form class="add-form-role" action="../../PHP/AC-Add.php" method="POST" enctype="multipart/form-data">
+      <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
         <i class="fa-solid fa-rotate-left back-role"></i>
         <div class="form-group">
           <label for="role-name" class="form-label">Tên quyền</label>

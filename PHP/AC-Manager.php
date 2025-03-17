@@ -1,13 +1,17 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM users";
+$sql = "SELECT users.*, permissions.name as p_name
+        FROM users 
+        LEFT JOIN permissions ON users.permission_id = permissions.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $status = $row['status'];  
         $userId = $row['id'];
+        $permission_id = $row['permission_id'];
+        $permission_name = $row['p_name'];
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['userName']) . "</td>";
         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
@@ -19,10 +23,10 @@ if ($result->num_rows > 0) {
                 </select>
               </td>";
          echo "<td>
-         <div class = 'role-dad'>
-             <img src='../../assest/note.png' alt='' class='role-active' onclick='togglePopup(event)' style='width: 15%;  cursor: pointer;'>
-             <span class ='role'>Quyền A</span>
+         <div style = 'display: flex;'>
+            <span style='margin-left: 10px; font-weight: bold;'>" . htmlspecialchars($permission_name) . "</span>
          </div>
+    
          </td>";
          echo "<td>
          <div class='fix-account'>
@@ -31,7 +35,11 @@ if ($result->num_rows > 0) {
          </div>
          </td>";
          echo "</tr>";
-             }
+         echo "<div id='role-popup'>  
+                    
+               <div class='popup-arrow'></div>
+               </div>";
+    }
 } else {
     echo "<tr><td colspan='4'>Không có tài khoản nào</td></tr>";
 }
