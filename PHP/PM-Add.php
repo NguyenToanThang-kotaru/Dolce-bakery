@@ -3,7 +3,7 @@ require_once 'PM-Manager.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role_name = trim($_POST['role-name']);
-    $functions = isset($_POST['permissions']) ? $_POST['permissions'] : []; // Danh sách chức năng
+    $functions = isset($_POST['permissions']) ? $_POST['permissions'] : []; 
 
     if (empty($role_name)) {
         echo "<script>alert('Vui lòng nhập tên quyền!'); window.history.back();</script>";

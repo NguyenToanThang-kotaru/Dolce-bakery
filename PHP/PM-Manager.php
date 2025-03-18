@@ -1,5 +1,5 @@
  <?php
-include 'config.php'; // Kết nối database
+include 'config.php'; 
 
 $sql = "SELECT 
     p.id AS permission_id,
