@@ -856,11 +856,6 @@ body {
   border-bottom: 10px solid #eed9ba;
 }
 
-.list-role-function{
-  display: flex;
-  flex-direction: column;
-}
-
 .role-function{
   margin-bottom: 5px;
 }

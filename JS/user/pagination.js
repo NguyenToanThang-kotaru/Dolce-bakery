@@ -177,6 +177,7 @@ function returnShop() {
   slide.style.display = "flex";
   mainmenu.style.display = "flex";
   brandstory.style.display = "flex";
+  infoproduct.style.display = "none";
 }
 
 bread.addEventListener("click", showBread);

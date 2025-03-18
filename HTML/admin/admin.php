@@ -518,7 +518,7 @@
             <td>Quyền A</td>
             <td class ="list-role-function">
             <div class ="role-function">Quản lí sản phẩm</div>
-            <div class ="role-function">Quản lí tài kho</div>
+            <!-- <div class ="role-function">Quản lí tài kho</div> -->
          </td>
          <td>
           4
