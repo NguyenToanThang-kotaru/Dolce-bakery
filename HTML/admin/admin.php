@@ -520,7 +520,7 @@
         </tbody>
       </table>
 
-      <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
+      <!-- <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
         <i class="fa-solid fa-rotate-left back-role"></i>
         <div class="form-group">
           <label for="role-name" class="form-label">Tên quyền</label>
@@ -551,7 +551,51 @@
         <div class="form-group text-center">
           <button type="submit" class="form-button">Thêm quyền</button>
         </div>
-      </form> 
+      </form>  -->
+
+      <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
+    <i class="fa-solid fa-rotate-left back-role"></i>
+
+    <!-- Nhập tên quyền -->
+    <div class="form-group">
+        <label for="role-name" class="form-label">Tên quyền</label>
+        <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" required />
+    </div>
+
+    <!-- Danh sách chức năng -->
+    <div class="form-group">
+        <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
+        <div class="role-container">
+            <?php
+            require_once '../../PHP/PM-Manager.php'; // Kết nối database
+
+            // Lấy  chức năng từ database
+            $sql = "SELECT id, name FROM functions ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "
+                    <div class='check-role'>
+                        <input type='checkbox' class='permission-checkbox' value='{$row['id']}' name='permissions[]'>
+                        <label>{$row['name']}</label>
+                    </div>";
+                }
+            } else {
+                echo "<p>Không có chức năng nào!</p>";
+            }
+            ?>
+        </div>
+    </div>
+
+    <!-- Nút thêm quyền -->
+    <div class="form-group text-center">
+        <button type="submit" class="form-button">Thêm quyền</button>
+    </div>
+</form>
+
+
+
 
       <form class="fix-form-role" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" id="role-id" name="role-id">

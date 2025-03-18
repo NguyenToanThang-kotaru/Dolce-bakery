@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
         // Số lượng tài khoản
         echo "<td>" . $row['AC_COUNT'] . "</td>";
 
-        // Nút mở danh sách user
+        // Danh sách người dùng
         echo "<td class='role-account'>";
         echo "<img src='../../assest/Download cloud.png' alt='' class='show-userrole' data-id='$permissionId'>";
         echo "</td>";
@@ -49,9 +49,8 @@ if ($result->num_rows > 0) {
         } else {
             echo "<p class='user-role'>Không có tài khoản nào.</p>";
         }
-        echo "</div>"; // Đóng list-user-role
-        echo "</div>"; // Đóng account-role-container
         echo "</div>";
+        echo "</div>"; 
 
         // Edit
         echo "<td>
@@ -67,7 +66,7 @@ if ($result->num_rows > 0) {
     echo "<tr><td style='text-align: center;' colspan='5'>Không có dữ liệu</td></tr>";
 }
 
-$conn->close();
+
 ?>
 
 <script>
@@ -95,12 +94,9 @@ $conn->close();
         });
     }
 
-    // Gán sự kiện khi tải trang
     attachUserRoleClickEvents();
 
- 
-
-    // Ẩn danh sách khi click ra ngoài
+    // Ẩn danh sách click ra ngoài
     document.addEventListener("click", function (event) {
         if (!event.target.closest(".account-role-container") && !event.target.classList.contains("show-userrole")) {
             document.querySelectorAll(".account-role-container").forEach(function (container) {
