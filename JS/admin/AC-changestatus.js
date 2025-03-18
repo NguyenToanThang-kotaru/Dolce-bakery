@@ -61,7 +61,7 @@ $(document).ready(function() {
                 console.log("Phản hồi từ server:", response);
                 $('#result').html(response);
                 
-                alert("Cập nhật quyền thành công!");
+                
             },
             error: function(xhr, status, error) {
                 console.error("Lỗi AJAX:", status, error);

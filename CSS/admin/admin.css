@@ -634,7 +634,7 @@ body {
   font-size: 16px;
 }
 
-#account-plus{
+#account-plus, #role-plus{
   font-size: 20px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -648,7 +648,9 @@ body {
   margin-bottom: 30px;
 }
 
-#account-plus:hover{
+
+
+#account-plus:hover, #role-plus:hover{
   color: #ea9029;
   transform: scale(1.1);
 }
@@ -705,7 +707,101 @@ body {
   display: none;
 }
 
-/*  */
+/* role-part */
+.role-part{
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.role-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.role-status{
+  padding: 2px;
+  border: 0px solid rgb(17, 17, 17);
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70); 
+}
+
+.role-table th, .role-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.role-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.role-table td{
+  background-color: #f9f5f0;
+}
+
+.role-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.fix-role{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.role-table i:hover{
+  color: #8b5a5a;
+}
+
+
+.add-form-role, .fix-form-role{
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-role i, .fix-form-role i{
+  margin-left: 740px;
+  cursor: pointer;
+}
+
+.add-form-role i:hover,.fix-form-role i:hover{
+  color: #ef9b09;
+  transform: scale(1.2);
+}
+
+#delete-overlay-role {  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}
+
 .role-container{
   width: 30%;
   border: 0px solid rgb(109, 105, 105);
@@ -714,6 +810,21 @@ body {
   font-weight: 500;
   color: #555;
   padding: 10px;
+}
+
+.role-container select{
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.role{
+  color: red;
+}
+
+.role-dad{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .check-role{
@@ -736,7 +847,7 @@ body {
 .popup-arrow {
   position: absolute;
   top: -10px;
-  left: 8%;
+  left: 18%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
@@ -744,3 +855,74 @@ body {
   border-right: 10px solid transparent;
   border-bottom: 10px solid #eed9ba;
 }
+
+/* .list-role-function{
+  display: flex;
+  flex-direction: column;
+} */
+
+.role-function{
+  margin-bottom: 5px;
+}
+
+.role-account img{
+  width: 8%;
+  height: 8%;
+  cursor: pointer;
+}
+
+.role-account img:hover{
+  transform: scale(1.1);
+}
+
+#account-overlay-role{  
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}
+
+.account-role-container{
+  width: 20%; 
+  height: 40%;
+  background-color: #feead7;
+  border-radius: 20px;
+  padding: 10px 40px;
+  margin: 0 auto;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items:center ;
+  box-shadow: 0 0 20px 10px rgba(49, 23, 1, 0.2);
+}
+
+.account-role-container img{
+  width: 60%;
+  height: 15% ;
+}
+
+.list-user-role{
+  background-color: hwb(0 100% 0%);
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  overflow-y: auto;
+  box-shadow: 0 0 20px 10px rgba(83, 10, 61, 0.2);
+}
+
+.user-role{
+  width: 100%;
+}
+
+.user-role:hover{
+  background-color: thistle;
+}
+

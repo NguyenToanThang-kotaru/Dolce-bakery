@@ -169,29 +169,23 @@
                         </div>
                         <div class="level-price">
                             <h4>Mức giá</h4>
-                            <div class="option-price"><input type="checkbox"><span>Dưới 500.000đ</span></div>
-                            <div class="option-price"><input type="checkbox"><span>Từ 500.000đ - 1 triệu</span></div>
-                            <div class="option-price"><input type="checkbox"><span>Từ 1 triệu - 1 triệu 500</span></div>
-                            <div class="option-price"><input type="checkbox"><span>Từ 1 triệu 500 - 2 triệu</span></div>
-                            <div class="option-price"><input type="checkbox"><span>Từ 2 triệu - 2 triệu 500</span></div>
-                            <div class="option-price"><input type="checkbox"><span>Từ 2 triệu 500 - 3 triệu</span></div>
-    
-    
-    
+                            <div class="option-price"><input type="checkbox" value = "0-50000"><span>Dưới 50.000đ</span></div>
+                            <div class="option-price"><input type="checkbox" value = "50000-100000"><span>Từ 50.000đ - 100.000đ</span></div>
+                            <div class="option-price"><input type="checkbox" value = "100000-150000"><span>Từ 100.000đ - 150.000đ</span></div>
                         </div>
                         <div class="price-range">
                             <span>Nhập khoảng giá phù hợp:</span>
                             <div class="slider-value">
-                                <span id="min-value">300.000đ</span>
+                                <span id="min-value-bread">20.000đ</span>
                                 <span style="border: none; width: 50px;">~</span>
-                                <span id="max-value">3.000.000đ</span>
+                                <span id="max-value-bread">200.000đ</span>
                             </div>
                             <div class="slider-container">
-                                <input type="range" id="min-price" min="300000" max="3000000" step="50000" value="300000">
-                                <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
+                                <input type="range" id="min-price-bread" min="20000" max="200000" step="10000" value="20000">
+                                <input type="range" id="max-price-bread" min="20000" max="200000" step="10000" value="200000">
                             </div>
     
-                            <span class="acp-filter" onclick="FilterClick('bread')">Done</span>
+                            <span class="acp-filter" onclick="render_filter()">Done</span>
                         </div>
                     </div>
                 <div class="show-product" id="product-list">
@@ -200,7 +194,7 @@
                     </div>
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
-                        <select name="" id="arrange-sl">
+                        <select name="" class="arrange-sl">
                             <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
@@ -210,7 +204,7 @@
                     <?php $type = "bread"; include '../../PHP/users/uploadpd.php'; ?>
                     </div>
     
-                </div>
+                </div>  
             </div>
 
             <div class="bread-pagination">
@@ -228,12 +222,9 @@
                     </div>
                     <div class="level-price">
                         <h4>Mức giá</h4>
-                        <div class="option-price"><input type="checkbox"><span>Dưới 500.000đ</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 500.000đ - 1 triệu</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 1 triệu - 1 triệu 500</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 1 triệu 500 - 2 triệu</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 2 triệu - 2 triệu 500</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 2 triệu 500 - 3 triệu</span></div>
+                        <div class="option-price"><input type="checkbox" value = "0-300000"><span>Dưới 300.000đ</span></div>
+                        <div class="option-price"><input type="checkbox" value = "300000-500000"><span>Từ 300.000đ - 500.000đ</span></div>
+                        <div class="option-price"><input type="checkbox" value = "500000-800000"><span>Từ 500.000đ - 800.000đ</span></div>
     
     
     
@@ -241,16 +232,16 @@
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
-                            <span id="min-value">300.000đ</span>
+                            <span id="min-value-cake">100.000đ</span>
                             <span style="border: none; width: 50px;">~</span>
-                            <span id="max-value">3.000.000đ</span>
+                            <span id="max-value-cake">1.000.000đ</span>
                         </div>
                         <div class="slider-container">
-                            <input type="range" id="min-price" min="300000" max="3000000" step="50000" value="300000">
-                            <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
+                            <input type="range" id="min-price-cake" min="100000" max="1000000" step="10000" value="100000">
+                            <input type="range" id="max-price-cake" min="100000" max="1000000" step="10000" value="1000000">
                         </div>
-    
-                        <span class="acp-filter" onclick="FilterClick('cake')">Done</span>
+
+                        <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
                 </div>
                 
@@ -260,7 +251,7 @@
                     </div>
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
-                        <select name="" id="arrange-sl">
+                        <select name="" class="arrange-sl">
                             <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
@@ -294,12 +285,10 @@
                     </div>
                     <div class="level-price">
                         <h4>Mức giá</h4>
-                        <div class="option-price"><input type="checkbox"><span>Dưới 500.000đ</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 500.000đ - 1 triệu</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 1 triệu - 1 triệu 500</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 1 triệu 500 - 2 triệu</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 2 triệu - 2 triệu 500</span></div>
-                        <div class="option-price"><input type="checkbox"><span>Từ 2 triệu 500 - 3 triệu</span></div>
+                        <div class="option-price"><input type="checkbox" value = "0-50000"><span>Dưới 50.000đ</span></div>
+                        <div class="option-price"><input type="checkbox" value = "50000-100000"><span>Từ 50.000đ - 100.000đ</span></div>
+                        <div class="option-price"><input type="checkbox" value = "100000-150000"><span>Từ 100.000đ - 150.000đ</span></div>
+                    
 
 
 
@@ -307,16 +296,16 @@
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
-                            <span id="min-value">300.000đ</span>
+                            <span id="min-value-cookie">20.000đ</span>
                             <span style="border: none; width: 50px;">~</span>
-                            <span id="max-value">3.000.000đ</span>
+                            <span id="max-value-cookie">100.000đ</span>
                         </div>
                         <div class="slider-container">
-                            <input type="range" id="min-price" min="300000" max="3000000" step="50000" value="300000">
-                            <input type="range" id="max-price" min="300000" max="3000000" step="50000" value="3000000">
+                            <input type="range" id="min-price-cookie" min="20000" max="100000" step="10000" value="20000">
+                            <input type="range" id="max-price-cookie" min="20000" max="100000" step="10000" value="100000">
                         </div>
 
-                        <span class="acp-filter" onclick="FilterClick('cookie')">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
                 </div>
 
@@ -326,7 +315,7 @@
                     </div>
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
-                        <select name="" id="arrange-sl">
+                        <select name="" class="arrange-sl">
                             <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
@@ -563,7 +552,7 @@
     <script src="../../JS/user/slideShow.js"></script>
     <script src="../../JS/user/blocklogin.js"></script>
     <script src="../../JS/user/blockCart.js"></script>
-    <script src="../../JS/user/pagination.js"></script>
+    <script defer src="../../JS/user/pagination.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
