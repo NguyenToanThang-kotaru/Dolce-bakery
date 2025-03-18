@@ -1,57 +1,3 @@
-// $(document).ready(function () {
-//     // Đăng ký
-//     $("#register-form-son").submit(function (event) {
-//         event.preventDefault(); 
-
-//         var userName = $('.rg-username').val();
-//         var email = $('.rg-email').val();
-//         var fullName = $('.rg-fullName').val();
-//         var phone = $('.rg-phone').val();
-//         var passWord = $('.rg-password').val();
-
-//         $.ajax({
-//             type: "POST",
-//             url: "../../PHP/users/UserCtrl.php",
-//             data: {
-//                 "register-form-son": true,
-//                 "rg-username": userName,
-//                 "rg-email": email,
-//                 "rg-fullName": fullName,
-//                 "rg-phone": phone,
-//                 "rg-password": passWord
-//             },
-//             success: function (response) {
-//                 alert(response); 
-//                 if (response.includes("Đăng ký thành công")) {
-//                     window.location.href = "../../HTML/user/dolce.php"; 
-
-//                 }
-//             }
-//         });
-//     });
-
-//     // Đăng nhập
-//     $("#login-form-son").submit(function (event) {
-//         event.preventDefault();
-//         var userName = $('.lg-username').val();
-//         var passWord = $('.lg-password').val();
-//         $.ajax({
-//             type: "POST",
-//             url: "../../PHP/users/UserCtrl.php",
-//             data: {
-//                 "login-form-son": true,
-//                 "lg-username": userName,
-//                 "lg-password": passWord
-//             },
-//             success: function (response) {
-//                 alert(response);
-//                 if (response.includes("Đăng nhập thành công")) {
-//                     window.location.href = "../../HTML/user/dolce.php";
-//                 }
-//             }
-//         });
-//     });
-// });
 
 $(document).ready(function () {
 
@@ -73,7 +19,7 @@ $(document).ready(function () {
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         var phoneRegex = /^0\d{9}$/;
         var passwordRegex = /^.{8,}$/;
-        var fullnameRegex = /^[a-zA-Z\s]+$/;
+        var fullnameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
 
         var rgUserName = document.querySelector(".rg-username");
         var rgEmail = document.querySelector(".rg-email");
@@ -174,38 +120,15 @@ $(document).ready(function () {
                         passWord.focus();
                         return;
                     }
-                    // let newMsg = "Đăng nhập thành công";
-                    // showToast(successMsg, newMsg);
-                    // setTimeout(() => {
-                    window.location.href = "../../HTML/user/dolce.php";
-                    // }, 2000);
+
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
                 }
 
                 let data = JSON.parse(response);
                 console.log("Parsed data:", data);
-
-                let html = `
-                <div class="row">
-                    <label for="account" class="Detail">Tài khoản: </label>
-                    <span>${data.userName}</span>
-                </div>
-                <div class="row">
-                    <label for="fullname" class="Detail">Họ và tên: </label>
-                    <span>${data.fullName}</span>
-                </div>
-                <div class="row">
-                    <label for="email" class="Detail">Email:</label>
-                    <span>${data.email}</span>
-                </div>
-                <div class="row">
-                    <label for="phone" class="Detail">Số điện thoại: </label>
-                    <span>${data.numberPhone}</span>
-                </div>
-                `;
-
-                document.querySelector('.InfoUser_Detail').innerHTML = html;
+                localStorage.setItem("userData", JSON.stringify(data));
+                location.reload();
             }
         });
     });
@@ -247,3 +170,35 @@ function clearErrors(form) {
         errorDiv.classList.remove("show");
     });
 }
+
+function loadUserInfo() {
+    let userData = localStorage.getItem("userData");
+    if (userData) {
+        let data = JSON.parse(userData);
+        console.log("User info loaded:", data);
+
+        let html = `
+        <div class="row">
+            <label for="account" class="Detail">Tài khoản: </label>
+            <span>${data.userName}</span>
+        </div>
+        <div class="row">
+            <label for="fullname" class="Detail">Họ và tên: </label>
+            <span>${data.fullName}</span>
+        </div>
+        <div class="row">
+            <label for="email" class="Detail">Email:</label>
+            <span>${data.email}</span>
+        </div>
+        <div class="row">
+            <label for="phone" class="Detail">Số điện thoại: </label>
+            <span>${data.numberPhone}</span>
+        </div>
+        `;
+
+        document.querySelector('.InfoUser_Detail').innerHTML = html;
+    }
+}
+
+// Gọi hàm khi trang load xong
+document.addEventListener("DOMContentLoaded", loadUserInfo);
