@@ -1,7 +1,7 @@
 <?php
     include 'config.php';
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
+    if($_SERVER['REQUEST_METHOD'] === 'POST'&&isset($_POST['id'])){
+        $id = $_POST['id'];
         $drop_IMGPD = ("SELECT image FROM products where id =$id");
         $drop_IMGPD = $conn->query($drop_IMGPD);
         $row = $drop_IMGPD->fetch_assoc();
@@ -11,13 +11,14 @@
             if ($row['image'] != "/Dolce-bakery/assest/PD-Manager/Default.jpg") {
                 unlink($imagePath);
             }            
-            header("Location: ../HTML/admin/admin.php");
-            echo "Sản phẩm đã được xóa thành công!";
-            exit();
+            
+            echo json_encode(["success" => true]);
     
         } else {
-            echo "Lỗi: " . $conn->error; 
+            echo json_encode(["success" => false]); 
         }
+        $conn->close();
+        exit;
     }
 
 ?>

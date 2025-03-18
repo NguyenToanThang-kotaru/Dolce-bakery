@@ -38,12 +38,24 @@ $conn->close();
             let productId = this.getAttribute('data-id');
             let deleteOverlay = document.getElementById('delete-overlay-product');
             deleteOverlay.style.display = 'block';
-            document.getElementById('delete-acp-product').onclick = function() {
-                window.location.href = '../../PHP/PD-delete.php?id=' + productId;
-            };
-            document.getElementById('cancel-product').onclick = function() {
-                deleteOverlay.style.display = 'none';
-            };
+            document.getElementById('delete-acp-product').onclick = function () {
+                fetch('../../PHP/PD-delete.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id=' + productId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // alert('Xóa sản phẩm thành công!');
+                        document.querySelector(`.delete-btn-product[data-id='${productId}']`).closest('tr').remove();
+                    } else {
+                        alert('Xóa sản phẩm thất bại!');
+                    }
+                    deleteOverlay.style.display = 'none';
+                })}
         });
     });
     document.querySelectorAll('.fix-btn-product').forEach(button =>{
