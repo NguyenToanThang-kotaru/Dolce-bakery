@@ -1,4 +1,4 @@
-<?php
+ <?php
 include 'config.php'; // Kết nối database
 
 $sql = "SELECT 
@@ -39,17 +39,17 @@ if ($result->num_rows > 0) {
         echo "<img src='../../assest/Download cloud.png' alt='' class='show-userrole' data-id='$permissionId'>";
         echo "</td>";
         echo "<div id='account-overlay-role'>";
-        echo "<div class='account-role-container' style='display: none;'>";
-        echo "<img src='../../assest/Chevron down.png' alt=''>";
-        echo "<div class='list-user-role' id='account-list-$permissionId' style='display: none;'>";
+        echo    "<div class='account-role-container' style='display: none;'>";
+        echo        "<img src='../../assest/Chevron down.png' alt=''>";
+        echo        "<div class='list-user-role' id='account-list-$permissionId' style='display: none;'>";
         if (!empty($users)) {
             foreach ($users as $user) {
-                echo "<div class='user-role'>" . htmlspecialchars($user) . "</div>";
+                echo"<div class='user-role'>" . htmlspecialchars($user) . "</div>";
             }
         } else {
-            echo "<p class='user-role'>Không có tài khoản nào.</p>";
+            echo    "<p class='user-role'>Không có tài khoản nào.</p>";
         }
-        echo "</div>";
+        echo    "</div>";
         echo "</div>"; 
 
         // Edit
@@ -77,7 +77,8 @@ if ($result->num_rows > 0) {
                 event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
 
                 let permissionId = this.getAttribute("data-id"); // Lấy ID quyền hạn
-                let accountContainer = document.getElementById(`account-container-${permissionId}`);
+                let accountContainer = document.getElementById(`account-list-${permissionId}`);
+
 
                 // Ẩn tất cả danh sách khác trước khi mở danh sách mới
                 // document.querySelectorAll(".account-role-container").forEach(function (container) {
@@ -88,8 +89,13 @@ if ($result->num_rows > 0) {
 
                 // Toggle hiển thị danh sách user
                 if (accountContainer) {
+                    let parentContainer = accountContainer.closest(".account-role-container");
+                    if (parentContainer) {
+                        parentContainer.style.display = (parentContainer.style.display === "none") ? "block" : "none";
+                    }
                     accountContainer.style.display = (accountContainer.style.display === "none") ? "block" : "none";
                 }
+
             };
         });
     }
@@ -108,4 +114,4 @@ if ($result->num_rows > 0) {
 
 </script>
 
-
+ 

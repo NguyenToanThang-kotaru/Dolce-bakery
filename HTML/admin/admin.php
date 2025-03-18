@@ -414,7 +414,7 @@
         </div>
 
         <div class="form-group">
-          <label for="account-role" class="form-label" style = "color: red;">Cấp quyền</label>
+          <label for="account-role" class="form-label" style = "color: red;">Cập nhật quyền</label>
           <div class = role-container>
           <select name="permissions[]" class="permission-select" data-user="<?= $userId ?>">
           <option value="1">Quyền A</option>
@@ -478,42 +478,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td>Quyền A</td>
-            <td class ="list-role-function">
-            <div class ="role-function">Quản lí sản phẩm</div>
-            <div class ="role-function">Quản lí tài kho</div>
-         </td>
-         <td>
-          4
-         </td>
-            <td class="role-account">
-              <img src="../../assest/Download cloud.png" alt="" class = "show-userrole">
-            <td>
-              <div class="fix-role">
-                <i class="fa-solid fa-pen-to-square fix-btn-role"></i>
-                <i class="fa-solid fa-trash delete-btn-role"></i>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Quyền B</td>
-            <td class = "list-role-function">
-              <div class ="role-function">Quản lí nhà cung cấp</div>
-              <div class ="role-function">Quản lí tài khoản</div>
-            </td>
-              <td>
-                5
-              </td>
-            <td class = "role-account">
-              <img src="../../assest/Download cloud.png" alt="" class="show-userrole">
-            <td>
-              <div class="fix-role">
-                <i class="fa-solid fa-pen-to-square fix-btn-role"></i>
-                <i class="fa-solid fa-trash delete-btn-role"></i>
-              </div>
-            </td>
-          </tr>  -->
           <?php
             include '../../PHP/PM-Manager.php';
            ?>
