@@ -55,8 +55,8 @@ if ($result->num_rows > 0) {
         // Edit
         echo "<td>
                 <div class='fix-role'>
-                    <i class='fa-solid fa-pen-to-square fix-btn-role'></i>
-                    <i class='fa-solid fa-trash delete-btn-role'></i>
+                    <i class='fa-solid fa-pen-to-square fix-btn-role' data-id='$permissionId' data-name='" . htmlspecialchars($row['P_NAME']) . "' data-functions='" . htmlspecialchars($row['F_NAME']) . "'></i>
+                    <i class='fa-solid fa-trash delete-btn-role' data-id='$permissionId'></i>
                 </div>
               </td>";
 
@@ -69,15 +69,18 @@ if ($result->num_rows > 0) {
 
 ?>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    function attachUserRoleClickEvents() {
-        document.querySelectorAll(".show-userrole").forEach(function (img) {
-            img.onclick = function (event) {
-                event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
 
-                let permissionId = this.getAttribute("data-id"); // Lấy ID quyền hạn
-                let accountContainer = document.getElementById(`account-list-${permissionId}`);
+
+
+<script>
+    // document.addEventListener("DOMContentLoaded", function () {
+    // function attachUserRoleClickEvents() {
+    //     document.querySelectorAll(".show-userrole").forEach(function (img) {
+    //         img.onclick = function (event) {
+    //             event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+
+    //             let permissionId = this.getAttribute("data-id"); // Lấy ID quyền hạn
+    //             let accountContainer = document.getElementById(`account-list-${permissionId}`);
 
 
                 // Ẩn tất cả danh sách khác trước khi mở danh sách mới
@@ -87,30 +90,67 @@ if ($result->num_rows > 0) {
                 //     }
                 // });
 
-                // Toggle hiển thị danh sách user
-                if (accountContainer) {
-                    let parentContainer = accountContainer.closest(".account-role-container");
-                    if (parentContainer) {
-                        parentContainer.style.display = (parentContainer.style.display === "none") ? "block" : "none";
+//                 // Toggle hiển thị danh sách user
+//                 if (accountContainer) {
+//                     let parentContainer = accountContainer.closest(".account-role-container");
+//                     if (parentContainer) {
+//                         parentContainer.style.display = (parentContainer.style.display === "none") ? "block" : "none";
+//                     }
+//                     accountContainer.style.display = (accountContainer.style.display === "none") ? "block" : "none";
+//                 }
+
+//             };
+//         });
+//     }
+
+//     attachUserRoleClickEvents();
+
+//     // Ẩn danh sách click ra ngoài
+//     document.addEventListener("click", function (event) {
+//         if (!event.target.closest(".account-role-container") && !event.target.classList.contains("show-userrole")) {
+//             document.querySelectorAll(".account-role-container").forEach(function (container) {
+//                 container.style.display = "none";
+//             });
+//         }
+//     });
+// });
+
+
+
+
+//Xóa
+
+    document.querySelectorAll('.delete-btn-role').forEach(button => {
+        button.addEventListener('click', function() {
+            let permissionId = this.getAttribute('data-id');
+            let deleteOverlay = document.getElementById('delete-overlay-role');
+            deleteOverlay.style.display = 'block';
+            document.getElementById('delete-acp-role').onclick = function () {
+                fetch('../../PHP/PM-Delete.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id=' + permissionId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.querySelector(`.delete-btn-role[data-id='${permissionId}']`).closest('tr').remove();
+                    } else {
+                        alert('Xóa sản phẩm thất bại!');
                     }
-                    accountContainer.style.display = (accountContainer.style.display === "none") ? "block" : "none";
-                }
-
-            };
+                    deleteOverlay.style.display = 'none';
+                })}
         });
-    }
-
-    attachUserRoleClickEvents();
-
-    // Ẩn danh sách click ra ngoài
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".account-role-container") && !event.target.classList.contains("show-userrole")) {
-            document.querySelectorAll(".account-role-container").forEach(function (container) {
-                container.style.display = "none";
-            });
-        }
     });
-});
+    document.querySelectorAll('.fix-btn-role').forEach(button =>{
+        
+        button.addEventListener('click',function(){
+            let productId = this.getAttribute('data-id');
+            document.getElementById('role-id').value = productId
+        })
+    });
 
 </script>
 
