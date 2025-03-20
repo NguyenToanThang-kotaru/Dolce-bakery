@@ -95,3 +95,44 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
     })
     .catch(error => console.error('Lỗi:', error));
 });
+
+document.getElementById("update-form-product").addEventListener("submit", function (event) {
+    event.preventDefault(); // Ngăn form gửi theo cách mặc định
+
+    let formData = new FormData(this); // Lấy dữ liệu form
+
+    fetch("../../PHP/PD-edit.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json()) // Chuyển phản hồi thành JSON
+    .then(data => {
+        if (data.success) {
+            alert(data.message); // Hiển thị thông báo thành công
+            event.preventDefault(); // Ngăn form gửi theo cách mặc định
+            console.log(data.product);
+            let priceStr = data.product.price.replace(/\./g, '').replace(' VND', ''); 
+            let priceNumber = parseInt(priceStr, 10);
+            // Cập nhật dòng sản phẩm trên bảng nếu có
+            let row = document.querySelector(`tr[data-id='${data.product.id}']`);
+            if (row) {
+                row.innerHTML = `
+                    <td class='img-admin'><img src="${data.product.image}" alt="" width="50"></td>
+                    <td>${data.product.name}</td>
+                    <td>${data.product.type}</td>
+                    <td>${data.product.quantity}</td>
+                    <td>${priceNumber.toLocaleString('vi-VN')} VND</td>
+                    <td>
+                        <div class='fix-product'>
+                            <i class='fa-solid fa-pen-to-square fix-btn-product' data-id="${data.product.id}"></i>
+                            <i class='fa-solid fa-trash delete-btn-product' data-id="${data.product.id}"></i>
+                        </div>
+                    </td>
+                `;
+            }
+        } else {
+            alert("Lỗi: " + data.message);
+        }
+    })
+    .catch(error => console.error("Lỗi:", error));
+});

@@ -7,7 +7,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
-        echo "<tr>";
+        echo "<tr data-id='$id'>";
         echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
         echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $row['type'] . "</td>";

@@ -159,7 +159,7 @@
         </div>
       </form> 
 
-      <form class="fix-form-product" action="../../PHP/PD-edit.php" method="POST" enctype="multipart/form-data">
+      <form class="fix-form-product" id="update-form-product" enctype="multipart/form-data">
         <input type="hidden" id="product-id" name="product-id">
         <i class="fa-solid fa-rotate-left back-product"></i>
         <div class="form-group">
