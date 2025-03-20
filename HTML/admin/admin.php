@@ -562,7 +562,7 @@
 
 
 
-      <form class="fix-form-role" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
+      <form class="fix-form-role" action="../../PHP/PM-Edit.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" id="role-id" name="role-id">
         <i class="fa-solid fa-rotate-left back-role"></i>
         <div class="form-group">
@@ -573,22 +573,25 @@
         <div class="form-group">
           <label for="account-role" class="form-label" style = "color: red;">Chức năng</label>
           <div class = role-container>
-           <div class ="check-role">
-              <input type="checkbox" id ="prd-mng">
-              <label for="prd-mng" >Quản lí sản phẩm</label>
-           </div>
-            <div class ="check-role">
-              <input type="checkbox" id ="ctm-mng">
-              <label for="ctm-mng">Quản lí khách hàng</label>
-            </div>
-            <div class ="check-role">
-              <input type="checkbox" id ="ncc-mng" >
-              <label for="ncc-mng">Quản lí nhà cung cấp</label>
-            </div>
-            <div class ="check-role">
-              <input type="checkbox" id="act-mng">
-              <label for="act-mng">Quản lí người dùng</label>
-            </div>
+          <?php
+            require_once '../../PHP/PM-Manager.php'; // Kết nối database
+
+            // Lấy  chức năng từ database
+            $sql = "SELECT id, name FROM functions ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "
+                    <div class='check-role'>
+                        <input type='checkbox' class='permission-checkbox' value='{$row['id']}' name='permissions[]'>
+                        <label>{$row['name']}</label>
+                    </div>";
+                }
+            } else {
+                echo "<p>Không có chức năng nào!</p>";
+            }
+            ?>
           </div>
         </div>
 
