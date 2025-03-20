@@ -72,6 +72,7 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
 
             // Tạo hàng mới trong bảng
             let newRow = document.createElement("tr");
+            newRow.setAttribute("data-id", data.product.id); 
             newRow.innerHTML = `
                 <td class='img-admin'><img src="${data.product.image}" alt='' width='50'></td>
                 <td>${data.product.name}</td>
@@ -100,7 +101,8 @@ document.getElementById("update-form-product").addEventListener("submit", functi
     event.preventDefault(); // Ngăn form gửi theo cách mặc định
 
     let formData = new FormData(this); // Lấy dữ liệu form
-
+    let productId = document.getElementById("product-id").value;
+    console.log("ID sản phẩm:", productId);
     fetch("../../PHP/PD-edit.php", {
         method: "POST",
         body: formData
@@ -108,8 +110,7 @@ document.getElementById("update-form-product").addEventListener("submit", functi
     .then(response => response.json()) // Chuyển phản hồi thành JSON
     .then(data => {
         if (data.success) {
-            alert(data.message); // Hiển thị thông báo thành công
-            event.preventDefault(); // Ngăn form gửi theo cách mặc định
+            alert(data.message); // Hiển thị thông báo thành công            
             console.log(data.product);
             let priceStr = data.product.price.replace(/\./g, '').replace(' VND', ''); 
             let priceNumber = parseInt(priceStr, 10);
@@ -129,7 +130,10 @@ document.getElementById("update-form-product").addEventListener("submit", functi
                         </div>
                     </td>
                 `;
+                console.log("Cập nhật thành công!");
             }
+            else
+                console.log("Không tìm thấy sản phẩm cần cập nhật!");
         } else {
             alert("Lỗi: " + data.message);
         }
