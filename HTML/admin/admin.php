@@ -485,38 +485,7 @@
         </tbody>
       </table>
 
-      <!-- <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
-        <i class="fa-solid fa-rotate-left back-role"></i>
-        <div class="form-group">
-          <label for="role-name" class="form-label">Tên quyền</label>
-          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
-        </div>
-        
-      <div class="form-group">
-          <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
-        <div class="role-container">
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="5" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí sản phẩm</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="4" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí khách hàng</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="3" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí nhà cung cấp</label>
-          </div>
-          <div class="check-role">
-            <input type="checkbox" class="permission-checkbox" value="2" name="permissions[]" data-user="<?= $userId ?>" >
-            <label>Quản lí người dùng</label>
-          </div>
-        </div>
-      </div>
-        <div class="form-group text-center">
-          <button type="submit" class="form-button">Thêm quyền</button>
-        </div>
-      </form>  -->
+     
 
       <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
     <i class="fa-solid fa-rotate-left back-role"></i>
@@ -562,24 +531,21 @@
 
 
 
-      <form class="fix-form-role" action="../../PHP/PM-Edit.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" id="role-id" name="role-id">
-        <i class="fa-solid fa-rotate-left back-role"></i>
-        <div class="form-group">
-          <label for="role-name" class="form-label">Tên quyền</label>
-          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
-        </div>
-
-        <div class="form-group">
-          <label for="account-role" class="form-label" style = "color: red;">Chức năng</label>
-          <div class = role-container>
-          <?php
+<form id="fix-form-role" class="fix-form-role" action="../../PHP/PM-Edit.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" id="role-id-f" name="role-id">
+    <i class="fa-solid fa-rotate-left back-role"></i>
+    <div class="form-group">
+        <label for="role-name" class="form-label">Tên quyền</label>
+        <input type="text" id="role-name-f" name="role-name" placeholder="Nhập tên" class="form-input" />
+    </div>
+    <div class="form-group">
+        <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
+        <div class="role-container">
+            <?php
             require_once '../../PHP/PM-Manager.php'; // Kết nối database
-
-            // Lấy  chức năng từ database
+            // Lấy chức năng từ database
             $sql = "SELECT id, name FROM functions ORDER BY id ASC";
             $result = $conn->query($sql);
-
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "
@@ -592,13 +558,12 @@
                 echo "<p>Không có chức năng nào!</p>";
             }
             ?>
-          </div>
         </div>
-
-        <div class="form-group text-center">
-          <button type="submit" class="form-button">Hoàn tất</button>
-        </div>
-      </form>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="form-button">Hoàn tất</button>
+    </div>
+</form>
 
       <div id="delete-overlay-role">
         <div class="delete-container">
@@ -618,6 +583,7 @@
   <!-- <script src="../../JS/PD-editAjax"></script> -->
   <script src="../../JS/admin/AC-changestatus.js"></script>
   <script src="../../JS/admin/PD-Ajax.js"></script>
+  <script src="../../JS/admin/PM-Ajax.js"></script>
 
 
 
