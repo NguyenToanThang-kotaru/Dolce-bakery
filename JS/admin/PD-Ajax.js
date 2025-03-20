@@ -27,6 +27,38 @@ document.addEventListener("click", function (event) {
     }
 });
 
+function uploadImg(inputElement) {
+    const preview = document.getElementById("preview-image"); // Tìm ảnh xem trước
+    const fileSelected = inputElement.files;
+
+    if (fileSelected.length > 0) {
+        const fileToLoad = fileSelected[0];
+        const fileReader = new FileReader();
+
+        fileReader.onload = function(event) {
+            if (preview) {
+                preview.src = event.target.result; // Gán ảnh mới
+                preview.style.display = "block"; // Hiển thị ảnh nếu nó đang bị ẩn
+            } else {
+                console.error("Không tìm thấy thẻ img để hiển thị ảnh xem trước!");
+            }
+        };
+
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+document.getElementById("product-image").onchange = function(event) {
+    const file = event.target.files[0]; // Lấy file ảnh được chọn
+    if (file) {
+        console.log("da cap nhat")
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("preview-image").src = e.target.result; // Cập nhật ảnh preview
+        };
+        reader.readAsDataURL(file);
+    }
+};
 
 document.querySelector(".product-table").addEventListener("click", function (event) {
     if (event.target.classList.contains("delete-btn-product")) {
@@ -94,7 +126,6 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
             alert("Lỗi: " + data.message);
         }
     })
-    .catch(error => console.error('Lỗi:', error));
 });
 
 document.getElementById("update-form-product").addEventListener("submit", function (event) {

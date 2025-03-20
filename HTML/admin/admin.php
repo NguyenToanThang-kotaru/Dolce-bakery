@@ -164,8 +164,8 @@
         <i class="fa-solid fa-rotate-left back-product"></i>
         <div class="form-group">
           <label for="product-image" class="form-label">*Ảnh sản phẩm</label>
-          <img id="preview-image" src="" alt="Ảnh sản phẩm" style="width: 150px; height: auto; display: block; margin-bottom: 10px;">
-          <input type="file" id="product-image" name="product-image" class="form-input" />
+          <img id="preview-image" src="" alt="Ảnh sản phẩm" style="width: 150px; height: auto; margin-bottom: 10px;">
+          <input type="file" id="product-image" onchange="uploadImg(this)" name="product-image" class="form-input" accept="image/*" />
         </div>
 
         <div class="form-group">
@@ -584,7 +584,6 @@
   <script src="../../JS/admin/AC-changestatus.js"></script>
   <script src="../../JS/admin/PD-Ajax.js"></script>
   <script src="../../JS/admin/PM-Ajax.js"></script>
-
 
 
 
