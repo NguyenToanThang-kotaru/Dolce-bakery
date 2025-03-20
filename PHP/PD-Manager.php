@@ -31,26 +31,3 @@ $conn->close();
         <button id='cancel-product'>Hủy</button>
     </div>
 </div>
-
-<script>
-    document.querySelectorAll('.delete-btn-product').forEach(button => {
-        button.addEventListener('click', function() {
-            let productId = this.getAttribute('data-id');
-            let deleteOverlay = document.getElementById('delete-overlay-product');
-            deleteOverlay.style.display = 'block';
-            document.getElementById('delete-acp-product').onclick = function() {
-                window.location.href = '../../PHP/PD-delete.php?id=' + productId;
-            };
-            document.getElementById('cancel-product').onclick = function() {
-                deleteOverlay.style.display = 'none';
-            };
-        });
-    });
-    document.querySelectorAll('.fix-btn-product').forEach(button =>{
-        
-        button.addEventListener('click',function(){
-            let productId = this.getAttribute('data-id');
-            document.getElementById('product-id').value = productId
-        })
-    });
-</script>
