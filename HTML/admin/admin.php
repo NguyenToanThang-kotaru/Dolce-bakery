@@ -116,7 +116,7 @@
             <th>Cài đặt</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="product-table-body">
           <?php include '../../PHP/PD-Manager.php'; ?>
         </tbody>
       </table>
@@ -155,7 +155,7 @@
         </div>
 
         <div class="form-group text-center">
-          <button type="submit" class="form-button">Thêm Sản Phẩm</button>
+          <button type="submit" class="form-button" id="accept-addPD">Thêm Sản Phẩm</button>
         </div>
       </form> 
 
@@ -617,7 +617,7 @@
   <script src="../../JS/admin/admin.js"></script>
   <!-- <script src="../../JS/PD-editAjax"></script> -->
   <script src="../../JS/admin/AC-changestatus.js"></script>
-  <script src="../../JS/admin/PD-editAjax.js"></script>
+  <script src="../../JS/admin/PD-Ajax.js"></script>
 
 
 

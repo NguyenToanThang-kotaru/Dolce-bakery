@@ -32,7 +32,7 @@ $conn->close();
     </div>
 </div>
 
-<script>
+<!-- <script>
     document.querySelectorAll('.delete-btn-product').forEach(button => {
         button.addEventListener('click', function() {
             let productId = this.getAttribute('data-id');
@@ -65,6 +65,6 @@ $conn->close();
             document.getElementById('product-id').value = productId
         })
     });
-</script>
+</script> -->
 
 <!-- upload product -->
