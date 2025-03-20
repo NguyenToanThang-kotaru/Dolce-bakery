@@ -164,17 +164,18 @@
         <i class="fa-solid fa-rotate-left back-product"></i>
         <div class="form-group">
           <label for="product-image" class="form-label">*Ảnh sản phẩm</label>
+          <img id="preview-image" src="" alt="Ảnh sản phẩm" style="width: 150px; height: auto; display: block; margin-bottom: 10px;">
           <input type="file" id="product-image" name="product-image" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="product-name" class="form-label">*Tên sản phẩm</label>
-          <input type="text" id="product-name" name="product-name" placeholder="Nhập tên sản phẩm" class="form-input" />
+          <input type="text" id="product-nameFIX" name="product-name" placeholder="Nhập tên sản phẩm" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="product-type" class="form-label">*Loại sản phẩm</label>
-          <select id="product-type" name="product-type" class="form-select">
+          <select id="product-typeFIX" name="product-type" class="form-select">
             <option value="">-- Chọn loại sản phẩm --</option>
             <option value="cake">Bánh kem</option>
             <option value="bread">Bánh mì</option>
@@ -184,13 +185,13 @@
 
         <div class="form-group">
           <label for="product-quantity" class="form-label">*Số Lượng</label>
-          <input type="number" id="product-quantity" name="product-quantity" placeholder="Nhập số lượng"
+          <input type="number" id="product-quantityFIX" name="product-quantity" placeholder="Nhập số lượng"
             class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="product-price" class="form-label">*Giá Tiền (VNĐ)</label>
-          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá tiền" class="form-input" />
+          <input type="number" id="product-priceFIX" name="product-price" placeholder="Nhập giá tiền" class="form-input" />
         </div>
 
         <div class="form-group text-center">
@@ -611,8 +612,9 @@
 
 
   <script src="../../JS/admin/admin.js"></script>
+  <!-- <script src="../../JS/PD-editAjax"></script> -->
   <script src="../../JS/admin/AC-changestatus.js"></script>
-  
+  <script src="../../JS/admin/PD-editAjax.js"></script>
 
 
 
