@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
+    <link rel="stylesheet" href="../../CSS/user/mainPD.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -353,7 +354,26 @@
         <div class="promotion"><img src="../../assest/slidesho3.jpg" style="width: 100%;height: 100%;object-fit: cover;"
                 alt=""></div>
 
+        <!-- --------------------------display all product--------------------- -->
+        <div class="main-containerPD">
 
+            <div class="show-allproduct" id="product-list">
+                <div class="titleallPD">
+                    <div class="typeallPD">Products</div>
+                </div>
+                    
+                <div class="allproduct-container" >
+                    <?php $type = "cookie"; include '../../PHP/users/uploadpd.php'; ?>
+                    <?php $type = "bread"; include '../../PHP/users/uploadpd.php'; ?>
+                    <?php $type = "cake"; include '../../PHP/users/uploadpd.php'; ?>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        
         <div id="mainMenu">
             <h1 id="MenuTitle">Menu</h1>
             <div id="selection">
