@@ -78,7 +78,7 @@ fetch(this.action, {
         alert("Cập nhật quyền thành công!");
         // Cập nhật giao diện người dùng 
         document.querySelector(".fix-form-role").style.display = "none";
-        document.querySelector(".role-table").style.display = "block";
+        document.querySelector(".role-table").removeAttribute("style");
         document.getElementById("role-plus").style.display = "block";
         document.getElementById("fix-form-role").reset();// Reset lại form
         updateRoleTable();// Cập nhật lại dữ liệu bảng quyền 
