@@ -8,6 +8,7 @@ if (!isset($type)) {
     die("Lỗi: Không xác định loại sản phẩm.");
 }
 
+
 $sql = "SELECT * FROM products WHERE type = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $type);

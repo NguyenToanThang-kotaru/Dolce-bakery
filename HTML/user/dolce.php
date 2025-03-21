@@ -357,15 +357,18 @@
         <!-- --------------------------display all product--------------------- -->
         <div class="main-containerPD">
 
-            <div class="show-allproduct" id="product-list">
+            <div class="show-allproduct" >
                 <div class="titleallPD">
-                    <div class="typeallPD">Products</div>
+                    <div >Products</div>
                 </div>
-                    
+                
                 <div class="allproduct-container" >
-                    <?php $type = "cookie"; include '../../PHP/users/uploadpd.php'; ?>
-                    <?php $type = "bread"; include '../../PHP/users/uploadpd.php'; ?>
-                    <?php $type = "cake"; include '../../PHP/users/uploadpd.php'; ?>
+                    
+                    <?php  include '../../PHP/users/displayProduc.php'; ?> 
+                    
+                    
+                    
+                    
 
                 </div>
 
