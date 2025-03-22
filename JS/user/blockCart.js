@@ -17,6 +17,7 @@ function blockShopCart(){
     cake_catelouge1.style.display = "none";
     bread_catelouge1.style.display = "none";
     cookie_catelouge1.style.display  ="none";
+    main_container.style.display = "none";
     shopcartContainer.style.display = "block";
     for(let i = 0; i<promotion.length;i++){
         promotion[i].style.display = "none"
@@ -29,6 +30,7 @@ function noneShopCart(){
     mainMenu.removeAttribute("style");
     brandStory.removeAttribute("style");
     shopcartContainer.removeAttribute("style");
+    main_container.style.display = "flex";
 }
 
 cart.addEventListener("click",()=>{

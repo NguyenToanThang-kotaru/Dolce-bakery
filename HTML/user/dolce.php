@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
     <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
+    <link rel="stylesheet" href="../../CSS/user/allPD.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -375,6 +376,42 @@
                 alt=""></div>
 
 
+
+        <!-- --------------------------display all product--------------------- -->
+        <div class="main-containerPD">
+
+            <div class="show-allproduct" >
+                <div class="titleallPD">
+                    <div >Products</div>
+                </div>
+                <div class="arrange-filter">
+                        <span>Sắp xếp theo:</span>
+                        <select name="" class="arrange-sl">
+                            <option value="impression">Nổi bật</option>
+                            <option value="up">Giá cao nhất</option>
+                            <option value="down">Giá thấp nhất</option>
+                        </select>
+                    </div>
+                
+                <div id="allproduct-container">
+                    
+                    <?php  include '../../PHP/users/displayProduct.php'; ?> 
+                    
+                    
+                    
+                    
+
+                </div>
+
+
+            </div>
+
+            <div class="allPD-pagination">
+            </div>
+
+        </div>        
+
+
         <div id="mainMenu">
             <h1 id="MenuTitle">Menu</h1>
             <div id="selection">
@@ -579,6 +616,7 @@
     <script src="../../JS/user/blocklogin.js"></script>
     <script src="../../JS/user/blockCart.js"></script>
     <script defer src="../../JS/user/pagination.js"></script>
+    <script defer src="../../JS/user/paginationOfMainPD.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>

@@ -15,8 +15,6 @@
 }   
 
 
-
-
 .title{
     color: #C09898;
     font-weight: bold;
@@ -30,7 +28,6 @@
     max-width: 1000px;
     min-height: 700px;
     flex-wrap: wrap;
-    gap: 30px;
     padding: 10px;
     margin-top: 20px;
     padding-left: 70px;
