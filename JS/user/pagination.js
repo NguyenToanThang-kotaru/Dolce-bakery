@@ -556,7 +556,7 @@ document.getElementById("search").addEventListener("input", function () {
           noResultMsg.textContent = "Không có sản phẩm nào phù hợp.";
           noResultMsg.style.textAlign = "center";
           container.appendChild(noResultMsg);
-      }
+      } 
   } else {
       if (noResultMsg) {
           noResultMsg.remove();
@@ -658,6 +658,9 @@ document.getElementById("search").addEventListener("input", function () {
                   slide.style.display = "none";
                   mainmenu.style.display = "none";
                   brandstory.style.display = "none";
+                  cake_catelouge.style.display = "none";
+                  bread_catelouge.style.display = "none";
+                  cookie_catelouge.style.display = "none";
                     
               });
 

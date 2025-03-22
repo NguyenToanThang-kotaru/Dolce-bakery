@@ -537,6 +537,12 @@
             <td class = "list-role-function">
               <div class ="role-function">Quản lí nhà cung cấp</div>
               <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
+              <div class ="role-function">Quản lí tài khoản</div>
             </td>
               <td>
                 5
