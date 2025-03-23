@@ -75,19 +75,3 @@
     align-items: center;
 }
 
-.product-name-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f3cbdb;
-    height: 50px;
-    font-size: 14px;
-    color: #eb8e93;
-    font-style: italic;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.product-name-main:hover{
-    color: #e9b451;
-}
