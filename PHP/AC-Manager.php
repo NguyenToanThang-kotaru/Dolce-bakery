@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
               </td>";
          echo "<td>
          <div style = 'display: flex;'>
-            <span style='margin-left: 10px; font-weight: bold;'>" . htmlspecialchars($permission_name) . "</span>
+            <span style='margin-left: 10px;'>" . htmlspecialchars($permission_name) . "</span>
          </div>
     
          </td>";
@@ -54,41 +54,6 @@ if ($result->num_rows > 0) {
     </div>
 
 
-<script>
-    
-    //Delete
-    document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.delete-btn-account').forEach(button => {
-        button.addEventListener('click', function() {
-            let accountId = this.getAttribute('data-id');
-            let deleteOverlay = document.getElementById('delete-overlay-account');
-            deleteOverlay.style.display = 'block';
-            document.getElementById('delete-acp-account').setAttribute('data-id', accountId);
-        });
-    });
-
-    document.getElementById('delete-acp-account').addEventListener('click', function() {
-        let accountId = this.getAttribute('data-id');
-        console.log(accountId);
-        
-        window.location.href = '../../PHP/AC-Delete.php?id=' + accountId;
-    });
-
-    document.getElementById('cancel-account').addEventListener('click', function() {
-        document.getElementById('delete-overlay-account').style.display = 'none';
-    });
-    });
-    
-    //Edit
-    document.querySelectorAll('.fix-btn-account').forEach(button => {
-    button.addEventListener('click', function() {
-        let accountId = this.getAttribute('data-id'); 
-        document.getElementById('account-id').value = accountId; 
-    });
-});
-
-
-</script>
 
 
 

@@ -360,70 +360,91 @@
      
 
       <form class="add-form-account" action="../../PHP/AC-Add.php" method="POST" enctype="multipart/form-data">
-        <i class="fa-solid fa-rotate-left back-account"></i>
-        <div class="form-group">
-          <label for="account-name" class="form-label">Tên đăng nhập</label>
-          <input type="text" id="account-name" name="account-name" placeholder="Nhập tên" class="form-input" />
-        </div>
+    <i class="fa-solid fa-rotate-left back-account"></i>
+    <div class="form-group">
+        <label for="account-name" class="form-label">Tên đăng nhập</label>
+        <input type="text" id="account-name" name="account-name" placeholder="Nhập tên" class="form-input" required />
+    </div>
 
-        <div class="form-group">
-          <label for="account-pass" class="form-label">Mật khẩu</label>
-          <input type="text" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
-        </div>
+    <div class="form-group">
+        <label for="account-pass" class="form-label">Mật khẩu</label>
+        <input type="password" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" required />
+    </div>
 
-        <div class="form-group">
-          <label for="account-email" class="form-label">Email</label>
-          <input type="text" id="account-email" name="account-email" placeholder="Nhập email" class="form-input" />
-        </div>
+    <div class="form-group">
+        <label for="account-email" class="form-label">Email</label>
+        <input type="email" id="account-email" name="account-email" placeholder="Nhập email" class="form-input" required />
+    </div>
 
-        
-       
-      <div class="form-group">
-          <label for="account-role" class="form-label" style="color: red;">Cấp quyền</label>
+    <div class="form-group">
+        <label for="account-role" class="form-label" style="color: red;">Cấp quyền</label>
         <div class="role-container">
-        <select name="permissions[]" class="permission-select" data-user="<?= $userId ?>">
-          <option value="1">Quyền A</option>
-          <option value="2">Quyền B</option>
-          <option value="3">Quyền C</option>
-          <option value="4">Quyền D</option>
-          <option value="5">None</option>
-        </select>
+            <?php
+            require_once '../../PHP/AC-Manager.php'; // Kết nối database
 
-        </div>
-      </div>
-        <div class="form-group text-center">
-          <button type="submit" class="form-button">Thêm tài khoản</button>
-        </div>
-      </form> 
+            // Lấy danh sách quyền từ bảng permissions
+            $sql = "SELECT id, name FROM permissions ORDER BY id ASC";
+            $result = $conn->query($sql);
 
-      <form class="fix-form-account" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" id="account-id" name="account-id">
+            echo "<select name='permission_id' class='permission-select' id='permissionSelect' required>";
+            echo "<option value=''>Chọn quyền</option>"; // Chọn giá trị mặc định
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+            } else {
+                echo "<option value=''>Không có quyền nào!</option>"; // Nếu không có dữ liệu
+            }
+            echo "</select>";
+            ?>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" class="form-button">Thêm tài khoản</button>
+    </div>
+</form>
+
+
+      <form class="fix-form-account" id="fix-form-account" action="../../PHP/AC-Edit.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="account-id-f" name="account-id">
         <i class="fa-solid fa-rotate-left back-account"></i>
         <div class="form-group">
           <label for="account-name" class="form-label">Tên đăng nhập</label>
-          <input type="text" id="account-name" name="account-name" placeholder="Nhập tên" class="form-input" />
+          <input type="text" id="account-name-f" name="account-name" placeholder="Nhập tên" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="account-pass" class="form-label">Mật khẩu</label>
-          <input type="text" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
+          <input type="text" id="account-pass-f" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="account-email" class="form-label">Email</label>
-          <input type="text" id="account-email" name="account-email" placeholder="Nhập email" class="form-input" />
+          <input type="text" id="account-email-f" name="account-email" placeholder="Nhập email" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="account-role" class="form-label" style = "color: red;">Cập nhật quyền</label>
           <div class = role-container>
-          <select name="permissions[]" class="permission-select" data-user="<?= $userId ?>">
-          <option value="1">Quyền A</option>
-          <option value="2">Quyền B</option>
-          <option value="3">Quyền C</option>
-          <option value="4">Quyền D</option>
-          <option value="5">None</option>
-        </select>
+          <?php
+            require_once '../../PHP/AC-Manager.php'; // Kết nối database
+
+            // Lấy danh sách quyền từ bảng permissions
+            $sql = "SELECT id, name FROM permissions ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            echo "<select name='permission_id' class='permission-select' id='permissionSelect-f' required>";
+            echo "<option value=''>Chọn quyền</option>"; 
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+            } else {
+                echo "<option value=''>Không có quyền nào!</option>"; 
+            }
+            echo "</select>";
+            ?>
           </div>
         </div>
 
@@ -463,8 +484,8 @@
             <div class ="user-role">userh</div>
             <div class ="user-role">userj</div>
           </div>
-        </div>
-      </div> -->
+        </div> -->
+      <!-- </div> -->
       
      <div id="role-plus">Thêm quyền</div>
 
@@ -478,7 +499,7 @@
             <th>Cài đặt</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="role-table-body">
           <?php
             include '../../PHP/PM-Manager.php';
            ?>
@@ -487,10 +508,8 @@
 
      
 
-      <form class="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
+      <form class="add-form-role" id="add-form-role" action="../../PHP/PM-Add.php" method="POST" enctype="multipart/form-data">
     <i class="fa-solid fa-rotate-left back-role"></i>
-
-    <!-- Nhập tên quyền -->
     <div class="form-group">
         <label for="role-name" class="form-label">Tên quyền</label>
         <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" required />
@@ -584,6 +603,7 @@
   <script src="../../JS/admin/AC-changestatus.js"></script>
   <script src="../../JS/admin/PD-Ajax.js"></script>
   <script src="../../JS/admin/PM-Ajax.js"></script>
+  <script src="../../JS/admin/AC-Ajax.js"></script>
 
 
 

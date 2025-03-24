@@ -1,20 +1,16 @@
 <?php
-include 'config.php';
+    include 'config.php';
+    if($_SERVER['REQUEST_METHOD'] === 'POST'&&isset($_POST['id'])){
+        $id = $_POST['id'];
+        $AC_delete=("DELETE FROM users where id = $id");
+        if ($conn->query($AC_delete) === TRUE) {
+            echo json_encode(["success" => true]);
 
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']); // Ép kiểu về số nguyên 
-    $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {           
-        header("Location: ../HTML/admin/admin.php");
-        exit(); 
-    } else {
-        echo "Lỗi: " . $stmt->error; 
+        } else {
+            echo json_encode(["success" => false]); 
+        }
+        $conn->close();
+        exit;
     }
 
-    $stmt->close();
-}
-
-$conn->close();
 ?>
