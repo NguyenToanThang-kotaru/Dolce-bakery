@@ -275,10 +275,11 @@ function toggleFilter(category) {
   filterSidebar.classList.toggle("active");
 
   if (filterSidebar.classList.contains("active")) {
-    productFilter.style.marginLeft = "300px";
-    filterShow.style.opacity = "0";
+    filterSidebar.style.marginLeft="0px"
+    productFilter.style.marginLeft = "650px";
+    filterShow.style.opacity = "0.5";
   } else {
-    productFilter.style.marginLeft = "0px";
+    productFilter.style.marginLeft = "-50px";
     filterShow.style.opacity = "1";
   }
 }

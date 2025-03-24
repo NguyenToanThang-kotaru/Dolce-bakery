@@ -401,9 +401,10 @@
 
         <!-- --------------------------display all product--------------------- -->
         <div class="main-containerPD">
+
             <div class="product-filter">
                 
-            
+
                 <div class="filter" id="filter-sidebar">
                     <div class="filter-title">
                         <img src="../../assest/filterrrr2.png" alt="" style="width: 10%;cursor: pointer;"
@@ -445,16 +446,14 @@
                             <input type="range" id="max-price-allproduct" min="20000" max="700000" step="10000"
                                 value="700000">
                         </div>
-            </div>
+
                         <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
-                
+                </div>
                 <div class="show-allproduct">
                     <div class="titleallPD">
                         <div>Products</div>
                     </div>
-                    
-                    
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
