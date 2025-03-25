@@ -81,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>Nguyễn</td>
             <td>01</td>
             <td>2</td>
@@ -96,7 +96,7 @@
             <td>150,000 VND</td>
             <td><i class="fa-solid fa-circle-info"></i></td>
             <td>Chưa xử lý</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -217,62 +217,12 @@
             <th>Cài đặt</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>01</td>
-            <td>Nguyễn</td>
-            <td>Đang hoạt động</td>
-            <td>
-              <img src="../../assest/ACdetail.png" id="customer-detail" alt="">
-            </td>
-            <!-- <td>Nguyễn@gmail.com</td>
-            <td>Q1</td> -->
-            <td>
-              <div class="fix-customer">
-                <i class="fa-solid fa-pen-to-square fix-btn-customer"></i>
-                <i class="fa-solid fa-trash delete-btn-customer"></i>
-              </div>
-            </td>
-          </tr>
+        <tbody id="customer-table-body">
+          <?php include '../../PHP/CU-Manager.php'?>
         </tbody>
       </table>
 
-      <div class="detail-customer-container">
-        <i class="fa-solid fa-rotate-left back-customer"></i>
-        <h2>Thông Tin Tài Khoản</h2>
-        <div class="cus-info">
-          <span class="cus-label">Mã Khách Hàng:</span>
-          <span class="cus-value">01</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Tên khách hàng:</span>
-          <span class="cus-value">Trịnh Trần Phương Tuấn</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Trạng thái tài khoản:</span>
-          <span class="cus-value">Đang hoạt động</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Số điện thoại:</span>
-          <span class="cus-value">0324886473</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Email:</span>
-          <span class="cus-value">bocon123@gmail.com</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Địa chỉ:</span>
-          <span class="cus-value">Bến Tre</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Tên đăng nhập:</span>
-          <span class="cus-value">choikhongbaogioboncon123</span>
-        </div>
-        <div class="cus-info">
-          <span class="cus-label">Mật khẩu:</span>
-          <span class="cus-value">*******</span>
-        </div>
-      </div>
+      
 
 
       <!-- <form class="add-form-customer">
@@ -311,7 +261,7 @@
         </div>
       </form> -->
 
-      <form class="fix-form-customer">
+      <form class="fix-form-customer" id="fix-form-customer" >
         <i class="fa-solid fa-rotate-left back-customer"></i>
 
         <div class="form-group">
@@ -321,24 +271,24 @@
 
         <div class="form-group">
           <label for="customer-name" class="form-label">Tên khách hàng</label>
-          <input type="text" id="customer-name" name="customer-name" placeholder="Nhập tên khách hàng"
+          <input type="text" id="customer-name-f" name="customer-name" placeholder="Nhập tên khách hàng"
             class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="customer-phone" class="form-label">Số điện thoại</label>
-          <input type="text" id="customer-phone" name="customer-phone" placeholder="Nhập SĐT khách hàng"
+          <input type="text" id="customer-phone-f" name="customer-phone" placeholder="Nhập SĐT khách hàng"
             class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="customer-email" class="form-label">Email</label>
-          <input type="email" id="customer-email" name="customer-email" placeholder="Nhập email" class="form-input" />
+          <input type="email" id="customer-email-f" name="customer-email" placeholder="Nhập email" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="customer-address" class="form-label">Địa chỉ</label>
-          <input type="text" id="custommer-address" name="customer-address" placeholder="Nhập địa chỉ"
+          <input type="text" id="customer-address-f" name="customer-address" placeholder="Nhập địa chỉ"
             class="form-input" />
         </div>
 
@@ -346,13 +296,7 @@
           <button type="submit" class="form-button">Hoàn tất</button>
         </div>
       </form>
-      <div id="delete-overlay-customer">
-        <div class="delete-container">
-          <span>Bạn muốn xóa khách hàng?</span>
-          <button id="delete-acp-customer">Xác nhận</button>
-          <button id="cancel-customer">Hủy</button>
-        </div>
-      </div>
+      
     </div>
   </div>
 
@@ -636,6 +580,7 @@
   <script src="../../JS/admin/PD-Ajax.js"></script>
   <script src="../../JS/admin/PM-Ajax.js"></script>
   <script src="../../JS/admin/AC-Ajax.js"></script>
+  <script src="../../JS/admin/CU-Ajax.js"></script>
 
 
 
