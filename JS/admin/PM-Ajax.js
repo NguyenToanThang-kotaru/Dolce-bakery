@@ -1,45 +1,3 @@
-//Thêm
-
-document.querySelector(".add-form-role").addEventListener("submit", function(e) {
-    e.preventDefault(); // Ngăn form load lại trang
-
-    let formData = new FormData(this);
-
-    fetch('../../PHP/PM-Add.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        let tableBody = document.querySelector("#role-table-body");
-        if (data.success) {
-            alert(data.message);
-
-            // Tạo hàng mới trong bảng
-            let newRow = document.createElement("tr");
-            newRow.setAttribute("data-id", data.role.id); 
-            newRow.innerHTML = `
-                <td>${data.role.name}</td>
-                <td></td>
-                <td>0</td>
-                <td class='role-account'><img src='../../assest/Download cloud.png' alt='' class='show-userrole' data-id='$permissionId'></td>
-                <td><div class='fix-role'>
-                    <i class='fa-solid fa-pen-to-square fix-btn-role' data-id='${data.role.id}'></i>
-                    <i class='fa-solid fa-trash delete-btn-role' data-id='${data.role.id}'></i>
-                </div></td>
-            `;
-
-            tableBody.appendChild(newRow);
-
-            // Xóa dữ liệu trong form
-            document.querySelector(".add-form-role").reset();
-        } else {
-            alert("Lỗi: " + data.message);
-        }
-    })
-});
-
-
 //Xóa
 
 document.querySelectorAll('.delete-btn-role').forEach(button => {
@@ -131,7 +89,7 @@ fetch(this.action, {
 .catch(error => console.error("Lỗi:", error));
 });
 
-function updateRoleTable() { //Hàm cập nhật trục tiếp
+function updateRoleTable() {
 fetch('../../PHP/PM-Manager.php')
     .then(response => response.text())
     .then(html => {

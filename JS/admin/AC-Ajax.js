@@ -47,8 +47,8 @@ document.querySelector(".add-form-account").addEventListener("submit", function(
 
 
 //Xóa
-document.querySelectorAll('.delete-btn-account').forEach(button => {
-    button.addEventListener('click', function() {
+document.querySelector(".account-table").addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-btn-account")) {
         let userId = this.getAttribute('data-id');
         let deleteOverlay = document.getElementById('delete-overlay-account');
         deleteOverlay.style.display = 'block';
@@ -63,13 +63,14 @@ document.querySelectorAll('.delete-btn-account').forEach(button => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    document.querySelector(`.delete-btn-account[data-id='${userId}']`).closest('tr').remove();
+                    console.log("da xoa");
+                    event.target.closest("tr").remove();
                 } else {
                     alert('Xóa tài khoản phẩm thất bại!');
                 }
                 deleteOverlay.style.display = 'none';
-            })}
-    });
+            })};
+    };
 });
 
 //Sửa
