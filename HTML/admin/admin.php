@@ -20,7 +20,7 @@
     <a href="#" id="admin-customer">Khách hàng</a>
     <a href="#" id="admin-account">Quản lí tài khoản</a>
     <a href="#" id="admin-role">Quản lí quyền</a>
-    
+
     <img src="../../assest/Dolce.png" alt="hahaha" />
   </div>
 
@@ -157,7 +157,7 @@
         <div class="form-group text-center">
           <button type="submit" class="form-button" id="accept-addPD">Thêm Sản Phẩm</button>
         </div>
-      </form> 
+      </form>
 
       <form class="fix-form-product" id="update-form-product" enctype="multipart/form-data">
         <input type="hidden" id="product-id" name="product-id">
@@ -195,25 +195,25 @@
         </div>
 
         <div class="form-group text-center">
-          <button type="submit" id="accept-fixPD" class = "form-button">Hoàn tất</button>
+          <button type="submit" id="accept-fixPD" class="form-button">Hoàn tất</button>
         </div>
       </form>
-      
+
     </div>
   </div>
 
   <div class="customer-part">
     <div class="customer-table-container">
-      <div id="customer-plus">Thêm khách hàng</div>
+      <!-- <div id="customer-plus">Thêm khách hàng</div> -->
       <table class="customer-table">
         <thead>
           <tr>
             <th>Mã KH</th>
             <th>Tên KH</th>
-            <th>Số điện thoại</th>
-            <th>Email</th>
-            <th>Địa chỉ</th>
             <th>Trạng thái tài khoản</th>
+            <th>Chi tiết tài khoản</th>
+            <!-- <th>Email</th>
+            <th>Địa chỉ</th> -->
             <th>Cài đặt</th>
           </tr>
         </thead>
@@ -221,24 +221,12 @@
           <tr>
             <td>01</td>
             <td>Nguyễn</td>
-            <td>000000</td>
-            <td>Nguyễn@gmail.com</td>
-            <td>Q1</td>
             <td>Đang hoạt động</td>
             <td>
-              <div class="fix-customer">
-                <i class="fa-solid fa-pen-to-square fix-btn-customer"></i>
-                <i class="fa-solid fa-trash delete-btn-customer"></i>
-              </div>
+              <img src="../../assest/ACdetail.png" id="customer-detail" alt="">
             </td>
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>Mai</td>
-            <td>002000</td>
-            <td>Mai@gmail.com</td>
-            <td>Q5</td>
-            <td>Đang hoạt động</td>
+            <!-- <td>Nguyễn@gmail.com</td>
+            <td>Q1</td> -->
             <td>
               <div class="fix-customer">
                 <i class="fa-solid fa-pen-to-square fix-btn-customer"></i>
@@ -249,7 +237,45 @@
         </tbody>
       </table>
 
-      <form class="add-form-customer">
+      <div class="detail-customer-container">
+        <i class="fa-solid fa-rotate-left back-customer"></i>
+        <h2>Thông Tin Tài Khoản</h2>
+        <div class="cus-info">
+          <span class="cus-label">Mã Khách Hàng:</span>
+          <span class="cus-value">01</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Tên khách hàng:</span>
+          <span class="cus-value">Trịnh Trần Phương Tuấn</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Trạng thái tài khoản:</span>
+          <span class="cus-value">Đang hoạt động</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Số điện thoại:</span>
+          <span class="cus-value">0324886473</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Email:</span>
+          <span class="cus-value">bocon123@gmail.com</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Địa chỉ:</span>
+          <span class="cus-value">Bến Tre</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Tên đăng nhập:</span>
+          <span class="cus-value">choikhongbaogioboncon123</span>
+        </div>
+        <div class="cus-info">
+          <span class="cus-label">Mật khẩu:</span>
+          <span class="cus-value">*******</span>
+        </div>
+      </div>
+
+
+      <!-- <form class="add-form-customer">
         <i class="fa-solid fa-rotate-left back-customer"></i>
 
         <div class="form-group">
@@ -283,7 +309,7 @@
         <div class="form-group text-center">
           <button type="submit" class="form-button">Thêm Khách Hàng</button>
         </div>
-      </form>
+      </form> -->
 
       <form class="fix-form-customer">
         <i class="fa-solid fa-rotate-left back-customer"></i>
@@ -332,7 +358,7 @@
 
   <div class="account-part">
     <div class="account-table-container">
-     <div id="account-plus">Thêm tài khoản</div>
+      <div id="account-plus">Thêm tài khoản</div>
       <table class="account-table">
         <thead>
           <tr>
@@ -347,17 +373,23 @@
         <tbody id="account-table-body">
           
           <?php
-            include '../../PHP/AC-Manager.php';
-           ?>
+          include '../../PHP/AC-Manager.php';
+          ?>
         </tbody>
       </table>
 
-      
-      
+      <div id="role-popup">
+        <div>Chức năng 1</div>
+        <div>Chức năng 2</div>
+        <div>Chức năng 3</div>
+        <div class="popup-arrow">
+        </div>
+      </div>
 
-     
 
-     
+
+
+
 
       <form class="add-form-account" action="../../PHP/AC-Add.php" method="POST" enctype="multipart/form-data">
     <i class="fa-solid fa-rotate-left back-account"></i>
@@ -452,14 +484,14 @@
           <button type="submit" class="form-button">Hoàn tất</button>
         </div>
       </form>
-      
 
-      
+
+
     </div>
   </div>
 
   <!-- ROLEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
-   
+
   <div class="role-part">
     <div class="role-table-container">
     <!-- <div id="account-overlay-role">
@@ -468,21 +500,21 @@
           <div class="list-user-role">
             <div class="user-role">user1</div>
             <div class="user-role">user2</div>
-            <div class ="user-role">user4</div>
-            <div class ="user-role">user5</div>
-            <div class ="user-role">user6</div>
-            <div class ="user-role">user7</div>
-            <div class ="user-role">user8</div>
-            <div class ="user-role">user9</div>
-            <div class ="user-role">usera</div>
-            <div class ="user-role">userb</div>
-            <div class ="user-role">userc</div>
-            <div class ="user-role">userd</div>
-            <div class ="user-role">usere</div>
-            <div class ="user-role">userf</div>
-            <div class ="user-role">userg</div>
-            <div class ="user-role">userh</div>
-            <div class ="user-role">userj</div>
+            <div class="user-role">user4</div>
+            <div class="user-role">user5</div>
+            <div class="user-role">user6</div>
+            <div class="user-role">user7</div>
+            <div class="user-role">user8</div>
+            <div class="user-role">user9</div>
+            <div class="user-role">usera</div>
+            <div class="user-role">userb</div>
+            <div class="user-role">userc</div>
+            <div class="user-role">userd</div>
+            <div class="user-role">usere</div>
+            <div class="user-role">userf</div>
+            <div class="user-role">userg</div>
+            <div class="user-role">userh</div>
+            <div class="user-role">userj</div>
           </div>
         </div> -->
       <!-- </div> -->
@@ -591,9 +623,9 @@
           <button id="cancel-role">Hủy</button>
         </div>
       </div>
-      
 
-      
+
+
     </div>
   </div>
 
