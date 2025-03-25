@@ -44,8 +44,10 @@
             }
         }
         else {
-            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
-                            VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
+            $defaultPermissionId = 0; 
+
+            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password, permission_id) 
+                VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd', '$defaultPermissionId')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Đăng ký thành công";
             } else {

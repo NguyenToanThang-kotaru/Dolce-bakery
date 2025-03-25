@@ -84,6 +84,7 @@ $(document).ready(function () {
                     showError(rgEmail, response);
                     rgEmail.focus();
                 }
+                console.log(response);
             }
         });
     });
