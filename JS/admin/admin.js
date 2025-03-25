@@ -96,8 +96,8 @@ const delete_ovl_1 = document.querySelector("#delete-overlay-product");
 const cancel_btn_1 = document.querySelector("#cancel-product");
 
 
-const add_form_2 = document.querySelector(".add-form-customer");
-const plus_2 = document.querySelector("#customer-plus");
+const add_form_2 = document.querySelector(".detail-customer-container");
+const plus_2 = document.querySelector("#customer-detail");
 const customer_table = document.querySelector(".customer-table");
 const fix_form_2 = document.querySelector(".fix-form-customer   ");
 const delete_acp_2 = document.querySelector("#delete-acp-customer");
