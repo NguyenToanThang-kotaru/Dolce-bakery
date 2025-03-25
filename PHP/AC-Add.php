@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "success" => true,
             "message" => "Thêm tài khoản thành công!",
             "account" => [
-                "id" => $stmt->id,
+                "id" => $conn->insert_id,
                 "username" => $username,
                 "password" => $password,
                 "email" => $email,

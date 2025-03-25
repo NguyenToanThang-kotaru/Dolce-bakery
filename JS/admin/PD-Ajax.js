@@ -65,7 +65,7 @@ document.querySelector(".product-table").addEventListener("click", function (eve
         let productId = event.target.getAttribute("data-id");
         let deleteOverlay = document.getElementById("delete-overlay-product");
         deleteOverlay.style.display = "block";
-
+        console.log("Product ID:", productId);
         document.getElementById("delete-acp-product").onclick = function () {
             fetch("../../PHP/PD-delete.php", {
                 method: "POST",

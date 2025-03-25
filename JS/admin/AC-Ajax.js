@@ -14,7 +14,7 @@ document.querySelector(".add-form-account").addEventListener("submit", function(
         let tableBody = document.querySelector("#account-table-body");
         if (data.success) {
             alert(data.message);
-
+            console.log(data.account);
             // Tạo hàng mới trong bảng
             let newRow = document.createElement("tr");
             newRow.setAttribute("data-id", data.account.id); 
@@ -54,7 +54,8 @@ document.querySelector(".add-form-account").addEventListener("submit", function(
 //Xóa
 document.querySelector(".account-table").addEventListener("click", function (event) {
     if (event.target.classList.contains("delete-btn-account")) {
-        let userId = this.getAttribute('data-id');
+        let userId = event.target.getAttribute("data-id");
+        console.log("Account ID:", userId);
         let deleteOverlay = document.getElementById('delete-overlay-account');
         deleteOverlay.style.display = 'block';
         document.getElementById('delete-acp-account').onclick = function () {
@@ -63,7 +64,7 @@ document.querySelector(".account-table").addEventListener("click", function (eve
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: 'id=' + userId
+                body: 'id=' + userId,
             })
             .then(response => response.json())
             .then(data => {

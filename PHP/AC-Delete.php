@@ -5,7 +5,7 @@
         $AC_delete=("DELETE FROM users where id = $id");
         if ($conn->query($AC_delete) === TRUE) {
             echo json_encode(["success" => true]);
-
+            
         } else {
             echo json_encode(["success" => false]); 
         }
