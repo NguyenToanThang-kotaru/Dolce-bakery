@@ -68,14 +68,19 @@
             // Kiểm tra mật khẩu
             if ($row['password'] === $passwd) { // Nếu bạn đang dùng mật khẩu mã hóa, hãy dùng password_verify()
                 session_start();
-                $_SESSION['userName'] = $row['userName'];
-                $_SESSION['role'] = $row['role'];
-                echo json_encode($row);
+                $_SESSION['userInfo'] = [
+                    'userName' => $row['userName'],
+                    'email' => $row['email'],
+                    'fullName' => $row['fullName'],
+                    'numberPhone' => $row['numberPhone'],
+                    'role' => $row['role'],
+                ];
+                echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
             } else {
-                echo "Sai mật khẩu!";
+                echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
             }
         } else {
-            echo "Không tồn tại người dùng!";
+            echo json_encode(['status' => 'error', 'message' => 'Không tồn tại người dùng']);
         }
         exit();
     }
