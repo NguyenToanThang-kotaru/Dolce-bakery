@@ -344,7 +344,7 @@
             <th>Cài đặt</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="account-table-body">
           
           <?php
             include '../../PHP/AC-Manager.php';

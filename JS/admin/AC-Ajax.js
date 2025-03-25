@@ -1,3 +1,51 @@
+//Thêm
+
+document.querySelector(".add-form-account").addEventListener("submit", function(e) {
+    e.preventDefault(); // Ngăn form load lại trang
+
+    let formData = new FormData(this);
+
+    fetch('../../PHP/AC-Add.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        let tableBody = document.querySelector("#account-table-body");
+        if (data.success) {
+            alert(data.message);
+
+            // Tạo hàng mới trong bảng
+            let newRow = document.createElement("tr");
+            newRow.setAttribute("data-id", data.account.id); 
+            newRow.innerHTML = `
+                <td>${data.account.username}</td>
+                <td>${data.account.password}</td>
+                <td>${data.account.email}</td>
+                <td>
+                    <select class='account-status' >
+                        <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>
+                        <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
+                    </select>
+                </td>
+                <td>${data.account.permission_name}</td>
+                <td><div class='fix-account'>
+                    <i class='fa-solid fa-pen-to-square fix-btn-account' data-id='${data.account.id}'></i>
+                    <i class='fa-solid fa-trash delete-btn-account' data-id='${data.account.id}'></i>
+                </div></td>
+            `;
+
+            tableBody.appendChild(newRow);
+
+            // Xóa dữ liệu trong form
+            document.querySelector(".add-form-account").reset();
+        } else {
+            alert("Lỗi: " + data.message);
+        }
+    })
+});
+
+
 //Xóa
 document.querySelectorAll('.delete-btn-account').forEach(button => {
     button.addEventListener('click', function() {
