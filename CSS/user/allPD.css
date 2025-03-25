@@ -39,7 +39,7 @@
 #allproduct-container{
     display: flex;
     max-width: 1200px;
-    min-height: 1100px;
+    min-height: 1150px;
     flex-wrap: wrap;
     padding: 10px;
     margin-top: 20px;

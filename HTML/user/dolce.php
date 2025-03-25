@@ -403,7 +403,7 @@
         <div class="main-containerPD">
 
             <div class="product-filter">
-                <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
+                <!-- <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')"> -->
 
                 <div class="filter" id="filter-sidebar">
                     <div class="filter-title">
@@ -462,6 +462,8 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
 
                     <div id="allproduct-container">
 

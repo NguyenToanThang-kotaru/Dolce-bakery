@@ -403,7 +403,7 @@ function updateDisplayAllproductSlider() {
     maxPrice_allproduct.value = minVal + 50000;
     maxVal = parseInt(maxPrice_allproduct.value);
   }
-
+z``
   minValueDisplay_allproduct.textContent = minVal.toLocaleString("vi-VN") + "đ";
   maxValueDisplay_allproduct.textContent = maxVal.toLocaleString("vi-VN") + "đ";
 }
