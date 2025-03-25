@@ -28,7 +28,12 @@ document.querySelector(".add-form-account").addEventListener("submit", function(
                         <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
                     </select>
                 </td>
-                <td>${data.account.permission_name}</td>
+                <td>
+                    <div style = 'display: flex;'>
+                        <span style='margin-left: 10px;'> ${data.account.permission_name}</span>
+                    </div>
+                
+                
                 <td><div class='fix-account'>
                     <i class='fa-solid fa-pen-to-square fix-btn-account' data-id='${data.account.id}'></i>
                     <i class='fa-solid fa-trash delete-btn-account' data-id='${data.account.id}'></i>
