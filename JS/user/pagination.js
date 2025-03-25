@@ -224,6 +224,9 @@ function showCake() {
   main_container.style.display = "none";
 }
 
+// let filter = document.querySelector(".main-containerPD .filter");
+// let PDfilter = document.querySelector(".main-containerPD .product-filter");
+
 function returnShop() {
   bread_catelouge.style.display = "none";
   cake_catelouge.style.display = "none";
@@ -234,6 +237,8 @@ function returnShop() {
   brandstory.style.display = "flex";
   infoproduct.style.display = "none";
   main_container.style.display = "flex";
+  // filter.style.left = "-600px";
+  // PDfilter.style.marginLeft = "0px";
 }
 
 bread.addEventListener("click", showBread);
