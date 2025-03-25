@@ -7,7 +7,6 @@
         $fullName = $_POST['rg-fullName'];
         $phone = $_POST['rg-phone'];
         $passwd = $_POST['rg-password'];
-    
         // // Kiểm tra bằng RegEx
         // if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
         //     // echo "Tên đăng nhập không hợp lệ!";
@@ -44,10 +43,8 @@
             }
         }
         else {
-            $defaultPermissionId = 0; 
-
-            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password, permission_id) 
-                VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd', '$defaultPermissionId')";
+            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
+                VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Đăng ký thành công";
             } else {
