@@ -12,6 +12,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode($response);
         exit();
     }
+    
+    
+    $function_names = []; //mảng chứa danh sách tên chức năng
+    if (!empty($functions)) {
+        $placeholders = implode(',', array_fill(0, count($functions), '?'));
+        $sql = "SELECT name FROM functions WHERE id IN ($placeholders)";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(str_repeat('i', count($functions)), ...$functions);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $function_names[] = $row["name"];
+        }
+
+        $stmt->close();
+    }
 
     // Thêm quyền vào bảng permissions
     $stmt = $conn->prepare("INSERT INTO permissions (name) VALUES (?)");
@@ -37,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "role" => [
                 "id" => $permission_id,
                 "name" => $role_name,
-                "functions" => $functions
+                "function_names" => $function_names
             ]
         ];
     } else {

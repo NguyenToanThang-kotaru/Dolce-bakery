@@ -1,8 +1,56 @@
+//Thêm
+
+document.querySelector(".add-form-role").addEventListener("submit", function(e) {
+    e.preventDefault(); // Ngăn form load lại trang
+
+    let formData = new FormData(this);
+
+    fetch('../../PHP/PM-Add.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        let tableBody = document.querySelector("#role-table-body");
+        if (data.success) {
+            alert(data.message);
+            // console.log(data.role);
+            // Tạo hàng mới trong bảng
+            let newRow = document.createElement("tr");
+            newRow.setAttribute("data-id", data.role.id); 
+            //inner danh sách tên chức năng
+            let functionsHTML = '';
+            data.role.function_names.forEach(func => {
+                functionsHTML += `<div class='role-function'>${func}</div>`;
+            });
+
+            newRow.innerHTML = `
+                <td>${data.role.name}</td>
+                <td>${functionsHTML}</td>
+                <td>0</td>
+                <td class='role-account'><img src='../../assest/Download cloud.png' alt='' class='show-userrole' data-id='$permissionId'></td>
+                <td><div class='fix-role'>
+                    <i class='fa-solid fa-pen-to-square fix-btn-role' data-id='${data.role.id}'></i>
+                    <i class='fa-solid fa-trash delete-btn-role' data-id='${data.role.id}'></i>
+                </div></td>
+            `;
+
+            tableBody.appendChild(newRow);
+
+            // Xóa dữ liệu trong form
+            document.querySelector(".add-form-role").reset();
+        } else {
+            alert("Lỗi: " + data.message);
+        }
+    })
+});
+
 //Xóa
 
-document.querySelectorAll('.delete-btn-role').forEach(button => {
-    button.addEventListener('click', function() {
-        let permissionId = this.getAttribute('data-id');
+document.querySelector(".role-table").addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-btn-role")) {
+        let permissionId = event.target.getAttribute("data-id");
+        console.log("role ID:", permissionId);
         let deleteOverlay = document.getElementById('delete-overlay-role');
         deleteOverlay.style.display = 'block';
         document.getElementById('delete-acp-role').onclick = function () {
@@ -11,18 +59,19 @@ document.querySelectorAll('.delete-btn-role').forEach(button => {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: 'id=' + permissionId
+                body: 'id=' + permissionId,
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    document.querySelector(`.delete-btn-role[data-id='${permissionId}']`).closest('tr').remove();
+                    console.log("da xoa");
+                    event.target.closest("tr").remove();
                 } else {
-                    alert('Xóa sản phẩm thất bại!');
+                    alert('Xóa tài khoản phẩm thất bại!');
                 }
                 deleteOverlay.style.display = 'none';
-            })}
-    });
+            })};
+    };
 });
 
 

@@ -1,5 +1,4 @@
 //Thêm
-
 document.querySelector(".add-form-account").addEventListener("submit", function(e) {
     e.preventDefault(); // Ngăn form load lại trang
 
