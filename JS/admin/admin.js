@@ -339,7 +339,7 @@ profile_img.addEventListener("click",showProfile);
 // customer
 
 // account
-const act_status = document.querySelectorAll(".account-status");
+const statusElements = document.querySelectorAll(".account-status, .customer-status");
 
 function ChangeStatus(event){
     let select = event.target;
@@ -352,7 +352,7 @@ function ChangeStatus(event){
     }
 }
 
-act_status.forEach(select => {
+statusElements.forEach(select => {
     select.addEventListener("change",ChangeStatus);
     ChangeStatus({target: select });
 })

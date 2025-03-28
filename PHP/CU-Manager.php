@@ -88,6 +88,32 @@ if ($result->num_rows > 0) {
         });
     });
 });
+    
+    // Thay đổi trạng thái
+    document.addEventListener("change", function (event) {
+    if (event.target.classList.contains("customer-status")) {
+        let customerId = event.target.getAttribute("data-id");
+        let newStatus = event.target.value;
+
+        fetch("../../PHP/CU-update_status.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `id=${customerId}&status=${newStatus}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`Trạng thái của khách hàng ${customerId} đã được cập nhật!`);
+            } else {
+                alert("Lỗi khi cập nhật trạng thái: " + data.message);
+            }
+        })
+        .catch(error => console.error("Lỗi:", error));
+    }
+});
+
 
 
 </script>

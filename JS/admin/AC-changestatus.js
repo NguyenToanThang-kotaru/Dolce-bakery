@@ -2,7 +2,7 @@
 // Thay đổi trạng thái AC
 $(document).ready(function() {
     $(".account-status").change(function() {
-        var userId = $(this).data("userid");
+        let userId = this.getAttribute("data-id");
         var newStatus = $(this).val();
         console.log('hi');
 
