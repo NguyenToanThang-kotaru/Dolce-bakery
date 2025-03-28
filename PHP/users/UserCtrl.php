@@ -25,7 +25,7 @@
         //     // echo "Mật khẩu không hợp lệ!";
         //     exit();
         // }
-    
+        
         // Kiểm tra email đã tồn tại
         $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
         $result = $conn->query($checkEmail);
@@ -43,8 +43,9 @@
             }
         }
         else {
+            $hasshedPassword = passWord_hash($passwd, PASSWORD_BCRYPT); 
             $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
-                VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
+                VALUES ('$userName', '$email', '$fullName', '$phone', '$hasshedPassword')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Đăng ký thành công";
             } else {
@@ -66,7 +67,8 @@
             $row = $result->fetch_assoc();
             
             // Kiểm tra mật khẩu
-            if ($row['password'] === $passwd) { // Nếu bạn đang dùng mật khẩu mã hóa, hãy dùng password_verify()
+            $hasshedPassword = $row['password'];
+            if (password_verify($passwd, $hasshedPassword)) { 
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userName' => $row['userName'],

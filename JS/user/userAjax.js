@@ -58,6 +58,9 @@ $(document).ready(function () {
             rgConfirmPassword.focus();
             return;
         }
+
+        
+
         // Nếu tất cả hợp lệ, gửi dữ liệu qua AJAX
         $.ajax({
             type: "POST",
