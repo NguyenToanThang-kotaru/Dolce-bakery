@@ -59,7 +59,7 @@ $(document).ready(function () {
             return;
         }
 
-        
+
 
         // Nếu tất cả hợp lệ, gửi dữ liệu qua AJAX
         $.ajax({
@@ -136,21 +136,28 @@ $(document).ready(function () {
     function checkLoginStatus() {
         $.ajax({
             type: "POST",
-            url: "../../PHP/users/sessionCheck.php", 
+            url: "../../PHP/users/sessionCheck.php",
             dataType: "json",
             success: function (data) {
-                loadUserInfo(data.user);
                 if (data.loggedIn) {
+                    // Lưu vào Session Storage
+                    sessionStorage.setItem("userSession", JSON.stringify(data.user));
+
                     $("#login-btn").hide();
                     $("#infor").show();
                     $("#log-out").show();
+
+                    loadUserInfo();
                 } else {
+                    sessionStorage.removeItem("userSession");
+
                     $("#login-btn").show();
                     $("#infor").hide();
                     $("#log-out").hide();
                 }
             }
         });
+
     }
 
 });
@@ -171,36 +178,38 @@ function clearErrors(form) {
 }
 
 function loadUserInfo() {
-    $.ajax({
-        type: "POST",
-        url: "../../PHP/users/sessionCheck.php",
-        dataType: "json",
-        success: function (data) {
-            console.log("User info loaded:", data.user);
-            if (!data.user) return;
-            let html = `
-            <div class="row">
-                <label for="account" class="Detail">Tài khoản: </label>
-                <span>${data.user.userName}</span>
-            </div>
-            <div class="row">
-                <label for="fullname" class="Detail">Họ và tên: </label>
-                <span>${data.user.fullName}</span>
-            </div>
-            <div class="row">
-                <label for="email" class="Detail">Email:</label>
-                <span>${data.user.email}</span>
-            </div>
-            <div class="row">
-                <label for="phone" class="Detail">Số điện thoại: </label>
-                <span>${data.user.numberPhone}</span>
-            </div>
-            `;
+    let userData = sessionStorage.getItem("userSession");
 
-            document.querySelector('.InfoUser_Detail').innerHTML = html;
-        },
-    });
+    if (!userData) {
+        console.log("No user session found");
+        return;
+    }
+
+    let data = JSON.parse(userData);
+    console.log("User info loaded from Session Storage:", data);
+
+    let html = `
+        <div class="row">
+            <label for="account" class="Detail">Tài khoản: </label>
+            <span>${data.userName}</span>
+        </div>
+        <div class="row">
+            <label for="fullname" class="Detail">Họ và tên: </label>
+            <span>${data.fullName}</span>
+        </div>
+        <div class="row">
+            <label for="email" class="Detail">Email:</label>
+            <span>${data.email}</span>
+        </div>
+        <div class="row">
+            <label for="phone" class="Detail">Số điện thoại: </label>
+            <span>${data.numberPhone}</span>
+        </div>
+    `;
+
+    document.querySelector('.InfoUser_Detail').innerHTML = html;
 }
+
 
 $("#log-out").click(function () {
     $.ajax({
