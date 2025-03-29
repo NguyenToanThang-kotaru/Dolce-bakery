@@ -71,6 +71,7 @@
             if (password_verify($passwd, $hasshedPassword)) { 
                 session_start();
                 $_SESSION['userInfo'] = [
+                    'userID' => $row['id'],
                     'userName' => $row['userName'],
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
