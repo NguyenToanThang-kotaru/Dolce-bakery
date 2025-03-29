@@ -123,7 +123,7 @@
                     <div id="delete"><img src="../..//assest/Close.png" alt=""></div>
                 </div>
                 <div id="rightMenu">
-                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%">
+                    <div id="cart" style="margin-left: 60px;" onclick = "getCart()"><img src="../../assest/Shopping cart.png" width="50%">
                     </div>
                     <div id="menu">
                         <img src="../../assest/menu.png" id="menu2" alt="">
