@@ -7,26 +7,25 @@
         $fullName = $_POST['rg-fullName'];
         $phone = $_POST['rg-phone'];
         $passwd = $_POST['rg-password'];
-    
-        // Kiểm tra bằng RegEx
-        if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
-            // echo "Tên đăng nhập không hợp lệ!";
-            exit();
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // echo "Email không hợp lệ!";
-            exit();
-        }
+        // // Kiểm tra bằng RegEx
+        // if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
+        //     // echo "Tên đăng nhập không hợp lệ!";
+        //     exit();
+        // }
+        // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //     // echo "Email không hợp lệ!";
+        //     exit();
+        // }
 
-        if (!preg_match("/^0\d{9}$/", $phone)) {
-            // echo "Số điện thoại không hợp lệ!";
-            exit();
-        }
-        if (!preg_match("/^.{8,}$/", $passwd)) {
-            // echo "Mật khẩu không hợp lệ!";
-            exit();
-        }
-    
+        // if (!preg_match("/^0\d{9}$/", $phone)) {
+        //     // echo "Số điện thoại không hợp lệ!";
+        //     exit();
+        // }
+        // if (!preg_match("/^.{8,}$/", $passwd)) {
+        //     // echo "Mật khẩu không hợp lệ!";
+        //     exit();
+        // }
+        
         // Kiểm tra email đã tồn tại
         $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
         $result = $conn->query($checkEmail);
@@ -44,8 +43,9 @@
             }
         }
         else {
+            $hasshedPassword = passWord_hash($passwd, PASSWORD_BCRYPT); 
             $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
-                            VALUES ('$userName', '$email', '$fullName', '$phone', '$passwd')";
+                VALUES ('$userName', '$email', '$fullName', '$phone', '$hasshedPassword')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Đăng ký thành công";
             } else {
@@ -56,27 +56,34 @@
     }
     
 
-
     if (isset($_POST['login-form-son'])) {
         $userName = $_POST['lg-username'];
         $passwd = $_POST['lg-password'];
     
-        $sql = "SELECT * FROM users WHERE (userName = '$userName' OR email='$userName') and password = '$passwd'";
+        $sql = "SELECT * FROM users WHERE userName = '$userName' OR email = '$userName'";
         $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            session_start();
-            $row = $result->fetch_assoc();
-            $_SESSION['userName'] = $row['userName'];
-            $_SESSION['role'] = $row['role'];
-
-            if ($row['status'] == 2) {
-                echo "Tài khoản của bạn đã bị khóa!";
-                exit();
-            }
     
-            echo "Đăng nhập thành công";
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            
+            // Kiểm tra mật khẩu
+            $hasshedPassword = $row['password'];
+            if (password_verify($passwd, $hasshedPassword)) { 
+                session_start();
+                $_SESSION['userInfo'] = [
+                    'userID' => $row['id'],
+                    'userName' => $row['userName'],
+                    'email' => $row['email'],
+                    'fullName' => $row['fullName'],
+                    'numberPhone' => $row['numberPhone'],
+                    'role' => $row['role'],
+                ];
+                echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
+            }
         } else {
-            echo "Sai tài khoản hoặc mật khẩu!";
+            echo json_encode(['status' => 'error', 'message' => 'Không tồn tại người dùng']);
         }
         exit();
     }
