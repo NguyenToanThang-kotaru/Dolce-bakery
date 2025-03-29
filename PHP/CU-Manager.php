@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
         echo "    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>" . $row['email'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . $row['address'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>" . $row['userName'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Mật khẩu:</span><span class='cus-value'>*******</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Mật khẩu:</span><span class='cus-value'>". $row['password'] ."</span></div>";
         echo "</div>";
     }
 } else {
