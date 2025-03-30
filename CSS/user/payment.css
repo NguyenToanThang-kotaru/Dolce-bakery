@@ -4,18 +4,34 @@ body {
     margin: 0;
     padding: 0;
 }
+#overlay-payment{
+  display: none;
+  position: absolute;
+  /* position: fixed; */
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+  top: 102px;
+  
+}
 #payment-container{
-    display:flex;
-    justify-content:center; 
-    margin: 20px;
-    gap: 20px;
+  position: relative;
+  z-index: 3;
+  display:flex;
+  justify-content:center; 
+  margin: 20px;
+  gap: 20px;
+  
+    
   }
 .payment {
   position: fixed;
   top: 0;
   left: 0;
   background-color: #faf5f5;
-  z-index: 100000;
+  /* z-index: 1; */
   overflow: auto;
   display: none;
 }
@@ -34,14 +50,14 @@ body {
   padding: 30px;
   height: fit-content;
   border: 2px solid #796af8;
-  box-shadow: 0 0 3px #074c77;
+ 
   border-radius: 8px;
   box-sizing: border-box;
   flex: 1;
   min-width: 48%;
 }
 
-.payment-container {
+.payment-left-container {
   background-color: #faf5f5;
   padding: 30px;
   box-sizing: border-box;
