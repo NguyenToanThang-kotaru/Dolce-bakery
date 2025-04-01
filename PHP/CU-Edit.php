@@ -9,13 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phoneNumber = $_POST['customer-phone'];
     $email = $_POST['customer-email'];
     $address = $_POST['customer-address'];
+    $userName = $_POST['customer-uname'];
+    $password = $_POST['customer-pass'];
     $status = 1;
 
     
     // Cập nhật database
-    $sql = "UPDATE customers SET email = ?, fullName = ?, address = ?, phoneNumber = ? WHERE id = ?";
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT); 
+    $sql = "UPDATE customers SET userName = ?, email = ?, fullName = ?, address = ?, phoneNumber = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $email, $fullName, $address, $phoneNumber, $id);
+    $stmt->bind_param("ssssssi",$userName, $email, $fullName, $address, $phoneNumber, $hashedPassword, $id);
 
 
     if ($stmt->execute()) {
@@ -28,12 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "status" => $status,
                 "address" => $address,
                 "phoneNumber" => $phoneNumber,
-                "email" => $email
+                "email" => $email,
+                "password" => $password,
+                "userName" => $userName
             ]
         ];
     } else {
         $response = ["success" => false, "message" => "Lỗi cập nhật: " . $conn->error];
     }
+
 
     $stmt->close();
     $conn->close();
