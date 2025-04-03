@@ -52,8 +52,8 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                     <td>${data.customer.fullName}</td>
                     <td>
                         <select class='customer-status' data-id="${data.customer.id}">
-                            <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>
-                            <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
+                            <option value='1' ${data.customer.status == 1 ? "selected" : ""}>Đang hoạt động</option>
+                            <option value='2' ${data.customer.status == 2 ? "selected" : ""}>Đã khóa</option>
                         </select>
                     </td>
                     <td><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id}" alt='Xem chi tiết'></td>
@@ -65,6 +65,8 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                     </td>
                 `;
 
+                let statusSelect = row.querySelector(".customer-status");
+                updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
 
                 console.log("Cập nhật thành công!");
             }
@@ -121,3 +123,15 @@ document.addEventListener("click", function (event) {
             .catch(error => console.error("Lỗi:", error));
     }
 });
+
+
+// Hàm lấy lại màu trạng thái
+function updateStatusColor(select) {
+    if(select.value == "2"){
+        select.style.boxShadow = "0 0 5px 1px red";
+    }
+    else{
+        select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
+    }
+}
+

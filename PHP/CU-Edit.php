@@ -11,7 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $_POST['customer-address'];
     $userName = $_POST['customer-uname'];
     $password = $_POST['customer-pass'];
-    $status = 1;
+
+    // Lấy trạng thái hiện tại của khách hàng từ database
+    $sql_get_status = "SELECT status FROM customers WHERE id = ?";
+    $stmt_get_status = $conn->prepare($sql_get_status);
+    $stmt_get_status->bind_param("i", $id);
+    $stmt_get_status->execute();
+    $stmt_get_status->bind_result($current_status);
+    $stmt_get_status->fetch();
+    $stmt_get_status->close();
+    $status = $current_status; 
+
 
     
     // Cập nhật database

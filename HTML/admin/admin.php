@@ -586,7 +586,6 @@
 
   <script src="../../JS/admin/admin.js"></script>
   <!-- <script src="../../JS/PD-editAjax"></script> -->
-  <script src="../../JS/admin/AC-changestatus.js"></script>
   <script src="../../JS/admin/PD-Ajax.js"></script>
   <script src="../../JS/admin/PM-Ajax.js"></script>
   <script src="../../JS/admin/AC-Ajax.js"></script>

@@ -139,12 +139,35 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
     .catch(error => console.error("Lỗi:", error));
 });
 
-function updateAccountTable() {
-    fetch('../../PHP/AC-Manager.php')
-        .then(response => response.text())
-        .then(html => {
-            document.querySelector(".account-table tbody").innerHTML = html;
-            document.querySelector(".account-table").style.width = "100%";
-        })
-        .catch(error => console.error("Lỗi:", error));
-}
+
+    function updateAccountTable() {
+        fetch('../../PHP/AC-Manager.php')
+            .then(response => response.text())
+            .then(html => {
+                document.querySelector(".account-table tbody").innerHTML = html;
+                document.querySelector(".account-table").style.width = "100%";
+                updateAllStatusColors();
+            })
+            .catch(error => console.error("Lỗi:", error));
+    }
+
+    function updateAllStatusColors() {
+        let statusSelects = document.querySelectorAll(".account-status");
+        statusSelects.forEach(select => {
+            updateStatusColor(select);
+        });
+    }
+
+    function updateStatusColor(select) {
+        if(select.value == "2"){
+            select.style.boxShadow = "0 0 5px 1px red";
+        }
+        else{
+            select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
+        }
+    }
+
+    
+
+
+
