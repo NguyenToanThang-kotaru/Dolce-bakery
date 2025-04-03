@@ -633,16 +633,18 @@
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
-                    <button id="close-payment">x</button>
-                    <h3>THÔNG TIN THANH TOÁN</h3>
-                    <form>
-                        <div class="payment-customer-title">
-                            <strong>Tên: </strong><span class="payment-customer-name">Nguyễn Văn A</span>
-                        </div>
-                        <div class="payment-customer-title">
-                            <strong>Email: </strong><span class="payment-customer-email">asd@</span>
-                        </div>
-                        <label for="phone-payment">Số điện thoại:</label><br />
+                    <div class="payment-header">
+                        <button id="close-payment">x</button>
+                        <h3 class="header">THÔNG TIN THANH TOÁN</h3>
+                    </div>
+                    
+                    <form id="payment-left-form">
+                        
+                        <strong>Tên: </strong><span class="payment-customer-name">Nguyễn Văn A</span>
+                        <br>
+                        <strong>Email: </strong><span class="payment-customer-email">asd@</span>
+                        <br>
+                        <label for="phone-payment">Số điện thoại:</label>
                         <input type="number" id="phone-payment" placeholder="Số điện thoại" required /><br />
                         <label for="address-payment">Địa chỉ: (Nếu thay đổi địa chỉ vui lòng nhập lại)</label><br />
                         <input type="text" id="address-payment" placeholder="Nhập địa chỉ" required /><br />
