@@ -34,9 +34,16 @@ buy.addEventListener("click",function(){
        blockPayment.style.display="none";
         flag_payment=0;
     })
+    window.addEventListener("click", function(event) {
+        if (event.target === blockPayment) {  
+            blockPayment.style.display = "none"; 
+            flag_payment=0;
+        }
+    });
+    
+    
      
 })
-
 
 
 
