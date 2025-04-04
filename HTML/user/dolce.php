@@ -357,7 +357,7 @@
 
                         <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
-                </div>
+                </div>  
 
                 <div class="show-product" id="product-list">
                     <div class="title">
@@ -366,8 +366,8 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
+                            <option value="impression">Nổi bật</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>

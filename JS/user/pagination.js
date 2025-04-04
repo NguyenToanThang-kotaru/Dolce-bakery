@@ -265,7 +265,7 @@ function toggleFilter(category) {
     filterSidebar = document.querySelector(".cookie-catelouge-container .filter");
     productFilter = document.querySelector(".cookie-catelouge-container .product-filter");
     filterShow = document.querySelector(".cookie-catelouge-container .filtershow");
-  }else if (category === "allproduct") {
+  } else if (category === "allproduct") {
     filterSidebar = document.querySelector(".main-containerPD .filter");
     productFilter = document.querySelector(".main-containerPD .product-filter");
     filterShow = document.querySelector(".main-containerPD .filtershow");
@@ -408,7 +408,7 @@ function updateDisplayAllproductSlider() {
     maxPrice_allproduct.value = minVal + 50000;
     maxVal = parseInt(maxPrice_allproduct.value);
   }
-z``
+  z``
   minValueDisplay_allproduct.textContent = minVal.toLocaleString("vi-VN") + "đ";
   maxValueDisplay_allproduct.textContent = maxVal.toLocaleString("vi-VN") + "đ";
 }
@@ -425,7 +425,7 @@ function render_filter() {
     activeCategory = "bread";
     minVal = parseInt(minPrice_bread.value);
     maxVal = parseInt(maxPrice_bread.value);
-  } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex"){
+  } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex") {
     activeCategory = "cookie";
     minVal = parseInt(minPrice_cookie.value);
     maxVal = parseInt(maxPrice_cookie.value);
@@ -458,7 +458,7 @@ function filterProductByPrice(minVal, maxVal, category) {
   } else if (category === "cookie") {
     productSelector = ".cookie-product";
     containerSelector = "#cookie-container";
-  }else if (category === "allproduct") {
+  } else if (category === "allproduct") {
     productSelector = ".product-item";
     containerSelector = "#allproduct-container";
   }
@@ -549,7 +549,7 @@ function render_filter_by_price() {
     activeCategory = "bread";
   } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex") {
     activeCategory = "cookie";
-  }else {
+  } else {
     activeCategory = "allproduct";
   }
 
@@ -557,7 +557,7 @@ function render_filter_by_price() {
   let selectedRanges = Array.from(document.querySelectorAll(".option-price input[type='checkbox']:checked"))
     .map(checkbox => {
       let [min, max] = checkbox.value.split("-").map(Number);
-      return { min, max };
+      return { max, min};
     });
 
   filterProductByPriceRange(selectedRanges, activeCategory);
@@ -566,6 +566,7 @@ function render_filter_by_price() {
 
 function filterProductByPriceRange(priceRanges, category) {
   let containerSelector = "";
+  let productSelector = "";
 
   if (category === "bread") {
     productSelector = ".bread-product";
@@ -576,7 +577,7 @@ function filterProductByPriceRange(priceRanges, category) {
   } else if (category === "cookie") {
     productSelector = ".cookie-product";
     containerSelector = "#cookie-container";
-  }else if (category === "allproduct") {
+  } else if (category === "allproduct") {
     productSelector = ".product-item";
     containerSelector = "#allproduct-container";
   }
@@ -584,61 +585,73 @@ function filterProductByPriceRange(priceRanges, category) {
   const product_container = document.querySelector(containerSelector);
   const originalProducts = originalProductLists[category];
 
-  const filteredProducts = Array.from(originalProducts).filter(product => {
-    let priceText = product.querySelector(".price").textContent.trim();
-    let price = parseInt(priceText.replace(/\D/g, ""), 10);
+  let filteredProducts;
 
-    return priceRanges.some(range => price >= range.min && price <= range.max);
-  });
+  if (priceRanges.length === 0) {
+    //Nếu không có checkbox nào được chọn -> Hiển thị tất cả sản phẩm
+    filteredProducts = Array.from(originalProducts);
+  } else {
+    //Nếu có checkbox được chọn -> Lọc theo khoảng giá
+    filteredProducts = Array.from(originalProducts).filter(product => {
+      let priceText = product.querySelector(".price").textContent.trim();
+      let price = parseInt(priceText.replace(/\D/g, ""), 10);
+
+      return priceRanges.some(range => price >= range.min && price <= range.max);
+    });
+  }
 
   updateProduct(filteredProducts, product_container);
 }
 
-//arange impession
+//================================arange impression
 
 document.querySelectorAll(".arrange-sl").forEach(select => {
-  select.addEventListener("change", function () {
-    const selectedValue = this.value;
-    console.log("Lựa chọn: ", selectedValue);
-
-    let productSelector = "";
-    let containerSelector = "";
-
-    if (document.querySelector(".bread-catelouge-container")?.style.display === "flex") {
-      productSelector = ".bread-product";
-      containerSelector = "#bread-container";
-    } else if (document.querySelector(".cake-catelouge-container")?.style.display === "flex") {
-      productSelector = ".cake-product";
-      containerSelector = "#cake-container";
-    } else if (document.querySelector(".cookie-catelouge-container")?.style.display === "flex") {
-      productSelector = ".cookie-product";
-      containerSelector = "#cookie-container";
-    } else if (getComputedStyle(document.querySelector(".main-containerPD"))?.display === "flex") {
-      productSelector = ".product-item";
-      containerSelector = "#allproduct-container";
-    }
-
-    if (!productSelector) {
-      console.log("Không xác định danh mục nào đang hiển thị!");
-      return;
-    }
-
-    let product_container = document.querySelector(containerSelector);
-    let productList = Array.from(document.querySelectorAll(productSelector)); // Lấy tất cả sản phẩm
-
-    console.log("Danh sách sản phẩm trước khi sắp xếp:", productList);
-
-    let sortedProducts = productList.sort((a, b) => {
-      let priceA = parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""), 10);
-      let priceB = parseInt(b.querySelector(".price").textContent.replace(/\D/g, ""), 10);
-      return selectedValue === "up" ? priceB - priceA : priceA - priceB;
-    });
-
-    console.log("Danh sách sản phẩm sau khi sắp xếp:", sortedProducts);
-
-    updateProduct(sortedProducts, product_container);
-  });
+  select.addEventListener("change", handleSortProducts);
 });
+
+const selectElement = document.querySelector(".arrange-sl");
+function handleSortProducts() {
+  const selectedValue = this.value; // Lấy giá trị của select hiện tại
+  console.log("Lựa chọn: ", selectedValue);
+
+  let productSelector = "";
+  let containerSelector = "";
+
+  if (document.querySelector(".bread-catelouge-container")?.style.display === "flex") {
+    productSelector = ".bread-product";
+    containerSelector = "#bread-container";
+  } else if (document.querySelector(".cake-catelouge-container")?.style.display === "flex") {
+    productSelector = ".cake-product";
+    containerSelector = "#cake-container";
+  } else if (document.querySelector(".cookie-catelouge-container")?.style.display === "flex") {
+    productSelector = ".cookie-product";
+    containerSelector = "#cookie-container";
+  } else if (getComputedStyle(document.querySelector(".main-containerPD"))?.display === "flex") {
+    productSelector = ".product-item";
+    containerSelector = "#allproduct-container";
+  }
+
+  if (!productSelector) {
+    console.log("Không xác định danh mục nào đang hiển thị!");
+    return;
+  }
+
+  let product_container = document.querySelector(containerSelector);
+  let productList = Array.from(document.querySelectorAll(productSelector)); // Lấy tất cả sản phẩm
+
+  console.log("Danh sách sản phẩm trước khi sắp xếp:", productList);
+
+  let sortedProducts = productList.sort((a, b) => {
+    let priceA = parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""), 10);
+    let priceB = parseInt(b.querySelector(".price").textContent.replace(/\D/g, ""), 10);
+    return selectedValue === "up" ? priceB - priceA : priceA - priceB;
+  });
+
+  console.log("Danh sách sản phẩm sau khi sắp xếp:", sortedProducts);
+
+  updateProduct(sortedProducts, product_container);
+}
+
 
 
 // search oninput
@@ -648,7 +661,7 @@ document.getElementById("search").addEventListener("input", function (event) {
   let activeCategory = "";
   let productSelector = "";
 
-  if (document.querySelector(".cake-catelouge-container").style.display === "flex") {   
+  if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
     activeCategory = "cake";
     productSelector = ".cake-product";
   } else if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
@@ -761,9 +774,21 @@ function removeVietnameseTones(str) {
 // search_suggestion
 let container = document.querySelector("#container");
 let infoproduct = document.querySelector("#InfoPD-container");
-document.getElementById("search").addEventListener("input", function () {
+let searchInput = document.getElementById("search");
+let suggestionBox = document.getElementById("suggestion");
+
+searchInput.addEventListener("input", function () {
   let keyword = this.value.trim();
-  let suggestionBox = document.getElementById("suggestion");
+
+  //Kiểm tra nếu đang ở danh mục riêng thì không hiển thị gợi ý
+  let cakeVisible = getComputedStyle(document.querySelector(".cake-catelouge-container")).display === "flex";
+  let breadVisible = getComputedStyle(document.querySelector(".bread-catelouge-container")).display === "flex";
+  let cookieVisible = getComputedStyle(document.querySelector(".cookie-catelouge-container")).display === "flex";
+
+  if (cakeVisible || breadVisible || cookieVisible) {
+    suggestionBox.style.display = "none";
+    return; //Dừng lại, không tiếp tục fetch API
+  }
 
   if (keyword === "") {
     suggestionBox.innerHTML = "";
@@ -771,10 +796,11 @@ document.getElementById("search").addEventListener("input", function () {
     return;
   }
 
+  // Nếu không ở danh mục riêng thì mới fetch API
   fetch(`../../PHP/users/search_suggestion.php?query=${encodeURIComponent(keyword)}`)
     .then(response => response.json())
     .then(data => {
-      console.log("Dữ liệu nhận được:", data); // Debug kiểm tra dữ liệu trả về
+      console.log("Dữ liệu nhận được:", data);
 
       suggestionBox.innerHTML = "";
       if (!data || data.length === 0) {
@@ -790,7 +816,7 @@ document.getElementById("search").addEventListener("input", function () {
         item.textContent = productName;
 
         item.addEventListener("click", function () {
-          document.getElementById("search").value = productName;
+          searchInput.value = productName;
           suggestionBox.innerHTML = "";
           suggestionBox.style.display = "none";
           console.log(productName);
@@ -814,7 +840,6 @@ document.getElementById("search").addEventListener("input", function () {
           bread_catelouge.style.display = "none";
           cookie_catelouge.style.display = "none";
           main_container.style.display = "none";
-
         });
 
         suggestionBox.appendChild(item);
@@ -825,6 +850,4 @@ document.getElementById("search").addEventListener("input", function () {
   container.addEventListener("click", function () {
     suggestionBox.style.display = "none";
   });
-
 });
-
