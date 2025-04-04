@@ -402,7 +402,7 @@
 
 
         <!-- --------------------------display all product--------------------- -->
-        <div class="main-containerPD">
+        <div class="main-containerPD allproduct-catelouge-container">
 
             <div class="product-filter">
                 <!-- <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')"> -->
@@ -468,13 +468,7 @@
                     <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
 
                     <div id="allproduct-container">
-
                         <?php include '../../PHP/users/displayProduct.php'; ?>
-
-
-
-
-
                     </div>
 
 
