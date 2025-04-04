@@ -118,45 +118,54 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
 
     let formData = new FormData(this);
 
-    fetch(this.action, {
+    fetch("../../PHP/AC-Edit.php", {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert("Cập nhật tài khoản thành công!");
+            alert(data.message);
+            console.log(data.user);
             // Cập nhật giao diện người dùng 
-            document.querySelector(".fix-form-account").style.display = "none";
-            document.querySelector(".account-table").removeAttribute("style");
-            document.getElementById("account-plus").style.display = "block";
-            document.getElementById("fix-form-account").reset(); 
-            updateAccountTable(); // Cập nhật lại dữ liệu không load
+            let row = document.querySelector(`tr[data-id='${data.user.id}']`);
+            if (row) {
+                row.innerHTML = `
+                    <td>${data.user.userName}</td>
+                    <td>${data.user.password}</td>
+                    <td>${data.user.email}</td>
+                    <td>
+                        <select class='account-status' data-id="${data.user.id}">
+                            <option value='1' ${data.user.status == 1 ? "selected" : ""}>Đang hoạt động</option>
+                            <option value='2' ${data.user.status == 2 ? "selected" : ""}>Đã khóa</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div style = 'display: flex;'>
+                        <span style='margin-left: 10px; font-weight: bold;'>${data.user.permission_name}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class='fix-account'>
+                            <i class='fa-solid fa-pen-to-square fix-btn-account' data-id="${data.user.id}"></i>
+                            <i class='fa-solid fa-trash delete-btn-account' data-id="${data.user.id}"></i>
+                        </div>
+                    </td>
+                `;
+
+                let statusSelect = row.querySelector(".account-status");
+                updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
+
+                console.log("Cập nhật thành công!");
+            }
+            else
+                console.log("Không tìm thấy tài khoản cần cập nhật!");
         } else {
-            alert("Có lỗi xảy ra: " + data.error);
+            alert("Lỗi: " + data.message);
         }
     })
     .catch(error => console.error("Lỗi:", error));
 });
-
-
-    function updateAccountTable() {
-        fetch('../../PHP/AC-Manager.php')
-            .then(response => response.text())
-            .then(html => {
-                document.querySelector(".account-table tbody").innerHTML = html;
-                document.querySelector(".account-table").style.width = "100%";
-                updateAllStatusColors();
-            })
-            .catch(error => console.error("Lỗi:", error));
-    }
-
-    function updateAllStatusColors() {
-        let statusSelects = document.querySelectorAll(".account-status");
-        statusSelects.forEach(select => {
-            updateStatusColor(select);
-        });
-    }
 
     function updateStatusColor(select) {
         if(select.value == "2"){

@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
         $userId = $row['id'];
         $permission_id = $row['permission_id'];
         $permission_name = $row['p_name'];
-        echo "<tr>";
+        echo "<tr data-id='$userId'>";
         echo "<td>" . htmlspecialchars($row['userName']) . "</td>";
         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
