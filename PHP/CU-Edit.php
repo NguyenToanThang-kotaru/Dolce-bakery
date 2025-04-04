@@ -9,13 +9,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phoneNumber = $_POST['customer-phone'];
     $email = $_POST['customer-email'];
     $address = $_POST['customer-address'];
-    $status = 1;
+    $userName = $_POST['customer-uname'];
+    $password = $_POST['customer-pass'];
+
+    // Lấy trạng thái hiện tại của khách hàng từ database
+    $sql_get_status = "SELECT status FROM customers WHERE id = ?";
+    $stmt_get_status = $conn->prepare($sql_get_status);
+    $stmt_get_status->bind_param("i", $id);
+    $stmt_get_status->execute();
+    $stmt_get_status->bind_result($current_status);
+    $stmt_get_status->fetch();
+    $stmt_get_status->close();
+    $status = $current_status; 
+
 
     
     // Cập nhật database
-    $sql = "UPDATE customers SET email = ?, fullName = ?, address = ?, phoneNumber = ? WHERE id = ?";
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT); 
+    $sql = "UPDATE customers SET userName = ?, email = ?, fullName = ?, address = ?, phoneNumber = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $email, $fullName, $address, $phoneNumber, $id);
+    $stmt->bind_param("ssssssi",$userName, $email, $fullName, $address, $phoneNumber, $hashedPassword, $id);
 
 
     if ($stmt->execute()) {
@@ -28,12 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "status" => $status,
                 "address" => $address,
                 "phoneNumber" => $phoneNumber,
-                "email" => $email
+                "email" => $email,
+                "password" => $password,
+                "userName" => $userName
             ]
         ];
     } else {
         $response = ["success" => false, "message" => "Lỗi cập nhật: " . $conn->error];
     }
+
 
     $stmt->close();
     $conn->close();

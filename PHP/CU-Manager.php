@@ -29,8 +29,8 @@ if ($result->num_rows > 0) {
         echo "</tr>";
 
         // Phần hiển thị chi tiết khách hàng
-        echo "<div class='detail-customer-container' id='detail-customer-$cusId' style='display: none;'>";
-        echo "    <i class='fa-solid fa-rotate-left back-customer' data-id='$cusId'></i>";
+        echo "<div class='detail-customer-container' id='detail-customer-$cusId' >";
+        echo "    <i class='fa-solid fa-rotate-left back-customer1' data-id='$cusId'></i>";
         echo "    <h2>Thông Tin Tài Khoản</h2>";
         echo "    <div class='cus-info'><span class='cus-label'>Mã Khách Hàng:</span><span class='cus-value'>" . $row['id'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Tên khách hàng:</span><span class='cus-value'>" . $row['fullName'] . "</span></div>";
@@ -39,7 +39,6 @@ if ($result->num_rows > 0) {
         echo "    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>" . $row['email'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . $row['address'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>" . $row['userName'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Mật khẩu:</span><span class='cus-value'>*******</span></div>";
         echo "</div>";
     }
 } else {
@@ -57,37 +56,45 @@ if ($result->num_rows > 0) {
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    let table = document.querySelector(".customer-table"); 
+    let table = document.querySelector(".customer-table");
 
-    // Khi click vào ảnh, hiển thị thông tin chi tiết của khách hàng đó và ẩn bảng
-    document.querySelectorAll(".customer-detail").forEach(item => {
-        item.addEventListener("click", function () {
-            let cusId = this.getAttribute("data-id");
+    // Lắng nghe sự kiện click trên document để xử lý cả phần tử được thêm động
+    document.addEventListener("click", function (event) {
+        let target = event.target;
+
+        // Khi click vào ảnh, hiển thị thông tin chi tiết khách hàng
+        if (target.classList.contains("customer-detail")) {
+            let cusId = target.getAttribute("data-id");
             table.style.display = "none";
 
-            // Ẩn tất cả chi tiết khách hàng trước khi hiển thị cái được chọn
+            // Ẩn tất cả các chi tiết khách hàng
             document.querySelectorAll(".detail-customer-container").forEach(div => {
                 div.style.display = "none";
             });
 
             // Hiển thị chi tiết khách hàng được chọn
-            document.getElementById("detail-customer-" + cusId).style.display = "block";
-        });
-    });
+            let detailCustomer = document.getElementById("detail-customer-" + cusId);
+            if (detailCustomer) {
+                detailCustomer.style.display = "block";
+            }
+        }
 
-    // Click vào nút quay lại
-    document.querySelectorAll(".back-customer").forEach(item => {
-        item.addEventListener("click", function () {
-            let cusId = this.getAttribute("data-id");
+        // Khi click vào nút quay lại
+        if (target.classList.contains("back-customer1")) {
+            let cusId = target.getAttribute("data-id");
 
             // Hiện lại bảng danh sách khách hàng
-            table.style.display = "table"; 
+            table.style.display = "table";
 
             // Ẩn phần chi tiết khách hàng
-            document.getElementById("detail-customer-" + cusId).style.display = "none";
-        });
+            let detailCustomer = document.getElementById("detail-customer-" + cusId);
+            if (detailCustomer) {
+                detailCustomer.style.display = "none";
+            }
+        }
     });
 });
+
     
     // Thay đổi trạng thái
     document.addEventListener("change", function (event) {

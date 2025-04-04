@@ -52,8 +52,8 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                     <td>${data.customer.fullName}</td>
                     <td>
                         <select class='customer-status' data-id="${data.customer.id}">
-                            <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>
-                            <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
+                            <option value='1' ${data.customer.status == 1 ? "selected" : ""}>Đang hoạt động</option>
+                            <option value='2' ${data.customer.status == 2 ? "selected" : ""}>Đã khóa</option>
                         </select>
                     </td>
                     <td><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id}" alt='Xem chi tiết'></td>
@@ -64,7 +64,27 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                         </div>
                     </td>
                 `;
+
+                let statusSelect = row.querySelector(".customer-status");
+                updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
+
                 console.log("Cập nhật thành công!");
+            }
+            
+            // Cập nhật phần hiển thị chi tiết
+            let detailSection = document.getElementById(`detail-customer-${customerId}`);
+            if (detailSection) {
+                detailSection.innerHTML = `
+                    <i class='fa-solid fa-rotate-left back-customer1' data-id='${customerId}'></i>
+                    <h2>Thông Tin Tài Khoản</h2>
+                    <div class='cus-info'><span class='cus-label'>Mã Khách Hàng:</span><span class='cus-value'>${data.customer.id}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Tên khách hàng:</span><span class='cus-value'>${data.customer.fullName}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Trạng thái tài khoản:</span><span class='cus-value'>${data.customer.status == 1 ? "Đang hoạt động" : "Đã khóa"}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Số điện thoại:</span><span class='cus-value'>${data.customer.phoneNumber}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>${data.customer.email}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>${data.customer.address}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>${data.customer.userName}</span></div>
+                `;
             }
             else
                 console.log("Không tìm thấy khách hàng cần cập nhật!");
@@ -89,6 +109,7 @@ document.addEventListener("click", function (event) {
                     document.getElementById("customer-phone-f").value = data.phoneNumber;
                     document.getElementById("customer-email-f").value = data.email;
                     document.getElementById("customer-address-f").value = data.address;
+                    document.getElementById("customer-uname-f").value = data.userName;
 
                     // Ẩn bảng khách hàng và nút thêm
                     document.querySelector(".customer-table").style.display = "none";
@@ -102,3 +123,15 @@ document.addEventListener("click", function (event) {
             .catch(error => console.error("Lỗi:", error));
     }
 });
+
+
+// Hàm lấy lại màu trạng thái
+function updateStatusColor(select) {
+    if(select.value == "2"){
+        select.style.boxShadow = "0 0 5px 1px red";
+    }
+    else{
+        select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
+    }
+}
+

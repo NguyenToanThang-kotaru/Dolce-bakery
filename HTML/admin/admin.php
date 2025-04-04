@@ -261,12 +261,22 @@
         </div>
       </form> -->
 
-      <form class="fix-form-customer" id="fix-form-customer" >
+      <form class="fix-form-customer" id="fix-form-customer" enctype="multipart/form-data">
         <i class="fa-solid fa-rotate-left back-customer"></i>
 
         <div class="form-group">
           <label for="customer-id" class="form-label">Mã khách hàng</label>
           <input type="text" id="customer-id" name="customer-id" placeholder="Nhập mã KH" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="customer-uname" class="form-label">Tên đăng nhập</label>
+          <input type="text" id="customer-uname-f" name="customer-uname" placeholder="Nhập tên đăng nhập" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="customer-pass" class="form-label">Password</label>
+          <input type="text" id="customer-pass-f" name="customer-pass" placeholder="Nhập mật khẩu" class="form-input" />
         </div>
 
         <div class="form-group">
@@ -576,7 +586,6 @@
 
   <script src="../../JS/admin/admin.js"></script>
   <!-- <script src="../../JS/PD-editAjax"></script> -->
-  <script src="../../JS/admin/AC-changestatus.js"></script>
   <script src="../../JS/admin/PD-Ajax.js"></script>
   <script src="../../JS/admin/PM-Ajax.js"></script>
   <script src="../../JS/admin/AC-Ajax.js"></script>
