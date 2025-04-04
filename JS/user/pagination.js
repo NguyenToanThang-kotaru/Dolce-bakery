@@ -408,7 +408,6 @@ function updateDisplayAllproductSlider() {
     maxPrice_allproduct.value = minVal + 50000;
     maxVal = parseInt(maxPrice_allproduct.value);
   }
-  z``
   minValueDisplay_allproduct.textContent = minVal.toLocaleString("vi-VN") + "đ";
   maxValueDisplay_allproduct.textContent = maxVal.toLocaleString("vi-VN") + "đ";
 }
@@ -436,6 +435,11 @@ function render_filter() {
   }
 
   filterProductByPrice(minVal, maxVal, activeCategory);
+  const currentSelect = document.querySelector(`.${activeCategory}-catelouge-container .product-filter .arrange-sl`);
+  if (currentSelect) {
+    handleSortProducts(currentSelect);
+  }
+  console.log(currentSelect);
 }
 
 
@@ -507,7 +511,7 @@ function updateProduct(products, product_container) {
     category = "allproduct";
   }
 
-  console.log(category);
+  // console.log(category);
 
   // Cập nhật lại danh sách sản phẩm & số trang sau khi lọc
   if (category === "bread") {
@@ -561,6 +565,10 @@ function render_filter_by_price() {
     });
 
   filterProductByPriceRange(selectedRanges, activeCategory);
+  const currentSelect = document.querySelector(`.${activeCategory}-catelouge-container .product-filter .arrange-sl`);
+  if (currentSelect) {
+    handleSortProducts(currentSelect);
+  }
 }
 
 
@@ -599,19 +607,29 @@ function filterProductByPriceRange(priceRanges, category) {
       return priceRanges.some(range => price >= range.min && price <= range.max);
     });
   }
-
+  // const currentSelect = document.querySelector(`.${category}-catelouge-container .product-filter .arrange-sl`);
+  // if (currentSelect) {
+  //   handleSortProducts(currentSelect);
+  // }
+  // console.log("hien tai la:");
+  
   updateProduct(filteredProducts, product_container);
+  
+  // Xử lý sắp xếp lại sản phẩm sau khi lọc
+  
 }
 
-//================================arange impression
 
+//================================arange impression
 document.querySelectorAll(".arrange-sl").forEach(select => {
-  select.addEventListener("change", handleSortProducts);
+  select.addEventListener("change", function () {
+    handleSortProducts(this);
+  });
 });
 
-const selectElement = document.querySelector(".arrange-sl");
-function handleSortProducts() {
-  const selectedValue = this.value; // Lấy giá trị của select hiện tại
+// const selectElement = document.querySelector(".arrange-sl");
+function handleSortProducts(selectElement) {
+  const selectedValue = selectElement.value;// Lấy giá trị của select hiện tại
   console.log("Lựa chọn: ", selectedValue);
 
   let productSelector = "";
@@ -639,7 +657,7 @@ function handleSortProducts() {
   let product_container = document.querySelector(containerSelector);
   let productList = Array.from(document.querySelectorAll(productSelector)); // Lấy tất cả sản phẩm
 
-  console.log("Danh sách sản phẩm trước khi sắp xếp:", productList);
+  // console.log("Danh sách sản phẩm trước khi sắp xếp:", productList);
 
   let sortedProducts = productList.sort((a, b) => {
     let priceA = parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""), 10);
@@ -647,7 +665,7 @@ function handleSortProducts() {
     return selectedValue === "up" ? priceB - priceA : priceA - priceB;
   });
 
-  console.log("Danh sách sản phẩm sau khi sắp xếp:", sortedProducts);
+  // console.log("Danh sách sản phẩm sau khi sắp xếp:", sortedProducts);
 
   updateProduct(sortedProducts, product_container);
 }
