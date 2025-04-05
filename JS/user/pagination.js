@@ -561,7 +561,7 @@ function render_filter_by_price() {
   let selectedRanges = Array.from(document.querySelectorAll(".option-price input[type='checkbox']:checked"))
     .map(checkbox => {
       let [min, max] = checkbox.value.split("-").map(Number);
-      return { max, min};
+      return { max, min };
     });
 
   filterProductByPriceRange(selectedRanges, activeCategory);
@@ -612,11 +612,11 @@ function filterProductByPriceRange(priceRanges, category) {
   //   handleSortProducts(currentSelect);
   // }
   // console.log("hien tai la:");
-  
+
   updateProduct(filteredProducts, product_container);
-  
+
   // Xử lý sắp xếp lại sản phẩm sau khi lọc
-  
+
 }
 
 
@@ -794,6 +794,7 @@ let container = document.querySelector("#container");
 let infoproduct = document.querySelector("#InfoPD-container");
 let searchInput = document.getElementById("search");
 let suggestionBox = document.getElementById("suggestion");
+let left_info_pd = document.getElementById("#Left");
 
 searchInput.addEventListener("input", function () {
   let keyword = this.value.trim();
@@ -858,6 +859,9 @@ searchInput.addEventListener("input", function () {
           bread_catelouge.style.display = "none";
           cookie_catelouge.style.display = "none";
           main_container.style.display = "none";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+
+          // main_container.scrollIntoView({ behavior: "smooth", block: "start" });
         });
 
         suggestionBox.appendChild(item);
@@ -869,3 +873,42 @@ searchInput.addEventListener("input", function () {
     suggestionBox.style.display = "none";
   });
 });
+
+//Click vào từng sản phẩm thì hiện ra thông tin
+document.querySelectorAll(".product-img img").forEach(img => {
+  //Chọn phần tử gần nhất với ảnh được click để lấy name của người con gái a yêu!!!!
+  img.addEventListener("click", function () {
+    let productItem = this.closest(".product-item, .bread-product, .cake-product, .cookie-product");
+    if (!productItem) return;
+
+    let productName = productItem.querySelector(".product-name")?.textContent?.trim();
+    if (!productName) return;
+
+    console.log("Click ảnh sản phẩm:", productName);
+
+    fetch(`../../PHP/users/getProductinfo.php?name=${encodeURIComponent(productName)}`)
+      .then(response => response.json())
+      .then(product => {
+        if (!product.error) {
+          document.querySelector(".PD-name h1").textContent = product.name;
+          document.querySelector(".Price").textContent = product.price + "đ";
+          document.querySelector("#PD-imgage img").src = product.image;
+        }
+      })
+      .catch(error => console.error("Lỗi khi tải thông tin sản phẩm:", error));
+
+    infoproduct.style.display = "flex";
+    slide.style.display = "none";
+    mainmenu.style.display = "none";
+    brandstory.style.display = "none";
+    cake_catelouge.style.display = "none";
+    bread_catelouge.style.display = "none";
+    cookie_catelouge.style.display = "none";
+    main_container.style.display = "none";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  });
+});
+
+
