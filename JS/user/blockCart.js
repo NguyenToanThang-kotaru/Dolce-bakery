@@ -136,18 +136,10 @@ function displayItemInCart() {
 
 function calculateTotal(cart) {
     let totalAmout = 0;
-    let html = '';
     cart.forEach(item => {
         totalAmout += item.price * item.quantity;
     })
-    html = `
-        <div style="display: flex; margin-left: 1.5%;">
-            <p>Tạm tính:</p>
-            <p id="price-total">${totalAmout}đ</p>
-        </div>
-        <p id="buy">Mua Ngay</p>  
-    `;
-    document.querySelector('#cart-footer').innerHTML = html;
+    document.querySelector('#price-total').textContent = totalAmout + "đ";
 }
 
 function addItemToCart(id) {
