@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once 'config.php';
-
+header('Content-Type: application/json');
 $response = [];
 
 if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
@@ -31,18 +33,19 @@ if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
     $permission_name=$update_permission;
 
     // Cập nhật thông tin tài khoản
+    $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
     $sql = "UPDATE users SET username = ?, email = ?, password = ?, permission_id = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssii", $userName, $email, $password, $permissionId, $accountId);
+    $stmt->bind_param("sssii", $userName, $email, $hasshedPassword, $permissionId, $accountId);
 
     if ($stmt->execute()) {
         $response = [
             "success" =>true,
-            "message" => "Cập nhật sản phẩm thành công!",
+            "message" => "Cập nhật tài khoảnthành công!",
             "user" => [
                 "id" => $accountId,
                 "userName" => $userName,
-                "password" => $password,
+                "password" => $hasshedPassword,
                 "email" => $email,
                 "permission_name" => $permission_name
             ]

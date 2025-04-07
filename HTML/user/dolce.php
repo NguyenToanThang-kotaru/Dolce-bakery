@@ -16,13 +16,8 @@
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
-    <link rel="stylesheet" href="../../CSS/user/allPD.css">
-=======
     <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
     <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
->>>>>>> Khanh-testCase
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -44,13 +39,8 @@
                 <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
                     <label for="lg-username">Enter your username or email address</label><br>
-<<<<<<< HEAD
-                    <input type="text" name="lg-username" class="username lg-username"
-                        placeholder="Username or email address"><br>
-=======
                     <input type="text" name="lg-username" class="username lg-username" placeholder="Username or email address"><br>
                     <div class="error-msg"></div>
->>>>>>> Khanh-testCase
                 </div>
                 <div class="login-password">
                     <label for="lg-password">Enter your Password</label><br>
@@ -77,14 +67,9 @@
                 <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
                     <label for="rg-username">Enter your username</label><br>
-<<<<<<< HEAD
-                    <input type="text" name="rg-username" class="username rg-username"
-                        placeholder="Username or email address" required><br>
-=======
                     <input type="text" name="rg-username" class="username rg-username" placeholder="Username or email address"
                         required><br>
                     <div class="error-msg"></div>
->>>>>>> Khanh-testCase
                 </div>
 
                 <div class="register-username">
@@ -98,15 +83,6 @@
                 <div class="register-info">
                     <div class="username-info">
                         <label for="rg-fullName"> Enter your full name</label>
-<<<<<<< HEAD
-                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name"
-                            required>
-                    </div>
-                    <div class="contactnumber-info">
-                        <label for="rg-phone">Contact Number</label>
-                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers"
-                            required>
-=======
                         <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name" required>
                         <div class="error-msg"></div>
                     </div>
@@ -114,20 +90,12 @@
                         <label for="rg-phone">Contact Number</label>
                         <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers" required>
                         <div class="error-msg"></div>
->>>>>>> Khanh-testCase
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="rg-password">Enter your Password</label><br>
-<<<<<<< HEAD
-                    <div class="password-container">
-                        <input type="password" name="rg-password" class="password rg-password" placeholder="Password"
-                            required>
-                    </div>
-=======
                     <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
                     <div class="error-msg"></div>
->>>>>>> Khanh-testCase
                 </div>
                 <div class="register-password">
                     <label for="password">Enter your Password Again</label><br>
@@ -629,18 +597,6 @@
                 <div class="InfoUser-Title">
                     <i id="Back" class="fa-solid fa-arrow-right-from-bracket"></i>
                     <h1 class="Title">Thông tin</h1>
-<<<<<<< HEAD
-
-                </div>
-                <div class="InfoUser_Detail">
-                    <div class="row">
-                        <label for="account" class="Detail">Tài khoản: </label>
-                        <span>Nguyen Van A</span>
-                    </div>
-                    <div class="row">
-                        <label for="fullname" class="Detail">Họ và tên: </label>
-                        <span>Nguyễn Văn A</span>
-=======
                 
                 </div>
             <div class="InfoUser_Detail">
@@ -657,7 +613,6 @@
                 <div class="row">
                     <label for="email" class="Detail" >Email:</label>
                     <span></span>
->>>>>>> Khanh-testCase
 
                     </div>
 
@@ -672,15 +627,10 @@
                         <span>1234567890</span>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div id="Buy-history">
-                    <div class="History">Lịch sử mua hàng</div>
-=======
                     
                 <div class="row">
                     <label for="phone" class="Detail" >Số điện thoại: </label>
                     <span></span>
->>>>>>> Khanh-testCase
                 </div>
             </div>
 
