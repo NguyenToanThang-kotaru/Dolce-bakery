@@ -25,6 +25,11 @@ function blockShopCart() {
     }
 }
 
+cart.addEventListener('click', function () {
+    getCart();
+    OnCart();
+});
+
 
 function noneShopCart() {
     slideshow.removeAttribute("style");
@@ -96,13 +101,15 @@ function getCart() {
             }
 
             new_cart = response;
-            displayProductInCart();
-            OnCart();
+            sessionStorage.setItem("cart", JSON.stringify(new_cart));
+            displayItemInCart();
+            calculateTotal(new_cart);
+
         }
     })
 }
 
-function displayProductInCart() {
+function displayItemInCart() {
     let html = '';
     new_cart.forEach(item => {
         html += `
@@ -116,11 +123,11 @@ function displayProductInCart() {
                 </div>
                 <div id="PDCart2">
                     <div id="quantity-container">
-                    <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
+                    <div id="downQuantity" onclick = "decreaseItemInCart(${item.id})"><i class="fa-solid fa-minus"></i></div>
                     <div id="PDCart-Quantity">${item.quantity}</div>
-                    <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
+                    <div id="upQuantity" onclick = "addItemToCart(${item.id})"><i class="fa-solid fa-plus"></i></div>
                 </div>
-                    <div id="delete-icon">
+                    <div id="delete-icon" onclick = "removeItemFromCart(${item.id})">
                         <i class="fa-regular fa-trash-can"></i>
                     </div>
                 </div>
@@ -130,3 +137,60 @@ function displayProductInCart() {
     document.querySelector('#cart-body #list-PD').innerHTML = html;
 }
 
+function calculateTotal(cart) {
+    let totalAmout = 0;
+    let html = '';
+    cart.forEach(item => {
+        totalAmout += item.price * item.quantity;
+    })
+    html = `
+        <div style="display: flex; margin-left: 1.5%;">
+            <p>Tạm tính:</p>
+            <p id="price-total">${totalAmout}đ</p>
+        </div>
+        <p id="buy">Mua Ngay</p>  
+    `;
+    document.querySelector('#cart-footer').innerHTML = html;
+}
+
+function addItemToCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/addToCart.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Them san pham: " + id);
+}
+
+function decreaseItemInCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/decreaseInCart.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Giam san pham: " + id);
+}
+
+function removeItemFromCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/removeFromCart.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Xoa san pham: " + id);
+}
