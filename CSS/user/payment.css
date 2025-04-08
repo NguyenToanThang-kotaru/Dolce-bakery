@@ -9,10 +9,10 @@ body {
   position: absolute;
   /* position: fixed; */
   z-index: 3;
-  background-color:rgba(101, 67, 33, 0.7);
+  background-color:rgba(101, 67, 33);
   padding: 10px;
   width: 100vw;
-  height: 100vh;
+  height: 170vh;
   top: 102px;
   
 }
