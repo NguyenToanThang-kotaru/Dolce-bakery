@@ -1,4 +1,4 @@
- <?php
+<?php
 include 'config.php'; 
 
 $sql = "SELECT 
@@ -15,10 +15,12 @@ GROUP BY p.id";
 
 $result = $conn->query($sql);
 
+$usersList = []; // Mảng chứa danh sách user theo permission_id
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $permissionId = $row['permission_id'];
-        $users = !empty($row['USER_LIST']) ? explode('|', $row['USER_LIST']) : [];
+        $usersList[$permissionId] = isset($row['USER_LIST']) ? explode('|', $row['USER_LIST']) : [];
 
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['P_NAME']) . "</td>";
@@ -34,84 +36,66 @@ if ($result->num_rows > 0) {
         // Số lượng tài khoản
         echo "<td>" . $row['AC_COUNT'] . "</td>";
 
-        // Danh sách người dùng
+        // Nút hiển thị modal
         echo "<td class='role-account'>";
         echo "<img src='../../assest/Download cloud.png' alt='' class='show-userrole' data-id='$permissionId'>";
         echo "</td>";
-        echo "<div id='account-overlay-role'>";
-        echo    "<div class='account-role-container' style='display: none;'>";
-        echo        "<img src='../../assest/Chevron down.png' alt=''>";
-        echo        "<div class='list-user-role' id='account-list-$permissionId' style='display: none;'>";
-        if (!empty($users)) {
-            foreach ($users as $user) {
-                echo"<div class='user-role'>" . htmlspecialchars($user) . "</div>";
-            }
-        } else {
-            echo    "<p class='user-role'>Không có tài khoản nào.</p>";
-        }
-        echo    "</div>";
-        echo "</div>"; 
 
         // Edit
         echo "<td>
-                <div class='fix-role'>
-                    <i class='fa-solid fa-pen-to-square fix-btn-role'></i>
-                    <i class='fa-solid fa-trash delete-btn-role'></i>
-                </div>
-              </td>";
-
+        <div class='fix-role'>
+            <i class='fa-solid fa-pen-to-square fix-btn-role' data-id='$permissionId'></i>
+            <i class='fa-solid fa-trash delete-btn-role' data-id='$permissionId'></i>
+        </div>
+        </td>";
         echo "</tr>";
     }
 } else {
     echo "<tr><td style='text-align: center;' colspan='5'>Không có dữ liệu</td></tr>";
 }
 
-
+// Đặt modal ngoài vòng lặp để tránh lặp nhiều lần
 ?>
+<div id="account-overlay-role">
+    <div class="account-role-container">
+        <img src="../../assest/Chevron down.png" alt="" id="close-modal">
+        <div class="list-user-role" id="account-list"></div>
+    </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    function attachUserRoleClickEvents() {
-        document.querySelectorAll(".show-userrole").forEach(function (img) {
-            img.onclick = function (event) {
-                event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+        let usersList = <?php echo json_encode($usersList); ?>; // Chuyển dữ liệu PHP sang JavaScript
 
-                let permissionId = this.getAttribute("data-id"); // Lấy ID quyền hạn
-                let accountContainer = document.getElementById(`account-list-${permissionId}`);
+        document.querySelectorAll(".show-userrole").forEach(function (button) {
+            button.addEventListener("click", function () {
+                let permissionId = this.getAttribute("data-id"); // Lấy ID quyền
+                let overlay = document.querySelector("#account-overlay-role"); // Modal chính
+                let userListContainer = document.querySelector("#account-list"); // Danh sách user trong modal
+                
+                // Xóa danh sách user cũ trước khi thêm mới
+                userListContainer.innerHTML = "";
 
-
-                // Ẩn tất cả danh sách khác trước khi mở danh sách mới
-                // document.querySelectorAll(".account-role-container").forEach(function (container) {
-                //     if (container !== accountContainer) {
-                //         container.style.display = "none";
-                //     }
-                // });
-
-                // Toggle hiển thị danh sách user
-                if (accountContainer) {
-                    let parentContainer = accountContainer.closest(".account-role-container");
-                    if (parentContainer) {
-                        parentContainer.style.display = (parentContainer.style.display === "none") ? "block" : "none";
-                    }
-                    accountContainer.style.display = (accountContainer.style.display === "none") ? "block" : "none";
+                if (usersList[permissionId] && usersList[permissionId].length > 0) {
+                    usersList[permissionId].forEach(function (user) {
+                        let userDiv = document.createElement("div");
+                        userDiv.className = "role-function";
+                        userDiv.textContent = user;
+                        userListContainer.appendChild(userDiv);
+                    });
+                } else {
+                    userListContainer.innerHTML = "<div class='role-function'>Không có người dùng</div>";
                 }
 
-            };
-        });
-    }
-
-    attachUserRoleClickEvents();
-
-    // Ẩn danh sách click ra ngoài
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".account-role-container") && !event.target.classList.contains("show-userrole")) {
-            document.querySelectorAll(".account-role-container").forEach(function (container) {
-                container.style.display = "none";
+                overlay.style.display = "flex"; // Hiển thị modal
             });
-        }
+        });
+
+        // Đóng modal khi click ra ngoài hoặc vào nút đóng
+        document.querySelector("#account-overlay-role").addEventListener("click", function (e) {
+            if (e.target === this || e.target.id === "close-modal") {
+                this.style.display = "none"; // Ẩn modal
+            }
+        });
     });
-});
-
 </script>
-
- 

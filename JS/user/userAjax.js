@@ -205,6 +205,9 @@ function loadUserInfo() {
             <label for="phone" class="Detail">Số điện thoại: </label>
             <span>${data.numberPhone}</span>
         </div>
+        <div id="Buy-history">
+                    <div class="History">Lịch sử mua hàng</div>
+        </div>
     `;
 
     document.querySelector('.InfoUser_Detail').innerHTML = html;
