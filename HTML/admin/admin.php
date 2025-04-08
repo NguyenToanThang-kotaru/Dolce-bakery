@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../../CSS/admin/admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -296,11 +297,11 @@
           <input type="email" id="customer-email-f" name="customer-email" placeholder="Nhập email" class="form-input" />
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="customer-address" class="form-label">Địa chỉ</label>
           <input type="text" id="customer-address-f" name="customer-address" placeholder="Nhập địa chỉ"
             class="form-input" />
-        </div>
+        </div> -->
 
         <div class="form-group text-center">
           <button type="submit" class="form-button">Hoàn tất</button>
@@ -317,7 +318,7 @@
         <thead>
           <tr>
             <th style="text-align: center">Tên đăng nhập</th>
-            <th>Mật khẩu</th>
+            <!-- <th>Mật khẩu</th> -->
             <th>Email</th>
             <th>Trạng thái</th>
             <th>Quyền</th>

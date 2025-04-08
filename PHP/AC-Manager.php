@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
         $permission_name = $row['p_name'];
         echo "<tr data-id='$userId'>";
         echo "<td>" . htmlspecialchars($row['userName']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['password']) . "</td>";
+        // echo "<td>" . htmlspecialchars($row['password']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>
                 <select class='account-status' data-id='$userId' data-current-status='$status'>

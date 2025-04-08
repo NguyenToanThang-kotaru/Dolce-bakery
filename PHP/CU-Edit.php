@@ -1,6 +1,9 @@
 <?php
+ob_clean(); 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'config.php';
-
+header('Content-Type: application/json');
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullName = $_POST['customer-name'];
     $phoneNumber = $_POST['customer-phone'];
     $email = $_POST['customer-email'];
-    $address = $_POST['customer-address'];
     $userName = $_POST['customer-uname'];
     $password = $_POST['customer-pass'];
 
@@ -22,13 +24,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt_get_status->close();
     $status = $current_status; 
 
+    $sql_get_address = "SELECT address FROM customers WHERE id = ?";
+    $stmt_get_address = $conn->prepare($sql_get_address);
+    $stmt_get_address->bind_param("i", $id);
+    $stmt_get_address->execute();
+    $stmt_get_address->bind_result($current_address);
+    $stmt_get_address->fetch();
+    $stmt_get_address->close();
+    $address = $current_address; 
+
 
     
     // Cập nhật database
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT); 
-    $sql = "UPDATE customers SET userName = ?, email = ?, fullName = ?, address = ?, phoneNumber = ?, password = ? WHERE id = ?";
+    $sql = "UPDATE customers SET userName = ?, email = ?, fullName = ?, phoneNumber = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi",$userName, $email, $fullName, $address, $phoneNumber, $hashedPassword, $id);
+    $stmt->bind_param("sssssi",$userName, $email, $fullName, $phoneNumber, $hashedPassword, $id);
 
 
     if ($stmt->execute()) {
@@ -42,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "address" => $address,
                 "phoneNumber" => $phoneNumber,
                 "email" => $email,
-                "password" => $password,
                 "userName" => $userName
             ]
         ];
