@@ -101,17 +101,6 @@ function getCart(callback) {
             if (response.status === "error") {
                 alert("Bạn cần đăng nhập");
                 callback(false);
-<<<<<<< HEAD
-            }
-
-            new_cart = response;
-            sessionStorage.setItem("cart", JSON.stringify(new_cart));
-            displayItemInCart();
-            calculateTotal(new_cart);
-            callback(true);
-        }
-    })
-=======
             } else {
                 new_cart = response;
                 sessionStorage.setItem("cart", JSON.stringify(new_cart));
@@ -121,7 +110,6 @@ function getCart(callback) {
             }
         },
     });
->>>>>>> f69c09a650d26128c557d54d2bda31f4921d5159
 }
 
 
