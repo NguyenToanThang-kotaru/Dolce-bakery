@@ -29,8 +29,8 @@
     display: flex;
     font-size: 11px;
     position: relative;
-    left: 290px;
-    bottom: 60px;
+    left: 270px;
+    bottom: 30px;
     flex-direction: column;
 }
 
@@ -85,4 +85,13 @@
 
 .contactnumber-info{
     margin-left: 25px;
+}
+
+.rg-highlight-2{
+    color: #915959;
+    cursor: pointer;
+}
+
+.rg-highlight-2:hover{
+    color: #Ecbc76;
 }

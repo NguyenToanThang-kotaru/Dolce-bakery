@@ -825,7 +825,7 @@ searchInput.addEventListener("input", function () {
     .then(response => response.json())
     .then(data => {
       console.log("Dữ liệu nhận được:", data);
-      
+
       suggestionBox.innerHTML = "";
       if (!data || data.length === 0) {
         suggestionBox.style.display = "none";
@@ -887,7 +887,7 @@ document.querySelectorAll(".product-img img").forEach(img => {
     if (!productItem) return;
 
     let productName = productItem.querySelector(".product-name")?.textContent?.trim();
-    if (!productName) return;
+    if (!productName) return; 
 
     console.log("Click ảnh sản phẩm:", productName);
 
