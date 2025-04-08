@@ -537,6 +537,7 @@
                     <h1 class="Title">Thông tin</h1>
                 
                 </div>
+            </div>
             <div class="InfoUser_Detail">
                 <div class="row">
                     <label for="account" class="Detail">Tài khoản: </label>
