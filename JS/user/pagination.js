@@ -199,6 +199,7 @@ const mainmenu = document.querySelector("#mainMenu");
 const brandstory = document.querySelector("#brandStory");
 
 const return_mainshop = document.querySelector("#return-mainshop");
+const back_mainicon = document.querySelectorAll(".backtomain");
 
 function showBread() {
   bread_catelouge.style.display = "flex";
@@ -246,6 +247,10 @@ cake.addEventListener("click", showCake);
 cookie.addEventListener("click", showCookie);
 
 return_mainshop.addEventListener("click", returnShop);
+back_mainicon.forEach(button =>{
+  button.addEventListener("click",returnShop);
+})
+
 
 //filter
 function toggleFilter(category) {
@@ -820,7 +825,7 @@ searchInput.addEventListener("input", function () {
     .then(response => response.json())
     .then(data => {
       console.log("Dữ liệu nhận được:", data);
-
+      
       suggestionBox.innerHTML = "";
       if (!data || data.length === 0) {
         suggestionBox.style.display = "none";

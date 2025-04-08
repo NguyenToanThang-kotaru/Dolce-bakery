@@ -239,6 +239,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="bread-container">
                         <?php $type = "bread";
                         include '../../PHP/users/uploadpd.php'; ?>
@@ -302,6 +305,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="cake-container">
 
                         <?php $type = "cake";
@@ -371,6 +377,10 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
+
                     <div class="product-container" id="cookie-container">
 
                         <?php $type = "cookie";
