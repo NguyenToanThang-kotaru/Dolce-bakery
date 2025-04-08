@@ -1,40 +1,52 @@
 <?php
-include 'config.php';
+include 'config.php'; // Kết nối database
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Kiểm tra xem các trường có tồn tại trong mảng $_POST hay không
-    $userName = isset($_POST['account-name']) ? $_POST['account-name'] : null;
-    $password = isset($_POST['account-pass']) ? $_POST['account-pass'] : null;
-    $email = isset($_POST['account-email']) ? $_POST['account-email'] : null;
-   
+$response = []; // Mảng chứa phản hồi
 
-    // Kiểm tra bằng RegEx
-    if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
-        // echo "Tên đăng nhập không hợp lệ!";
-        exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['account-name'] ?? '');
+    $password = trim($_POST['account-pass'] ?? '');
+    $email = trim($_POST['account-email'] ?? '');
+    $permission_id = $_POST['permission_id'] ?? null;
+    $permission_name = null;
+
+    //Lấy tên quyền
+    $sql = "SELECT name FROM permissions WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $permission_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $permission_name = $row["name"];
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // echo "Email không hợp lệ!";
-        exit();
-    }
-    if (!preg_match("/^.{8,}$/", $password)) {
-        // echo "Mật khẩu không hợp lệ!";
-        exit();
-    }
 
-    // Thực hiện câu lệnh SQL để thêm sản phẩm vào cơ sở dữ liệu
-    $sql = "INSERT INTO users (userName, password, email) VALUES ('$userName', '$password', '$email')";
+    $stmt->close();
 
-    if ($conn->query($sql) === TRUE) {
-        header("Location: ../HTML/admin/admin.php");
-        echo "AC đã được thêm thành công!";
-        exit();
+    // 🔹 Thêm tài khoản vào bảng users
+    $stmt = $conn->prepare("INSERT INTO users (userName, password, email, permission_id) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $username, $password, $email, $permission_id);
 
+    if ($stmt->execute()) {
+        $response = [
+            "success" => true,
+            "message" => "Thêm tài khoản thành công!",
+            "account" => [
+                "id" => $conn->insert_id,
+                "username" => $username,
+                "password" => $password,
+                "email" => $email,
+                "permission_id" => $permission_id,
+                "permission_name" => $permission_name  
+            ]
+        ];
     } else {
-        echo "Lỗi: " . $conn->error;
+        $response = ["success" => false, "message" => "Lỗi: " . $conn->error];
     }
 
-    // Đóng kết nối
+    $stmt->close();
     $conn->close();
+    echo json_encode($response);
+    exit();
 }
 ?>

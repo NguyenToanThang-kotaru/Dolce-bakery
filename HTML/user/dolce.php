@@ -18,7 +18,13 @@
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
     <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
     <link rel="stylesheet" href="../../CSS/user/allPD.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="../../CSS/user/payment.css">
+=======
+    <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
+    <link rel="stylesheet" href="../../CSS/user/payment.css">
+    <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
+>>>>>>> 9de11d66d4287316a7e37bd6029cda65cd809ee3
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -40,8 +46,8 @@
                 <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
                     <label for="lg-username">Enter your username or email address</label><br>
-                    <input type="text" name="lg-username" class="username lg-username"
-                        placeholder="Username or email address"><br>
+                    <input type="text" name="lg-username" class="username lg-username" placeholder="Username or email address"><br>
+                    <div class="error-msg"></div>
                 </div>
                 <div class="login-password">
                     <label for="lg-password">Enter your Password</label><br>
@@ -50,6 +56,7 @@
                         <i class="fa-solid fa-eye" id="block-password"></i>
                         <i class="fa-regular fa-eye-slash" id="none-password"></i>
                     </div>
+                    <div class="error-msg"></div>
                 </div>
                 <button type="submit" class="signin-btn">Sign in</button>
             </form>
@@ -67,41 +74,40 @@
                 <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
                     <label for="rg-username">Enter your username</label><br>
-                    <input type="text" name="rg-username" class="username rg-username"
-                        placeholder="Username or email address" required><br>
+                    <input type="text" name="rg-username" class="username rg-username" placeholder="Username or email address"
+                        required><br>
+                    <div class="error-msg"></div>
                 </div>
 
                 <div class="register-username">
                     <label for="rg-email">Enter your email</label><br>
                     <input type="text" name="rg-email" class="username rg-email" placeholder="Username or email address"
                         required><br>
+                    <div class="error-msg"></div>
                 </div>
 
 
                 <div class="register-info">
                     <div class="username-info">
                         <label for="rg-fullName"> Enter your full name</label>
-                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name"
-                            required>
+                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name" required>
+                        <div class="error-msg"></div>
                     </div>
                     <div class="contactnumber-info">
                         <label for="rg-phone">Contact Number</label>
-                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers"
-                            required>
+                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers" required>
+                        <div class="error-msg"></div>
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="rg-password">Enter your Password</label><br>
-                    <div class="password-container">
-                        <input type="password" name="rg-password" class="password rg-password" placeholder="Password"
-                            required>
-                    </div>
+                    <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
+                    <div class="error-msg"></div>
                 </div>
                 <div class="register-password">
                     <label for="password">Enter your Password Again</label><br>
-                    <div class="password-container">
-                        <input type="password" class="password" placeholder="Password" required>
-                    </div>
+                    <input type="password" class="password rg-confirm-password" placeholder="Password" required>
+                    <div class="error-msg"></div>
                 </div>
                 <button type="submit" id="signup-btn">Sign up</button>
             </form>
@@ -238,6 +244,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="bread-container">
                         <?php $type = "bread";
                         include '../../PHP/users/uploadpd.php'; ?>
@@ -301,6 +310,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="cake-container">
 
                         <?php $type = "cake";
@@ -356,7 +368,7 @@
 
                         <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
-                </div>
+                </div>  
 
                 <div class="show-product" id="product-list">
                     <div class="title">
@@ -365,11 +377,15 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
+                            <option value="impression">Nổi bật</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
+
                     <div class="product-container" id="cookie-container">
 
                         <?php $type = "cookie";
@@ -401,10 +417,10 @@
 
 
         <!-- --------------------------display all product--------------------- -->
-        <div class="main-containerPD">
+        <div class="main-containerPD allproduct-catelouge-container">
 
             <div class="product-filter">
-                
+                <!-- <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')"> -->
 
                 <div class="filter" id="filter-sidebar">
                     <div class="filter-title">
@@ -465,14 +481,10 @@
                     </div>
                     <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
 
+                    <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
+
                     <div id="allproduct-container">
-
                         <?php include '../../PHP/users/displayProduct.php'; ?>
-
-
-
-
-
                     </div>
 
 
@@ -521,72 +533,13 @@
             <div id="cart-body">
                 <p id="Title">Products</p>
                 <div id="list-PD">
-                    <div class="PDCart">
-                        <div id="PDCart1">
-                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
-                            <div id="PDCart-NP">
-                                <div id="PDCart-Name">Sản phẩm 1</div>
-                                <div id="PDCart-Price">100.000đ</div>
-                            </div>
-                        </div>
-                        <div id="PDCart2">
-                            <div id="quantity-container">
-                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
-                                <div id="PDCart-Quantity">1</div>
-                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
-                            </div>
-                            <div id="delete-icon">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="PDCart">
-                        <div id="PDCart1">
-                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
-                            <div id="PDCart-NP">
-                                <div id="PDCart-Name">Sản phẩm 1</div>
-                                <div id="PDCart-Price">100.000đ</div>
-                            </div>
-                        </div>
-                        <div id="PDCart2">
-                            <div id="quantity-container">
-                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
-                                <div id="PDCart-Quantity">1</div>
-                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
-                            </div>
-                            <div id="delete-icon">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="PDCart">
-                        <div id="PDCart1">
-                            <img src="../../assest/Dolce.png" width="8%" height="100%" alt="">
-                            <div id="PDCart-NP">
-                                <div id="PDCart-Name">Sản phẩm 1</div>
-                                <div id="PDCart-Price">100.000đ</div>
-                            </div>
-                        </div>
-                        <div id="PDCart2">
-                            <div id="quantity-container">
-                                <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
-                                <div id="PDCart-Quantity">1</div>
-                                <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
-                            </div>
-                            <div id="delete-icon">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div id="cart-footer">
                 <div style="display: flex; margin-left: 1.5%;">
                     <p>Tạm tính:</p>
-                    <p id="price-total">0đ</p>
+                    <p id="price-total"></p>
                 </div>
                 <button  id="buy">Mua Ngay</button>
             </div>
@@ -597,39 +550,37 @@
                 <div class="InfoUser-Title">
                     <i id="Back" class="fa-solid fa-arrow-right-from-bracket"></i>
                     <h1 class="Title">Thông tin</h1>
+                
+                </div>
+            <div class="InfoUser_Detail">
+                <div class="row">
+                    <label for="account" class="Detail">Tài khoản: </label>
+                    <span></span>
+                </div>
+                <div class="row">
+                    <label for="fullname" class="Detail" >Họ và tên: </label>
+                    <span></span>
 
                 </div>
-                <div class="InfoUser_Detail">
-                    <div class="row">
-                        <label for="account" class="Detail">Tài khoản: </label>
-                        <span>Nguyen Van A</span>
-                    </div>
-                    <div class="row">
-                        <label for="fullname" class="Detail">Họ và tên: </label>
-                        <span>Nguyễn Văn A</span>
-
-                    </div>
-
-                    <div class="row">
-                        <label for="email" class="Detail">Email:</label>
-                        <span>email@gmail.com</span>
-
-                    </div>
-
-                    <div class="row">
-                        <label for="phone" class="Detail">Số điện thoại: </label>
-                        <span>1234567890</span>
-                    </div>
+                
+                <div class="row">
+                    <label for="email" class="Detail" >Email:</label>
+                    <span></span>
                 </div>
+                    
+                <div class="row">
+                    <label for="phone" class="Detail" >Số điện thoại: </label>
+                    <span></span>
+                </div>
+
                 <div id="Buy-history">
                     <div class="History">Lịch sử mua hàng</div>
                 </div>
+
             </div>
 
         </div>
-
-
-        <!--------------------------------------Payment--------------------------------------->
+    </div>
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
@@ -660,8 +611,9 @@
                             <tr style="border-bottom: 1px solid #ddd">
                                 <th colspan="2" class="payment-heading">ĐƠN HÀNG CỦA BẠN</th>
                                 <th>
-                                    <strong>Ngày đặt:
-                                        <span class="payment-date">22/09/2005</span></strong>
+                                <strong>Ngày đặt:
+                                    <span class="payment-date">22/09/2005</span>
+                                </strong>
                                 </th>
                             </tr>
                             <tr class="order-header">
@@ -671,30 +623,30 @@
                             <tr style="border-bottom: 1px solid #ddd">
                                 <th class="payment-product-name">Tên sản phẩm</th>
                                 <th class="payment-quantity">Số lượng</th>
-                                <th class="payment-price"></th>
+                                <th class="payment-price">Giá</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+
+                        <tbody id="product-list">
+                            
+                        </tbody>
+
                         <tfoot>
-                            <tr style="border-top: 1px solid #ddd">
-                                <td colspan="2">Tổng tạm tính:</td>
-                                <td>
-                                    <span class="payment-total-product-price-value">1.200.200</span><sup>đ</sup>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Giao hàng:</td>
-                                <td>Giao hàng miễn phí</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Tổng đơn:</td>
-                                <td>
-                                    <span class="payment-total-price-value">12.000.0000</span><sup>đ</sup>
-                                </td>
-                            </tr>
+                        <tr style="border-top: 1px solid #ddd">
+                            <td colspan="2">Tổng tạm tính:</td>
+                            <td><span class="payment-total-product-price-value">1.200.200</span><sup>đ</sup></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Giao hàng:</td>
+                            <td>Giao hàng miễn phí</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Tổng đơn:</td>
+                            <td><span class="payment-total-price-value">12.000.000<sup>đ</sup></span></td>
+                        </tr>
                         </tfoot>
                     </table>
-
+                    
                     <h3>Phương thức thanh toán</h3>
                     <div>
                         <input type="radio" id="cash-on-delivery" name="payment" value="tm" />
@@ -724,9 +676,9 @@
 
             </div>
 
-        </div>
+        </div>    
         
-
+        
         <!-- -------------------------------------FOoter------------------------------------- -->
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">
@@ -776,10 +728,10 @@
         </footer>
 
 
-    </div>
+   
 
 
-
+    <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/clear.js"></script>
     <script src="../../JS/user/slideShow.js"></script>
     <script src="../../JS/user/blocklogin.js"></script>

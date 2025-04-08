@@ -1,32 +1,21 @@
 <?php
-include 'config.php';
+include 'config.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-    $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+    $userId = $_POST['id'];
+    $newStatus = $_POST['status'];
 
-    if ($id <= 0 || ($status != 1 && $status != 2)) {
-        echo "Lỗi: Dữ liệu không hợp lệ!";
-        exit();
-    }
-
+    // Cập nhật trạng thái khách hàng
     $stmt = $conn->prepare("UPDATE users SET status = ? WHERE id = ?");
-    if (!$stmt) {
-        echo "Lỗi chuẩn bị truy vấn: " . $conn->error;
-        exit();
-    }
+    $stmt->bind_param("ii", $newStatus, $userId);
 
-    $stmt->bind_param("ii", $status, $id);
     if ($stmt->execute()) {
-        echo "success";
+        echo json_encode(["success" => true, "message" => "Cập nhật trạng thái thành công!"]);
     } else {
-        echo "Lỗi khi cập nhật: " . $stmt->error;
+        echo json_encode(["success" => false, "message" => "Lỗi khi cập nhật trạng thái!"]);
     }
 
     $stmt->close();
     $conn->close();
-} else {
-    echo "Lỗi: Chỉ chấp nhận phương thức POST!";
 }
 ?>
-

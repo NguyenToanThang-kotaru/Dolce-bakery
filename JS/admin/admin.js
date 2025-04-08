@@ -96,8 +96,7 @@ const delete_ovl_1 = document.querySelector("#delete-overlay-product");
 const cancel_btn_1 = document.querySelector("#cancel-product");
 
 
-const add_form_2 = document.querySelector(".add-form-customer");
-const plus_2 = document.querySelector("#customer-plus");
+const add_form_2 = document.querySelector(".detail-customer-container");
 const customer_table = document.querySelector(".customer-table");
 const fix_form_2 = document.querySelector(".fix-form-customer   ");
 const delete_acp_2 = document.querySelector("#delete-acp-customer");
@@ -144,7 +143,6 @@ function addFormProduct(){
 function addFormCustomer(){
     customer_table.style.display = "none";
     add_form_2.style.display = "block";
-    plus_2.style.display = "none";
     fix_form_2.style.display = "none";
     profile_part.style.display = "none";
     
@@ -179,7 +177,6 @@ function fixFormProduct(){
 function fixFormCustomer(){
     customer_table.style.display = "none";
     fix_form_2.style.display = "block";
-    plus_2.style.display = "none";
     add_form_2.style.display = "none";
     profile_part.style.display = "none";
 }
@@ -213,7 +210,6 @@ function returnProduct(){
 function returnCustomer(){
     customer_table.removeAttribute("style");
     add_form_2.style.display = "none";
-    plus_2.style.display = "block";
     fix_form_2.style.display = "none";
     delete_ovl_2.style.display = "none";
     profile_part.style.display = "none";
@@ -259,7 +255,6 @@ function showUserRole(){
 }
 
 plus_1.addEventListener("click",addFormProduct);
-plus_2.addEventListener("click",addFormCustomer);
 plus_3.addEventListener("click",addFormAccount);
 plus_4.addEventListener("click",addFormRole);
 
@@ -344,7 +339,7 @@ profile_img.addEventListener("click",showProfile);
 // customer
 
 // account
-const act_status = document.querySelectorAll(".account-status");
+const statusElements = document.querySelectorAll(".account-status, .customer-status");
 
 function ChangeStatus(event){
     let select = event.target;
@@ -357,7 +352,7 @@ function ChangeStatus(event){
     }
 }
 
-act_status.forEach(select => {
+statusElements.forEach(select => {
     select.addEventListener("change",ChangeStatus);
     ChangeStatus({target: select });
 })
@@ -383,5 +378,3 @@ function togglePopup(event) {
         }
     });
 }
-
-
