@@ -1,22 +1,32 @@
 <?php
-    include 'config.php';
+require_once 'config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['account-id']; 
-    $usernName = $_POST['account-name'];
+$response = [];
+
+if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
+    $accountId = $_POST['account-id'];
+    $userName = $_POST['account-name'];
     $password = $_POST['account-pass'];
     $email = $_POST['account-email'];
+    $permissionId = $_POST['permission_id']; 
 
-
-    $sql = "UPDATE users SET userName = ?, password = ?, email = ? WHERE id = ?";
+    // Cập nhật thông tin tài khoản
+    $sql = "UPDATE users SET username = ?, email = ?, password = ?, permission_id = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $usernName, $password, $email, $id);
+    $stmt->bind_param("sssii", $userName, $email, $password, $permissionId, $accountId);
+
 
     if ($stmt->execute()) {
-        header("Location: ../HTML/admin/admin.php");
+        $response['success'] = true;
     } else {
-        echo "Lỗi cập nhật: " . $conn->error;
+        $response['error'] = "Không thể cập nhật tài khoản!";
     }
 
+    // Đóng statement
+    $stmt->close();
+} else {
+    $response['error'] = "Dữ liệu không hợp lệ!";
 }
+
+echo json_encode($response);
 ?>

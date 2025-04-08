@@ -1,4 +1,3 @@
-
 * {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -11,7 +10,7 @@ body {
   min-height: 100vh;
 }
 
-#margin0auto{
+#margin0auto {
   margin: 0 auto;
 }
 
@@ -41,7 +40,7 @@ body {
   cursor: pointer;
 }
 
-.sidebar h2:hover{
+.sidebar h2:hover {
   background-color: #8b5a5a;
   transform: scale(1.02);
 }
@@ -56,7 +55,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.sidebar img{
+.sidebar img {
   border: 4px solid;
   width: 150px;
   height: 150px;
@@ -65,9 +64,9 @@ body {
   margin-left: 50px;
 }
 
-.sidebar a:hover{
-    transform: scale(1.05);
-    color: #edb6e7;
+.sidebar a:hover {
+  transform: scale(1.05);
+  color: #edb6e7;
 }
 
 .sidebar a:hover {
@@ -100,7 +99,7 @@ body {
   cursor: pointer;
 }
 
-.profile img:hover{
+.profile img:hover {
   transform: scale(1.1);
 }
 
@@ -132,7 +131,7 @@ body {
 
 /* profile */
 
-.profile-part{
+.profile-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -167,7 +166,7 @@ body {
   margin-top: 20px;
 }
 
-.menu-profile span{
+.menu-profile span {
   color: #c0392b;
 }
 
@@ -212,7 +211,7 @@ body {
 
 /* oder part */
 
-.oder-part{
+.oder-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -220,7 +219,7 @@ body {
 
 .order-header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -249,19 +248,20 @@ body {
   margin-bottom: 20px;
 }
 
-.order-table i{
+.order-table i {
   font-size: 20px;
   color: rgb(210, 124, 19);
   cursor: pointer;
   border: none;
 }
 
-.order-table i:hover{
+.order-table i:hover {
   transform: scale(1.09);
   color: #8b5a5a;
 }
 
-.order-table th, .order-table td {
+.order-table th,
+.order-table td {
   padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -274,7 +274,7 @@ body {
   font-size: 16px;
 }
 
-.order-table td{
+.order-table td {
   background-color: #f9f5f0;
 }
 
@@ -284,7 +284,7 @@ body {
 }
 
 /*product part  */
-.product-part{
+.product-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -307,7 +307,8 @@ body {
   margin-bottom: 20px;
 }
 
-.product-table th, .product-table td {
+.product-table th,
+.product-table td {
   padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -320,7 +321,7 @@ body {
   font-size: 16px;
 }
 
-.product-table td{
+.product-table td {
   background-color: #f9f5f0;
 }
 
@@ -329,7 +330,7 @@ body {
   font-size: 14px;
 }
 
-#product-plus{
+#product-plus {
   font-size: 20px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -343,34 +344,35 @@ body {
   margin-bottom: 30px;
 }
 
-#product-plus:hover{
+#product-plus:hover {
   color: #ea9029;
   transform: scale(1.1);
 }
 
-.product-table img{
+.product-table img {
   width: 100px;
   height: 100px;
 }
 
-.img-admin{
+.img-admin {
   display: flex;
   justify-content: center;
 }
 
-.fix-product{
+.fix-product {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.product-table i:hover{
+.product-table i:hover {
   color: #8b5a5a;
 }
 
 /* add product */
 
-.add-form-product, .fix-form-product {
+.add-form-product,
+.fix-form-product {
   display: none;
   max-width: 800px;
   margin: 20px auto;
@@ -381,12 +383,14 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-form-product i, .fix-form-product i{
+.add-form-product i,
+.fix-form-product i {
   margin-left: 740px;
   cursor: pointer;
 }
 
-.add-form-product i:hover,.fix-form-product i:hover{
+.add-form-product i:hover,
+.fix-form-product i:hover {
   color: #ef9b09;
   transform: scale(1.2);
 }
@@ -439,7 +443,7 @@ body {
   background-color: #e16e03ee;
 }
 
-#delete-overlay-product{  
+#delete-overlay-product {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -450,7 +454,7 @@ body {
   display: none;
 }
 
-.delete-container{
+.delete-container {
   width: 300px;
   height: 150px;
   background-color: #feead7;
@@ -464,12 +468,12 @@ body {
   justify-content: center;
 }
 
-.delete-container span{
+.delete-container span {
   color: #ee3e08;
 
 }
 
-.delete-container button{
+.delete-container button {
   padding: 5px 30px;
   border-radius: 20px;
   background-color: #8b5a5a;
@@ -477,13 +481,13 @@ body {
   cursor: pointer;
 }
 
-.delete-container button:hover{
+.delete-container button:hover {
   transform: scale(1.1);
 }
 
 
 /* customer part */
-.customer-part{
+.customer-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -507,7 +511,8 @@ body {
 }
 
 
-.customer-table th, .customer-table td {
+.customer-table th,
+.customer-table td {
   padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -520,7 +525,7 @@ body {
   font-size: 16px;
 }
 
-#customer-plus{
+#customer-plus {
   font-size: 20px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -534,12 +539,12 @@ body {
   margin-bottom: 30px;
 }
 
-#customer-plus:hover{
+#customer-plus:hover {
   color: #ea9029;
   transform: scale(1.1);
 }
 
-.customer-table td{
+.customer-table td {
   background-color: #f9f5f0;
 }
 
@@ -548,18 +553,18 @@ body {
   font-size: 14px;
 }
 
-.fix-customer{
+.fix-customer {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.customer-table i:hover{
+.customer-table i:hover {
   color: #8b5a5a;
 }
 
 
-.add-form-customer, .fix-form-customer {
+.fix-form-customer {
   display: none;
   max-width: 800px;
   margin: 20px auto;
@@ -570,17 +575,63 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-form-customer i, .fix-form-customer i{
+.detail-customer-container {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.detail-customer-container h2 {
+  text-align: left;
+  font-size: 18px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.cus-info {
+  display: grid;
+  grid-template-columns: 180px auto;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cus-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.cus-value {
+  color: #555;
+}
+
+.back-customer .back-customer1{
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+}
+
+
+
+
+.detail-customer-container i,
+.fix-form-customer i {
   margin-left: 740px;
   cursor: pointer;
 }
 
-.add-form-customer i:hover,.fix-form-customer i:hover{
+.detail-customer-container i:hover,
+.fix-form-customer i:hover {
   color: #ef9b09;
   transform: scale(1.2);
 }
 
-#delete-overlay-customer{  
+#delete-overlay-customer {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -591,8 +642,15 @@ body {
   display: none;
 }
 
+.customer-status {
+  padding: 2px;
+  border: 0px solid rgb(17, 17, 17);
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70);
+}
+
 /* account part */
-.account-part{
+.account-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -608,20 +666,24 @@ body {
   overflow-y: auto;
   margin-top: 50px;
 }
+
 .account-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.account-status{
+.account-status {
   padding: 2px;
   border: 0px solid rgb(17, 17, 17);
   border-radius: 10px;
-  box-shadow: 0 0 5px 1px rgb(47, 218, 70); 
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70);
 }
 
-.account-table th, .account-table td {
+
+
+.account-table th,
+.account-table td {
   padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -634,7 +696,8 @@ body {
   font-size: 16px;
 }
 
-#account-plus, #role-plus{
+#account-plus,
+#role-plus {
   font-size: 20px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -650,12 +713,13 @@ body {
 
 
 
-#account-plus:hover, #role-plus:hover{
+#account-plus:hover,
+#role-plus:hover {
   color: #ea9029;
   transform: scale(1.1);
 }
 
-.account-table td{
+.account-table td {
   background-color: #f9f5f0;
 }
 
@@ -664,18 +728,19 @@ body {
   font-size: 14px;
 }
 
-.fix-account{
+.fix-account {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.account-table i:hover{
+.account-table i:hover {
   color: #8b5a5a;
 }
 
 
-.add-form-account, .fix-form-account {
+.add-form-account,
+.fix-form-account {
   display: none;
   max-width: 800px;
   margin: 20px auto;
@@ -686,17 +751,19 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-form-account i, .fix-form-account i{
+.add-form-account i,
+.fix-form-account i {
   margin-left: 740px;
   cursor: pointer;
 }
 
-.add-form-account i:hover,.fix-form-account i:hover{
+.add-form-account i:hover,
+.fix-form-account i:hover {
   color: #ef9b09;
   transform: scale(1.2);
 }
 
-#delete-overlay-account {  
+#delete-overlay-account {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -708,7 +775,7 @@ body {
 }
 
 /* role-part */
-.role-part{
+.role-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
@@ -724,20 +791,22 @@ body {
   overflow-y: auto;
   margin-top: 50px;
 }
+
 .role-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.role-status{
+.role-status {
   padding: 2px;
   border: 0px solid rgb(17, 17, 17);
   border-radius: 10px;
-  box-shadow: 0 0 5px 1px rgb(47, 218, 70); 
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70);
 }
 
-.role-table th, .role-table td {
+.role-table th,
+.role-table td {
   padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -750,7 +819,7 @@ body {
   font-size: 16px;
 }
 
-.role-table td{
+.role-table td {
   background-color: #f9f5f0;
 }
 
@@ -759,18 +828,19 @@ body {
   font-size: 14px;
 }
 
-.fix-role{
+.fix-role {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.role-table i:hover{
+.role-table i:hover {
   color: #8b5a5a;
 }
 
 
-.add-form-role, .fix-form-role{
+.add-form-role,
+.fix-form-role {
   display: none;
   max-width: 800px;
   margin: 20px auto;
@@ -781,17 +851,19 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-form-role i, .fix-form-role i{
+.add-form-role i,
+.fix-form-role i {
   margin-left: 740px;
   cursor: pointer;
 }
 
-.add-form-role i:hover,.fix-form-role i:hover{
+.add-form-role i:hover,
+.fix-form-role i:hover {
   color: #ef9b09;
   transform: scale(1.2);
 }
 
-#delete-overlay-role {  
+#delete-overlay-role {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -802,7 +874,7 @@ body {
   display: none;
 }
 
-.role-container{
+.role-container {
   width: 30%;
   border: 0px solid rgb(109, 105, 105);
   box-shadow: 0 0 8px 1px rgb(160, 159, 159);
@@ -812,26 +884,26 @@ body {
   padding: 10px;
 }
 
-.role-container select{
+.role-container select {
   padding: 10px;
   border-radius: 10px;
 }
 
-.role{
+.role {
   color: red;
 }
 
-.role-dad{
+.role-dad {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.check-role{
+.check-role {
   margin-top: 10px;
 }
 
-#role-popup{
+#role-popup {
   position: absolute;
   background: #eed9ba;
   font-size: 14px;
@@ -840,7 +912,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 8px 2px rgba(141, 82, 236, 0.2);
-  display: none;    
+  display: none;
   z-index: 2;
 }
 
@@ -856,26 +928,21 @@ body {
   border-bottom: 10px solid #eed9ba;
 }
 
-/* .list-role-function{
-  display: flex;
-  flex-direction: column;
-} */
-
-.role-function{
+.role-function {
   margin-bottom: 5px;
 }
 
-.role-account img{
+.role-account img {
   width: 8%;
   height: 8%;
   cursor: pointer;
 }
 
-.role-account img:hover{
+.role-account img:hover {
   transform: scale(1.1);
 }
 
-#account-overlay-role{  
+#account-overlay-role {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
@@ -886,8 +953,8 @@ body {
   display: none;
 }
 
-.account-role-container{
-  width: 20%; 
+.account-role-container {
+  width: 20%;
   height: 40%;
   background-color: #feead7;
   border-radius: 20px;
@@ -897,16 +964,16 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items:center ;
+  align-items: center;
   box-shadow: 0 0 20px 10px rgba(49, 23, 1, 0.2);
 }
 
-.account-role-container img{
+.account-role-container img {
   width: 60%;
-  height: 15% ;
+  height: 15%;
 }
 
-.list-user-role{
+.list-user-role {
   background-color: hwb(0 100% 0%);
   border-radius: 10px;
   width: 100%;
@@ -918,11 +985,21 @@ body {
   box-shadow: 0 0 20px 10px rgba(83, 10, 61, 0.2);
 }
 
-.user-role{
+.user-role {
   width: 100%;
 }
 
-.user-role:hover{
+.user-role:hover {
   background-color: thistle;
+}
+
+/* detail */
+.customer-table img {
+  cursor: pointer;
+  width: 16%;
+}
+
+.customer-table img:hover {
+  transform: scale(1.1);
 }
 

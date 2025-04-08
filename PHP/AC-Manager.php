@@ -17,7 +17,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['password']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>
-                <select class='account-status' data-userid='" . $row['id'] . "'>
+                <select class='account-status' data-id='$userId' data-current-status='$status'>
                     <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>
                     <option value='2' " . ($status == 2 ? "selected" : "") . ">Đã khóa</option>
                 </select>
@@ -55,38 +55,34 @@ if ($result->num_rows > 0) {
 
 
 <script>
-    
-    //Delete
-    document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.delete-btn-account').forEach(button => {
-        button.addEventListener('click', function() {
-            let accountId = this.getAttribute('data-id');
-            let deleteOverlay = document.getElementById('delete-overlay-account');
-            deleteOverlay.style.display = 'block';
-            document.getElementById('delete-acp-account').setAttribute('data-id', accountId);
-        });
-    });
+     
+    // Thay đổi trạng thái
+    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("change", function (event) {
+    if (event.target.classList.contains("account-status")) {
+        let userId = event.target.getAttribute("data-id");
+        let newStatus = event.target.value;
 
-    document.getElementById('delete-acp-account').addEventListener('click', function() {
-        let accountId = this.getAttribute('data-id');
-        console.log(accountId);
-        
-        window.location.href = '../../PHP/AC-Delete.php?id=' + accountId;
-    });
-
-    document.getElementById('cancel-account').addEventListener('click', function() {
-        document.getElementById('delete-overlay-account').style.display = 'none';
-    });
-    });
-    
-    //Edit
-    document.querySelectorAll('.fix-btn-account').forEach(button => {
-    button.addEventListener('click', function() {
-        let accountId = this.getAttribute('data-id'); 
-        document.getElementById('account-id').value = accountId; 
-    });
+        fetch("../../PHP/AC-update_status.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `id=${userId}&status=${newStatus}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`Trạng thái của tài khoản ${userId} đã được cập nhật!`);
+            } else {
+                alert("Lỗi khi cập nhật trạng thái: " + data.message);
+            }
+        })
+        .catch(error => console.error("Lỗi:", error));
+    }
 });
-
+});
+   
 
 </script>
 
