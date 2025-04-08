@@ -7,7 +7,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
-        echo "<tr>";
+        echo "<tr data-id='$id'>";
         echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
         echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $row['type'] . "</td>";
@@ -31,40 +31,3 @@ $conn->close();
         <button id='cancel-product'>Hủy</button>
     </div>
 </div>
-
-<script>
-    document.querySelectorAll('.delete-btn-product').forEach(button => {
-        button.addEventListener('click', function() {
-            let productId = this.getAttribute('data-id');
-            let deleteOverlay = document.getElementById('delete-overlay-product');
-            deleteOverlay.style.display = 'block';
-            document.getElementById('delete-acp-product').onclick = function () {
-                fetch('../../PHP/PD-delete.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'id=' + productId
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // alert('Xóa sản phẩm thành công!');
-                        document.querySelector(`.delete-btn-product[data-id='${productId}']`).closest('tr').remove();
-                    } else {
-                        alert('Xóa sản phẩm thất bại!');
-                    }
-                    deleteOverlay.style.display = 'none';
-                })}
-        });
-    });
-    document.querySelectorAll('.fix-btn-product').forEach(button =>{
-        
-        button.addEventListener('click',function(){
-            let productId = this.getAttribute('data-id');
-            document.getElementById('product-id').value = productId
-        })
-    });
-</script>
-
-<!-- upload product -->
