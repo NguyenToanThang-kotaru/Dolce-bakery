@@ -203,19 +203,30 @@ th.payment-heading {
   margin: 0;
 }
 tbody{
-  width: 100%;
+  width: 110%;
   overflow-y: auto;
-  width: 100%;
+ 
   max-height: 300px;
   display: block;
+  margin-right: 10px;
 }
 tbody tr {
   display: table;
   width: 100%;
-  table-layout: fixed; /* Đảm bảo các cột có chiều rộng đồng đều */
+  table-layout: fixed;
+  margin-right: 0px;
 }
 thead{
   display: table;
-  width: 100%;
-  table-layout: fixed; /* Đảm bảo các cột có chiều rộng đồng đều */
+  width: 120%;
+  table-layout: fixed; 
 }
+td img{
+  vertical-align: middle;
+}
+.payment-product-name, .payment-quantity, .payment-price{
+  
+  text-align: center;
+  vertical-align: middle;
+}
+  

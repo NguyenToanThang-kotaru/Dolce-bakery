@@ -77,9 +77,11 @@ function displayItemReadyPaying() {
         totalAmount += item.price * item.quantity;
         html += `
             <tr>
-                <td><img src="${item.image}"style="width: 20%;; object-fit: cover; vertical-align: middle; margin-right: 8px;">${item.name}</td>
-                <td>${item.quantity}</td>
-                <td>${(item.price * item.quantity).toLocaleString('vi-VN')}<sup>đ</sup></td>
+                
+                <td><img src="${item.image}"style="width: 30px; object-fit: cover; vertical-align: middle; margin-right:8px"></td>
+                <td style=" text-align:left; width:100px">${item.name}</td>
+                <td style=" text-align:center;">${item.quantity}</td>
+                <td style="text-align:right;">${(item.price * item.quantity).toLocaleString('vi-VN')}<sup>đ</sup></td>
             </tr>                                
         `;
     })
