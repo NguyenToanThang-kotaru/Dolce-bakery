@@ -26,9 +26,12 @@ function blockShopCart() {
 }
 
 cart.addEventListener('click', function () {
-    getCart();
-    OnCart();
+    getCart(function (canOpen) {
+        if (!canOpen) return;
+        OnCart();
+    });
 });
+
 
 
 function noneShopCart() {
@@ -89,7 +92,7 @@ function addToCart(productId) {
     });
 }
 
-function getCart() {
+function getCart(callback) {
     $.ajax({
         url: "../../PHP/carts/getCart.php",
         type: "POST",
@@ -97,14 +100,14 @@ function getCart() {
         success: function (response) {
             if (response.status === "error") {
                 alert("Bạn cần đăng nhập");
-                return;
+                callback(false);
             }
 
             new_cart = response;
             sessionStorage.setItem("cart", JSON.stringify(new_cart));
             displayItemInCart();
             calculateTotal(new_cart);
-
+            callback(true);
         }
     })
 }
