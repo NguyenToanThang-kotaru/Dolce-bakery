@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         $response = [
             "success" => true,
-            "message" => "Cập nhật sản phẩm thành công!",
+            "message" => "Cập nhật thông tin thành công!",
             "customer" => [
                 "id" => $id,
                 "fullName" => $fullName,
