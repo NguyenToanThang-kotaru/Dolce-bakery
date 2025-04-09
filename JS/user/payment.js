@@ -14,11 +14,11 @@ function toggleCOD() {
     atmOptions.style.display = "none";
 }
 
-let buy = document.getElementById("buy");
-let blockPayment = document.getElementById("overlay-payment");
-let closePayment = document.getElementById("close-payment");
-let back_cart = document.getElementById("payment-back-cart");
-let back_mainPage = document.getElementById("main-page");
+const buy = document.getElementById("buy");
+const blockPayment = document.getElementById("overlay-payment");
+const closePayment = document.getElementById("close-payment");
+const back_cart = document.getElementById("payment-back-cart");
+const back_mainPage = document.getElementById("main-page");
 let flag_payment = 0;
 
 buy.addEventListener("click", function () {
@@ -56,7 +56,38 @@ buy.addEventListener("click", function () {
 
     GoToPayProcess();
 })
+const payment = document.getElementById('submit-payment-btn');
+const blockInvoice = document.getElementById('overlay-invoice');
+const mainInvoice = document.getElementById('invoice-container');
+const closeInvoice = document.getElementById('close-invoice');
+let flag_invoice = 0;
+payment.addEventListener("click", function () {
+    if(flag_invoice === 0){
+        blockInvoice.style.display="block";
+        mainInvoice.style.display="block";
+        blockPayment.style.display = "none";
+        flag_payment = 0;
+        flag_invoice = 1;
 
+    }
+    else{
+        blockInvoice.style.display="none";
+        mainInvoice.style.display="none";
+        flag_invoice = 0;
+    }
+    closeInvoice.addEventListener("click",function(){
+        blockInvoice.style.display="none";
+        mainInvoice.style.display="none";
+        flag_invoice = 0;
+    })
+    window.addEventListener("click",function(event){
+        if(event.target === blockInvoice){
+            blockInvoice.style.display="none";
+            mainInvoice.style.display="none";
+            flag_invoice = 0;
+        }
+    })
+})
 
 function GoToPayProcess() {
     getPayDate();

@@ -616,7 +616,7 @@
 
                         </div>
                         <div class="payment-left-footer">
-                            <p id="payment-back-cart" style="display: inline-block; margin-top: 230px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
                                 ← Quay lại giỏ hàng
                             </p>
                         </div>
@@ -689,7 +689,7 @@
                         </div>
                     </div>
                     <div class="payment-submit-background">
-                        <button type="submit" class="submit-payment-btn">Thanh toán</button>
+                        <button type="submit" id="submit-payment-btn">Thanh toán</button>
                     </div>
                 </form>
 
@@ -697,7 +697,7 @@
 
         </div>    
         <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
-         <div id="overlay-invoice">
+        <div id="overlay-invoice">
             <div id="invoice-container">
                 <div class="invoice-header">
                     <button id="close-invoice">x</button>
@@ -802,7 +802,7 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
         
         <!-- -------------------------------------FOoter------------------------------------- -->
         <footer class="container-footer">
