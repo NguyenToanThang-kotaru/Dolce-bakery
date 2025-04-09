@@ -117,9 +117,10 @@
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
             <nav id="topMenu-container"
                 style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;flex-basis: 33.33%;">
-                <div style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
+                <div id="main-page" style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
                     <a href="#">
                         <img src="../../assest/Dolce.png" alt="" height="70px" id="return-mainshop">
+                        <span class="cart-count">0</span>
                     </a>
                     <h3 style="margin-left: 8px">Bakery Shop</h3>
                 </div>
@@ -590,18 +591,37 @@
                     </div>
                     
                     <form id="payment-left-form">
+                        <div class="cus-name">
+                            <label>Tên: </label><span class="payment-customer-name"></span>
+                        </div>
                         
-                        <strong>Tên: </strong><span class="payment-customer-name">Nguyễn Văn A</span>
                         <br>
-                        <strong>Email: </strong><span class="payment-customer-email">asd@</span>
+                        <div class="cus-email">
+                            <label>Email: </label><span class="payment-customer-email"></span>
+                        </div>
                         <br>
-                        <label for="phone-payment">Số điện thoại:</label>
-                        <input type="number" id="phone-payment" placeholder="Số điện thoại" required /><br />
-                        <label for="address-payment">Địa chỉ: (Nếu thay đổi địa chỉ vui lòng nhập lại)</label><br />
-                        <input type="text" id="address-payment" placeholder="Nhập địa chỉ" required /><br />
-                        <label for="note-payment">Ghi chú đơn hàng (tùy chọn)</label> <br />
-                        <textarea id="note-payment"
-                            placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay địa chỉ giao hàng chi tiết"></textarea>
+                        <div class="cus-phone">
+                            <label for="phone-payment" >Số điện thoại:</label><span class="payment-customer-phone"></span>
+                        </div>
+                        <br />
+                        <div class="cus-address">
+                            <label for="address-payment">Địa chỉ: </label>
+                            <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required />
+                                
+                        </div>
+                        <br />
+                        <div class="payment-customer-note">
+                            <label for="note-payment">Ghi chú đơn hàng (tùy chọn)</label> <br />
+                            <textarea id="note-payment"
+                                placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay địa chỉ giao hàng chi tiết"></textarea>
+
+                        </div>
+                        <div class="payment-left-footer">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 230px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;">
+                                ← Quay lại giỏ hàng
+                            </p>
+                        </div>
+                        
                     </form>
                 </div>
 

@@ -79,6 +79,7 @@ CartPhone.addEventListener("click", () => {
 
 let new_cart = [];
 
+const cartIcon = document.getElementById("#cart");
 function addToCart(productId) {
     $.ajax({
         url: "../../PHP/carts/addToCart.php",
@@ -87,9 +88,12 @@ function addToCart(productId) {
             'product_id': productId
         },
         success: function (response) {
-            alert(response);
+            // alert(response);
+            $('.cart-count').text(response);
         }
     });
+    
+    
 }
 
 function getCart(callback) {

@@ -19,6 +19,11 @@
     } else {
         $conn->query("INSERT INTO cart (user_id, product_id, quantity) VALUES ($user_id, $product_id, 1)");
     }
+    
+    // echo "Thêm vào giỏ hàng thành công!";
+    $total_sql = "SELECT SUM(quantity) AS total FROM cart WHERE user_id = $user_id";
+    $total_result = $conn->query($total_sql);
+    $row = $total_result->fetch_assoc();
 
-    echo "Thêm vào giỏ hàng thành công!";
+    echo $row['total']; // gửi về số lượng để JS hiển thị
 ?>

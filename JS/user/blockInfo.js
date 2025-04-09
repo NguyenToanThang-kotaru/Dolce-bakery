@@ -24,4 +24,11 @@ a.addEventListener("click",function(){
     d.style.display="none";
     flagInfo=0;
     })
+    window.addEventListener("click",function(event){
+        if(event.target===d){
+            b.style.display="none";
+            d.style.display="none";
+            flagInfo=0;
+        }
+    })
 })

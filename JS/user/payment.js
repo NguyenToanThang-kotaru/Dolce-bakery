@@ -17,6 +17,8 @@ function toggleCOD() {
 let buy = document.getElementById("buy");
 let blockPayment = document.getElementById("overlay-payment");
 let closePayment = document.getElementById("close-payment");
+let back_cart = document.getElementById("payment-back-cart");
+let back_mainPage = document.getElementById("main-page");
 let flag_payment = 0;
 
 buy.addEventListener("click", function () {
@@ -42,6 +44,15 @@ buy.addEventListener("click", function () {
             flag_payment = 0;
         }
     });
+    back_cart.addEventListener("click", function () {
+        blockPayment.style.display = "none";
+        flag_payment = 0;
+    })
+    back_mainPage.addEventListener("click", function () {
+        blockPayment.style.display = "none";
+        flag_payment = 0;
+       
+    })
 
     GoToPayProcess();
 })
@@ -65,6 +76,7 @@ function getPayDate() {
 function setUserInfoPayment() {
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
     document.querySelector(".payment-customer-email").textContent = userSession.email;
+    document.querySelector(".payment-customer-phone").textContent = userSession.numberPhone;
 }
 
 function displayItemReadyPaying() {
