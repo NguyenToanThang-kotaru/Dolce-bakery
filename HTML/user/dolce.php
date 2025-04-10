@@ -770,8 +770,8 @@
                             <span class="invoice-total-price">12.000.000đ</span>
                         </div>
                           
-                        <div class="invoice-process-note">Ghi chú:</div>
-                        <div class="invoice-process-payment">Phương thức thanh toán:</div>
+                        <div class="invoice-process-note"></div>
+                        <div class="invoice-process-payment"></div>
                     </div>
 
                 </div>

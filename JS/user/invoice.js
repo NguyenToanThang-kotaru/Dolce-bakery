@@ -61,8 +61,8 @@ function getInfoSummary()
     document.querySelector(".invoice-customer-phone").textContent = phone;
     document.querySelector(".invoice-customer-address").textContent = address;
     document.querySelector(".invoice-date").textContent = paymentDate;
-    document.querySelector(".invoice-process-note").textContent = note;
-    document.querySelector(".invoice-process-payment").textContent = paymentMethod + " " + bankName + " " + bankNumber;
+    document.querySelector(".invoice-process-note").textContent = "Ghi chú: " + note;
+    document.querySelector(".invoice-process-payment").textContent = "Phương thức thanh toán: " + paymentMethod + " " + bankName + " " + bankNumber;
     
     console.log(userName);
     console.log(email);
