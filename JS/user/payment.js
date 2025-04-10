@@ -65,6 +65,8 @@ function getPayDate() {
 function setUserInfoPayment() {
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
     document.querySelector(".payment-customer-email").textContent = userSession.email;
+    document.querySelector("#phone-payment").value = userSession.numberPhone + "";
+    // Them dia chi
 }
 
 function displayItemReadyPaying() {
@@ -89,3 +91,4 @@ function displayItemReadyPaying() {
     document.querySelector(".payment-table .payment-total-product-price-value").innerHTML = totalAmount.toLocaleString('vi-VN');
     document.querySelector(".payment-table .payment-total-price-value").innerHTML = totalAmount.toLocaleString('vi-VN');
 }
+
