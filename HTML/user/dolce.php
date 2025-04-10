@@ -18,13 +18,9 @@
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
     <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
     <link rel="stylesheet" href="../../CSS/user/allPD.css">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../../CSS/user/payment.css">
-=======
     <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
     <link rel="stylesheet" href="../../CSS/user/payment.css">
     <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
->>>>>>> 9de11d66d4287316a7e37bd6029cda65cd809ee3
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
