@@ -712,6 +712,8 @@
                             <span class="invoice-customer-phone"></span> <br />
                             <label><strong>Địa chỉ:</strong></label>
                             <span class="invoice-customer-address"></span> <br />
+                            <label><strong>Email:</strong></label>
+                            <span class="invoice-customer-email"></span> <br />
                             <label><strong>Voucher(nếu có):</strong></label>
                             <span class="invoice-customer-voucher"></span> <br />
                         </div>
@@ -727,6 +729,9 @@
                         <!-- <span class="payment-product"></span> -->
                         <div class="invoice-product-list-container">
                             <div class="invoice-product">
+                                <span class="invoice-product-img">
+                                    <img src>
+                                </span>
                                 <span class="invoice-product-name">Bánh kem trà xanh </span>
                                 <span class="invoice-product-quantity">x2</span>
                                 <span class="space">........................................................................</span>
