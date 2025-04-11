@@ -43,7 +43,7 @@ function getInfoSummary()
 {
     let userName = document.querySelector(".payment-customer-name").textContent;
     let email = document.querySelector(".payment-customer-email").textContent;
-    let phone = document.querySelector("#phone-payment").value;
+    let phone = document.querySelector(".payment-customer-phone").textContent;
     let address = document.querySelector("#address-payment").value;
     let note = document.querySelector("#note-payment").value;
     let paymentDate = document.querySelector(".payment-date").textContent;

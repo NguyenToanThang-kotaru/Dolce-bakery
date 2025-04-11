@@ -107,7 +107,7 @@ function getPayDate() {
 function setUserInfoPayment() {
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
     document.querySelector(".payment-customer-email").textContent = userSession.email;
-    document.querySelector("#phone-payment").value = userSession.numberPhone + "";
+    document.querySelector(".payment-customer-phone").textContent = userSession.numberPhone + "";
     // Them dia chi
 }
 
