@@ -1,4 +1,4 @@
-const payment = document.querySelector('.submit-payment-btn');
+const payment = document.getElementById('submit-payment-btn');
 const blockInvoice = document.getElementById('overlay-invoice');
 const mainInvoice = document.getElementById('invoice-container');
 const closeInvoice = document.getElementById('close-invoice');
