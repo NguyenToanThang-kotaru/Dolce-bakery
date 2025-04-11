@@ -125,7 +125,7 @@ function displayItemInCart() {
                     <img src="${item.image}" width="8%" height="100%" alt="">
                     <div id="PDCart-NP">
                         <div id="PDCart-Name">${item.name}</div>
-                        <div id="PDCart-Price">${item.price}đ</div>
+                        <div id="PDCart-Price">${parseInt(item.price).toLocaleString("vi-VN")}đ</div>
                     </div>
                 </div>
                 <div id="PDCart2">
@@ -149,7 +149,7 @@ function calculateTotal(cart) {
     cart.forEach(item => {
         totalAmout += item.price * item.quantity;
     })
-    document.querySelector('#price-total').textContent = totalAmout + "đ";
+    document.querySelector('#price-total').textContent = totalAmout.toLocaleString("vi-VN") + "đ";
 }
 
 function addItemToCart(id) {

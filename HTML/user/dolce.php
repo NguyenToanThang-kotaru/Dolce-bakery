@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../../CSS/user/allPD.css">
     <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
     <link rel="stylesheet" href="../../CSS/user/payment.css">
+    <link rel="stylesheet" href="../../CSS/user/invoice.css">
     <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -596,27 +597,16 @@
                             <label><strong>Email:</strong> </label><span class="payment-customer-email"></span>
                         </div>
                         <br>
-                        <div class="cus-phone">
-                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label><span class="payment-customer-phone"></span>
-                        </div>
-                        <br />
-                        <div class="cus-address">
-                            <label for="address-payment"><strong>Địa chỉ:</strong> </label>
-                            <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required />
-                                
-                        </div>
-                        <br />
-                        <div class="payment-customer-note">
-                            <label for="note-payment"><strong>Ghi chú đơn hàng (tùy chọn)</strong></label> <br />
-                            <input style="width: 30vw;" type="text" id="note-payment" placeholder="Nhập ghi chú cho đơn hàng" />
-
-                        </div>
-                        <div class="payment-left-footer">
-                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
-                                ← Quay lại giỏ hàng
-                            </p>
-                        </div>
+                        <label for="phone-payment">Số điện thoại:</label>
+                        <input type="number" id="phone-payment" placeholder="Số điện thoại" required /><br />
                         
+                        <label for="address-payment">Địa chỉ: (Nếu thay đổi địa chỉ vui lòng nhập lại)</label><br />
+                        <input type="text" id="address-payment" placeholder="Nhập địa chỉ" required /><br />
+                        <div class="error-msg-payment"></div>
+
+                        <label for="note-payment">Ghi chú đơn hàng (tùy chọn)</label> <br />
+                        <textarea id="note-payment"
+                            placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay địa chỉ giao hàng chi tiết"></textarea>
                     </form>
                 </div>
 
@@ -679,11 +669,14 @@
                                 <option value="vpbank">VPBank</option>
                                 <option value="agribank">Agribank</option>
                             </select>
+                            <div id="select-bank" class="error-msg-payment"></div>
                             <br /><br />
                             <label for="card-number">Số thẻ:</label>
                             <input type="number" id="card-number" placeholder="Nhập số thẻ ATM" required />
+                            <div id="payment-card-method-error" class="error-msg-payment"></div>
                         </div>
                     </div>
+                    <div id="payment-method-error" class="error-msg-payment"></div>
                     <div class="payment-submit-background">
                         <button type="submit" id="submit-payment-btn">Thanh toán</button>
                     </div>
@@ -725,7 +718,6 @@
                             <div class="invoice-product">
                                 <span class="invoice-product-name">Bánh kem trà xanh </span>
                                 <span class="invoice-product-quantity">x2</span>
-                               
                                 <span class="space">........................................................................</span>
                                 <span class="invoice-product-price">9000000đ</span>
                             </div>
@@ -785,8 +777,8 @@
                             <span class="invoice-total-price">12.000.000đ</span>
                         </div>
                           
-                        <div class="invoice-process-note">Ghi chú:</div>
-                        <div class="invoice-process-payment">Phương thức thanh toán:</div>
+                        <div class="invoice-process-note"></div>
+                        <div class="invoice-process-payment"></div>
                     </div>
 
                 </div>
@@ -801,7 +793,6 @@
                 </div>
             </div>
         </div>
-        
         <!-- -------------------------------------FOoter------------------------------------- -->
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">
@@ -853,7 +844,7 @@
 
    
 
-
+    <script src="../../JS/user/invoice.js"></script>
     <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/clear.js"></script>
     <script src="../../JS/user/slideShow.js"></script>
