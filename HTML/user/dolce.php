@@ -696,7 +696,7 @@
             </div>
 
         </div>    
-        
+        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-invoice">
             <div id="invoice-container">
                 <div class="invoice-header">
@@ -729,7 +729,6 @@
                             <div class="invoice-product">
                                 <span class="invoice-product-name">Bánh kem trà xanh </span>
                                 <span class="invoice-product-quantity">x2</span>
-                               
                                 <span class="space">........................................................................</span>
                                 <span class="invoice-product-price">9000000đ</span>
                             </div>
@@ -789,8 +788,8 @@
                             <span class="invoice-total-price">12.000.000đ</span>
                         </div>
                           
-                        <div class="invoice-process-note">Ghi chú:</div>
-                        <div class="invoice-process-payment">Phương thức thanh toán:</div>
+                        <div class="invoice-process-note"></div>
+                        <div class="invoice-process-payment"></div>
                     </div>
 
                 </div>
