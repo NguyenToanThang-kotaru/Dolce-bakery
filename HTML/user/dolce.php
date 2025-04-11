@@ -723,7 +723,9 @@
                         <!-- <span class="payment-product"></span> -->
                         <div class="invoice-product-list-container">
                             <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
+                                <span class="invoice-product-name">Bánh kem trà xanh </span>
+                                <span class="invoice-product-quantity">x2</span>
+                               
                                 <span class="space">........................................................................</span>
                                 <span class="invoice-product-price">9000000đ</span>
                             </div>
