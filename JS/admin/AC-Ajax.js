@@ -114,7 +114,6 @@ document.querySelector(".add-form-account").addEventListener("submit", function 
             newRow.setAttribute("data-id", data.account.id); 
             newRow.innerHTML = `
                 <td>${data.account.username}</td>
-                <td>${data.account.hasshedPassword}</td>
                 <td>${data.account.email}</td>
                 <td>
                     <select class='account-status'>

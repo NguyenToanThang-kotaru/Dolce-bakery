@@ -142,12 +142,13 @@ if (!isset($_SESSION['adminInfo'])) {
 
         <div class="form-group">
           <label for="product-type" class="form-label">Loại sản phẩm</label>
-          <select id="product-type" name="product-type" class="form-select">
+          <!-- <select id="product-type" name="product-type" class="form-select">
             <option value="">-- Chọn loại sản phẩm --</option>
             <option value="cake">Bánh kem</option>
             <option value="bread">Bánh mì</option>
             <option value="cookie">Cookies</option>
-          </select>
+          </select> -->
+          <?php include '../../PHP/PD-getCategory.php'?>
         </div>
 
         <div class="form-group">

@@ -1,7 +1,8 @@
 <?php
 session_start();
-unset($_SESSION['adminInfo']);
-session_destroy(); 
-header("Location: login_admin.php"); 
+unset($_SESSION['adminInfo']); // Xóa biến session
+session_destroy();             // Hủy toàn bộ session
+
+echo json_encode(['status' => 'success']);
 exit();
 ?>
