@@ -5,7 +5,7 @@ $response = []; // Mảng chứa phản hồi
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['product-name'] ?? null;
-    $type = $_POST['product-type'] ?? null;
+    $category_id = $_POST['product-category'] ?? null;
     $quantity = $_POST['product-quantity'] ?? null;
     $price = $_POST['product-price'] ?? null;
 
@@ -25,8 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target_file = $noneIMG;
     }
 
-    $sql = "INSERT INTO products (name, type, quantity, price, image) 
-            VALUES ('$name', '$type', '$quantity', '$price', '$target_file')";
+     // lấy tên loại
+     $sql = "SELECT name FROM categories WHERE id = ?";
+     $stmt = $conn->prepare($sql);
+     $stmt->bind_param("i", $category_id);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     if ($row = $result->fetch_assoc()) {
+         $category_name = $row["name"];
+     }
+     $stmt->close();
+
+    $sql = "INSERT INTO products (pd_name, category_id, quantity, price, image) 
+            VALUES ('$name', '$category_id', '$quantity', '$price', '$target_file')";
 
     if ($conn->query($sql) === TRUE) {
         $response = [
@@ -36,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "id" => $conn->insert_id,
                 "image" => $target_file,
                 "name" => $name,
-                "type" => $type,
+                "category_name" => $category_name,
+                "category_id" => $category_id,
                 "quantity" => $quantity,
                 "price" => number_format($price, 0, ',', '.') . " VND"
             ]

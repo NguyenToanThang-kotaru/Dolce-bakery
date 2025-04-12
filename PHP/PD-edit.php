@@ -6,7 +6,7 @@ $response = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['product-id']; // Lấy ID sản phẩm
     $name = $_POST['product-name'];
-    $type = $_POST['product-type'];
+    $category_id = $_POST['product-category'];
     $quantity = $_POST['product-quantity'];
     $price = $_POST['product-price'];
 
@@ -38,10 +38,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
 
-    // Cập nhật database
-    $sql = "UPDATE products SET image = ?, name = ?, type = ?, quantity = ?, price = ? WHERE id = ?";
+    // lấy tên loại
+    $sql = "SELECT name FROM categories WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssiii", $target_file, $name, $type, $quantity, $price, $id);
+    $stmt->bind_param("i", $category_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $category_name = $row["name"];
+    }
+    $stmt->close();
+
+    // Cập nhật database
+    $sql = "UPDATE products SET image = ?, pd_name = ?, category_id = ?, quantity = ?, price = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssiiii", $target_file, $name, $category_id, $quantity, $price, $id);
 
     if ($stmt->execute()) {
         $response = [
@@ -51,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "id" => $id,
                 "image" => $target_file,
                 "name" => $name,
-                "type" => $type,
+                "category_name" => $category_name,
                 "quantity" => $quantity,
                 "price" => number_format($price, 0, ',', '.') . " VND"
             ]

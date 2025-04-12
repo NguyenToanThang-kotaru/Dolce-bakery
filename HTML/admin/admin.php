@@ -141,14 +141,19 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-type" class="form-label">Loại sản phẩm</label>
-          <!-- <select id="product-type" name="product-type" class="form-select">
+        <label for="subcategory" class="form-label">Chủng sản phẩm</label>
+        <?php 
+          $selectId = "product-subcategory";
+          $selectName = "product-subcategory";
+          include '../../PHP/PD-getSubcategory.php';
+        ?>
+        </div>
+
+        <div class="form-group">
+        <label for="category" class="form-label">Loại sản phẩm</label>
+        <select name="product-category" id="product-category" class="form-select" required>
             <option value="">-- Chọn loại sản phẩm --</option>
-            <option value="cake">Bánh kem</option>
-            <option value="bread">Bánh mì</option>
-            <option value="cookie">Cookies</option>
-          </select> -->
-          <?php include '../../PHP/PD-getCategory.php'?>
+        </select>
         </div>
 
         <div class="form-group">
@@ -184,13 +189,41 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-type" class="form-label">*Loại sản phẩm</label>
-          <select id="product-typeFIX" name="product-type" class="form-select">
-            <option value="">-- Chọn loại sản phẩm --</option>
-            <option value="cake">Bánh kem</option>
-            <option value="bread">Bánh mì</option>
-            <option value="cookie">Cookies</option>
-          </select>
+        <label for="subcategory" class="form-label">Chủng sản phẩm</label>
+        <select name="product-subcategory" id="product-subcategoryFIX" class="form-select" required>
+          <?php
+            include 'config.php';
+            $sql = "SELECT id, name FROM subcategories";
+            $result = $conn->query($sql);
+            echo "  <option value=''>-- Chọn chủng loại sản phẩm --</option>";
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+            } else {
+                echo "<option value=''>Không có chủng loại nào!</option>";
+            }
+          ?>
+        </select>
+        </div>
+
+        <div class="form-group">
+        <label for="category" class="form-label">Loại sản phẩm</label>
+        <select name="product-category" id="product-categoryFIX" class="form-select" required>
+        <?php
+            include 'config.php';
+            $sql = "SELECT id, name FROM categories";
+            $result = $conn->query($sql);
+            echo "  <option value=''>-- Chọn loại sản phẩm --</option>";
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+            } else {
+                echo "<option value=''>Không có loại nào!</option>";
+            }
+          ?>
+        </select>
         </div>
 
         <div class="form-group">
@@ -670,7 +703,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/AC-Ajax.js"></script>
   <script src="../../JS/admin/CU-Ajax.js"></script>
   <script src="../../JS/admin/Logout_admin.js"></script>
-
+  <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
 
 
 </body>
