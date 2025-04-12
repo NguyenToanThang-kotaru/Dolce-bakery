@@ -90,6 +90,7 @@ function addToCart(productId) {
         success: function (response) {
             // alert(response);
             $('.cart-count').text(response);
+            showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
         }
     });
     
@@ -192,4 +193,20 @@ function removeItemFromCart(id) {
         }
     });
     console.log("Xoa san pham: " + id);
+}
+
+function showToast(message, isSuccess, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    toast.style.backgroundColor = isSuccess ? "#4caf50" : "#f44336";
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = "fadeout 0.3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+
+    return duration + 300; 
 }

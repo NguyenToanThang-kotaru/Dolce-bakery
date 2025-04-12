@@ -732,57 +732,11 @@
                                 <span class="invoice-product-img">
                                     <img src>
                                 </span>
-                                <span class="invoice-product-name">Bánh kem trà xanh </span>
-                                <span class="invoice-product-quantity">x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
+                                <span class="invoice-product-name"></span>
+                                <span class="invoice-product-quantity"></span>
+                                <span class="space"></span>
+                                <span class="invoice-product-price"></span>
                             </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-
                         </div>
                         
                         
@@ -790,7 +744,7 @@
                     <div class="invoice-process">
                         <div class="invoice-process-total">
                             Tổng cộng:
-                            <span class="invoice-total-price">12.000.000đ</span>
+                            <span class="invoice-total-price"></span>
                         </div>
                           
                         <div class="invoice-process-note"></div>

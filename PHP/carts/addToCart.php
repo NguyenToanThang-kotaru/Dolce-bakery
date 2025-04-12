@@ -9,6 +9,7 @@
     }
 
     $user_id = $_SESSION['userInfo']['userID'];
+    $email = $_SESSION['userInfo']['email'];
     $product_id = $_POST['product_id'];
 
     $sql = "SELECT * FROM cart WHERE user_id = $user_id AND product_id = $product_id";
@@ -17,7 +18,7 @@
     if($result->num_rows > 0){
         $conn->query("UPDATE cart SET quantity = quantity + 1 WHERE user_id = $user_id AND product_id = $product_id");
     } else {
-        $conn->query("INSERT INTO cart (user_id, product_id, quantity) VALUES ($user_id, $product_id, 1)");
+        $conn->query("INSERT INTO cart (user_id, email, product_id, quantity) VALUES ($user_id, '$email', $product_id, 1)");
     }
     
     // echo "Thêm vào giỏ hàng thành công!";
