@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
         $id = $row['id'];
         echo "<tr data-id='$id'>";
         echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
-        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $row['pd_name'] . "</td>";
         echo "<td>" . $row['category_name'] . "</td>";
         echo "<td>" . $row['quantity'] . "</td>";
         echo "<td>" . number_format($row['price'], 0, ',', '.') . " VND</td>";
