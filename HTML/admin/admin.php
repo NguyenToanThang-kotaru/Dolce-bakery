@@ -1,12 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION['adminInfo'])) {
-    header("Location: login-admin.php");
-    exit();
+  header("Location: login-admin.php");
+  exit();
 }
-?> 
+?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,6 +28,7 @@ if (!isset($_SESSION['adminInfo'])) {
     <a href="#" id="admin-customer">Khách hàng</a>
     <a href="#" id="admin-account">Quản lí tài khoản</a>
     <a href="#" id="admin-role">Quản lí quyền</a>
+    <a href="#" id="admin-employee">Nhân viên</a>
 
     <img src="../../assest/Dolce.png" alt="hahaha" />
   </div>
@@ -59,7 +61,7 @@ if (!isset($_SESSION['adminInfo'])) {
       <div class="profile-header">
         <img src="../../assest/admin.jpg" alt="" class="avatar" />
         <div class="user-info">
-            <h2><?php echo $_SESSION['adminInfo']['fullName']; ?></h2>
+          <h2><?php echo $_SESSION['adminInfo']['fullName']; ?></h2>
         </div>
       </div>
       <ul class="menu-profile">
@@ -148,7 +150,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <option value="bread">Bánh mì</option>
             <option value="cookie">Cookies</option>
           </select> -->
-          <?php include '../../PHP/PD-getCategory.php'?>
+          <?php include '../../PHP/PD-getCategory.php' ?>
         </div>
 
         <div class="form-group">
@@ -253,11 +255,11 @@ if (!isset($_SESSION['adminInfo'])) {
             </thead>
             <tbody id="history-order-table-body">
               <!-- Dữ liệu đơn hàng sẽ được thêm ở đây -->
-               <!-- Dữ liệu tạm -->
+              <!-- Dữ liệu tạm -->
               <tr>
-                  <td>Bánh thần tài</td>
-                  <td>3</td>
-                  <td>303030</td>
+                <td>Bánh thần tài</td>
+                <td>3</td>
+                <td>303030</td>
               </tr>
             </tbody>
           </table>
@@ -279,11 +281,11 @@ if (!isset($_SESSION['adminInfo'])) {
             </thead>
             <tbody id="history-order-table-body">
               <!-- Dữ liệu đơn hàng sẽ được thêm ở đây -->
-               <!-- Dữ liệu tạm -->
+              <!-- Dữ liệu tạm -->
               <tr>
-                  <td>Bánh thần tài</td>
-                  <td>3</td>
-                  <td>303030</td>
+                <td>Bánh thần tài</td>
+                <td>3</td>
+                <td>303030</td>
               </tr>
             </tbody>
           </table>
@@ -659,6 +661,99 @@ if (!isset($_SESSION['adminInfo'])) {
 
 
 
+    </div>
+  </div>
+
+  <!-- employee-part -->
+  <div class="employee-part">
+    <div class="employee-table-container">
+      <div id="employee-plus">Thêm nhân viên</div>
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã nhân viên</th>
+            <th>Họ tên</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Cài đặt</th>
+          </tr>
+        </thead>
+        <tbody id="employee-table-body">
+          <tr>
+            <td>1</td>
+            <td>NV001</td>
+            <td>Nguyễn Toàn Năng</td>
+            <td>Quận 1</td>
+            <td>0391823921</td>
+            <td>
+              <div class='fix-employee'>
+                <i class='fa-solid fa-pen-to-square fix-btn-employee' data-id='$empId'></i>
+                <i class='fa-solid fa-trash delete-btn-employee' data-id='$empId'></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form class="add-form-employee" action="../../PHP/PD-Add.php" method="POST" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-employee"></i>
+
+        <div class="form-group">
+          <label for="employee-name" class="form-label">Họ tên nhân viên</label>
+          <input type="text" id="employee-name" name="employee-name" placeholder="Nhập tên nhân viên"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="employee-address" name="employee-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="employee-phone" name="employee-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button" id="accept-addEP">Thêm Nhân Viên</button>
+        </div>
+      </form>
+
+      <form class="fix-form-employee" id="update-form-employee" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-employee"></i>
+        <div class="form-group">
+          <label for="employee-name" class="form-label">Họ tên nhân viên</label>
+          <input type="text" id="employee-nameFIX" name="employee-name" placeholder="Nhập tên nhân viên"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="employee-addressFIX" name="employee-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="employee-phoneFIX" name="employee-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" id="accept-fixEP" class="form-button">Hoàn tất</button>
+        </div>
+      </form>
+
+      <div id="delete-overlay-employee">
+        <div class="delete-container">
+          <span>Bạn muốn xóa nhân viên?</span>
+          <button id="delete-acp-employee">Xác nhận</button>
+          <button id="cancel-employee">Hủy</button>
+        </div>
+      </div>
     </div>
   </div>
 
