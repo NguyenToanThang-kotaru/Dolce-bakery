@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="../../CSS/user/cartShop.css">
     <link rel="stylesheet" href="../../CSS/user/catelouge.css">
     <link rel="stylesheet" href="../../CSS/user/InfoUser.css">
+    <link rel="stylesheet" href="../../CSS/user/infoproduct.css">
+    <link rel="stylesheet" href="../../CSS/user/allPD.css">
     <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
     <script src="https://kit.fontawesome.com/1dbf430077.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -123,7 +125,7 @@
                     <div id="suggestion"></div>
                 </div>
                 <div id="rightMenu">
-                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%">
+                    <div id="cart" style="margin-left: 60px;" onclick = "getCart()"><img src="../../assest/Shopping cart.png" width="50%">
                     </div>
                     <div id="menu">
                         <img src="../../assest/menu.png" id="menu2" alt="">
@@ -237,6 +239,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="bread-container">
                         <?php $type = "bread";
                         include '../../PHP/users/uploadpd.php'; ?>
@@ -300,6 +305,9 @@
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
                     <div class="product-container" id="cake-container">
 
                         <?php $type = "cake";
@@ -355,7 +363,7 @@
 
                         <span class="acp-filter" onclick="render_filter()">Done</span>
                     </div>
-                </div>
+                </div>  
 
                 <div class="show-product" id="product-list">
                     <div class="title">
@@ -364,11 +372,15 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
                             <option value="up">Giá cao nhất</option>
+                            <option value="impression">Nổi bật</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
+
+                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+
+
                     <div class="product-container" id="cookie-container">
 
                         <?php $type = "cookie";
@@ -400,7 +412,7 @@
 
 
         <!-- --------------------------display all product--------------------- -->
-        <div class="main-containerPD">
+        <div class="main-containerPD allproduct-catelouge-container">
 
             <div class="product-filter">
                 <!-- <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')"> -->
@@ -466,13 +478,7 @@
                     <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
 
                     <div id="allproduct-container">
-
                         <?php include '../../PHP/users/displayProduct.php'; ?>
-
-
-
-
-
                     </div>
 
 
@@ -613,19 +619,6 @@
                 <div class="row">
                     <label for="email" class="Detail" >Email:</label>
                     <span></span>
-
-                    </div>
-
-                    <div class="row">
-                        <label for="email" class="Detail">Email:</label>
-                        <span>email@gmail.com</span>
-
-                    </div>
-
-                    <div class="row">
-                        <label for="phone" class="Detail">Số điện thoại: </label>
-                        <span>1234567890</span>
-                    </div>
                 </div>
                     
                 <div class="row">
@@ -636,7 +629,7 @@
 
         </div>
 
-
+    </div>
 
 
         <!-- -------------------------------------FOoter------------------------------------- -->
@@ -688,7 +681,7 @@
         </footer>
 
 
-    </div>
+   
 
 
 
@@ -698,7 +691,6 @@
     <script src="../../JS/user/blockCart.js"></script>
     <script defer src="../../JS/user/pagination.js"></script>
     <script defer src="../../JS/user/paginationOfMainPD.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>

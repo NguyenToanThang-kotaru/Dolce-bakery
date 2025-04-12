@@ -330,3 +330,18 @@
 .acp-filter:hover{
     background-color: rgb(150, 150, 142);
 }
+
+
+.backtomain{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 1;
+    position: absolute;
+    left: 20px;
+    /* top: 150px; */
+}
+
+.backtomain:hover{
+    transform: scale(1.1);
+}

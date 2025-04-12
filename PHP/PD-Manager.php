@@ -10,7 +10,7 @@ if ($result->num_rows > 0) {
         echo "<tr data-id='$id'>";
         echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
         echo "<td>" . $row['name'] . "</td>";
-        echo "<td>" . $row['type'] . "</td>";
+        echo "<td>" . $row['category_id'] . "</td>";
         echo "<td>" . $row['quantity'] . "</td>";
         echo "<td>" . number_format($row['price'], 0, ',', '.') . " VND</td>";
         echo "<td><div class='fix-product'>

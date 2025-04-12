@@ -141,7 +141,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.loggedIn) {
                     // Lưu vào Session Storage
-                    sessionStorage.setItem("userSession", JSON.stringify(data.user));
+                    sessionStorage.setItem("userInfo", JSON.stringify(data.user));
 
                     $("#login-btn").hide();
                     $("#infor").show();
@@ -149,7 +149,7 @@ $(document).ready(function () {
 
                     loadUserInfo();
                 } else {
-                    sessionStorage.removeItem("userSession");
+                    sessionStorage.removeItem("userInfo");
 
                     $("#login-btn").show();
                     $("#infor").hide();
@@ -178,10 +178,10 @@ function clearErrors(form) {
 }
 
 function loadUserInfo() {
-    let userData = sessionStorage.getItem("userSession");
+    let userData = sessionStorage.getItem("userInfo");
 
     if (!userData) {
-        console.log("No user session found");
+        console.log("No user info found");
         return;
     }
 

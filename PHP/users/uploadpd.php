@@ -23,7 +23,9 @@ if ($result->num_rows > 0) {
                 <div class='product-name'>" . $row['name'] . "</div>    
                 <div class='product-end'>
                     <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
-                    <div class='add-cart'><img src='../../assest/cart.png' alt=''></div>
+                    <div class='add-cart' onclick='addToCart(" . $row['id'] . ")'>
+                        <img src='../../assest/cart.png' alt=''>
+                    </div> 
                 </div>
               </div>";
     }

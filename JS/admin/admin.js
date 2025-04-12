@@ -106,6 +106,10 @@ const delete_btn_2 = document.querySelectorAll(".delete-btn-customer");
 const fix_btn_2 = document.querySelectorAll(".fix-btn-customer");
 const cancel_btn_2 = document.querySelector("#cancel-customer");
 
+const order_history = document.querySelector(".history-order-container");
+const show_order_btn = document.querySelectorAll(".history-order")
+const back_history = document.querySelector(".back-customer2");
+
 const add_form_3 = document.querySelector(".add-form-account");
 const plus_3 = document.querySelector("#account-plus");
 const account_table = document.querySelector(".account-table");
@@ -213,6 +217,7 @@ function returnCustomer(){
     fix_form_2.style.display = "none";
     delete_ovl_2.style.display = "none";
     profile_part.style.display = "none";
+    order_history.style.display = "none";
 }
 
 function returnAcount(){
@@ -232,6 +237,11 @@ function returnRole(){
     delete_ovl_4.style.display = "none";
     profile_part.style.display = "none";
     account_ovl_4.style.display = "none";
+}
+
+function showOrderHistory(){
+    order_history.style.display = "block";
+    customer_table.style.display = "none";
 }
 
 function showNofiProduct(){
@@ -254,9 +264,15 @@ function showUserRole(){
     account_ovl_4.style.display = "block";
 }
 
+
 plus_1.addEventListener("click",addFormProduct);
 plus_3.addEventListener("click",addFormAccount);
 plus_4.addEventListener("click",addFormRole);
+
+
+show_order_btn.forEach(button =>{
+    button.addEventListener("click",showOrderHistory);
+})
 
 delete_btn_1.forEach(button =>{
     button.addEventListener("click",showNofiProduct);
@@ -306,6 +322,8 @@ back_3.forEach(button =>{
 back_4.forEach(button =>{
     button.addEventListener("click",returnRole);
 })
+
+back_history.addEventListener("click",returnCustomer);
 
 show_userrole.forEach(button =>{
     button.addEventListener("click",showUserRole);

@@ -7,6 +7,7 @@
     justify-content: space-between;
     font-family: Arial, sans-serif;
     text-align: center;
+    display: block;
   }
   
   #logo-section {
