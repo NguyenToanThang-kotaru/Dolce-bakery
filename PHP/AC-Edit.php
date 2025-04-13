@@ -9,18 +9,23 @@ if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
     $accountId = $_POST['account-id'];
     $userName = $_POST['account-name'];
     $password = $_POST['account-pass'];
-    $email = $_POST['account-email'];
     $permissionId = $_POST['permission_id']; 
+    $permission_name = null;
 
-    // Lấy trạng thái hiện tại của tài khoan từ database
-    $sql_get_status = "SELECT status FROM users WHERE id = ?";
+    // Lấy trạng thái hiện tại và tên nhân viên
+    $sql_get_status = "
+    SELECT ea.status, e.fullName 
+    FROM employeeaccount ea 
+    JOIN employees e ON ea.userName = e.id 
+    WHERE ea.id = ?
+    ";
     $stmt_get_status = $conn->prepare($sql_get_status);
     $stmt_get_status->bind_param("i", $accountId);
     $stmt_get_status->execute();
-    $stmt_get_status->bind_result($current_status);
+    $stmt_get_status->bind_result($current_status, $fullName);
     $stmt_get_status->fetch();
     $stmt_get_status->close();
-    $status = $current_status; 
+    $status = $current_status;
 
     // Lấy tên quyền
     $sql_get_permission_name = "SELECT name FROM permissions WHERE id = ?";
@@ -34,20 +39,21 @@ if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
 
     // Cập nhật thông tin tài khoản
     $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
-    $sql = "UPDATE users SET username = ?, email = ?, password = ?, permission_id = ? WHERE id = ?";
+    $sql = "UPDATE employeeaccount SET userName = ?, password = ?, permission_id = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssii", $userName, $email, $hasshedPassword, $permissionId, $accountId);
+    $stmt->bind_param("ssii", $userName, $hasshedPassword, $permissionId, $accountId);
 
     if ($stmt->execute()) {
         $response = [
             "success" =>true,
-            "message" => "Cập nhật tài khoảnthành công!",
+            "message" => "Cập nhật tài khoản thành công!",
             "user" => [
                 "id" => $accountId,
                 "userName" => $userName,
                 "password" => $hasshedPassword,
-                "email" => $email,
-                "permission_name" => $permission_name
+                "permission_name" => $permission_name,
+                "fullName" => $fullName,
+                "status" => $status
             ]
             ];
 

@@ -71,7 +71,6 @@ document.querySelector(".add-form-account").addEventListener("submit", function 
     clearErrors(this);
 
     let username = document.getElementById("account-name").value;
-    let email = document.getElementById("account-email").value;
     let password = document.getElementById("account-pass").value;
     let permission = document.getElementById("permissionSelect").value;
 
@@ -81,10 +80,6 @@ document.querySelector(".add-form-account").addEventListener("submit", function 
 
     if (!usernameRegex.test(username)) {
         showError(document.getElementById("account-name"), "Tên đăng nhập không hợp lệ.");
-        return;
-    }
-    if (!emailRegex.test(email)) {
-        showError(document.getElementById("account-email"), "Email không hợp lệ.");
         return;
     }
     if (!passwordRegex.test(password)) {
@@ -114,7 +109,7 @@ document.querySelector(".add-form-account").addEventListener("submit", function 
             newRow.setAttribute("data-id", data.account.id); 
             newRow.innerHTML = `
                 <td>${data.account.username}</td>
-                <td>${data.account.email}</td>
+                <td>${data.account.fullName}</td>
                 <td>
                     <select class='account-status'>
                         <option value='1' ${data.account.status == 1 ? 'selected' : ''}>Đang hoạt động</option>
@@ -189,7 +184,6 @@ document.addEventListener("click", function (event) {
                     document.getElementById("account-id-f").value = data.id;
                     document.getElementById("account-name-f").value = data.userName;
                     // document.getElementById("account-pass-f").value = data.password;
-                    document.getElementById("account-email-f").value = data.email;
 
                     // Cập nhật quyền 
                     if (data.permission_id) {
@@ -210,60 +204,6 @@ document.addEventListener("click", function (event) {
     }
 });
 
-// document.getElementById("fix-form-account").addEventListener("submit", function (event) {
-//     event.preventDefault(); 
-
-//     let formData = new FormData(this);
-
-//     fetch("../../PHP/AC-Edit.php", {
-//         method: "POST",
-//         body: formData
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             alert(data.message);
-//             console.log(data.user);
-//             // Cập nhật giao diện người dùng 
-//             let row = document.querySelector(`tr[data-id='${data.user.id}']`);
-//             if (row) {
-//                 row.innerHTML = `
-//                     <td>${data.user.userName}</td>
-//                     <td>${data.user.password}</td>
-//                     <td>${data.user.email}</td>
-//                     <td>
-//                         <select class='account-status' data-id="${data.user.id}">
-//                             <option value='1' ${data.user.status == 1 ? "selected" : ""}>Đang hoạt động</option>
-//                             <option value='2' ${data.user.status == 2 ? "selected" : ""}>Đã khóa</option>
-//                         </select>
-//                     </td>
-//                     <td>
-//                         <div style = 'display: flex;'>
-//                         <span style='margin-left: 10px; font-weight: bold;'>${data.user.permission_name}</span>
-//                         </div>
-//                     </td>
-//                     <td>
-//                         <div class='fix-account'>
-//                             <i class='fa-solid fa-pen-to-square fix-btn-account' data-id="${data.user.id}"></i>
-//                             <i class='fa-solid fa-trash delete-btn-account' data-id="${data.user.id}"></i>
-//                         </div>
-//                     </td>
-//                 `;
-
-//                 let statusSelect = row.querySelector(".account-status");
-//                 updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
-
-//                 console.log("Cập nhật thành công!");
-//             }
-//             else
-//                 console.log("Không tìm thấy tài khoản cần cập nhật!");
-//         } else {
-//             alert("Lỗi: " + data.message);
-//         }
-//     })
-//     .catch(error => console.error("Lỗi:", error));
-// });
-
 
 document.getElementById("fix-form-account").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -271,7 +211,6 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
     clearErrors(this); // Xóa lỗi cũ
 
     let username = document.getElementById("account-name-f").value.trim();
-    let email = document.getElementById("account-email-f").value.trim();
     let permission = document.getElementById("permissionSelect-f").value;
     let password = document.getElementById("account-pass-f").value;
 
@@ -282,11 +221,6 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
 
     if (!usernameRegex.test(username)) {
         showError(document.getElementById("account-name-f"), "Tên đăng nhập không hợp lệ.");
-        return;
-    }
-
-    if (!emailRegex.test(email)) {
-        showError(document.getElementById("account-email-f"), "Email không hợp lệ.");
         return;
     }
 
@@ -315,8 +249,7 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
             if (row) {
                 row.innerHTML = `
                     <td>${data.user.userName}</td>
-                    <td>${data.user.password}</td>
-                    <td>${data.user.email}</td>
+                    <td>${data.user.fullName}</td>
                     <td>
                         <select class='account-status' data-id="${data.user.id}">
                             <option value='1' ${data.user.status == 1 ? "selected" : ""}>Đang hoạt động</option>

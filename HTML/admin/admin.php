@@ -270,8 +270,8 @@ if (!isset($_SESSION['adminInfo'])) {
       </table>
 
       <div class="history-order-container">
-        <!-- <i class="fa-solid fa-rotate-left back-customer2"></i>
-        <div id="cus-identity">
+         <i class="fa-solid fa-rotate-left back-customer2"></i>
+        <!--<div id="cus-identity">
           <span>Khách hàng:</span>
           <h4>Nguyễn Toàn Thắng</h4>
         </div>
@@ -428,7 +428,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <tr>
             <th style="text-align: center">Tên đăng nhập</th>
             <!-- <th>Mật khẩu</th> -->
-            <th>Email</th>
+            <th>Tên nhân viên</th>
             <th>Trạng thái</th>
             <th>Quyền</th>
             <th>Cài đặt</th>
@@ -465,12 +465,6 @@ if (!isset($_SESSION['adminInfo'])) {
         <div class="form-group">
           <label for="account-pass" class="form-label">Mật khẩu</label>
           <input type="password" id="account-pass" name="account-pass" placeholder="Nhập mật khẩu" class="form-input"
-            required />
-        </div>
-
-        <div class="form-group">
-          <label for="account-email" class="form-label">Email</label>
-          <input type="email" id="account-email" name="account-email" placeholder="Nhập email" class="form-input"
             required />
         </div>
 
@@ -515,11 +509,6 @@ if (!isset($_SESSION['adminInfo'])) {
         <div class="form-group">
           <label for="account-pass" class="form-label">Mật khẩu</label>
           <input type="text" id="account-pass-f" name="account-pass" placeholder="Nhập mật khẩu" class="form-input" />
-        </div>
-
-        <div class="form-group">
-          <label for="account-email" class="form-label">Email</label>
-          <input type="text" id="account-email-f" name="account-email" placeholder="Nhập email" class="form-input" />
         </div>
 
         <div class="form-group">
@@ -707,25 +696,15 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>STT</th>
             <th>Mã nhân viên</th>
             <th>Họ tên</th>
+            <th>Chức vụ</th>
+            <th>Email</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
             <th>Cài đặt</th>
           </tr>
         </thead>
         <tbody id="employee-table-body">
-          <tr>
-            <td>1</td>
-            <td>NV001</td>
-            <td>Nguyễn Toàn Năng</td>
-            <td>Quận 1</td>
-            <td>0391823921</td>
-            <td>
-              <div class='fix-employee'>
-                <i class='fa-solid fa-pen-to-square fix-btn-employee' data-id='$empId'></i>
-                <i class='fa-solid fa-trash delete-btn-employee' data-id='$empId'></i>
-              </div>
-            </td>
-          </tr>
+            <?php include '../../PHP/EP-Manager.php'?>
         </tbody>
       </table>
 
@@ -734,20 +713,45 @@ if (!isset($_SESSION['adminInfo'])) {
 
         <div class="form-group">
           <label for="employee-name" class="form-label">Họ tên nhân viên</label>
-          <input type="text" id="employee-name" name="employee-name" placeholder="Nhập tên nhân viên"
-            class="form-input" />
+          <input type="text" id="employee-name" name="employee-name" placeholder="Nhập tên nhân viên" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-email" class="form-label">Email</label>
+          <input type="text" id="employee-email" name="employee-email" placeholder="Nhập email" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="employee-address" class="form-label">Địa chỉ</label>
-          <input type="text" id="employee-address" name="employee-address" placeholder="Nhập địa chỉ"
-            class="form-input" />
+          <input type="text" id="employee-address" name="employee-address" placeholder="Nhập địa chỉ" class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="employee-phone" class="form-label">Số điện thoại</label>
-          <input type="number" id="employee-phone" name="employee-phone" placeholder="Nhập số điện thoại"
-            class="form-input" />
+          <input type="number" id="employee-phone" name="employee-phone" placeholder="Nhập số điện thoại" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-position" class="form-label" style="color: red;">Chức vụ</label>
+          <div class="role-container">
+            <?php
+            require_once '../../PHP/EP-Manager.php'; 
+            // Lấy danh sách chức vụ từ bảng positions
+            $sql = "SELECT id, name FROM positions ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            echo "<select name='position_id' class='position_id-select' id='positionSelect' required>";
+            echo "<option value=''>Chọn chức vụ</option>"; 
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                echo "<option value='{$row['id']}'>{$row['name']}</option>";
+              }
+            } else {
+              echo "<option value=''>Không có chức vụ nào!</option>"; 
+            }
+            echo "</select>";
+            ?>
+          </div>
         </div>
 
         <div class="form-group text-center">
@@ -764,6 +768,11 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
+          <label for="employee-email" class="form-label">Email</label>
+          <input type="text" id="employee-emailFIX" name="employee-email" placeholder="Nhập email" class="form-input" />
+        </div>
+
+        <div class="form-group">
           <label for="employee-address" class="form-label">Địa chỉ</label>
           <input type="text" id="employee-addressFIX" name="employee-address" placeholder="Nhập địa chỉ"
             class="form-input" />
@@ -773,6 +782,29 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="employee-phone" class="form-label">Số điện thoại</label>
           <input type="number" id="employee-phoneFIX" name="employee-phone" placeholder="Nhập số điện thoại"
             class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="employee-position" class="form-label" style="color: red;">Chức vụ</label>
+          <div class="role-container">
+            <?php
+            require_once '../../PHP/EP-Manager.php'; 
+            // Lấy danh sách chức vụ từ bảng positions
+            $sql = "SELECT id, name FROM positions ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            echo "<select name='position_id' class='position_id-select' id='positionSelect' required>";
+            echo "<option value=''>Chọn chức vụ</option>"; 
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                echo "<option value='{$row['id']}'>{$row['name']}</option>";
+              }
+            } else {
+              echo "<option value=''>Không có chức vụ nào!</option>"; 
+            }
+            echo "</select>";
+            ?>
+          </div>
         </div>
 
         <div class="form-group text-center">
