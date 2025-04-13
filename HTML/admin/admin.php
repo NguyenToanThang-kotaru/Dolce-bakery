@@ -268,7 +268,7 @@ if (!isset($_SESSION['adminInfo'])) {
       </table>
 
       <div class="history-order-container">
-        <i class="fa-solid fa-rotate-left back-customer2"></i>
+        <!-- <i class="fa-solid fa-rotate-left back-customer2"></i>
         <div id="cus-identity">
           <span>Khách hàng:</span>
           <h4>Nguyễn Toàn Thắng</h4>
@@ -284,10 +284,10 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Thành tiền</th>
               </tr>
             </thead>
-            <tbody id="history-order-table-body">
+            <tbody id="history-order-table-body"> -->
               <!-- Dữ liệu đơn hàng sẽ được thêm ở đây -->
                <!-- Dữ liệu tạm -->
-              <tr>
+              <!-- <tr>
                   <td>Bánh thần tài</td>
                   <td>3</td>
                   <td>303030</td>
@@ -310,10 +310,10 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Thành tiền</th>
               </tr>
             </thead>
-            <tbody id="history-order-table-body">
+            <tbody id="history-order-table-body"> -->
               <!-- Dữ liệu đơn hàng sẽ được thêm ở đây -->
                <!-- Dữ liệu tạm -->
-              <tr>
+              <!-- <tr>
                   <td>Bánh thần tài</td>
                   <td>3</td>
                   <td>303030</td>
@@ -324,7 +324,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <p><strong>Tổng tiền:</strong> <span id="total-amount">0đ</span></p>
             <p><strong>Trạng thái đơn hàng:</strong> <span id="order-status">Chưa xác định</span></p>
           </div>
-        </div>
+        </div> -->
       </div>
 
 

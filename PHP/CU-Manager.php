@@ -126,4 +126,44 @@ if ($result->num_rows > 0) {
 
 
 
+    // Hiển thị lịch sử đơn hàng
+    document.addEventListener("DOMContentLoaded", function () {
+        let table = document.querySelector(".customer-table");
+        const historyContainer = document.querySelector(".history-order-container");
+
+        document.addEventListener("click", function (event) {
+            let target = event.target;
+
+            // Click vào biểu tượng xem lịch sử
+            if (target.classList.contains("history-order")) {
+                let cusId = target.closest("tr").getAttribute("data-id");
+
+                // Ẩn bảng danh sách
+                table.style.display = "none";
+
+                // Gửi AJAX để lấy lịch sử đơn hàng
+                fetch("../../PHP/get_order_history.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `id=${cusId}`
+                })
+                .then(response => response.text())
+                .then(html => {
+                    historyContainer.innerHTML = html;
+                    historyContainer.style.display = "block";
+                })
+                .catch(error => console.error("Lỗi khi tải lịch sử:", error));
+            }
+
+            // Click vào nút quay lại trong lịch sử
+            if (target.classList.contains("back-customer2")) {
+                historyContainer.style.display = "none";
+                table.style.display = "table";
+            }
+        });
+    });
+
+
 </script>

@@ -94,7 +94,10 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                             <option value='2' ${data.customer.status == 2 ? "selected" : ""}>Đã khóa</option>
                         </select>
                     </td>
-                    <td><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id}" alt='Xem chi tiết'></td>
+                    <td style='text-align: center; vertical-align: middle;'><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id} " alt='Xem chi tiết' ></td>
+                    <td style='text-align: center; vertical-align: middle;'>
+                        <img src='../../assest/H-oder.png' class='history-order' alt='Xem lịch sử'>
+                    </td>
                     <td>
                         <div class='fix-customer'>
                             <i class='fa-solid fa-pen-to-square fix-btn-customer' data-id="${data.customer.id}"></i>
