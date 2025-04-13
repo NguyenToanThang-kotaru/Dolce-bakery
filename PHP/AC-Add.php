@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'config.php'; // Kết nối database
-
+header('Content-Type: application/json');
 $response = []; // Mảng chứa phản hồi
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,8 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     // 🔹 Thêm tài khoản vào bảng users
+    $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
     $stmt = $conn->prepare("INSERT INTO users (userName, password, email, permission_id) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $username, $password, $email, $permission_id);
+    $stmt->bind_param("sssi", $username, $hasshedPassword, $email, $permission_id);
 
     if ($stmt->execute()) {
         $response = [
@@ -34,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "account" => [
                 "id" => $conn->insert_id,
                 "username" => $username,
-                "password" => $password,
+                "hasshedPassword" => $hasshedPassword,
                 "email" => $email,
                 "permission_id" => $permission_id,
                 "permission_name" => $permission_name  

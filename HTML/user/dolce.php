@@ -738,7 +738,6 @@
     <script src="../../JS/user/blockCart.js"></script>
     <script defer src="../../JS/user/pagination.js"></script>
     <script defer src="../../JS/user/paginationOfMainPD.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>

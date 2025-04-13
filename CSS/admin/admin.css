@@ -586,6 +586,108 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Lich su don hang */
+.history-order-container {
+  display: none;
+  max-width: 800px;
+  min-height: 500px;
+  max-height: 500px;
+  margin: 20px auto;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.history-order-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #f4f6f8;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 20px;
+  overflow-y: auto;
+  margin-top: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.history-order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.history-order-table th,
+.history-order-table td {
+  padding: 12px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.history-order-table th {
+  background-color: #e8f1fa;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.history-order-table td {
+  background-color: #ffffff;
+  color: #555;
+  font-size: 14px;
+}
+
+.history-order-container i {
+  margin-left: 710px;
+  margin-bottom: 10px;
+  color: #4A90E2;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.history-order-container i:hover {
+  transform: scale(1.1);
+}
+
+.history-order-wrapper {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.order-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 16px;
+  padding: 12px 10px;
+  color: #2c3e50;
+  border-top: 1px solid #e0e0e0;
+}
+
+#cus-identity {
+  display: flex;
+  color: #3C8DBC;
+  gap: 10px;
+  font-weight: 500;
+}
+
+#order-id {
+  text-align: center;
+  color: #3C8DBC;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+/* ssssssssssssssssssssssssssssssossssssss */
 .detail-customer-container h2 {
   text-align: left;
   font-size: 18px;
@@ -610,7 +712,9 @@ body {
   color: #555;
 }
 
-.back-customer .back-customer1{
+.back-customer,
+.back-customer1,
+.back-customer2 {
   cursor: pointer;
   font-size: 18px;
   color: #555;
@@ -626,7 +730,8 @@ body {
 }
 
 .detail-customer-container i:hover,
-.fix-form-customer i:hover {
+.fix-form-customer i:hover,
+.history-order-container i:hover {
   color: #ef9b09;
   transform: scale(1.2);
 }
@@ -1003,3 +1108,120 @@ body {
   transform: scale(1.1);
 }
 
+/* employee */
+.employee-part {
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.employee-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.employee-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.employee-table td {
+  background-color: #f9f5f0;
+}
+
+.employee-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+#employee-plus {
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+#employee-plus:hover {
+  color: #ea9029;
+  transform: scale(1.1);
+}
+
+.employee-table img {
+  width: 100px;
+  height: 100px;
+}
+
+.fix-employee {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.employee-table i:hover {
+  color: #8b5a5a;
+}
+
+/* add employee */
+
+.add-form-employee,
+.fix-form-employee {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-employee i,
+.fix-form-employee i {
+  margin-left: 740px;
+  cursor: pointer;
+}
+
+.add-form-employee i:hover,
+.fix-form-employee i:hover {
+  color: #ef9b09;
+  transform: scale(1.2);
+}
+
+#delete-overlay-employee {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+}

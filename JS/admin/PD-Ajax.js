@@ -5,11 +5,14 @@ document.addEventListener("click", function (event) {
         fetch(`../../PHP/PD-getPD.php?id=${productId}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 if (!data.error) {
+                    
                     document.getElementById("preview-image").src = data.image;
                     document.getElementById("product-id").value = data.id;
-                    document.getElementById("product-nameFIX").value = data.name;
-                    document.getElementById("product-typeFIX").value = data.type;
+                    document.getElementById("product-nameFIX").value = data.pd_name;
+                    document.getElementById("product-categoryFIX").value = data.category_id;
+                    document.getElementById("product-subcategoryFIX").value = data.subcategory_id;
                     document.getElementById("product-quantityFIX").value = data.quantity;
                     document.getElementById("product-priceFIX").value = data.price;
 
@@ -108,7 +111,7 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
             newRow.innerHTML = `
                 <td class='img-admin'><img src="${data.product.image}" alt='' width='50'></td>
                 <td>${data.product.name}</td>
-                <td>${data.product.type}</td>
+                <td>${data.product.category_name}</td>
                 <td>${data.product.quantity}</td>
                 <td>${data.product.price}</td>
                 <td><div class='fix-product'>
@@ -151,7 +154,7 @@ document.getElementById("update-form-product").addEventListener("submit", functi
                 row.innerHTML = `
                     <td class='img-admin'><img src="${data.product.image}" alt="" width="50"></td>
                     <td>${data.product.name}</td>
-                    <td>${data.product.type}</td>
+                    <td>${data.product.category_name}</td>
                     <td>${data.product.quantity}</td>
                     <td>${priceNumber.toLocaleString('vi-VN')} VND</td>
                     <td>
