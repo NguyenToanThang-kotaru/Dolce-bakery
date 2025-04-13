@@ -142,7 +142,7 @@ if ($result->num_rows > 0) {
                 table.style.display = "none";
 
                 // Gửi AJAX để lấy lịch sử đơn hàng
-                fetch("../../PHP/get_order_history.php", {
+                fetch("../../PHP/CU-get_order_history.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
