@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['account-pass'] ?? '');
     $permission_id = $_POST['permission_id'] ?? null;
     $permission_name = null;
+    $status = 1;
 
     //Lấy tên quyền
     $sql = "SELECT name FROM permissions WHERE id = ?";
@@ -24,22 +25,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 
-    // Lấy trạng thái hiện tại và tên nhân viên
-    $sql_get_status = "
-    SELECT ea.status, e.fullName 
-    FROM employeeaccount ea 
-    JOIN employees e ON ea.userName = e.id 
-    WHERE ea.id = ?
-    ";
-    $stmt_get_status = $conn->prepare($sql_get_status);
-    $stmt_get_status->bind_param("i", $accountId);
-    $stmt_get_status->execute();
-    $stmt_get_status->bind_result($current_status, $fullName);
-    $stmt_get_status->fetch();
-    $stmt_get_status->close();
-    $status = $current_status;
+    // Lấy tên nhân viên
+    $sql = "SELECT fullName FROM employees WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $position_name = "";
+    if ($row = $result->fetch_assoc()) {
+        $fullName = $row["fullName"];
+    }
+    $stmt->close();
+   
 
-    // 🔹 Thêm tài khoản vào bảng
+    
+
+    // Thêm tài khoản vào bảng
     $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
     $stmt = $conn->prepare("INSERT INTO employeeaccount (userName, password, permission_id) VALUES (?, ?, ?)");
     $stmt->bind_param("ssi", $username, $hasshedPassword, $permission_id);

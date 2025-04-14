@@ -3,7 +3,9 @@ include 'config.php';
 
 $sql = "SELECT e.*, p.name AS position_name 
         FROM employees e
-        JOIN positions p ON e.position_id = p.id";
+        JOIN positions p ON e.position_id = p.id
+        ORDER BY e.id ASC";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -31,3 +33,10 @@ if ($result->num_rows > 0) {
     echo "<tr><td colspan='7'>Không có tài khoản nào</td></tr>";
 }
 ?>
+    <div id="delete-overlay-employee">
+        <div class="delete-container">
+          <span>Bạn muốn xóa nhân viên?</span>
+          <button id="delete-acp-employee">Xác nhận</button>
+          <button id="cancel-employee">Hủy</button>
+        </div>
+    </div>

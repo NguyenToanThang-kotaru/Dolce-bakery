@@ -118,7 +118,7 @@ document.querySelector(".add-form-account").addEventListener("submit", function 
                 </td>
                 <td>
                     <div style='display: flex;'>
-                        <span style='margin-left: 10px;'>${data.account.permission_name}</span>
+                        <span style='margin-left: 10px; font-weight: bold;'>${data.account.permission_name}</span>
                     </div>
                 </td>
                 <td>
@@ -181,7 +181,7 @@ document.addEventListener("click", function (event) {
             .then(data => {
                 if (!data.error) {
                     // Điền thông tin vào form
-                    document.getElementById("account-id-f").value = data.id;
+                    document.getElementById("account-id").value = data.id;
                     document.getElementById("account-name-f").value = data.userName;
                     // document.getElementById("account-pass-f").value = data.password;
 
@@ -241,41 +241,35 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
     })
     .then(response => response.json())
     .then(data => {
+        let tableBody = document.querySelector("#account-table-body");
         if (data.success) {
             alert(data.message);
-            console.log(data.user);
-            // Cập nhật giao diện người dùng 
-            let row = document.querySelector(`tr[data-id='${data.user.id}']`);
-            if (row) {
-                row.innerHTML = `
-                    <td>${data.user.userName}</td>
-                    <td>${data.user.fullName}</td>
-                    <td>
-                        <select class='account-status' data-id="${data.user.id}">
-                            <option value='1' ${data.user.status == 1 ? "selected" : ""}>Đang hoạt động</option>
-                            <option value='2' ${data.user.status == 2 ? "selected" : ""}>Đã khóa</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div style = 'display: flex;'>
+            console.log(data);
+            // Tạo một dòng mới với dữ liệu từ server
+            let newRow = document.querySelector(`tr[data-id='${data.user.id}']`);
+            newRow.innerHTML = `
+                <td>${data.user.userName}</td>
+                <td>${data.user.fullName}</td>
+                <td>
+                    <select class='account-status'>
+                        <option value='1' ${data.user.status == 1 ? 'selected' : ''}>Đang hoạt động</option>
+                        <option value='2' ${data.user.status == 2 ? 'selected' : ''}>Đã khóa</option>
+                    </select>
+                </td>
+                <td>
+                    <div style='display: flex;'>
                         <span style='margin-left: 10px; font-weight: bold;'>${data.user.permission_name}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class='fix-account'>
-                            <i class='fa-solid fa-pen-to-square fix-btn-account' data-id="${data.user.id}"></i>
-                            <i class='fa-solid fa-trash delete-btn-account' data-id="${data.user.id}"></i>
-                        </div>
-                    </td>
-                `;
-
-                let statusSelect = row.querySelector(".account-status");
-                updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
-
-                console.log("Cập nhật thành công!");
-            }
-            else
-                console.log("Không tìm thấy tài khoản cần cập nhật!");
+                    </div>
+                </td>
+                <td>
+                    <div class='fix-account'>
+                        <i class='fa-solid fa-pen-to-square fix-btn-account' data-id='${data.user.id}'></i>
+                        <i class='fa-solid fa-trash delete-btn-account' data-id='${data.user.id}'></i>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(newRow);  // Thêm dòng mới vào bảng
+            document.querySelector(".add-form-account").reset();  // Reset form
         } else {
             alert("Lỗi: " + data.message);
         }

@@ -4,7 +4,8 @@ include 'config.php';
 $sql = "SELECT employeeaccount.*, permissions.name AS p_name, employees.fullName 
         FROM employeeaccount 
         LEFT JOIN permissions ON employeeaccount.permission_id = permissions.id
-        LEFT JOIN employees ON employeeaccount.userName = employees.id";
+        LEFT JOIN employees ON employeeaccount.userName = employees.id
+        ORDER BY employeeaccount.id ASC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

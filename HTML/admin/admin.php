@@ -26,10 +26,10 @@ if (!isset($_SESSION['adminInfo'])) {
     <a href="#" id="admin-oder">Đơn hàng</a>
     <a href="#" id="admin-product">Sản phẩm</a>
     <a href="#" id="admin-customer">Khách hàng</a>
+    <a href="#" id="admin-employee">Nhân viên</a>
     <a href="#" id="admin-account">Quản lí tài khoản</a>
     <a href="#" id="admin-role">Quản lí quyền</a>
-    <a href="#" id="admin-employee">Nhân viên</a>
-
+   
     <img src="../../assest/Dolce.png" alt="hahaha" />
   </div>
 
@@ -499,7 +499,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
       <form class="fix-form-account" id="fix-form-account" action="../../PHP/AC-Edit.php" method="POST"
         enctype="multipart/form-data">
-        <input type="hidden" id="account-id-f" name="account-id">
+        <input type="hidden" id="account-id" name="account-id">
         <i class="fa-solid fa-rotate-left back-account"></i>
         <div class="form-group">
           <label for="account-name" class="form-label">Tên đăng nhập</label>
@@ -722,13 +722,13 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="employee-address" class="form-label">Địa chỉ</label>
-          <input type="text" id="employee-address" name="employee-address" placeholder="Nhập địa chỉ" class="form-input" />
+          <label for="employee-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="employee-phone" name="employee-phone" placeholder="Nhập số điện thoại" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label for="employee-phone" class="form-label">Số điện thoại</label>
-          <input type="number" id="employee-phone" name="employee-phone" placeholder="Nhập số điện thoại" class="form-input" />
+          <label for="employee-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="employee-address" name="employee-address" placeholder="Nhập địa chỉ" class="form-input" />
         </div>
 
         <div class="form-group">
@@ -759,8 +759,9 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
       </form>
 
-      <form class="fix-form-employee" id="update-form-employee" enctype="multipart/form-data">
-        <i class="fa-solid fa-rotate-left back-employee"></i>
+      <form class="fix-form-employee" id="fix-form-employee" enctype="multipart/form-data">
+      <input type="hidden" id="employee-id" name="employee-id">  
+      <i class="fa-solid fa-rotate-left back-employee"></i>
         <div class="form-group">
           <label for="employee-name" class="form-label">Họ tên nhân viên</label>
           <input type="text" id="employee-nameFIX" name="employee-name" placeholder="Nhập tên nhân viên"
@@ -793,7 +794,7 @@ if (!isset($_SESSION['adminInfo'])) {
             $sql = "SELECT id, name FROM positions ORDER BY id ASC";
             $result = $conn->query($sql);
 
-            echo "<select name='position_id' class='position_id-select' id='positionSelect' required>";
+            echo "<select name='position_id' class='position_id-select' id='positionSelectFIX' required>";
             echo "<option value=''>Chọn chức vụ</option>"; 
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
@@ -811,14 +812,6 @@ if (!isset($_SESSION['adminInfo'])) {
           <button type="submit" id="accept-fixEP" class="form-button">Hoàn tất</button>
         </div>
       </form>
-
-      <div id="delete-overlay-employee">
-        <div class="delete-container">
-          <span>Bạn muốn xóa nhân viên?</span>
-          <button id="delete-acp-employee">Xác nhận</button>
-          <button id="cancel-employee">Hủy</button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -829,6 +822,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/PM-Ajax.js"></script>
   <script src="../../JS/admin/AC-Ajax.js"></script>
   <script src="../../JS/admin/CU-Ajax.js"></script>
+  <script src="../../JS/admin/EP-Ajax.js"></script>
   <script src="../../JS/admin/Logout_admin.js"></script>
   <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
 
