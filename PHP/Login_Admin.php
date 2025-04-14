@@ -8,8 +8,12 @@ if (isset($_POST['admin-login'])) {
 
     $userName = mysqli_real_escape_string($conn, $userName);
 
-    $sql = "SELECT * FROM users WHERE userName = '$userName'";
+    $sql = "SELECT ea.*, e.fullName 
+        FROM employeeaccount ea 
+        JOIN employees e ON ea.userName = e.id 
+        WHERE ea.userName = '$userName'";
     $result = $conn->query($sql);
+
 
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -18,7 +22,6 @@ if (isset($_POST['admin-login'])) {
             $_SESSION['adminInfo'] = [
                 'adminID' => $row['id'],
                 'userName' => $row['userName'],
-                'email' => $row['email'],
                 'permission_id' => $row['permission_id'],
                 'fullName' => $row['fullName']
             ];

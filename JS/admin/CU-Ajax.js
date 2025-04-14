@@ -42,7 +42,7 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let passwordRegex = /^.{8,}$/;
     let phoneRegex = /^0\d{9}$/;
-    var fullnameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
+    let fullnameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
 
    
     if (!passwordRegex.test(password)) {

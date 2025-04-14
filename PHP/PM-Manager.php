@@ -10,7 +10,7 @@ $sql = "SELECT
 FROM permissions p
 LEFT JOIN permission_function pf ON p.id = pf.permission_id
 LEFT JOIN functions f ON pf.function_id = f.id
-LEFT JOIN users u ON p.id = u.permission_id
+LEFT JOIN employeeaccount u ON p.id = u.permission_id
 GROUP BY p.id";
 
 $result = $conn->query($sql);

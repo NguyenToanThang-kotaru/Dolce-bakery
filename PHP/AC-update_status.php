@@ -5,8 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userId = $_POST['id'];
     $newStatus = $_POST['status'];
 
-    // Cập nhật trạng thái khách hàng
-    $stmt = $conn->prepare("UPDATE users SET status = ? WHERE id = ?");
+    // Cập nhật trạng thái
+    $stmt = $conn->prepare("UPDATE employeeaccount SET status = ? WHERE id = ?");
     $stmt->bind_param("ii", $newStatus, $userId);
 
     if ($stmt->execute()) {
