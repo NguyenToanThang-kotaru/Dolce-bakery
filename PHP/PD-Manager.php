@@ -1,7 +1,9 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM products";
+$sql = "SELECT products.*, categories.name AS category_name 
+        FROM products 
+        INNER JOIN categories ON products.category_id = categories.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -9,8 +11,8 @@ if ($result->num_rows > 0) {
         $id = $row['id'];
         echo "<tr data-id='$id'>";
         echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
-        echo "<td>" . $row['name'] . "</td>";
-        echo "<td>" . $row['type'] . "</td>";
+        echo "<td>" . $row['pd_name'] . "</td>";
+        echo "<td>" . $row['category_name'] . "</td>";
         echo "<td>" . $row['quantity'] . "</td>";
         echo "<td>" . number_format($row['price'], 0, ',', '.') . " VND</td>";
         echo "<td><div class='fix-product'>
