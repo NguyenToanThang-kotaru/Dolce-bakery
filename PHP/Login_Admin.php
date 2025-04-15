@@ -8,10 +8,14 @@ if (isset($_POST['admin-login'])) {
 
     $userName = mysqli_real_escape_string($conn, $userName);
 
-    $sql = "SELECT ea.*, e.fullName 
-        FROM employeeaccount ea 
-        JOIN employees e ON ea.userName = e.id 
-        WHERE ea.userName = '$userName'";
+    // Lấy thông tin của tài khoản nhân viên và danh sách các chức năng.
+    $sql = "SELECT ea.*, e.fullName, GROUP_CONCAT(pf.function_id) AS function_ids
+        FROM employeeaccount ea
+        JOIN employees e ON ea.userName = e.id
+        JOIN permissions p ON ea.permission_id = p.id
+        JOIN permission_function pf ON p.id = pf.permission_id
+        WHERE ea.userName = '$userName'
+        GROUP BY ea.id";
     $result = $conn->query($sql);
 
 
@@ -19,11 +23,13 @@ if (isset($_POST['admin-login'])) {
         $row = $result->fetch_assoc();
 
         if (password_verify($passwd, $row['password'])) {
+            $functionIds = explode(',', $row['function_ids']);
             $_SESSION['adminInfo'] = [
                 'adminID' => $row['id'],
                 'userName' => $row['userName'],
                 'permission_id' => $row['permission_id'],
-                'fullName' => $row['fullName']
+                'fullName' => $row['fullName'],
+                'function_ids' => $functionIds
             ];
 
             echo json_encode(['status' => 'success']);

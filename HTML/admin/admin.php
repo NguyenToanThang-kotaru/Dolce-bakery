@@ -5,6 +5,7 @@ if (!isset($_SESSION['adminInfo'])) {
   exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -20,6 +21,8 @@ if (!isset($_SESSION['adminInfo'])) {
 </head>
 
 <body>
+  
+
   <div class="sidebar">
     <h2 id="admin">Admin</h2>
     <a href="#">Thống kê</a>
@@ -81,16 +84,18 @@ if (!isset($_SESSION['adminInfo'])) {
       <table class="order-table">
         <thead>
           <tr>
-            <th>Tên KH</th>
-            <th>Mã KH</th>
-            <th>Số lượng</th>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Mã khách hàng</th>
+            <th>Tên khách hàng</th>
             <th>Tổng tiền</th>
+            <th>Ngày đặt</th>
             <th>Xem chi tiết</th>
             <th>Trạng thái</th>
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
+           <!-- <tr>
             <td>Nguyễn</td>
             <td>01</td>
             <td>2</td>
@@ -104,10 +109,12 @@ if (!isset($_SESSION['adminInfo'])) {
             <td>3</td>
             <td>150,000 VND</td>
             <td><i class="fa-solid fa-circle-info"></i></td>
-            <td>Chưa xử lý</td>
-          </tr> -->
+            <td>Chưa xử lý</td> 
+          </tr>  -->
+          <?php include '../../PHP/OD-Manager.php' ?>
         </tbody>
       </table>
+      <div class="order-detail-container" style="display: none; margin-top: 20px;"></div>
     </div>
   </div>
   <!-- ----------------------------PRODUCT----------------------------- -->
@@ -122,7 +129,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Loại</th>
             <th>Số lượng</th>
             <th>Giá tiền</th>
-            <th>Cài đặt</th>
+            <th id="setting-pro">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="product-table-body">
@@ -261,7 +268,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Lịch sử đơn hàng</th>
             <!-- <th>Email</th>
             <th>Địa chỉ</th> -->
-            <th>Cài đặt</th>
+            <th id="setting-cus">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="customer-table-body">
@@ -431,7 +438,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Tên nhân viên</th>
             <th>Trạng thái</th>
             <th>Quyền</th>
-            <th>Cài đặt</th>
+            <th id="setting-ac">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="account-table-body">
@@ -583,7 +590,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Chức năng</th>
             <th>Số lượng TK</th>
             <th>Danh sách tài khoản</th>
-            <th>Cài đặt</th>
+            <th id="setting-pm">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="role-table-body">
@@ -700,7 +707,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Email</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
-            <th>Cài đặt</th>
+            <th id="setting-emp">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="employee-table-body">
@@ -824,7 +831,17 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/CU-Ajax.js"></script>
   <script src="../../JS/admin/EP-Ajax.js"></script>
   <script src="../../JS/admin/Logout_admin.js"></script>
-  <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
+
+  <script>
+    const adminFunctions = <?php echo json_encode($_SESSION['adminInfo']['function_ids']); ?>;
+    console.log(adminFunctions);
+    adminFunctions.forEach(funcId => {
+ 
+      
+    });
+
+
+  </script>
 
 
 </body>
