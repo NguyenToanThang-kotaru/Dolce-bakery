@@ -80,17 +80,24 @@ CartPhone.addEventListener("click", () => {
 let new_cart = [];
 
 const cartIcon = document.getElementById("#cart");
-function addToCart(productId) {
+function addToCart(productId, quantity = 1) {
     $.ajax({
-        url: "../../PHP/carts/addToCart.php",
+        url: "../../PHP/carts/addToCartById.php",
         type: "POST",
         data: {
-            'product_id': productId
+            'product_id': productId,
+            'quantity': quantity,
         },
         success: function (response) {
             // alert(response);
-            $('.cart-count').text(response);
-            showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
+            if(response.includes("Bạn cần đăng nhập"))
+            {
+                showToast("Bạn cần đăng nhập để mua hàng.", false);
+            }
+            else{
+                $('.cart-count').text(response);
+                showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
+            }
         }
     });
     
@@ -104,8 +111,9 @@ function getCart(callback) {
         dataType: "json",
         success: function (response) {
             if (response.status === "error") {
-                alert("Bạn cần đăng nhập");
+                showToast("Bạn cần đăng nhập để xem giỏ hàng.", false);
                 callback(false);
+                return;
             }
 
             new_cart = response;
@@ -133,7 +141,7 @@ function displayItemInCart() {
                     <div id="quantity-container">
                     <div id="downQuantity" onclick = "decreaseItemInCart(${item.id})"><i class="fa-solid fa-minus"></i></div>
                     <div id="PDCart-Quantity">${item.quantity}</div>
-                    <div id="upQuantity" onclick = "addItemToCart(${item.id})"><i class="fa-solid fa-plus"></i></div>
+                    <div id="upQuantity" onclick = "addItemToCart(${item.id},1)"><i class="fa-solid fa-plus"></i></div>
                 </div>
                     <div id="delete-icon" onclick = "removeItemFromCart(${item.id})">
                         <i class="fa-regular fa-trash-can"></i>
@@ -155,7 +163,7 @@ function calculateTotal(cart) {
 
 function addItemToCart(id) {
     $.ajax({
-        url: "../../PHP/carts/addToCart.php",
+        url: "../../PHP/carts/addToCartById.php",
         type: "POST",
         data: {
             'product_id': id
@@ -209,4 +217,36 @@ function showToast(message, isSuccess, duration = 2000) {
     }, duration);
 
     return duration + 300; 
+}
+
+const addToCartButton = document.querySelector("#InfoPD-container .add-cart-info");
+addToCartButton.addEventListener("click", function () {
+    let imgUrl = document.querySelector("#InfoPD-container #product-img").getAttribute("src");
+    let quantity = parseInt(document.querySelector(".QuantityPD-container #quantity-value").textContent);
+    addToCartByImage(imgUrl, quantity);
+});
+
+function addToCartByImage(imageUrl, quantity = 1) {
+    $.ajax({
+        url: "../../PHP/carts/addToCartByImg.php",
+        type: "POST",
+        data: { image_url: imageUrl },
+        success: function (productId) {
+            if (productId === "not_found") {
+                showToast("Không tìm thấy sản phẩm.", false);
+                return;
+            }
+            addToCart(productId,quantity);
+        }
+    });
+}
+
+function changeQuantity(change) {
+    let quantityElement = document.getElementById('quantity-value');
+    let currentQuantity = parseInt(quantityElement.textContent);
+    let newQuantity = currentQuantity + change;
+
+    if (newQuantity >= 1) {
+        quantityElement.textContent = newQuantity;
+    }
 }

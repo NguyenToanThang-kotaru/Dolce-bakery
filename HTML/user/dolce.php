@@ -165,7 +165,7 @@
         <div id="InfoPD-container">
             <div id="Left">
                 <div id="PD-imgage">
-                    <img src="../../assest/PD-Manager">
+                    <img id = "product-img" src="../../assest/PD-Manager">
                 </div>
 
             </div>
@@ -181,9 +181,9 @@
                 <div id="Quantity-Price">
                     <p class="Price">100.000đ</p>
                     <div class="QuantityPD-container">
-                        <i class="fa-solid fa-minus"></i>
-                        <p>1</p>
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-minus" onclick="changeQuantity(-1)"></i>
+                        <p id="quantity-value">1</p>
+                        <i class="fa-solid fa-plus" onclick="changeQuantity(1)"></i>
                     </div>
                 </div>
                 <div id="button">
@@ -824,7 +824,6 @@
     <script defer src="../../JS/user/paginationOfMainPD.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
-    <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>
 </body>
 
