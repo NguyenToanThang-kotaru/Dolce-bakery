@@ -108,7 +108,7 @@ $(document).ready(function () {
             success: function (response) {
                 var loginForm = document.querySelector("#login-form-son");
                 clearErrors(loginForm);
-
+                console.log(response);
                 if (response.status === "error") {
                     if (response.message === "Không tồn tại người dùng") {
                         var username = document.querySelector(".lg-username");
@@ -209,7 +209,7 @@ function loadUserInfo() {
         </div>
         <div class="row">
             <label for="phone" class="Detail">Số điện thoại: </label>
-            <span>${data.numberPhone}</span>
+            <span>${data.phoneNumber}</span>
         </div>
         <div id="Buy-history">
                     <div class="History">Lịch sử mua hàng</div>

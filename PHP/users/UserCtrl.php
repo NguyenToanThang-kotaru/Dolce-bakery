@@ -27,7 +27,7 @@
         // }
         
         // Kiểm tra email đã tồn tại
-        $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
+        $checkEmail = "SELECT * FROM customers WHERE (email = '$email' OR userName= '$userName')";
         $result = $conn->query($checkEmail);
         if($result->num_rows>0){
             $row = $result->fetch_assoc();
@@ -43,8 +43,9 @@
             }
         }
         else {
-            $hasshedPassword = passWord_hash($passwd, PASSWORD_BCRYPT); 
-            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
+            // $hasshedPassword = password_hash($passwd, PASSWORD_BCRYPT); 
+            $hasshedPassword = $passwd; 
+            $insertQuery = "INSERT INTO customers (userName, email, fullName, phoneNumber, password) 
                 VALUES ('$userName', '$email', '$fullName', '$phone', '$hasshedPassword')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Đăng ký thành công";
@@ -60,7 +61,7 @@
         $userName = $_POST['lg-username'];
         $passwd = $_POST['lg-password'];
     
-        $sql = "SELECT * FROM users WHERE userName = '$userName' OR email = '$userName'";
+        $sql = "SELECT * FROM customers WHERE userName = '$userName' OR email = '$userName'";
         $result = $conn->query($sql);
     
         if ($result->num_rows > 0) {
@@ -68,15 +69,16 @@
             
             // Kiểm tra mật khẩu
             $hasshedPassword = $row['password'];
-            if (password_verify($passwd, $hasshedPassword)) { 
+            // if (password_verify($passwd, $hasshedPassword)) { 
+            if ($hasshedPassword == $passwd) { 
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userID' => $row['id'],
                     'userName' => $row['userName'],
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
-                    'numberPhone' => $row['numberPhone'],
-                    'role' => $row['role'],
+                    'phoneNumber' => $row['phoneNumber'],
+                    'status' => $row['status'],
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
             } else {
