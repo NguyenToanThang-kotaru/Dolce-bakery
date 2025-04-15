@@ -966,3 +966,29 @@ document.querySelectorAll(".product-img img").forEach(img => {
 });
 
 
+// Lấy chủng loại từ PHP
+function loadSubcategories() {
+  const categoryId = document.getElementById('product-category').value;
+  const subcategorySelect = document.getElementById('product-subcategory');
+
+  // Xóa dữ liệu cũ
+  subcategorySelect.innerHTML = "<option>Đang tải...</option>";
+
+  // Gửi AJAX
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "../../PHP/PD-getSubcategory.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+
+  xhr.onload = function() {
+      if (this.status === 200) {
+          subcategorySelect.innerHTML = this.responseText;
+      } else {
+          subcategorySelect.innerHTML = "<option>Lỗi tải dữ liệu</option>";
+      }
+  };
+
+  xhr.send("subcategory_id=" + encodeURIComponent(categoryId));
+}
+
+
+

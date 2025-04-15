@@ -491,25 +491,25 @@
                         <input type="text" id="product-name-main" placeholder="Nhập tên sản phẩm...">
                     </div>
 
-                    <!-- Chọn loại sản phẩm -->
-                    <div class="category-select">
-                        <label for="product-category">Loại sản phẩm:</label>
-                        <select id="product-category" onchange="loadSubcategories()">
-                            <option value="">-- Tất cả --</option>
-                            <option value="1">Bánh mì</option>
-                            <option value="2">Bánh kem</option>
-                            <option value="3">Bánh quy</option>
-                        </select>
-                    </div>
+       <!-- Chọn loại sản phẩm -->
+<div class="category-select">
+    <label for="product-category">Loại sản phẩm:</label>
+    <select id="product-category" onchange="loadSubcategories()">
+        <option value="">-- Tất cả --</option>
+        <option value="1">Bánh mì</option>
+        <option value="2">Bánh kem</option>
+        <option value="3">Bánh quy</option>
+        <!-- Thêm các loại khác nếu có -->
+    </select>
+</div>
 
-                    <!-- Chọn chủng loại sản phẩm -->
-                    <div class="subcategory-select">
-                        <label for="product-subcategory">Chủng loại sản phẩm:</label>
-                        <select id="product-subcategory">
-                            <option value="">-- Chọn chủng loại --</option>
-                            <!-- Các chủng loại sẽ được load động dựa trên loại sản phẩm đã chọn -->
-                        </select>
-                    </div>
+<!-- Chọn chủng loại sản phẩm -->
+<div class="subcategory-select">
+    <label for="product-subcategory">Chủng loại sản phẩm:</label>
+    <select id="product-subcategory">
+        <option value="">-- Chọn chủng loại --</option>
+    </select>
+</div>
 
                     <!-- Khoảng giá -->
                     <div class="price-range">

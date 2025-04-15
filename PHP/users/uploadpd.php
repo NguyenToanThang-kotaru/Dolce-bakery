@@ -8,7 +8,11 @@ if (!isset($type)) {
     die("Lỗi: Không xác định loại sản phẩm.");
 }   
     
-$sql = "SELECT pd.*, ct.* FROM products pd JOIN categories ct ON pd.category_id = ct.id WHERE ct.name = ?";
+$sql = "SELECT pd.*, sct.*, ct.*
+FROM products pd
+JOIN subcategories sct ON pd.subcategory_id = sct.subcategory_id
+JOIN categories ct ON sct.subcategory_id = ct.id
+WHERE ct.name = ? ";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $type);
 $stmt->execute();
@@ -33,4 +37,4 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-?>
+?> 
