@@ -5,40 +5,50 @@ header('Content-Type: text/html; charset=UTF-8');
 
 include '../../PHP/config.php';
 
-// Nhận dữ liệu từ AJAX
 $category = $_POST['category'];
-$keyword = "%" . $_POST['keyword'] . "%";
-$type = $_POST['type'];
+$keyword = "%" . $_POST['keyword'] . "%"; // bỏ khoảng trắng thừa
 $minPrice = $_POST['min'];
 $maxPrice = $_POST['max'];
+$subcategory = (int)($_POST['subcategory'] ?? 0); // đề phòng không có thì = 0
 
-// Tạo câu truy vấn cơ bản JOIN với categories
-$sql = "SELECT p.pd_name, p.image, p.price 
+$types = "dddi";
+$params = [$keyword, $minPrice, $maxPrice, $subcategory];
+
+// JOIN thêm bảng categories để lọc theo loại
+$sql = "SELECT p.*
         FROM products p 
-        JOIN categories c ON p.category_id = c.id 
-        WHERE p.pd_name LIKE ? 
-          AND p.price BETWEEN ? AND ?";
+        JOIN subcategories sc ON p.subcategory_id = sc.id 
+        JOIN categories c ON sc.subcategory_id = c.id 
+        WHERE p.pd_name LIKE ?
+          AND p.price BETWEEN ? AND ? AND sc.id = ?;";
 
-// Chuẩn bị mảng tham số truyền vào
 $params = [];
-$types = "sii"; // s = string (keyword), i = int (min), i = int (max)
+$types = "sddi";
 $params[] = $keyword;
 $params[] = $minPrice;
 $params[] = $maxPrice;
+$params[] = $subcategory;
+// if ($category === "allproduct" && !empty($type)) {
+//     $sql .= " AND c.name = ?";
+//     $params[] = $type;
+//     $types .= "s";
+// }
 
-// Nếu là allproduct và có chọn loại, thêm điều kiện lọc theo tên loại
-if ($category === "allproduct" && !empty($type)) {
-    $sql .= " AND c.name = ?";
-    $params[] = $type;
-    $types .= "s";
-}
+// if (!empty($subcategory)) {
+//     $sql .= " AND sc.id = ?";
+//     $params[] = $subcategory;
+//     $types .= "i";
+// }
 
 $stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("Lỗi SQL: " . $conn->error . "<br>Query: " . $sql);
+}
+
 $stmt->bind_param($types, ...$params);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Trả về kết quả HTML sản phẩm
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '<div class="product-item">

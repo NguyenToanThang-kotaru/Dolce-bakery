@@ -434,23 +434,21 @@ function toggleFilterBlockSelect(currentCategory) {
   sidebar.setAttribute("data-category", currentCategory);
 }
 
-
 function render_filter() {
   const keyword = document.getElementById("product-name-main")?.value || "";
   const minVal = document.getElementById("min-price-allproduct")?.value || 0;
   const maxVal = document.getElementById("max-price-allproduct")?.value || 1000000;
   const type = document.getElementById("product-category")?.value || "";
-
-  // Nếu category đang bị null, bạn có thể hardcode tạm:
-  const category = "allproduct";
+  const subcategory = document.getElementById("product-subcategory")?.value || "";
+  const category = "allproduct"; // luôn là allproduct trong trang chính
 
   if (!keyword.trim()) {
     console.error("Keyword không được trống.");
-    return;  // Dừng hàm nếu keyword rỗng
+    return;
   }
 
-
-  const data = `category=${category}&keyword=${keyword}&min=${minVal}&max=${maxVal}&type=${type}`;
+  // Thêm subcategory vào dữ liệu gửi
+  const data = `category=${category}&keyword=${keyword}&min=${minVal}&max=${maxVal}&type=${type}&subcategory=${subcategory}`;
   console.log("📤 Data gửi:", data);
 
   const xhr = new XMLHttpRequest();
@@ -464,35 +462,6 @@ function render_filter() {
     }
   };
   xhr.send(data);
-}
-
-
-//Hàm lấy các chủng loại của từng loại
-function loadSubcategories() {
-  const categoryId = document.getElementById('product-category').value;
-
-  // Gửi yêu cầu AJAX tới server để lấy danh sách chủng loại
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', '../../PHP/users/get_subcategories.php?category_id=' + categoryId, true);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      // Parse dữ liệu JSON trả về
-      const subcategories = JSON.parse(xhr.responseText);
-
-      // Lấy select của chủng loại và xóa các option cũ
-      const subcategorySelect = document.getElementById('product-subcategory');
-      subcategorySelect.innerHTML = '<option value="">-- Chọn chủng loại --</option>';
-
-      // Thêm các option mới vào select
-      subcategories.forEach(function (subcategory) {
-        const option = document.createElement('option');
-        option.value = subcategory.id;
-        option.textContent = subcategory.name;
-        subcategorySelect.appendChild(option);
-      });
-    }
-  };
-  xhr.send();
 }
 
 
@@ -977,14 +946,14 @@ function loadSubcategories() {
   // Gửi AJAX
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "../../PHP/PD-getSubcategory.php", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-  xhr.onload = function() {
-      if (this.status === 200) {
-          subcategorySelect.innerHTML = this.responseText;
-      } else {
-          subcategorySelect.innerHTML = "<option>Lỗi tải dữ liệu</option>";
-      }
+  xhr.onload = function () {
+    if (this.status === 200) {
+      subcategorySelect.innerHTML = this.responseText;
+    } else {
+      subcategorySelect.innerHTML = "<option>Lỗi tải dữ liệu</option>";
+    }
   };
 
   xhr.send("subcategory_id=" + encodeURIComponent(categoryId));
