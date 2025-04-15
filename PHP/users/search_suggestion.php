@@ -11,7 +11,7 @@ if (!isset($_GET['query']) || empty($_GET['query'])) {
 }
 
 $keyword = "%" . $_GET['query'] . "%";
-$sql = "SELECT name FROM products WHERE name LIKE ?";
+$sql = "SELECT pd_name FROM products WHERE pd_name LIKE ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $keyword);
 $stmt->execute();
@@ -19,7 +19,7 @@ $result = $stmt->get_result();
 
 $suggestions = [];
 while ($row = $result->fetch_assoc()) {
-    $suggestions[] = $row['name'];
+    $suggestions[] = $row['pd_name'];
 }   
 
 $stmt->close();

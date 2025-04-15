@@ -5,13 +5,13 @@ header('Content-Type: application/json; charset=UTF-8');
 
 include '../../PHP/config.php';
 
-if (!isset($_GET['name']) || empty($_GET['name'])) {
+if (!isset($_GET['pd_name']) || empty($_GET['pd_name'])) {
     echo json_encode(["error" => "Thiếu tên sản phẩm"], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-$productName = $_GET['name'];
-$sql = "SELECT name, price, image FROM products WHERE name = ?";
+$productName = $_GET['pd_name'];
+$sql = "SELECT pd_name, price, image FROM products WHERE pd_name = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $productName);
 $stmt->execute();

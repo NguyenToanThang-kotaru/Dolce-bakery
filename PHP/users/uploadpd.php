@@ -6,7 +6,7 @@ include '../../PHP/config.php';
 
 if (!isset($type)) {
     die("Lỗi: Không xác định loại sản phẩm.");
-}
+}   
     
 $sql = "SELECT pd.*, ct.* FROM products pd JOIN categories ct ON pd.category_id = ct.id WHERE ct.name = ?";
 $stmt = $conn->prepare($sql);
