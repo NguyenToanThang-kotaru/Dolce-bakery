@@ -219,20 +219,18 @@
                     <!-- Nhập tên sản phẩm -->
                     <div class="name-search">
                         <label for="product-name">Tên sản phẩm:</label>
-                        <input type="text" id="product-name" placeholder="Nhập tên sản phẩm...">
+                        <input type="text" id="product-name-bread" placeholder="Nhập tên sản phẩm...">
                     </div>
 
-                    <!-- Chọn loại sản phẩm -->
-
-                    <!-- <div class="category-select">
-                        <label for="product-category">Loại sản phẩm:</label>
-                        <select id="product-category">
-                            <option value="">-- Tất cả --</option>
-                            <option value="bread">Bánh mì</option>
-                            <option value="cake">Bánh kem</option>
-                            <option value="cookie">Bánh quy</option>
-                        </select>
-                    </div> -->
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-bread">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-bread";
+                        $selectName = "product-subcategory";
+                        $categoryId = 1; // bread
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
 
 
                     <div class="price-range">
@@ -304,19 +302,18 @@
                     <!-- Nhập tên sản phẩm -->
                     <div class="name-search">
                         <label for="product-name">Tên sản phẩm:</label>
-                        <input type="text" id="product-name" placeholder="Nhập tên sản phẩm...">
+                        <input type="text" id="product-name-cake" placeholder="Nhập tên sản phẩm...">
                     </div>
 
-                    <!-- Chọn loại sản phẩm -->
-                    <!-- <div class="category-select">
-                        <label for="product-category">Loại sản phẩm:</label>
-                        <select id="product-category">
-                            <option value="">-- Tất cả --</option>
-                            <option value="bread">Bánh mì</option>
-                            <option value="cake">Bánh kem</option>
-                            <option value="cookie">Bánh quy</option>
-                        </select>
-                    </div> -->
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-cake">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-cake";
+                        $selectName = "product-subcategory";
+                        $categoryId = 2; // cake
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
 
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
@@ -332,7 +329,7 @@
                                 value="1000000">
                         </div>
 
-                        <span class="acp-filter" onclick="render_filter()">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Tìm kiếm</span>
                     </div>
                 </div>
 
@@ -394,19 +391,19 @@
                     <!-- Nhập tên sản phẩm -->
                     <div class="name-search">
                         <label for="product-name">Tên sản phẩm:</label>
-                        <input type="text" id="product-name" placeholder="Nhập tên sản phẩm...">
+                        <input type="text" id="product-name-cookie" placeholder="Nhập tên sản phẩm...">
                     </div>
 
-                    <!-- Chọn loại sản phẩm -->
-                    <!-- <div class="category-select">
-                        <label for="product-category">Loại sản phẩm:</label>
-                        <select id="product-category">
-                            <option value="">-- Tất cả --</option>
-                            <option value="bread">Bánh mì</option>
-                            <option value="cake">Bánh kem</option>
-                            <option value="cookie">Bánh quy</option>
-                        </select>
-                    </div> -->
+                    <!-- Chọn chủng loại sản phẩm -->
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-cookie">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-cookie";
+                        $selectName = "product-subcategory";
+                        $categoryId = 3; // cookie
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
 
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
@@ -422,7 +419,7 @@
                                 value="100000">
                         </div>
 
-                        <span class="acp-filter" onclick="render_filter()">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Tìm kiếm</span>
                     </div>
                 </div>
 
@@ -487,15 +484,15 @@
 
                     <!-- Nhập tên sản phẩm -->
                     <div class="name-search">
-                        <label for="product-name-main">Tên sản phẩm:</label>
-                        <input type="text" id="product-name-main" placeholder="Nhập tên sản phẩm...">
+                        <label for="product-name-allproduct">Tên sản phẩm:</label>
+                        <input type="text" id="product-name-allproduct" placeholder="Nhập tên sản phẩm...">
                     </div>
 
                     <!-- Chọn loại sản phẩm -->
                     <div class="category-select">
                         <label for="product-category">Loại sản phẩm:</label>
                         <select id="product-category" onchange="loadSubcategories()">
-                            <option value="">-- Tất cả --</option>
+                            <option value="0">-- Tất cả --</option>
                             <option value="1">Bánh mì</option>
                             <option value="2">Bánh kem</option>
                             <option value="3">Bánh quy</option>
@@ -505,8 +502,8 @@
 
                     <!-- Chọn chủng loại sản phẩm -->
                     <div class="subcategory-select">
-                        <label for="product-subcategory">Chủng loại sản phẩm:</label>
-                        <select id="product-subcategory">
+                        <label for="product-subcategory-allproduct">Chủng loại sản phẩm:</label>
+                        <select id="product-subcategory-allproduct" class="subcategory-select">
                             <option value="">-- Chọn chủng loại --</option>
                         </select>
                     </div>

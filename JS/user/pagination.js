@@ -417,53 +417,83 @@ function updateDisplayAllproductSlider() {
   maxValueDisplay_allproduct.textContent = maxVal.toLocaleString("vi-VN") + "đ";
 }
 
-function toggleFilterBlockSelect(currentCategory) {
-  // Hiện/ẩn sidebar filter
-  const sidebar = document.getElementById("filter-sidebar");
-  sidebar.classList.toggle("active");
-
-  // Ẩn phần loại sản phẩm nếu không phải allproduct
-  const categorySelect = document.querySelector(".category-select");
-  if (currentCategory !== "allproduct") {
-    categorySelect.style.display = "none";
-  } else {
-    categorySelect.style.display = "block";
-  }
-
-  // Lưu lại category hiện tại để filter
-  sidebar.setAttribute("data-category", currentCategory);
-}
 
 function render_filter() {
-  const keyword = document.getElementById("product-name-main")?.value || "";
-  const minVal = document.getElementById("min-price-allproduct")?.value || 0;
-  const maxVal = document.getElementById("max-price-allproduct")?.value || 1000000;
-  const type = document.getElementById("product-category")?.value || "";
-  const subcategory = document.getElementById("product-subcategory")?.value || "";
-  const category = "allproduct"; // luôn là allproduct trong trang chính
-
-  if (!keyword.trim()) {
-    console.error("Keyword không được trống.");
-    return;
+  // Xác định danh mục hiện tại
+  let activeCategory = "allproduct";
+  if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
+    activeCategory = "bread";
+  } else if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
+    activeCategory = "cake";
+  } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex") {
+    activeCategory = "cookie";
   }
 
-  // Thêm subcategory vào dữ liệu gửi
-  const data = `category=${category}&keyword=${keyword}&min=${minVal}&max=${maxVal}&type=${type}&subcategory=${subcategory}`;
-  console.log("📤 Data gửi:", data);
+  // Lấy keyword từ input tương ứng
+  const keywordInput = document.getElementById(`product-name-${activeCategory}`);
+  const keyword = keywordInput?.value?.trim() || "";
 
+  // Lấy giá min/max theo danh mục
+  const minVal = document.getElementById(`min-price-${activeCategory}`)?.value || 0;
+  const maxVal = document.getElementById(`max-price-${activeCategory}`)?.value || 1000000;
+
+  // Lấy subcategory tương ứng
+  const subcategory = document.getElementById(`product-subcategory-${activeCategory}`)?.value || "";
+
+  // Lấy loại nếu là allproduct
+  const type = activeCategory === "allproduct"
+    ? document.getElementById("product-category")?.value || 0
+    : 0;
+
+  // Chuẩn bị dữ liệu gửi
+  const data = `category=${activeCategory}&keyword=${encodeURIComponent(keyword)}&min=${minVal}&max=${maxVal}&subcategory=${subcategory}&type=${type}`;
+  console.log("📤 Dữ liệu gửi:", data);
+
+  // Gửi AJAX
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "../../PHP/users/filter_product.PHP", true);
+  xhr.open("POST", "../../PHP/users/filter_product.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
   xhr.onload = function () {
     if (xhr.status === 200) {
-      document.getElementById("allproduct-container").innerHTML = xhr.responseText;
+      const container = document.getElementById(`${activeCategory}-container`);
+      if (container) {
+        container.innerHTML = xhr.responseText;
+
+        // ✅ Phân trang lại sau khi cập nhật HTML
+        if (activeCategory === "bread") {
+          product_frame1 = document.querySelectorAll(".bread-product");
+          totalPage1 = Math.ceil(product_frame1.length / product);
+          if (totalPage1 <= 1) pagination1.innerHTML = "";
+          showPage1(1);
+        } else if (activeCategory === "cake") {
+          product_frame2 = document.querySelectorAll(".cake-product");
+          totalPage2 = Math.ceil(product_frame2.length / product);
+          if (totalPage2 <= 1) pagination2.innerHTML = "";
+          showPage2(1);
+        } else if (activeCategory === "cookie") {
+          product_frame3 = document.querySelectorAll(".cookie-product");
+          totalPage3 = Math.ceil(product_frame3.length / product);
+          if (totalPage3 <= 1) pagination3.innerHTML = "";
+          showPage3(1);
+        } else if (activeCategory === "allproduct") {
+          product_frame = document.querySelectorAll(".product-item");
+          totalPage = Math.ceil(product_frame.length / allPD);
+          if (totalPage <= 1) pagination.innerHTML = "";
+          showPage(1);
+        }
+
+      } else {
+        console.error("❌ Không tìm thấy container tương ứng.");
+      }
     } else {
-      console.error("❌ Lỗi khi gọi filter_product.PHP");
+      console.error("❌ Lỗi khi gọi filter_product.php");
     }
   };
+
+
   xhr.send(data);
 }
-
 
 
 const originalProductLists = {
@@ -937,27 +967,41 @@ document.querySelectorAll(".product-img img").forEach(img => {
 
 // Lấy chủng loại từ PHP
 function loadSubcategories() {
-  const categoryId = document.getElementById('product-category').value;
-  const subcategorySelect = document.getElementById('product-subcategory');
+  const categorySelect = document.getElementById('product-category');
+  const subcategorySelect = document.getElementById('product-subcategory-allproduct');
 
-  // Xóa dữ liệu cũ
+  if (!categorySelect || !subcategorySelect) return;
+
+  const categoryId = categorySelect.value;
+
+  if (!categoryId) {
+    subcategorySelect.innerHTML = "<option value=''>Vui lòng chọn loại sản phẩm trước</option>";
+    return;
+  }
+
+  // Hiển thị đang tải
   subcategorySelect.innerHTML = "<option>Đang tải...</option>";
 
-  // Gửi AJAX
+  // Gửi AJAX để lấy danh sách chủng loại
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "../../PHP/PD-getSubcategory.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   xhr.onload = function () {
-    if (this.status === 200) {
-      subcategorySelect.innerHTML = this.responseText;
+    if (xhr.status === 200) {
+      subcategorySelect.innerHTML = xhr.responseText;
     } else {
-      subcategorySelect.innerHTML = "<option>Lỗi tải dữ liệu</option>";
+      subcategorySelect.innerHTML = "<option value=''>Lỗi tải dữ liệu</option>";
     }
   };
 
   xhr.send("subcategory_id=" + encodeURIComponent(categoryId));
 }
+
+
+
+
+
 
 
 

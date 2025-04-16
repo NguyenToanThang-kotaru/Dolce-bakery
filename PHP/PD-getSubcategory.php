@@ -1,15 +1,35 @@
 <?php
 include 'config.php';
 
-// Kiểm tra nếu có truyền subcategory_id (tức là ID của loại sản phẩm)
-if (isset($_POST['subcategory_id'])) {
-    $categoryId = intval($_POST['subcategory_id']);
+// Nếu được include từ các mục riêng (không có POST mà có $categoryId)
+if (!isset($_POST['subcategory_id']) && isset($categoryId)) {
+    $categoryId = intval($categoryId);
 
-    // Truy vấn từ bảng subcategories, vì đó là bảng chứa các chủng loại
+    // Truy vấn
     $sql = "SELECT id, name FROM subcategories WHERE subcategory_id = $categoryId";
     $result = $conn->query($sql);
 
-    // Kiểm tra và in ra các option
+    // In cả thẻ select và các option
+    echo "<select id='$selectId' name='$selectName' class='form-select'>";
+    if ($result && $result->num_rows > 0) {
+        echo "<option value='0'>-- Tất cả --</option>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='{$row['id']}'>{$row['name']}</option>";
+        }
+    } else {
+        echo "<option value=''>Không có chủng loại nào</option>";
+    }
+    echo "</select>";
+    return;
+}
+
+// Nếu gọi bằng AJAX từ allproduct
+if (isset($_POST['subcategory_id'])) {
+    $categoryId = intval($_POST['subcategory_id']);
+
+    $sql = "SELECT id, name FROM subcategories WHERE subcategory_id = $categoryId";
+    $result = $conn->query($sql);
+
     if ($result && $result->num_rows > 0) {
         echo "<option value=''>-- Chọn chủng loại --</option>";
         while ($row = $result->fetch_assoc()) {
@@ -18,7 +38,9 @@ if (isset($_POST['subcategory_id'])) {
     } else {
         echo "<option value=''>Không có chủng loại nào</option>";
     }
-} else {
-    echo "<option value=''>Vui lòng chọn loại sản phẩm trước</option>";
+    return;
 }
+
+// Trường hợp không truyền gì
+echo "<option value=''>Vui lòng chọn loại sản phẩm trước</option>";
 ?>

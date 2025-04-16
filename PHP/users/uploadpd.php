@@ -10,7 +10,7 @@ if (!isset($type)) {
     
 $sql = "SELECT pd.*, sct.*, ct.*
 FROM products pd
-JOIN subcategories sct ON pd.subcategory_id = sct.subcategory_id
+JOIN subcategories sct ON pd.subcategory_id = sct.id
 JOIN categories ct ON sct.subcategory_id = ct.id
 WHERE ct.name = ? ";
 $stmt = $conn->prepare($sql);
