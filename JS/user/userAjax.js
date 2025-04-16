@@ -74,8 +74,10 @@ $(document).ready(function () {
                 "rg-password": passWord
             },
             success: function (response) {
-                if (response.includes("Đăng ký thành công")) {
-                    window.location.href = "../../HTML/user/dolce.php";
+                if (response.includes("success")) {
+                    localStorage.setItem("isLoggedIn", "true");
+                    checkLoginStatus();
+                    location.reload();
                 }
                 else if (response.includes("Tên đăng nhập đã tồn tại")) {
                     showError(rgUserName, response);
