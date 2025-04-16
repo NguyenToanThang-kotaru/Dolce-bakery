@@ -199,7 +199,7 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-        <label for="category" class="form-label">Thể loại sản phẩm</label>
+        <label for="category" class="form-label">*Thể loại sản phẩm</label>
         <select name="product-category" id="product-categoryFIX" class="form-select" required>
         <?php
             include 'config.php';
@@ -218,7 +218,7 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-        <label for="subcategory" class="form-label">Phân loại sản phẩm</label>
+        <label for="subcategory" class="form-label">*Phân loại sản phẩm</label>
         <select name="product-subcategory" id="product-subcategoryFIX" class="form-select" required>
           <?php
             include 'config.php';

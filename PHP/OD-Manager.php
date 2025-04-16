@@ -3,7 +3,7 @@ include 'config.php';
 
 $sql = "SELECT 
             orders.id AS order_id,
-            orders.orderDate,
+            DATE_FORMAT(orders.orderDate, '%d/%m/%Y') AS orderDate, -- chuyển về dd/mm/yyyy
             orders.totalPrice,
             orders.status,
             customers.fullName,
