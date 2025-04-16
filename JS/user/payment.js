@@ -107,7 +107,7 @@ function getPayDate() {
 function setUserInfoPayment() {
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
     document.querySelector(".payment-customer-email").textContent = userSession.email;
-    document.querySelector(".payment-customer-phone").textContent = userSession.numberPhone + "";
+    document.querySelector(".payment-customer-phone").textContent = userSession.phoneNumber + "";
     // Them dia chi
 }
 
@@ -123,7 +123,7 @@ function displayItemReadyPaying() {
             <tr>
                 
                 <td><img src="${item.image}"style="width: 30px; object-fit: cover; vertical-align: middle; margin-right:8px"></td>
-                <td style=" text-align:left; width:100px">${item.name}</td>
+                <td style=" text-align:left; width:100px">${item.pd_name}</td>
                 <td style=" text-align:center;">${item.quantity}</td>
                 <td style="text-align:right;">${(item.price * item.quantity).toLocaleString('vi-VN')}<sup>đ</sup></td>
             </tr>                                

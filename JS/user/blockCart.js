@@ -79,7 +79,6 @@ CartPhone.addEventListener("click", () => {
 
 let new_cart = [];
 
-const cartIcon = document.getElementById("#cart");
 function addToCart(productId, quantity = 1) {
     $.ajax({
         url: "../../PHP/carts/addToCartById.php",
@@ -133,7 +132,7 @@ function displayItemInCart() {
                 <div id="PDCart1">
                     <img src="${item.image}" width="8%" height="100%" alt="">
                     <div id="PDCart-NP">
-                        <div id="PDCart-Name">${item.name}</div>
+                        <div id="PDCart-Name">${item.pd_name}</div>
                         <div id="PDCart-Price">${parseInt(item.price).toLocaleString("vi-VN")}đ</div>
                     </div>
                 </div>

@@ -51,6 +51,8 @@ let address;
 let note;
 let paymentDate;
 let paymentMethod;
+let bankName = "";
+let cardNumber = "";
 let totalAmount = 0;
 let orderItems = [];
 
@@ -62,24 +64,24 @@ function getInfoSummary()
     address = document.querySelector("#address-payment").value;
     note = document.querySelector("#note-payment").value;
     paymentDate = document.querySelector(".payment-date").textContent;
-    paymentMethod = "thanh toán khi nhận hàng.";
-    let bankName = "";
-    let bankNumber = "";
+    paymentMethod = 1;
+    let paymentMethod_toString = '';
     if(document.querySelector("#atm-payment").checked)
     {
-        paymentMethod = "thanh toán bằng ngân hàng";
+        paymentMethod = 2;
         bankName = document.querySelector("#bank").value;
-        bankNumber = document.querySelector("#card-number").value;
+        cardNumber = document.querySelector("#card-number").value;
     }
-
+    
+    paymentMethod_toString = paymentMethod<=1 ? "Thanh toán khi nhận hàng" : "Thanh toán bằng thẻ ngân hàng";
     document.querySelector(".invoice-customer-name").textContent = userName;
     document.querySelector(".invoice-customer-phone").textContent = phone;
     document.querySelector(".invoice-customer-address").textContent = address;
     document.querySelector(".invoice-customer-email").textContent = email;
     document.querySelector(".invoice-date").textContent = paymentDate;
     document.querySelector(".invoice-process-note").textContent = "Ghi chú: " + note;
-    paymentMethod = paymentMethod + " " + bankName + " " + bankNumber;
-    document.querySelector(".invoice-process-payment").textContent = "Phương thức thanh toán: " + paymentMethod;
+    paymentMethod_toString = paymentMethod_toString + " " + bankName + " " + cardNumber;
+    document.querySelector(".invoice-process-payment").textContent = "Phương thức thanh toán: " + paymentMethod_toString;
     displayItemInSummary();
 }
 function checkConditionToPay()
@@ -161,7 +163,7 @@ function displayItemInSummary() {
                 <span class="invoice-product-img">
                     <img src = "${item.image}" style="width: 30px; object-fit: cover; vertical-align: middle; margin-right:8px">
                 </span>
-                <span class="invoice-product-name">${item.name}</span>
+                <span class="invoice-product-name">${item.pd_name}</span>
                 <span class="invoice-product-quantity">X${item.quantity}</span>
                 <span class="space">........................................................................</span>
                 <span class="invoice-product-price">${parseInt(item.price * item.quantity).toLocaleString("vi-VN")}đ</span>
@@ -211,8 +213,10 @@ function getCartSummary() {
     orderItems = [];
     cart.forEach(item => {
         orderItems.push({
-            name: item.name,
+            id: item.id,
+            name: item.pd_name,
             quantity: item.quantity,
+            price: item.price,
             totalPrice: item.price * item.quantity
         });
     });
@@ -221,18 +225,17 @@ function getCartSummary() {
 }
 function savePaymentIntoDatabase()
 {
-
+    console.log(paymentDate);
     $.ajax({
         type: "POST",
         url: "../../PHP/users/savePayment.php",
         data: {
-            userName: userName,
-            email: email,
-            phone: phone,
-            address: address,
+            // address: address,
             note: note,
             paymentDate: paymentDate,
             paymentMethod: paymentMethod,
+            bankName: bankName,
+            cardNumber: cardNumber,
             totalAmount: totalAmount,
             orderItems: JSON.stringify(orderItems)
         },

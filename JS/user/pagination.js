@@ -897,7 +897,7 @@ document.querySelectorAll(".product-img img").forEach(img => {
       .then(response => response.json())
       .then(product => {
         if (!product.error) {
-          document.querySelector(".PD-name h1").textContent = product.name;
+          document.querySelector(".PD-name h1").textContent = product.pd_name;
           document.querySelector(".Price").textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
           document.querySelector("#PD-imgage img").src = product.image;
         }

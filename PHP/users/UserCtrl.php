@@ -43,8 +43,8 @@
             }
         }
         else {
-            // $hasshedPassword = password_hash($passwd, PASSWORD_BCRYPT); 
-            $hasshedPassword = $passwd; 
+            $hasshedPassword = password_hash($passwd, PASSWORD_BCRYPT); 
+            // $hasshedPassword = $passwd; 
             $insertQuery = "INSERT INTO customers (userName, email, fullName, phoneNumber, password) 
                 VALUES ('$userName', '$email', '$fullName', '$phone', '$hasshedPassword')";
             if ($conn->query($insertQuery) === TRUE) {
@@ -69,8 +69,8 @@
             
             // Kiểm tra mật khẩu
             $hasshedPassword = $row['password'];
-            // if (password_verify($passwd, $hasshedPassword)) { 
-            if ($hasshedPassword == $passwd) { 
+            if (password_verify($passwd, $hasshedPassword)) { 
+            // if ($hasshedPassword == $passwd) { 
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userID' => $row['id'],
