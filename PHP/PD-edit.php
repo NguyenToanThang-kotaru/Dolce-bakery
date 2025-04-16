@@ -6,7 +6,7 @@ $response = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['product-id']; // Lấy ID sản phẩm
     $name = $_POST['product-name'];
-    $category_id = $_POST['product-category'];
+    $subcategory_id = $_POST['product-subcategory'];
     $quantity = $_POST['product-quantity'];
     $price = $_POST['product-price'];
 
@@ -38,21 +38,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
 
-    // lấy tên loại
-    $sql = "SELECT name FROM categories WHERE id = ?";
+    $sql = "SELECT subcategories.name AS subcategory_name, categories.name AS category_name
+    FROM subcategories
+    INNER JOIN categories ON subcategories.category_id = categories.id
+    WHERE subcategories.id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $category_id);
+    $stmt->bind_param("i", $subcategory_id);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
-        $category_name = $row["name"];
+    $subcategory_name = $row["subcategory_name"];
+    $category_name = $row["category_name"];
     }
     $stmt->close();
 
     // Cập nhật database
-    $sql = "UPDATE products SET image = ?, pd_name = ?, category_id = ?, quantity = ?, price = ? WHERE id = ?";
+    $sql = "UPDATE products SET image = ?, pd_name = ?, subcategory_id = ?, quantity = ?, price = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssiiii", $target_file, $name, $category_id, $quantity, $price, $id);
+    $stmt->bind_param("ssiiii", $target_file, $name, $subcategory_id, $quantity, $price, $id);
 
     if ($stmt->execute()) {
         $response = [
@@ -63,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "image" => $target_file,
                 "name" => $name,
                 "category_name" => $category_name,
+                "subcategory_name" => $subcategory_name,
                 "quantity" => $quantity,
                 "price" => number_format($price, 0, ',', '.') . " VND"
             ]

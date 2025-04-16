@@ -1,55 +1,53 @@
-// Lấy loại theo chủng loại
-
 document.addEventListener("DOMContentLoaded", function () {
-    // ----------- Form Thêm Sản Phẩm -----------
-    const subcategoryAdd = document.getElementById("product-subcategory");
-    const categoryAdd = document.getElementById("product-category");
-  
-    if (subcategoryAdd && categoryAdd) {
-      subcategoryAdd.addEventListener("change", function () {
-        const subcategoryId = this.value;
-  
-        fetch("../../PHP/PD-getCategory.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: "subcategory_id=" + encodeURIComponent(subcategoryId),
+  // ----------- Form Thêm Sản Phẩm -----------
+  const categoryAdd = document.getElementById("product-category");
+  const subcategoryAdd = document.getElementById("product-subcategory");
+
+  if (categoryAdd && subcategoryAdd) {
+    categoryAdd.addEventListener("change", function () {
+      const categoryId = this.value;
+
+      fetch("../../PHP/PD-getSubcategory.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: "category_id=" + encodeURIComponent(categoryId),
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          subcategoryAdd.innerHTML = data;
         })
-          .then((response) => response.text())
-          .then((data) => {
-            categoryAdd.innerHTML = data;
-          })
-          .catch((error) => {
-            console.error("Lỗi khi tải loại sản phẩm (thêm):", error);
-            categoryAdd.innerHTML = "<option value=''>Không thể tải dữ liệu</option>";
-          });
-      });
-    }
-  
-    // ----------- Form Sửa Sản Phẩm -----------
-    const subcategoryFix = document.getElementById("product-subcategoryFIX");
-    const categoryFix = document.getElementById("product-categoryFIX");
-  
-    if (subcategoryFix && categoryFix) {
-      subcategoryFix.addEventListener("change", function () {
-        const subcategoryId = this.value;
-  
-        fetch("../../PHP/PD-getCategory.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: "subcategory_id=" + encodeURIComponent(subcategoryId),
+        .catch((error) => {
+          console.error("Lỗi khi tải phân loại (thêm):", error);
+          subcategoryAdd.innerHTML = "<option value=''>Không thể tải dữ liệu</option>";
+        });
+    });
+  }
+
+  // ----------- Form Sửa Sản Phẩm -----------
+  const categoryFix = document.getElementById("product-categoryFIX");
+  const subcategoryFix = document.getElementById("product-subcategoryFIX");
+
+  if (categoryFix && subcategoryFix) {
+    categoryFix.addEventListener("change", function () {
+      const categoryId = this.value;
+
+      fetch("../../PHP/PD-getSubcategory.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: "category_id=" + encodeURIComponent(categoryId),
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          subcategoryFix.innerHTML = data;
         })
-          .then((response) => response.text())
-          .then((data) => {
-            categoryFix.innerHTML = data;
-          })
-          .catch((error) => {
-            console.error("Lỗi khi tải loại sản phẩm (sửa):", error);
-            categoryFix.innerHTML = "<option value=''>Không thể tải dữ liệu</option>";
-          });
-      });
-    }
-  });
+        .catch((error) => {
+          console.error("Lỗi khi tải phân loại (sửa):", error);
+          subcategoryFix.innerHTML = "<option value=''>Không thể tải dữ liệu</option>";
+        });
+    });
+  }
+});

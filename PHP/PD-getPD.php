@@ -12,8 +12,8 @@ if (isset($_GET['id'])) {
             categories.name AS category_name,
             categories.id AS category_id
         FROM products
-        INNER JOIN categories ON products.category_id = categories.id
-        INNER JOIN subcategories ON categories.subcategory_id = subcategories.id
+        INNER JOIN subcategories ON products.subcategory_id = subcategories.id
+        INNER JOIN categories ON subcategories.category_id = categories.id
         WHERE products.id = $id
     ";
 

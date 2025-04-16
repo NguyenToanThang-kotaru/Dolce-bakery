@@ -126,7 +126,8 @@ if (!isset($_SESSION['adminInfo'])) {
           <tr>
             <th style="text-align: center">Hình ảnh sản phẩm</th>
             <th>Tên sản phẩm</th>
-            <th>Loại</th>
+            <th>Thể loại</th>
+            <th>Phân loại</th>
             <th>Số lượng</th>
             <th>Giá tiền</th>
             <th id="setting-pro">Cài đặt</th>
@@ -150,18 +151,18 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-        <label for="subcategory" class="form-label">Chủng sản phẩm</label>
+        <label for="category" class="form-label">Thể loại sản phẩm</label>
         <?php 
-          $selectId = "product-subcategory";
-          $selectName = "product-subcategory";
-          include '../../PHP/PD-getSubcategory.php';
+          $selectId = "product-category";
+          $selectName = "product-category";
+          include '../../PHP/PD-getCategory.php';
         ?>
         </div>
 
         <div class="form-group">
-        <label for="category" class="form-label">Loại sản phẩm</label>
-        <select name="product-category" id="product-category" class="form-select" required>
-            <option value="">-- Chọn loại sản phẩm --</option>
+        <label for="subcategory" class="form-label">Phân loại sản phẩm</label>
+        <select name="product-subcategory" id="product-subcategory" class="form-select" required>
+            <option value="">-- Chọn phân loại sản phẩm --</option>
         </select>
         </div>
 
@@ -198,38 +199,38 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-        <label for="subcategory" class="form-label">Chủng sản phẩm</label>
-        <select name="product-subcategory" id="product-subcategoryFIX" class="form-select" required>
-          <?php
+        <label for="category" class="form-label">Thể loại sản phẩm</label>
+        <select name="product-category" id="product-categoryFIX" class="form-select" required>
+        <?php
             include 'config.php';
-            $sql = "SELECT id, name FROM subcategories";
+            $sql = "SELECT id, name FROM categories";
             $result = $conn->query($sql);
-            echo "  <option value=''>-- Chọn chủng loại sản phẩm --</option>";
+            echo "  <option value=''>-- Chọn thể loại sản phẩm --</option>";
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<option value='{$row['id']}'>{$row['name']}</option>";
                 }
             } else {
-                echo "<option value=''>Không có chủng loại nào!</option>";
+                echo "<option value=''>Không có thể loại nào!</option>";
             }
           ?>
         </select>
         </div>
 
         <div class="form-group">
-        <label for="category" class="form-label">Loại sản phẩm</label>
-        <select name="product-category" id="product-categoryFIX" class="form-select" required>
-        <?php
+        <label for="subcategory" class="form-label">Phân loại sản phẩm</label>
+        <select name="product-subcategory" id="product-subcategoryFIX" class="form-select" required>
+          <?php
             include 'config.php';
-            $sql = "SELECT id, name FROM categories";
+            $sql = "SELECT id, name FROM subcategories";
             $result = $conn->query($sql);
-            echo "  <option value=''>-- Chọn loại sản phẩm --</option>";
+            echo "  <option value=''>-- Chọn phân loại loại sản phẩm --</option>";
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<option value='{$row['id']}'>{$row['name']}</option>";
                 }
             } else {
-                echo "<option value=''>Không có loại nào!</option>";
+                echo "<option value=''>Không có phân loại loại nào!</option>";
             }
           ?>
         </select>
@@ -831,6 +832,8 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/CU-Ajax.js"></script>
   <script src="../../JS/admin/EP-Ajax.js"></script>
   <script src="../../JS/admin/Logout_admin.js"></script>
+  <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
+
 
   <script>
     const adminFunctions = <?php echo json_encode($_SESSION['adminInfo']['function_ids']); ?>;

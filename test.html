@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuyển Trang (Query Parameters)</title>
+  <link href="/CSS/admin/admin.css">
+
+  
+</head>
+<body>
+  <form id="filterForm" method="GET" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;">
+    <!-- Trạng thái -->
+    <div>
+        <label for="status">Trạng thái:</label><br>
+        <select id="status" name="status">
+            <option value="">Tất cả</option>
+            <option value="pending">Chờ xử lý</option>
+            <option value="approved">Đã duyệt</option>
+            <option value="rejected">Từ chối</option>
+        </select>
+    </div>
+
+    <!-- Tỉnh/Thành phố -->
+    <div>
+        <label for="province">Tỉnh/Thành phố:</label><br>
+        <select id="province" name="province">
+            <option value="">Chọn tỉnh/thành</option>
+            <!-- Thêm option động từ JS hoặc server -->
+        </select>
+    </div>
+
+    <!-- Huyện/Quận -->
+    <div>
+        <label for="district">Huyện/Quận:</label><br>
+        <select id="district" name="district">
+            <option value="">Chọn quận/huyện</option>
+        </select>
+    </div>
+
+    <!-- Xã/Phường -->
+    <div>
+        <label for="ward">Xã/Phường:</label><br>
+        <select id="ward" name="ward">
+            <option value="">Chọn xã/phường</option>
+        </select>
+    </div>
+
+    <!-- Từ ngày -->
+    <div>
+        <label for="fromDate">Từ ngày:</label><br>
+        <input type="date" id="fromDate" name="fromDate">
+    </div>
+
+    <!-- Đến ngày -->
+    <div>
+        <label for="toDate">Đến ngày:</label><br>
+        <input type="date" id="toDate" name="toDate">
+    </div>
+
+    <!-- Nút lọc -->
+    <div>
+        <button type="submit">Lọc</button>
+    </div>
+</form>
+
+
+  <script src="test.js"></script>
+</body>
+</html>
