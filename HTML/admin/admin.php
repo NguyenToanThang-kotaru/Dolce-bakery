@@ -81,6 +81,30 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="oder-part">
     <div class="order-table-container">
+      <form id="filter-form-order" style="margin-bottom: 10px; display: flex; gap: 5px;">
+        <div>
+          <label for="filter-status">Lọc theo trạng thái:</label>
+          <?php
+            include '../../PHP/config.php';
+            $sql = "SELECT id, name FROM orderstatus ORDER BY id ASC";
+            $result = $conn->query($sql);
+            echo "<select name='order-status' class='orderstatus-select' id='filter-status' required>";
+            echo "<option value='0'>Tất cả</option>";
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                echo "<option value='{$row['id']}'>{$row['name']}</option>";
+              }
+            } else {
+              echo "<option value=''>Không có trạng thái nào!</option>"; 
+            }
+            echo "</select>";
+          ?>
+        </div>
+        <div>
+          <button type="submit">Lọc</button>
+        </div>
+      </form>
+
       <table class="order-table">
         <thead>
           <tr>
@@ -95,22 +119,6 @@ if (!isset($_SESSION['adminInfo'])) {
           </tr>
         </thead>
         <tbody>
-           <!-- <tr>
-            <td>Nguyễn</td>
-            <td>01</td>
-            <td>2</td>
-            <td>500,000 VND</td>
-            <td><i class="fa-solid fa-circle-info"></i></td>
-            <td>Đã xử lý</td>
-          </tr>
-          <tr>
-            <td>Mai</td>
-            <td>02</td>
-            <td>3</td>
-            <td>150,000 VND</td>
-            <td><i class="fa-solid fa-circle-info"></i></td>
-            <td>Chưa xử lý</td> 
-          </tr>  -->
           <?php include '../../PHP/OD-Manager.php' ?>
         </tbody>
       </table>
@@ -833,6 +841,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/EP-Ajax.js"></script>
   <script src="../../JS/admin/Logout_admin.js"></script>
   <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
+  <script src="../../JS/admin/OD-ajax.js"></script>
 
 
   <script>
