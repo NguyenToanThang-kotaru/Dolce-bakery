@@ -1,21 +1,24 @@
 <?php
 include 'config.php';
 
-if (isset($_POST['subcategory_id'])) {
-    $subcategory_id = intval($_POST['subcategory_id']);
+// Lấy id và name từ query string
+$selectId = isset($_GET['id']) ? $_GET['id'] : 'product-category';
+$selectName = isset($_GET['name']) ? $_GET['name'] : 'product-category';
 
-    $sql = "SELECT id, name FROM categories WHERE subcategory_id = $subcategory_id";
-    $result = $conn->query($sql);
+$sql = "SELECT id, name FROM categories";
+$result = $conn->query($sql);
 
-    if ($result && $result->num_rows > 0) {
-        echo "<option value=''>-- Chọn loại sản phẩm --</option>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<option value='{$row['id']}'>{$row['name']}</option>";
-        }
-    } else {
-        echo "<option value=''>Không có loại sản phẩm nào</option>";
+// Bắt đầu thẻ select
+echo "<select name='{$selectName}' class='form-select' id='{$selectId}' required>";
+echo "  <option value=''>-- Chọn thể loại sản phẩm --</option>";
+
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<option value='{$row['id']}'>{$row['name']}</option>";
     }
 } else {
-    echo "<option value=''>Vui lòng chọn chủng loại trước</option>";
+    echo "<option value=''>Không có thể loại nào!</option>";
 }
+
+echo "</select>";
 ?>
