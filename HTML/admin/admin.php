@@ -82,13 +82,13 @@ if (!isset($_SESSION['adminInfo'])) {
   <div class="oder-part">
     <div class="order-table-container">
       <form id="filter-form-order" style="margin-bottom: 10px; display: flex; gap: 5px;">
-        <div>
-          <label for="filter-status">Lọc theo trạng thái:</label>
+        <div class="form-group">
+          <label for="filter-status">Trạng thái:</label>
           <?php
             include '../../PHP/config.php';
             $sql = "SELECT id, name FROM orderstatus ORDER BY id ASC";
             $result = $conn->query($sql);
-            echo "<select name='order-status' class='orderstatus-select' id='filter-status' required>";
+            echo "<select name='order-status' class='orderstatus-select form-select' id='filter-status' required >";
             echo "<option value='0'>Tất cả</option>";
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
@@ -100,8 +100,24 @@ if (!isset($_SESSION['adminInfo'])) {
             echo "</select>";
           ?>
         </div>
-        <div>
-          <button type="submit">Lọc</button>
+       
+        <div class="form-group">
+            <label for="province">Tỉnh/Thành phố:</label><br>
+            <select name="order-province" class="form-select" id="order-province" required>;
+              <option value="">Chọn tỉnh/thành phố</option>";
+              <?php include '../../PHP/OD-get_province.php'?>
+        </div>
+
+        <div class="form-group">
+            <label for="district">Huyện/Quận:</label><br>
+            <select id="order-district" name="order-district" class="form-select">
+                <option value="">Chọn huyện/quận</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+        <label></label><br>
+          <button type="submit" class="form-button"><img src="../../assest/Filter.png" style="height: 17px;"> Lọc</button>
         </div>
       </form>
 
@@ -842,6 +858,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/Logout_admin.js"></script>
   <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
   <script src="../../JS/admin/OD-ajax.js"></script>
+  <script src="../../JS/admin/OD-getAddress_ajax.js"></script>
 
 
   <script>
