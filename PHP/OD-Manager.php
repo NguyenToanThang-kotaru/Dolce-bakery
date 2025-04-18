@@ -2,6 +2,8 @@
 include 'config.php';
 
 $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+$province_id = $_POST['province_id'] ?? "";
+$district_id = $_POST['district_id'] ?? "";
 
 $sql = "SELECT 
             orders.id AS order_id,

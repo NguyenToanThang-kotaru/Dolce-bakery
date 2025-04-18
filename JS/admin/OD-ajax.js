@@ -37,6 +37,7 @@
     // Dùng ajax xem chi tiết theo từng đơn hàng
     document.addEventListener("DOMContentLoaded", function () {
         const table = document.querySelector(".order-table");
+        const filterForm = document.getElementById("filter-form-order");
         const detailContainer = document.querySelector(".order-detail-container");
 
         document.addEventListener("click", function (event) {
@@ -58,6 +59,7 @@
                 .then(html => {
                     detailContainer.innerHTML = html;
                     detailContainer.style.display = "block";
+                    filterForm.style.display = "none";
                 })
                 .catch(error => console.error("Lỗi khi tải chi tiết đơn hàng:", error));
             }
@@ -65,6 +67,7 @@
             if (target.classList.contains("back-orderdetail")) {
                     detailContainer.style.display = "none";
                     table.style.display = "table";
+                    filterForm.style.display = "flex";
                 }
         });
     });

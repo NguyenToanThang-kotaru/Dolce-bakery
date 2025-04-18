@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['adminInfo'])) {
-  header("Location: login-admin.php");
+  header("Location: login_admin.php");
   exit();
 }
 ?>
@@ -113,6 +113,16 @@ if (!isset($_SESSION['adminInfo'])) {
             <select id="order-district" name="order-district" class="form-select">
                 <option value="">Chọn huyện/quận</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fromDate">Từ ngày:</label><br>
+            <input type="date" id="filter-start-date" name="start_date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="toDate">Đến ngày:</label><br>
+            <input type="date" id="filter-end-date" name="end_date" class="form-input">
         </div>
         
         <div class="form-group">
