@@ -571,6 +571,11 @@
                     <span></span>
                 </div>
 
+                <div class="row">
+                    <label for="address" class="Detail" >Địa chỉ: </label>
+                    <span></span>
+                </div>
+
                 <div id="Buy-history">
                     <div class="History">Lịch sử mua hàng</div>
                 </div>
