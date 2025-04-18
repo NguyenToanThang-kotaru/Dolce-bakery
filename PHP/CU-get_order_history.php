@@ -19,7 +19,7 @@ $sql = "SELECT
         JOIN customers c ON o.customer_id = c.id
         JOIN orderstatus os ON o.status = os.id
         WHERE c.id = ?
-        ORDER BY o.orderDate DESC, o.id DESC";
+        ORDER BY o.id ASC";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $customerId);
@@ -30,6 +30,7 @@ $customerName = '';
 $currentOrderId = 0;
 $currentTotalPrice = '';
 $currentOrderStatus = '';
+$orderDate='';
 $hasOrders = false;
 
 echo "<i class='fa-solid fa-rotate-left back-customer2'></i>";
@@ -49,6 +50,7 @@ while ($row = $result->fetch_assoc()) {
             echo "</tbody></table>
                   <div class='order-summary'>
                     <p><strong>Tổng tiền:</strong> {$currentTotalPrice} đ</p>
+                    <p><strong>Ngày đặt:</strong> {$orderDate}</p>
                     <p><strong>Trạng thái đơn hàng:</strong> {$currentOrderStatus}</p>
                   </div>
                 </div>";
@@ -58,6 +60,7 @@ while ($row = $result->fetch_assoc()) {
         $currentOrderId = $orderId;
         $currentTotalPrice = number_format($row['totalPrice']);
         $currentOrderStatus = $row['order_status'];
+        $orderDate = $row['orderDate'];
 
         // Hiển thị tên khách hàng và tiêu đề nếu là đơn đầu tiên
         if (!$hasOrders) {
@@ -96,6 +99,7 @@ if ($currentOrderId != 0) {
     echo "</tbody></table>
           <div class='order-summary'>
             <p><strong>Tổng tiền:</strong> {$currentTotalPrice} đ</p>
+            <p><strong>Ngày đặt:</strong> {$orderDate}</p>
             <p><strong>Trạng thái đơn hàng:</strong> {$currentOrderStatus}</p>
           </div>
         </div>";

@@ -71,13 +71,13 @@
     
         $sql = "SELECT * FROM customers WHERE userName = '$userName' OR email = '$userName'";
         $result = $conn->query($sql);
-    
-        if ($result->num_rows > 0) {
+        // $hasshedPassword1 = passWord_hash($passwd, PASSWORD_BCRYPT);
+        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        if ($result->num_rows > 0) { 
             $row = $result->fetch_assoc();
-            
             // Kiểm tra mật khẩu
-            $hasshedPassword = $row['password'];
-            if (password_verify($passwd, $hasshedPassword)) { 
+            $hasshedPasswordnew = $row['password'];
+            if (password_verify($passwd, $hasshedPasswordnew)) { 
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userID' => $row['id'],
@@ -89,8 +89,16 @@
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
+                echo json_encode([
+                    'status' => 'error', 
+                    'message' => 'Sai mật khẩu',
+                    'debug_info' => [
+                        'input_password_______' => $concac = password_verify($passwd, $hasshedPasswordnew),
+                        'hashed_password_in_db' => $hasshedPasswordnew
+                    ]
+                ]);
             }
+            
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Không tồn tại người dùng']);
         }

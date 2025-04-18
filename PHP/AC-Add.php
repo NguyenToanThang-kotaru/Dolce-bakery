@@ -8,9 +8,9 @@ $response = []; // Mảng chứa phản hồi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['account-name'] ?? '');
     $password = trim($_POST['account-pass'] ?? '');
-    $email = trim($_POST['account-email'] ?? '');
     $permission_id = $_POST['permission_id'] ?? null;
     $permission_name = null;
+    $status = 1;
 
     //Lấy tên quyền
     $sql = "SELECT name FROM permissions WHERE id = ?";
@@ -25,10 +25,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 
-    // 🔹 Thêm tài khoản vào bảng users
+    // Lấy tên nhân viên
+    $sql = "SELECT fullName FROM employees WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $position_name = "";
+    if ($row = $result->fetch_assoc()) {
+        $fullName = $row["fullName"];
+    }
+    $stmt->close();
+   
+
+    
+
+    // Thêm tài khoản vào bảng
     $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
-    $stmt = $conn->prepare("INSERT INTO users (userName, password, email, permission_id) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $username, $hasshedPassword, $email, $permission_id);
+    $stmt = $conn->prepare("INSERT INTO employeeaccount (userName, password, permission_id) VALUES (?, ?, ?)");
+    $stmt->bind_param("ssi", $username, $hasshedPassword, $permission_id);
 
     if ($stmt->execute()) {
         $response = [
@@ -38,9 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "id" => $conn->insert_id,
                 "username" => $username,
                 "hasshedPassword" => $hasshedPassword,
-                "email" => $email,
                 "permission_id" => $permission_id,
-                "permission_name" => $permission_name  
+                "permission_name" => $permission_name,
+                "fullName" => $fullName,
+                "status" => $status
             ]
         ];
     } else {

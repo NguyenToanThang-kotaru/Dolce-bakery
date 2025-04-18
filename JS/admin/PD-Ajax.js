@@ -112,6 +112,7 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
                 <td class='img-admin'><img src="${data.product.image}" alt='' width='50'></td>
                 <td>${data.product.name}</td>
                 <td>${data.product.category_name}</td>
+                <td>${data.product.subcategory_name}</td>
                 <td>${data.product.quantity}</td>
                 <td>${data.product.price}</td>
                 <td><div class='fix-product'>
@@ -155,6 +156,7 @@ document.getElementById("update-form-product").addEventListener("submit", functi
                     <td class='img-admin'><img src="${data.product.image}" alt="" width="50"></td>
                     <td>${data.product.name}</td>
                     <td>${data.product.category_name}</td>
+                    <td>${data.product.subcategory_name}</td>
                     <td>${data.product.quantity}</td>
                     <td>${priceNumber.toLocaleString('vi-VN')} VND</td>
                     <td>

@@ -119,6 +119,7 @@ $(document).ready(function () {
                         return;
                     }
                     else if (response.message === "Sai mật khẩu") {
+                        console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
                         var passWord = document.querySelector(".lg-password");
                         showError(pwdContainer, "Sai mật khẩu")

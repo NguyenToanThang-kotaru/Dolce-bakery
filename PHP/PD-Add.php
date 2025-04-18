@@ -5,7 +5,7 @@ $response = []; // Mảng chứa phản hồi
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['product-name'] ?? null;
-    $category_id = $_POST['product-category'] ?? null;
+    $subcategory_id = $_POST['product-subcategory'] ?? null;
     $quantity = $_POST['product-quantity'] ?? null;
     $price = $_POST['product-price'] ?? null;
 
@@ -25,19 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target_file = $noneIMG;
     }
 
-     // lấy tên loại
-     $sql = "SELECT name FROM categories WHERE id = ?";
-     $stmt = $conn->prepare($sql);
-     $stmt->bind_param("i", $category_id);
-     $stmt->execute();
-     $result = $stmt->get_result();
-     if ($row = $result->fetch_assoc()) {
-         $category_name = $row["name"];
-     }
-     $stmt->close();
+    $sql = "SELECT subcategories.name AS subcategory_name, categories.name AS category_name
+    FROM subcategories
+    INNER JOIN categories ON subcategories.category_id = categories.id
+    WHERE subcategories.id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $subcategory_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+    $subcategory_name = $row["subcategory_name"];
+    $category_name = $row["category_name"];
+    }
+    $stmt->close();
 
-    $sql = "INSERT INTO products (pd_name, category_id, quantity, price, image) 
-            VALUES ('$name', '$category_id', '$quantity', '$price', '$target_file')";
+
+    $sql = "INSERT INTO products (pd_name, subcategory_id, quantity, price, image) 
+            VALUES ('$name', '$subcategory_id', '$quantity', '$price', '$target_file')";
 
     if ($conn->query($sql) === TRUE) {
         $response = [
@@ -48,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "image" => $target_file,
                 "name" => $name,
                 "category_name" => $category_name,
+                "subcategory_name" => $subcategory_name,
                 "category_id" => $category_id,
                 "quantity" => $quantity,
                 "price" => number_format($price, 0, ',', '.') . " VND"
