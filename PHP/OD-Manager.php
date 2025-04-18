@@ -59,7 +59,7 @@ if ($result->num_rows > 0){
                 <i class='fa-solid fa-circle-info order-detail' data-id='$orderId' style='cursor:pointer;'></i>
               </td>";
         echo "<td>
-                <select class='order-status' data-id='$orderId' data-ole='{$row['status']}'>
+                <select class='order-status' data-id='$orderId' data-old='{$row['status']}'>
                     <option value='1' " . ($row['status'] == 1 ? "selected" : "") . ">Chờ xử lí</option>
                     <option value='2' " . ($row['status'] == 2 ? "selected" : "") . ">Đã xử lí</option>
                     <option value='3' " . ($row['status'] == 3 ? "selected" : "") . ">Đang giao</option>

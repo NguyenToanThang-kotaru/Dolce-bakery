@@ -87,7 +87,15 @@
             if (event.target.classList.contains("order-status")) {
                 let orderId = event.target.getAttribute("data-id");
                 let newStatus = event.target.value;
-    
+                let currentStatus = event.target.getAttribute("data-old");
+
+            // Không thể chuyển trạng thái về trạng thái bé hơn và không thể chuyển từ "đã giao" sang "đã hủy"
+            if ((parseInt(newStatus) < parseInt(currentStatus)) || ( parseInt(newStatus)==5 && parseInt(currentStatus)==4)) {
+                alert("Không thể thay đổi trạng thái");
+                event.target.value=currentStatus;
+                return;
+            }
+
                 fetch("../../PHP/OD-update_status.php", {
                     method: "POST",
                     headers: {
@@ -112,11 +120,12 @@
                             .then(html => {
                                 const tableBody = document.querySelector(".order-table tbody");
                                 tableBody.innerHTML = html;
-                                updateStatusColor(); // ✅ cập nhật màu sau khi refetch
+                                updateStatusColor(); 
                             });
                         } else {
+                            event.target.setAttribute("data-old", newStatus);
                             alert(`Trạng thái của đơn hàng ${orderId} đã được cập nhật!`);
-                            updateStatusColor(); // ✅ cập nhật màu nếu không lọc
+                            updateStatusColor(); 
                         }
                     } else {
                         alert("Lỗi khi cập nhật trạng thái: " + data.message);
