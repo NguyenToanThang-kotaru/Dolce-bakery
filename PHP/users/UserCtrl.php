@@ -75,9 +75,25 @@
         // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         if ($result->num_rows > 0) { 
             $row = $result->fetch_assoc();
+            $district_id=$row["district_id"];
             // Kiểm tra mật khẩu
             $hasshedPasswordnew = $row['password'];
             if (password_verify($passwd, $hasshedPasswordnew)) { 
+                $sqlAddress = "SELECT provinces.name AS province_name, districts.name AS district_name
+                FROM provinces
+                INNER JOIN districts ON districts.province_id = provinces.id
+                WHERE districts.id = ?";
+                $stmt = $conn->prepare($sqlAddress);
+                $stmt->bind_param("i", $district_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $rowAddress;
+                if ($rowAddress = $result->fetch_assoc()) {
+                $province_name = $rowAddress["province_name"];
+                $district_name = $rowAddress["district_name"];
+                }
+                $stmt->close();
+
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userID' => $row['id'],
@@ -85,7 +101,9 @@
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
                     'phoneNumber' => $row['phoneNumber'],
-                    'address' => $row['address'],
+                    'addressDetail' => $row['addressDetail'],
+                    'province_name' => $province_name,
+                    'district_name' => $district_name,
                     'status' => $row['status'],
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
