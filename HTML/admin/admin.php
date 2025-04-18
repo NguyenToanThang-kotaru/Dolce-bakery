@@ -103,7 +103,7 @@ if (!isset($_SESSION['adminInfo'])) {
        
         <div class="form-group">
             <label for="province">Tỉnh/Thành phố:</label><br>
-            <select name="order-province" class="form-select" id="order-province" required>;
+            <select name="order-province" class="form-select" id="order-province">;
               <option value="">Chọn tỉnh/thành phố</option>";
               <?php include '../../PHP/OD-get_province.php'?>
         </div>

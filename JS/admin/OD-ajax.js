@@ -1,29 +1,38 @@
-    // Lọc đơn hàng theo trạng thái
-    document.addEventListener("DOMContentLoaded", function () {
-        const filterForm = document.getElementById("filter-form-order");
-        const filterSelect = document.getElementById("filter-status");
-        const tableBody = document.querySelector(".order-table tbody");
-    
-        filterForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Ngăn reload trang
-    
-            const selectedStatus = filterSelect.value;
-    
-            fetch("../../PHP/OD-Manager.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `status=${selectedStatus}`
-            })
-            .then(response => response.text())
-            .then(html => {
-                tableBody.innerHTML = html;
-                updateStatusColorEffect(); // cập nhật màu trạng thái
-            })
-            .catch(error => console.error("Lỗi lọc đơn hàng:", error));
-        });
+    // Lọc đơn hàng
+    const filterForm = document.getElementById("filter-form-order");
+    const tableBody = document.querySelector(".order-table tbody");
+
+    filterForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const status = document.getElementById("filter-status").value;
+        const province = document.getElementById("order-province").value;
+        const district = document.getElementById("order-district").value;
+        const startDate = document.getElementById("filter-start-date").value;
+        const endDate = document.getElementById("filter-end-date").value;
+
+        const formData = new URLSearchParams();
+        formData.append("status", status);
+        formData.append("province_id", province);
+        formData.append("district_id", district);
+        formData.append("start_date", startDate);
+        formData.append("end_date", endDate);
+
+        fetch("../../PHP/OD-Manager.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        })
+        .then(response => response.text())
+        .then(html => {
+            tableBody.innerHTML = html;
+            updateStatusColorEffect();
+        })
+        .catch(error => console.error("Lỗi lọc đơn hàng:", error));
     });
+
     
 
     function updateStatusColorEffect() { //Lấy đúng màu trạng thái khi lọc
@@ -72,7 +81,7 @@
         });
     });
 
-    // Thay đổi trạng thái
+    //Thay đổi trạng thái đơn hàng
     document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("change", function (event) {
             if (event.target.classList.contains("order-status")) {
@@ -89,10 +98,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Lấy trạng thái hiện tại khi đang lọc
                         const currentFilter = document.getElementById("filter-status").value;
     
-                        // Nếu trạng thái có thay đổi thì refetch lại bảng
                         if (currentFilter !== "0") {
                             fetch("../../PHP/OD-Manager.php", {
                                 method: "POST",
@@ -105,10 +112,11 @@
                             .then(html => {
                                 const tableBody = document.querySelector(".order-table tbody");
                                 tableBody.innerHTML = html;
-                                updateStatusColorEffect();
+                                updateStatusColor(); // ✅ cập nhật màu sau khi refetch
                             });
                         } else {
                             alert(`Trạng thái của đơn hàng ${orderId} đã được cập nhật!`);
+                            updateStatusColor(); // ✅ cập nhật màu nếu không lọc
                         }
                     } else {
                         alert("Lỗi khi cập nhật trạng thái: " + data.message);
@@ -118,9 +126,10 @@
             }
         });
     
-        // Gán màu trạng thái ban đầu
+        // Gán màu trạng thái ban đầu khi load trang
         updateStatusColor();
     });
+    
 
     function updateStatusColor() {
         const statusElements = document.querySelectorAll(".order-status");
