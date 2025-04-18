@@ -6,6 +6,7 @@ $response = []; // Mảng chứa phản hồi
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['product-name'] ?? null;
     $subcategory_id = $_POST['product-subcategory'] ?? null;
+    $category_id = $_POST['product-category'] ?? null;
     $quantity = $_POST['product-quantity'] ?? null;
     $price = $_POST['product-price'] ?? null;
 

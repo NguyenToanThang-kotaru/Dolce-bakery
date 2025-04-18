@@ -87,7 +87,6 @@
                 .then(data => {
                     if (data.success) {
                         // Lấy trạng thái hiện tại khi đang lọc
-                        alert(`Trạng thái của đơn hàng ${orderId} đã được cập nhật!`);
                         const currentFilter = document.getElementById("filter-status").value;
     
                         // Nếu trạng thái có thay đổi thì refetch lại bảng
@@ -117,13 +116,15 @@
         });
     
         // Gán màu trạng thái ban đầu
+        updateStatusColor();
+    });
+
+    function updateStatusColor() {
         const statusElements = document.querySelectorAll(".order-status");
         statusElements.forEach(select => {
-            select.addEventListener("change", ChangeStatus);
-            ChangeStatus({ target: select });
+            ChangeStatus({ target: select }); 
         });
-    });
-    
+    }
 
     //Màu của select trạng thái
     function ChangeStatus(event) {
