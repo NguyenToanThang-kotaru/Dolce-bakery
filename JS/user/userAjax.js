@@ -196,7 +196,9 @@ function loadUserInfo() {
 
     let data = JSON.parse(userData);
     console.log("User info loaded from Session Storage:", data);
-
+    let address;
+    if(data.address == null) address = "Chưa có";
+    else address = data.address;
     let html = `
         <div class="row">
             <label for="account" class="Detail">Tài khoản: </label>
@@ -214,6 +216,17 @@ function loadUserInfo() {
             <label for="phone" class="Detail">Số điện thoại: </label>
             <span>${data.phoneNumber}</span>
         </div>
+        <div class="row">
+            <!-- Phần 1: Tên khung -->
+            <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
+
+            <!-- Phần 2: Nội dung + chữ thay đổi -->
+            <div class="value-wrapper">
+                <span class="content no-margin">${address}</span>
+                <span class="changed no-margin">Thay đổi</span>
+            </div>
+        </div>
+
         <div id="Buy-history">
                     <div class="History">Lịch sử mua hàng</div>
         </div>

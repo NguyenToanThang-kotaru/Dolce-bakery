@@ -85,6 +85,7 @@
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
                     'phoneNumber' => $row['phoneNumber'],
+                    'address' => $row['address'],
                     'status' => $row['status'],
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
