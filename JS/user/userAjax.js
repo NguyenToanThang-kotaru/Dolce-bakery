@@ -186,62 +186,127 @@ function clearErrors(form) {
     });
 }
 
-function loadUserInfo() {
-    let userData = sessionStorage.getItem("userInfo");
+    function loadUserInfo() {
+        let userData = sessionStorage.getItem("userInfo");
 
-    if (!userData) {
-        console.log("No user info found");
-        return;
+        if (!userData) {
+            console.log("No user info found");
+            return;
+        }
+
+        let data = JSON.parse(userData);
+        console.log("User info loaded from Session Storage:", data);
+        let address;
+        if(data.address == null) address = "Chưa có";
+        else address = data.address;
+        let html = `
+            <div class="row">
+                <label for="account" class="Detail">Tài khoản: </label>
+                <span>${data.userName}</span>
+            </div>
+            <div class="row">
+                <label for="fullname" class="Detail">Họ và tên: </label>
+                <span>${data.fullName}</span>
+            </div>
+            <div class="row">
+                <label for="email" class="Detail">Email:</label>
+                <span>${data.email}</span>
+            </div>
+            <div class="row">
+                <label for="phone" class="Detail">Số điện thoại: </label>
+                <span>${data.phoneNumber}</span>
+            </div>
+            <div class="row">
+                <!-- Phần 1: Tên khung -->
+                <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
+
+                <!-- Phần 2: Nội dung + chữ thay đổi -->
+                <div class="value-wrapper">
+                    <span class="content no-margin">${address}</span>
+                    <span class="changed no-margin" onclick = "OnUpdateAddress()">Cập nhật</span>
+                </div>
+            </div>
+
+            <div id="Buy-history">
+                        <div class="History">Lịch sử mua hàng</div>
+            </div>
+        `;
+
+        document.querySelector('.InfoUser_Detail').innerHTML = html;
     }
 
-    let data = JSON.parse(userData);
-    console.log("User info loaded from Session Storage:", data);
-    let address;
-    if(data.address == null) address = "Chưa có";
-    else address = data.address;
-    let html = `
-        <div class="row">
-            <label for="account" class="Detail">Tài khoản: </label>
-            <span>${data.userName}</span>
-        </div>
-        <div class="row">
-            <label for="fullname" class="Detail">Họ và tên: </label>
-            <span>${data.fullName}</span>
-        </div>
-        <div class="row">
-            <label for="email" class="Detail">Email:</label>
-            <span>${data.email}</span>
-        </div>
-        <div class="row">
-            <label for="phone" class="Detail">Số điện thoại: </label>
-            <span>${data.phoneNumber}</span>
-        </div>
-        <div class="row">
-            <!-- Phần 1: Tên khung -->
-            <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
 
-            <!-- Phần 2: Nội dung + chữ thay đổi -->
-            <div class="value-wrapper">
-                <span class="content no-margin">${address}</span>
-                <span class="changed no-margin">Thay đổi</span>
-            </div>
-        </div>
+    $("#log-out").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "../../PHP/users/Logout.php",
+            success: function () {
+                window.location.href = "../../HTML/user/dolce.php";
+            }
+        });
+    });
 
-        <div id="Buy-history">
-                    <div class="History">Lịch sử mua hàng</div>
-        </div>
-    `;
 
-    document.querySelector('.InfoUser_Detail').innerHTML = html;
+    function luuDiaChi() {
+        var dc = $('#diaChi').val();
+        var tinh = $('#province').val();
+        var quan = $('#district').val();
+        if (!dc || !tinh || !quan) {
+            showToast("Vui lòng nhập đầy đủ thông tin!", false);
+            return;
+        }
+
+    
+        $.ajax({
+            type: "POST",
+            url: "../../PHP/users/saveAddress.php",  
+            data: {
+                "addressDetail": dc,
+                "province": tinh,
+                "district": quan
+            },
+            success: function (response) {
+                const res = JSON.parse(response);
+                if (res.status === "success") {
+                    sessionStorage.setItem("userInfo", JSON.stringify(res.user));
+                    showToast("Đã cập nhật địa chỉ thành công", true);
+                    $('#diaChi').val('');
+                    $('#province').val('');
+                    $('#district').val('');
+                    loadUserInfo();
+                    setUserInfoPayment();
+                    document.querySelector(".overlayAddress").style.display = "none";
+                    document.getElementById("overlayInfo").style.display = "block";
+                    document.querySelector(".overlayInfoAddress").style.display = "none";
+                } else {
+                    alert("Lỗi: " + res.message);
+                }
+            }
+        });
+    }
+
+function showToast(message, isSuccess, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    toast.style.backgroundColor = isSuccess ? "#4caf50" : "#f44336";
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = "fadeout 0.3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+
+    return duration + 300; 
 }
 
 
-$("#log-out").click(function () {
-    $.ajax({
-        type: "POST",
-        url: "../../PHP/users/Logout.php",
-        success: function () {
-            window.location.href = "../../HTML/user/dolce.php";
-        }
-    });
-});
+function setUserInfoPayment() {
+    let userSession = sessionStorage.getItem("userInfo");
+    userSession = JSON.parse(userSession);
+    document.querySelector(".payment-customer-name").textContent = userSession.fullName;
+    document.querySelector(".payment-customer-email").textContent = userSession.email;
+    document.querySelector(".payment-customer-phone").textContent = userSession.phoneNumber + "";
+    document.querySelector(".payment-customer-address").textContent = userSession.address;
+}

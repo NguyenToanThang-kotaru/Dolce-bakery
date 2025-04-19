@@ -6,13 +6,16 @@ $user_id = $_SESSION['userInfo']['userID'];
 $note = $_POST['note'];
 $paymentDate =  date('Y-m-d');
 $paymentMethod = $_POST['paymentMethod'];
+$addressDetail = $_POST['addressDetail'];
+$province_id = $_POST['province_id'];
+$district_id = $_POST['district_id'];
 $totalAmount = $_POST['totalAmount'];
 $bankName = $_POST['bankName'];
 $cardNumber = $_POST['cardNumber'];
 $orderItems = json_decode($_POST['orderItems'], true);
 
-$insertQuery = "INSERT INTO orders(customer_id, totalPrice, orderDate, status, notes, paymentMethod_id)
-                VALUES ('$user_id', '$totalAmount', '$paymentDate', 1, '$note', '$paymentMethod')";
+$insertQuery = "INSERT INTO orders(customer_id, totalPrice, orderDate, status, notes, paymentMethod_id, province_id, district_id, addressDetail)
+                VALUES ('$user_id', '$totalAmount', '$paymentDate', 1, '$note', '$paymentMethod', '$province_id', '$district_id', '$addressDetail')";
 
 if ($conn->query($insertQuery) === TRUE) {
     $order_id = $conn->insert_id; // Lấy ID đơn hàng vừa thêm

@@ -188,7 +188,7 @@
                 </div>
                 <div id="button">
                     <button class="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
-                    <button class="Buy" type="submit">Mua Ngay</button>
+                    <button class="Buy" type="submit">Mua Ngay</button> 
                 </div>
             </div>
 
@@ -582,8 +582,28 @@
 
             </div>
 
+        </div></div>
+        
+        <div class="overlayInfoAddress"></div>
+        <div class="overlayAddress">
+            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+
+            <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
+            <input type="text" id="diaChi" class="addr-input" placeholder="Số nhà, tên đường...">
+
+            <label for="tinh" class="addr-label">Tỉnh / Thành phố:</label>
+            <select id="province" class="addr-input">
+            <option value="">-- Chọn tỉnh / thành phố --</option>
+            </select>
+
+            <label for="quan" class="addr-label">Quận / Huyện:</label>
+            <select id="district" class="addr-input">
+            <option value="">-- Chọn quận / huyện --</option>
+            </select>
+
+            <button class="addr-button" onclick="luuDiaChi()">Lưu địa chỉ</button>
         </div>
-    </div>
+
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
@@ -603,13 +623,15 @@
                         </div>
                         <br>
                         <div class="cus-phone">
-                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label><span class="payment-customer-phone"></span>
+                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label>
+                            <span class="payment-customer-phone"></span>
                         </div>
                         <br />
                         <div class="cus-address">
                             <label for="address-payment"><strong>Địa chỉ:</strong> </label>
-                            <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required />
-                                
+                            <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
+                            <span class="payment-customer-address content no-margin"></span>
+                            <span class="changed no-margin" onclick = "OnUpdateAddress()">Thay đổi</span>    
                         </div>
                         <br />
                         <div class="payment-customer-note">

@@ -6,20 +6,14 @@
 
 }
 #overlayInfo{
-    display: none;
     position: fixed;
-    /* position: absolute; */
     top: 0;
-    z-index: 5;
-    
-    background-color: rgba(0,0,0,0.5);
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
- 
- 
-   
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Lớp đen mờ */
+    z-index: 100; /* Đặt lớp overlay lên trên */
+    display: none; /* Mặc định ẩn */
 } 
 #InfoUser-container{
     display: none;
@@ -144,3 +138,73 @@
     font-weight: bold;
     flex-shrink: 0;         /* không co lại khi thiếu chỗ */
 }
+
+.overlayInfoAddress{
+   position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Lớp đen mờ */
+    z-index: 100; /* Đặt lớp overlay lên trên */
+    display: none; /* Mặc định ẩn */
+} 
+.overlayAddress {
+    position: fixed; /* Đảm bảo nó nổi lên */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Căn giữa theo cả chiều ngang và dọc */
+    background-color: rgb(255, 246, 242);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Đảm bảo nằm trên tất cả */
+    display: none; /* Ban đầu ẩn đi, khi cần thì show ra */
+}
+
+
+  .addr-title {
+    text-align: center;
+    color: #4b2e2e;
+    margin-bottom: 25px;
+    font-size: 22px;
+  }
+
+  .addr-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #4b2e2e;
+  }
+
+  .addr-input {
+    width: 700px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    margin-bottom: 18px;
+  }
+
+  .addr-input:focus {
+    border-color: #f48fb1;
+    outline: none;
+  }
+
+  .addr-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff66cc;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .addr-button:hover {
+    background-color: #e055b2;
+  }

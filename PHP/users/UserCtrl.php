@@ -92,6 +92,8 @@
                 $province_name = $rowAddress["province_name"];
                 $district_name = $rowAddress["district_name"];
                 }
+
+                $address = $row['addressDetail'] . ", " . $province_name . ", " . $district_name;
                 $stmt->close();
 
                 session_start();
@@ -101,9 +103,12 @@
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
                     'phoneNumber' => $row['phoneNumber'],
+                    'address' => $address,
                     'addressDetail' => $row['addressDetail'],
                     'province_name' => $province_name,
                     'district_name' => $district_name,
+                    'province_id' => $row['province_id'],
+                    'district_id' => $row['district_id'],
                     'status' => $row['status'],
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
@@ -123,6 +128,4 @@
         }
         exit();
     }
-
-
 ?>

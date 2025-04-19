@@ -51,6 +51,8 @@ let address;
 let note;
 let paymentDate;
 let paymentMethod;
+let province_id;
+let district_id;
 let bankName = "";
 let cardNumber = "";
 let totalAmount = 0;
@@ -61,7 +63,7 @@ function getInfoSummary()
     userName = document.querySelector(".payment-customer-name").textContent;
     email = document.querySelector(".payment-customer-email").textContent;
     phone = document.querySelector(".payment-customer-phone").textContent;
-    address = document.querySelector("#address-payment").value;
+    address = document.querySelector(".payment-customer-address").value;
     note = document.querySelector("#note-payment").value;
     paymentDate = document.querySelector(".payment-date").textContent;
     paymentMethod = 1;
@@ -86,20 +88,12 @@ function getInfoSummary()
 }
 function checkConditionToPay()
 {
-    let address = document.querySelector("#address-payment");
     let payByFTF= document.querySelector("#cash-on-delivery");
     let payByTrans = document.querySelector("#atm-payment");
     let atmPayment = document.querySelector("#atm-payment");
     let bankSelect = document.querySelector("#bank");
     let cardNumber = document.querySelector("#card-number");
 
-    if(address.value == ''){
-        showErrorPayment(address, "Vui lòng nhập địa chỉ giao hàng");
-        address.focus();
-        return false;
-    } 
-
-    
     if(!payByFTF.checked && !payByTrans.checked){
         showErrorPayment(payByFTF, "Vui lòng chọn phương thức thanh toán");
         return false;
@@ -225,6 +219,8 @@ function getCartSummary() {
 }
 function savePaymentIntoDatabase()
 {
+    userSession = sessionStorage.getItem("userInfo");
+    userSession = JSON.parse(userSession);
     console.log(paymentDate);
     $.ajax({
         type: "POST",
@@ -234,6 +230,9 @@ function savePaymentIntoDatabase()
             note: note,
             paymentDate: paymentDate,
             paymentMethod: paymentMethod,
+            addressDetail: userSession.addressDetail,
+            province_id: userSession.province_id,
+            district_id: userSession.district_id,
             bankName: bankName,
             cardNumber: cardNumber,
             totalAmount: totalAmount,

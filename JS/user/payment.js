@@ -1,5 +1,3 @@
-let userSession = sessionStorage.getItem("userInfo");
-userSession = JSON.parse(userSession);
 const COD = document.querySelector("#cash-on-delivery");
 const atmOptions = document.getElementById("atm-options");
 const atmPayment = document.querySelector("#atm-payment");
@@ -20,7 +18,7 @@ const closePayment = document.getElementById("close-payment");
 const back_cart = document.getElementById("payment-back-cart");
 const back_mainPage = document.getElementById("main-page");
 let flag_payment = 0;
-
+let userSession;
 buy.addEventListener("click", function () {
     if (flag_payment === 0) {
 
@@ -105,10 +103,12 @@ function getPayDate() {
     return formattedDate;
 }
 function setUserInfoPayment() {
+    userSession = sessionStorage.getItem("userInfo");
+    userSession = JSON.parse(userSession);
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
     document.querySelector(".payment-customer-email").textContent = userSession.email;
     document.querySelector(".payment-customer-phone").textContent = userSession.phoneNumber + "";
-    // Them dia chi
+    document.querySelector(".payment-customer-address").textContent = userSession.address;
 }
 
 function displayItemReadyPaying() {
