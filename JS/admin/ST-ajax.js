@@ -5,6 +5,7 @@
     filterFormST.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        const title = document.querySelector(".statistic-title");
         const startDate = document.getElementById("statistic-start-date").value;
         const endDate = document.getElementById("statistic-end-date").value;
         const sort_statistic = document.getElementById("statistic-sort").value;
@@ -24,6 +25,7 @@
         .then(response => response.text())
         .then(html => {
             tableBodyST.innerHTML = html;
+            title.style.display = "block";
             updateStatusColorEffect();
         })
         .catch(error => console.error("Lỗi thống kê:", error));

@@ -105,7 +105,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <button type="submit" class="form-button">Thống kê</button>
         </div>
     </form>
-      <h3 style="text-align:center;" class="statistic-title">5 khách hàng có tổng mua cao nhất</h3>
+      <h3 style="text-align:center; display: none" class="statistic-title">5 khách hàng có tổng mua cao nhất</h3>
       <table class="statistic-table">
         <thead>
           <tr>
