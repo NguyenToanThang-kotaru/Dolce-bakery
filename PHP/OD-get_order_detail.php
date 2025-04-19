@@ -71,11 +71,11 @@ if ($result2->num_rows > 0) {
               </tr>";
     }
     echo "</tbody></table>";
-    echo "<p>Địa chỉ giao hàng: $addressDetail, $district_name, $province_name</p>";
-    echo "<p>Phương thức thanh toán: $paymentMethod_name</p>";
+    echo "<p><strong>Địa chỉ giao hàng:</strong> $addressDetail, $district_name, $province_name</p>";
+    echo "<p><strong>Phương thức thanh toán:</strong> $paymentMethod_name</p>";
     if ($paymentMethod_id == 2){
-        echo "<p>Tên ngân hàng: $bank_name</p>";
-        echo "<p>Số tài khoản: $card_number</p>";
+        echo "<p><strong>Tên ngân hàng:</strong> $bank_name</p>";
+        echo "<p><strong>Số tài khoản:</strong> $card_number</p>";
     }
 } else {
     echo "<p style='color:red; text-align:center;'>Không tìm thấy chi tiết đơn hàng.</p>";

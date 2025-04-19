@@ -8,8 +8,8 @@
         const status = document.getElementById("filter-status").value;
         const province = document.getElementById("order-province").value;
         const district = document.getElementById("order-district").value;
-        const startDate = document.getElementById("filter-start-date").value;
-        const endDate = document.getElementById("filter-end-date").value;
+        const startDate = document.getElementById("order-start-date").value;
+        const endDate = document.getElementById("order-end-date").value;
 
         const formData = new URLSearchParams();
         formData.append("status", status);

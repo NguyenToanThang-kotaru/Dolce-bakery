@@ -209,9 +209,83 @@ body {
   background-color: #c0392b;
 }
 
-/* oder part */
+/* statistic part */
 
-.oder-part {
+.statistic-part {
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.statistic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.statistic-header h1 {
+  font-size: 24px;
+  color: #6b4f4f;
+  margin-top: 30px;
+  margin-left: 500px;
+}
+
+.statistic-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.statistic-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.statistic-table i {
+  font-size: 20px;
+  color: rgb(210, 124, 19);
+  cursor: pointer;
+  border: none;
+}
+
+.statistic-table i:hover {
+  transform: scale(1.09);
+  color: #8b5a5a;
+}
+
+.statistic-table th,
+.statistic-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.statistic-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.statistic-table td {
+  background-color: #f9f5f0;
+}
+
+.statistic-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+/* order part */
+
+.order-part {
   flex: 1;
   background-color: #f4f0f4;
   display: none;
