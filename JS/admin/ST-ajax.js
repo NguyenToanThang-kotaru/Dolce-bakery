@@ -1,3 +1,4 @@
+    // Thống kê
     const filterFormST = document.getElementById("filter-form-statistic");
     const tableBodyST = document.querySelector(".statistic-table tbody");
 
@@ -26,4 +27,44 @@
             updateStatusColorEffect();
         })
         .catch(error => console.error("Lỗi thống kê:", error));
+    });
+
+    // Hiện chi tiết đơn hàng khi click vào link, clone bên đơn hàng qua
+    document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector(".statistic-table");
+        const filterForm = document.getElementById("filter-form-statistic");
+        const detailContainer = document.querySelector(".order-detail-container1");
+        const title = document.querySelector(".statistic-title");
+
+        document.addEventListener("click", function (event) {
+            let target = event.target;
+
+            if (target.classList.contains("order-info")) {
+                const orderId = target.getAttribute("data-id");
+
+                table.style.display = "none";
+
+                fetch("../../PHP/OD-get_order_detail.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `id=${orderId}`
+                })
+                .then(response => response.text())
+                .then(html => {
+                    detailContainer.innerHTML = html;
+                    detailContainer.style.display = "block";
+                    filterForm.style.display = "none";
+                    title.style.display = "none";
+                })
+                .catch(error => console.error("Lỗi khi tải chi tiết đơn hàng:", error));
+            }
+            if (target.classList.contains("back-orderdetail")) {
+                    detailContainer.style.display = "none";
+                    table.style.display = "table";
+                    filterForm.style.display = "flex";
+                    title.style.display = "block";
+                }
+        });
     });

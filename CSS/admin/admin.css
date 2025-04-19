@@ -1301,7 +1301,8 @@ body {
   display: none;
 }
 
-.order-detail-container {
+.order-detail-container,
+.order-detail-container1 {
   width: 90%;
   background-color: #f4f6f8;
   margin-left: 60px;

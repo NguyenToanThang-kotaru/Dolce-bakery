@@ -102,10 +102,10 @@ if (!isset($_SESSION['adminInfo'])) {
         
         <div class="form-group">
         <label></label><br>
-          <button type="submit" class="form-button"><img src="../../assest/Filter.png" style="height: 17px;"> Lọc</button>
+          <button type="submit" class="form-button">Thống kê</button>
         </div>
     </form>
-      <h3 style="text-align:center;">5 khách hàng có tổng mua cao nhất</h3>
+      <h3 style="text-align:center;" class="statistic-title">5 khách hàng có tổng mua cao nhất</h3>
       <table class="statistic-table">
         <thead>
           <tr>
@@ -120,7 +120,8 @@ if (!isset($_SESSION['adminInfo'])) {
           <?php include '../../PHP/ST-Manager.php' ?>
         </tbody>
       </table>
-     
+      <div class="order-detail-container1" style="display: none;"></div>
+
 
     </div>
   </div>

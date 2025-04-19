@@ -7,7 +7,7 @@
 
     // kiểm tra đầu vào
     if (empty($start_date) || empty($end_date)) {
-        echo "<tr><td colspan='5' style='text-align: center;'>Vui lòng chọn khoảng thời gian</td></tr>";
+        echo "<tr><td colspan='5' style='text-align: center;'><strong>Vui lòng chọn khoảng thời gian</strong></td></tr>";
         return;
     }
     // lọc theo khoảng thời gian
@@ -19,20 +19,26 @@
         $where[] = "DATE(orders.orderDate) <= '" . $conn->real_escape_string($end_date) . "'";
     }
 
+    // đơn hàng phải có trạng thái "đã giao"
+    $where[] = "orders.status = 4"; 
+
     $whereSQL = "";
     if (!empty($where)) {
         $whereSQL = "WHERE " . implode(" AND ", $where);
     }
 
-    // lấy top 5 khách có tổng mua cao nhất, đơn hàng phải có trạng thái "đã giao"
+    // lấy top 5 khách có tổng mua cao nhất, danh sách các đơn hàng tương ứng dưới dạng link
     $innerSQL = "
         SELECT 
             customers.id AS customer_id,
             customers.fullName,
-            SUM(orders.totalPrice) AS totalAmount
+            SUM(orders.totalPrice) AS totalAmount,
+            GROUP_CONCAT(
+            CONCAT('<a href=\"#\" class=\"order-info\" data-id=\"', orders.id, '\">#', orders.id, '</a>') 
+            SEPARATOR ', ') AS orderLinks
         FROM customers
         LEFT JOIN orders ON orders.customer_id = customers.id
-        $whereSQL and orders.status = 4 
+        $whereSQL
         GROUP BY customers.id, customers.fullName
         ORDER BY totalAmount DESC
         LIMIT 5
@@ -59,15 +65,11 @@
             echo "<td>" . htmlspecialchars($row['customer_id']) . "</td>";
             echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
             echo "<td>" . number_format($row['totalAmount']) . " đ</td>";
-            echo "<td style='text-align: center; vertical-align: middle;'>
-                    <i class='fa-solid fa-circle-info orders-detail' data-id='$cusId' style='cursor:pointer;'></i>
-                  </td>";
+            echo "<td>"   . $row['orderLinks'] .   "</td>"; 
             echo "</tr>";
         }
     } else {
         echo "<tr><td colspan='8' style='text-align: center;'>Không có khách hàng nào</td></tr>";
     }
 ?>
-<script>
- 
-</script>
+
