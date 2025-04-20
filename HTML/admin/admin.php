@@ -82,6 +82,12 @@ if (!isset($_SESSION['adminInfo'])) {
   <div class="statistic-part">
     <div class="statistic-table-container">
     <form id="filter-form-statistic" style="margin-bottom: 10px; display: flex; gap: 5px;">
+
+        <div class="form-group">
+            <label for="fromDate">Số lượng khách hàng:</label><br>
+            <input type="number" id="customer-number" name="customer-number" class="form-input" placeholder="Nhập số lượng" min="1">
+        </div>
+
         <div class="form-group">
             <label for="fromDate">Từ ngày:</label><br>
             <input type="date" id="statistic-start-date" name="start_date" class="form-input">
@@ -105,7 +111,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <button type="submit" class="form-button">Thống kê</button>
         </div>
     </form>
-      <h3 style="text-align:center; display: none" class="statistic-title">5 khách hàng có tổng mua cao nhất</h3>
+      <h3 style="text-align:center; display: none" class="statistic-title"></h3>
       <table class="statistic-table">
         <thead>
           <tr>

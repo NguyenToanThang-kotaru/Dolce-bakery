@@ -93,6 +93,7 @@
             if ((parseInt(newStatus) < parseInt(currentStatus)) || ( parseInt(newStatus)==5 && parseInt(currentStatus)==4)) {
                 alert("Không thể thay đổi trạng thái");
                 event.target.value=currentStatus;
+                updateStatusColor(); 
                 return;
             }
 

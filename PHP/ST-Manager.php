@@ -4,10 +4,11 @@
     $start_date = $_POST['start_date'] ?? "";
     $end_date = $_POST['end_date'] ?? "";
     $sort = $_POST['sort'] ?? "";
+    $limit = intval($_POST['count'] ?? 0);
 
     // kiểm tra đầu vào
-    if (empty($start_date) || empty($end_date)) {
-        echo "<tr><td colspan='5' style='text-align: center;'><strong>Vui lòng chọn khoảng thời gian</strong></td></tr>";
+    if (empty($limit)) {
+        echo "<tr><td colspan='5' style='text-align: center;'><strong>Vui lòng nhập số lượng khách hàng muốn thống kế</strong></td></tr>";
         return;
     }
     // lọc theo khoảng thời gian
@@ -34,14 +35,18 @@
             customers.fullName,
             SUM(orders.totalPrice) AS totalAmount,
             GROUP_CONCAT(
-            CONCAT('<a href=\"#\" class=\"order-info\" data-id=\"', orders.id, '\">#', orders.id, '</a>') 
-            SEPARATOR ', ') AS orderLinks
+                CONCAT(
+                        '<a href=\"#\" class=\"order-info\" data-id=\"', orders.id, '\">#', orders.id, '</a>',
+                        ' (', DATE_FORMAT(orders.orderDate, '%d/%m/%Y'), ')'
+                )
+                SEPARATOR '<br>'
+            ) AS orderLinks
         FROM customers
         LEFT JOIN orders ON orders.customer_id = customers.id
         $whereSQL
         GROUP BY customers.id, customers.fullName
         ORDER BY totalAmount DESC
-        LIMIT 5
+        LIMIT $limit
     ";
 
     // sắp xếp lại theo yêu cầu người dùng

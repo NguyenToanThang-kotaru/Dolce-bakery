@@ -8,12 +8,21 @@
         const title = document.querySelector(".statistic-title");
         const startDate = document.getElementById("statistic-start-date").value;
         const endDate = document.getElementById("statistic-end-date").value;
+        const count = document.getElementById("customer-number").value;
         const sort_statistic = document.getElementById("statistic-sort").value;
 
+        if (count) {
+            title.innerText = `${count} khách hàng có tổng mua hàng cao nhất`;
+            title.style.display = "block";
+        } else {
+            title.style.display = "none";
+        }
+        
         const formData = new URLSearchParams();
         formData.append("start_date", startDate);
         formData.append("end_date", endDate);
         formData.append("sort", sort_statistic);
+        formData.append("count", count);
 
         fetch("../../PHP/ST-Manager.php", {
             method: "POST",
@@ -25,7 +34,6 @@
         .then(response => response.text())
         .then(html => {
             tableBodyST.innerHTML = html;
-            title.style.display = "block";
             updateStatusColorEffect();
         })
         .catch(error => console.error("Lỗi thống kê:", error));
