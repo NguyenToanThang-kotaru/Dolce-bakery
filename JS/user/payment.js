@@ -51,7 +51,7 @@ buy.addEventListener("click", function () {
         flag_payment = 0;
        
     })
-
+    localStorage.removeItem("userAddress");
     GoToPayProcess();
 })
 // const payment = document.getElementById('submit-payment-btn');

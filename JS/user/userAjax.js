@@ -247,10 +247,10 @@ function clearErrors(form) {
     });
 
 
-    function luuDiaChi() {
-        var dc = $('#diaChi').val();
-        var tinh = $('#province').val();
-        var quan = $('#district').val();
+    function saveAddress() {
+        var dc = $('.overlayAddress .address').val();
+        var tinh = $('.overlayAddress .province').val();
+        var quan = $('.overlayAddress .district').val();
         if (!dc || !tinh || !quan) {
             showToast("Vui lòng nhập đầy đủ thông tin!", false);
             return;
@@ -270,9 +270,9 @@ function clearErrors(form) {
                 if (res.status === "success") {
                     sessionStorage.setItem("userInfo", JSON.stringify(res.user));
                     showToast("Đã cập nhật địa chỉ thành công", true);
-                    $('#diaChi').val('');
-                    $('#province').val('');
-                    $('#district').val('');
+                    $('.address').val('');
+                    $('.province').val('');
+                    $('.district').val('');
                     loadUserInfo();
                     setUserInfoPayment();
                     document.querySelector(".overlayAddress").style.display = "none";
@@ -284,6 +284,51 @@ function clearErrors(form) {
             }
         });
     }
+function changeAddress()
+{
+    var dc = $('.overlayAddressPayment .address').val();
+    var tinh = $('.overlayAddressPayment .province').val();
+    var quan = $('.overlayAddressPayment .district').val();
+    if (!dc || !tinh || !quan) {
+        showToast("Vui lòng nhập đầy đủ thông tin!", false);
+        return;
+    }
+    $.ajax({
+        type: "POST",
+        url: "../../PHP/users/getAddressName.php",  
+        data: {
+            "addressDetail": dc,
+            "province": tinh,
+            "district": quan
+        },
+        success: function (response) {
+            const res = JSON.parse(response);
+            if (res.status === "success") {
+                showToast("Đã thay đổi địa chỉ thành công", true);
+                $('.address').val('');
+                $('.province').val('');
+                $('.district').val('');
+                document.querySelector(".overlayAddressPayment").style.display = "none";
+                document.querySelector(".overlayInfoAddress").style.display = "none";
+
+                let provinceName = res.provinceName;
+                let districtName = res.districtName;
+                let address = dc + ", " + districtName + ", " + provinceName;
+
+                document.querySelector(".payment-customer-address").textContent = address;
+            } else {
+                alert("Lỗi: " + res.message);
+            }
+        }
+    });
+    let address = dc + ", " + quan + ", " + tinh;
+    document.querySelector(".payment-customer-address").textContent = address;
+    localStorage.setItem("userAddress", JSON.stringify({
+        addressDetail: dc,
+        province: tinh,
+        district: quan
+    }));
+}
 
 function showToast(message, isSuccess, duration = 2000) {
     const toast = document.createElement("div");

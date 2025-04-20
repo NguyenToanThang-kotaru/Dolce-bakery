@@ -149,6 +149,7 @@
     z-index: 100; /* Đặt lớp overlay lên trên */
     display: none; /* Mặc định ẩn */
 } 
+.overlayAddressPayment,
 .overlayAddress {
     position: fixed; /* Đảm bảo nó nổi lên */
     top: 50%;

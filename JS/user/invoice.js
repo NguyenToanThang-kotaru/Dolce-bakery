@@ -63,7 +63,7 @@ function getInfoSummary()
     userName = document.querySelector(".payment-customer-name").textContent;
     email = document.querySelector(".payment-customer-email").textContent;
     phone = document.querySelector(".payment-customer-phone").textContent;
-    address = document.querySelector(".payment-customer-address").value;
+    address = document.querySelector(".payment-customer-address").textContent;
     note = document.querySelector("#note-payment").value;
     paymentDate = document.querySelector(".payment-date").textContent;
     paymentMethod = 1;
@@ -219,9 +219,13 @@ function getCartSummary() {
 }
 function savePaymentIntoDatabase()
 {
-    userSession = sessionStorage.getItem("userInfo");
-    userSession = JSON.parse(userSession);
-    console.log(paymentDate);
+    let addressData = JSON.parse(localStorage.getItem("userAddress") || "null");
+    let userSession = JSON.parse(sessionStorage.getItem("userInfo") || "null");
+
+    // Ưu tiên localStorage, fallback sang session
+    let addressDetail = addressData?.addressDetail || userSession?.addressDetail;
+    let province_id = addressData?.province || userSession?.province_id;
+    let district_id = addressData?.district || userSession?.district_id;
     $.ajax({
         type: "POST",
         url: "../../PHP/users/savePayment.php",
@@ -230,9 +234,9 @@ function savePaymentIntoDatabase()
             note: note,
             paymentDate: paymentDate,
             paymentMethod: paymentMethod,
-            addressDetail: userSession.addressDetail,
-            province_id: userSession.province_id,
-            district_id: userSession.district_id,
+            addressDetail: addressDetail,
+            province_id: province_id,
+            district_id: district_id,
             bankName: bankName,
             cardNumber: cardNumber,
             totalAmount: totalAmount,
