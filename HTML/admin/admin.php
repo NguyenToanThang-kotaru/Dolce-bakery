@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['adminInfo'])) {
-  header("Location: login-admin.php");
+  header("Location: login_admin.php");
   exit();
 }
 ?>
@@ -25,7 +25,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="sidebar">
     <h2 id="admin">Admin</h2>
-    <a href="#">Thống kê</a>
+    <a href="#" id="admin-statistic">Thống kê</a>
     <a href="#" id="admin-oder">Đơn hàng</a>
     <a href="#" id="admin-product">Sản phẩm</a>
     <a href="#" id="admin-customer">Khách hàng</a>
@@ -79,31 +79,70 @@ if (!isset($_SESSION['adminInfo'])) {
     </div>
   </div>
 
-  <div class="oder-part">
+  <div class="statistic-part">
+    <div class="statistic-table-container">
+    <form id="filter-form-statistic" style="margin-bottom: 10px; display: flex; gap: 5px;">
+
+        <div class="form-group">
+            <label for="fromDate">Số lượng khách hàng:</label><br>
+            <input type="number" id="customer-number" name="customer-number" class="form-input" placeholder="Nhập số lượng" min="1">
+        </div>
+
+        <div class="form-group">
+            <label for="fromDate">Từ ngày:</label><br>
+            <input type="date" id="statistic-start-date" name="start_date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="toDate">Đến ngày:</label><br>
+            <input type="date" id="statistic-end-date" name="end_date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="sort">Sắp xếp:</label><br>
+            <select id="statistic-sort" name="statistic-sort" class="form-select" require>
+                <option value="1">Tăng dần</option>
+                <option value="2">Giảm dần</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+        <label></label><br>
+          <button type="submit" class="form-button">Thống kê</button>
+        </div>
+    </form>
+      <h3 style="text-align:center; display: none" class="statistic-title"></h3>
+      <table class="statistic-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã khách hàng</th>
+            <th>Tên khách hàng</th>
+            <th>Tổng tiền mua</th>
+            <th>Các đơn hàng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php include '../../PHP/ST-Manager.php' ?>
+        </tbody>
+      </table>
+      <div class="order-detail-container1" style="display: none;"></div>
+
+
+    </div>
+  </div>
+
+  <div class="order-part">
     <div class="order-table-container">
       <form id="filter-form-order" style="margin-bottom: 10px; display: flex; gap: 5px;">
         <div class="form-group">
           <label for="filter-status">Trạng thái:</label>
-          <?php
-            include '../../PHP/config.php';
-            $sql = "SELECT id, name FROM orderstatus ORDER BY id ASC";
-            $result = $conn->query($sql);
-            echo "<select name='order-status' class='orderstatus-select form-select' id='filter-status' required >";
-            echo "<option value='0'>Tất cả</option>";
-            if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['id']}'>{$row['name']}</option>";
-              }
-            } else {
-              echo "<option value=''>Không có trạng thái nào!</option>"; 
-            }
-            echo "</select>";
-          ?>
+          <?php include '../../PHP/OD-get_status.php' ?>
         </div>
        
         <div class="form-group">
             <label for="province">Tỉnh/Thành phố:</label><br>
-            <select name="order-province" class="form-select" id="order-province" required>;
+            <select name="order-province" class="form-select" id="order-province">;
               <option value="">Chọn tỉnh/thành phố</option>";
               <?php include '../../PHP/OD-get_province.php'?>
         </div>
@@ -113,6 +152,16 @@ if (!isset($_SESSION['adminInfo'])) {
             <select id="order-district" name="order-district" class="form-select">
                 <option value="">Chọn huyện/quận</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fromDate">Từ ngày:</label><br>
+            <input type="date" id="order-start-date" name="start_date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="toDate">Đến ngày:</label><br>
+            <input type="date" id="order-end-date" name="end_date" class="form-input">
         </div>
         
         <div class="form-group">
@@ -859,6 +908,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/PD-getCategory_ajax.js"></script>
   <script src="../../JS/admin/OD-ajax.js"></script>
   <script src="../../JS/admin/OD-getAddress_ajax.js"></script>
+  <script src="../../JS/admin/ST-ajax.js"></script>
 
 
   <script>

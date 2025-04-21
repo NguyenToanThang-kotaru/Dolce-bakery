@@ -1,7 +1,13 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM customers";
+$sql = "SELECT customers.*, 
+               provinces.name AS province_name, 
+               districts.name AS district_name
+        FROM customers
+        JOIN provinces ON customers.province_id = provinces.id
+        JOIN districts ON customers.district_id = districts.id";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -31,7 +37,7 @@ if ($result->num_rows > 0) {
               </td>";
         echo "</tr>";
 
-        // Phần hiển thị chi tiết khách hàng
+        // Phần hiển thị chi tiết khách hàng 
         echo "<div class='detail-customer-container' id='detail-customer-$cusId' >";
         echo "    <i class='fa-solid fa-rotate-left back-customer1' data-id='$cusId'></i>";
         echo "    <h2>Thông Tin Tài Khoản</h2>";
@@ -40,7 +46,7 @@ if ($result->num_rows > 0) {
         echo "    <div class='cus-info'><span class='cus-label'>Trạng thái tài khoản:</span><span class='cus-value'>" . ($status == 1 ? "Đang hoạt động" : "Đã khóa") . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Số điện thoại:</span><span class='cus-value'>" . $row['phoneNumber'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>" . $row['email'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . $row['address'] . "</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . $row['addressDetail'] .", ". $row['district_name'] .", ". $row['province_name'] . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>" . $row['userName'] . "</span></div>";
         echo "</div>";
     }
