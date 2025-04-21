@@ -228,7 +228,7 @@ function clearErrors(form) {
             </div>
 
             <div id="Buy-history">
-                        <div class="History">Lịch sử mua hàng</div>
+                        <div class="History" onclick = "openOrderHistory()">Lịch sử mua hàng</div>
             </div>
         `;
 

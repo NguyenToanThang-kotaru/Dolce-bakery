@@ -551,34 +551,6 @@
                 
                 </div>
             <div class="InfoUser_Detail">
-                <div class="row">
-                    <label for="account" class="Detail">Tài khoản: </label>
-                    <span></span>
-                </div>
-                <div class="row">
-                    <label for="fullname" class="Detail" >Họ và tên: </label>
-                    <span></span>
-
-                </div>
-                
-                <div class="row">
-                    <label for="email" class="Detail" >Email:</label>
-                    <span></span>
-                </div>
-                    
-                <div class="row">
-                    <label for="phone" class="Detail" >Số điện thoại: </label>
-                    <span></span>
-                </div>
-
-                <div class="row">
-                    <label for="address" class="Detail" >Địa chỉ: </label>
-                    <span></span>
-                </div>
-
-                <div id="Buy-history">
-                    <div class="History">Lịch sử mua hàng</div>
-                </div>
 
             </div>
 
@@ -621,6 +593,54 @@
 
             <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
         </div>
+
+        <div class="modal-overlay-history">
+            <div class="modal-content">
+                <span class="close-history-modal">&times;</span>
+                <h3 class="order-title">Đơn hàng đã mua</h3>
+
+                <div class="orders-scroll-area">
+                    <div class="order-box">
+                        <h4>Đơn hàng 15</h4>
+                        <div class="order-date"><strong>Ngày đặt:</strong> 2025-04-21</div>
+                        <table class="history-order-table">
+                        <thead>
+                            <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Thanh Xà Diệu Đà</td>
+                            <td>1</td>
+                            <td>700,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Bánh Kem Trà Xanh</td>
+                            <td>1</td>
+                            <td>250,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Tôm Phô Mai</td>
+                            <td>4</td>
+                            <td>25,000 đ</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="order-summary-history">
+                        <p><strong>Tổng tiền:</strong> 1,050,000 đ</p>
+                        <p><strong>Trạng thái:</strong> Chờ xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
@@ -740,7 +760,6 @@
             </div>
 
         </div>    
-        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-invoice">
             <div id="invoice-container">
                 <div class="invoice-header">
@@ -853,11 +872,9 @@
             <div id="copyright-section">
                 <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
             </div>
-        </footer>
-
-
-   
-
+        </footer>   
+    
+    <script src="../../JS/user/blockOrderHistory.js"></script>
     <script src="../../JS/user/invoice.js"></script>
     <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/clear.js"></script>

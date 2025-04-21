@@ -2,134 +2,104 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Cập nhật địa chỉ</title>
+  <title>Chi tiết đơn hàng</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    /* === CSS Styling === */
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0e8e2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .overlayAddress {
       background-color: #fff6f2;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 480px;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .addr-title {
+    .history-order-container {
+      background-color: rgb(255, 246, 242);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .history-order-container h3 {
       text-align: center;
       color: #4b2e2e;
-      margin-bottom: 25px;
-      font-size: 22px;
+      margin-bottom: 10px;
+      font-size: 24px;
     }
 
-    .addr-label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 500;
+    .history-order-container .order-date {
+      text-align: center;
+      font-weight: bold;
+      color: #4b2e2e;
+      margin-bottom: 20px;
+    }
+
+    .history-order-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .history-order-table th,
+    .history-order-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .history-order-table thead {
+      background-color: #ffccdd;
       color: #4b2e2e;
     }
 
-    .addr-input {
-      width: 100%;
-      padding: 10px 12px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      background-color: #fff;
-      margin-bottom: 18px;
-    }
-
-    .addr-input:focus {
-      border-color: #f48fb1;
-      outline: none;
-    }
-
-    .addr-button {
-      width: 100%;
-      padding: 12px;
-      background-color: #ff66cc;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
+    .history-order-container .order-summary p {
+      margin: 6px 0;
       font-size: 16px;
-      transition: background-color 0.3s ease;
+      color: #4b2e2e;
     }
 
-    .addr-button:hover {
-      background-color: #e055b2;
+    .history-order-container .order-summary strong {
+      font-weight: bold;
+      color: #e055b2;
     }
+
   </style>
 </head>
 <body>
-  <div class="overlayAddress">
-    <h2 class="addr-title">Cập nhật địa chỉ</h2>
+  <div class="history-order-container">
+    <h3>Chi tiết đơn hàng</h3>
+    <div class="order-date">Ngày đặt: 20/04/2025</div>
 
-    <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
-    <input type="text" id="diaChi" class="addr-input" placeholder="Số nhà, tên đường...">
+    <table class="history-order-table">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bánh kem dâu</td>
+          <td>2</td>
+          <td>200.000đ</td>
+        </tr>
+        <tr>
+          <td>Bánh su kem</td>
+          <td>5</td>
+          <td>150.000đ</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <label for="tinh" class="addr-label">Tỉnh / Thành phố:</label>
-    <select id="tinh" class="addr-input" onchange="capNhatQuanHuyen()">
-      <option value="">-- Chọn tỉnh / thành phố --</option>
-      <option value="hcm">TP. Hồ Chí Minh</option>
-      <option value="hn">Hà Nội</option>
-      <option value="dn">Đà Nẵng</option>
-    </select>
-
-    <label for="quan" class="addr-label">Quận / Huyện:</label>
-    <select id="quan" class="addr-input">
-      <option value="">-- Chọn quận / huyện --</option>
-    </select>
-
-    <button class="addr-button" onclick="luuDiaChi()">Lưu địa chỉ</button>
+    <div class="order-summary">
+      <p><strong>Tổng tiền:</strong> 350.000đ</p>
+      <p><strong>Phí vận chuyển:</strong> 30.000đ</p>
+      <p><strong>Thành tiền:</strong> 380.000đ</p>
+    </div>
   </div>
-
-  <script>
-    const duLieu = {
-      hcm: ["Quận 1", "Quận 3", "Gò Vấp", "Thủ Đức"],
-      hn: ["Ba Đình", "Hoàn Kiếm", "Cầu Giấy"],
-      dn: ["Hải Châu", "Sơn Trà", "Liên Chiểu"]
-    };
-
-    function capNhatQuanHuyen() {
-      const tinh = document.getElementById("tinh").value;
-      const quan = document.getElementById("quan");
-      quan.innerHTML = '<option value="">-- Chọn quận / huyện --</option>';
-
-      if (duLieu[tinh]) {
-        duLieu[tinh].forEach(q => {
-          const op = document.createElement("option");
-          op.value = q;
-          op.textContent = q;
-          quan.appendChild(op);
-        });
-      }
-    }
-
-    function luuDiaChi() {
-      const dc = document.getElementById("diaChi").value;
-      const tinh = document.getElementById("tinh").value;
-      const quan = document.getElementById("quan").value;
-
-      if (!dc || !tinh || !quan) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
-        return;
-      }
-
-      alert(`Đã lưu địa chỉ: ${dc}, ${quan}, ${tinh}`);
-    }
-  </script>
 </body>
 </html>
