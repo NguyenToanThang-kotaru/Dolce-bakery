@@ -257,7 +257,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
@@ -340,7 +340,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
@@ -431,7 +431,7 @@
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
                             <option value="up">Giá cao nhất</option>
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
@@ -534,7 +534,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>

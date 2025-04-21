@@ -491,6 +491,14 @@ function render_filter() {
     }
   };
 
+  // Reset sắp xếp về mặc định sau khi lọc
+  const arrangeSelect = document.querySelector(`.${activeCategory}-catelouge-container .product-filter .arrange-sl`)
+    || document.querySelector(".main-containerPD .product-filter .arrange-sl");
+  if (arrangeSelect) {
+    arrangeSelect.value = ""; // hoặc "all" tùy theo option bạn đặt trong HTML
+  }
+
+
 
   xhr.send(data);
 }
