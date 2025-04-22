@@ -7,24 +7,24 @@
         $fullName = $_POST['rg-fullName'];
         $phone = $_POST['rg-phone'];
         $passwd = $_POST['rg-password'];
-        // // Kiểm tra bằng RegEx
-        // if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
-        //     // echo "Tên đăng nhập không hợp lệ!";
-        //     exit();
-        // }
-        // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        //     // echo "Email không hợp lệ!";
-        //     exit();
-        // }
+        // Kiểm tra bằng RegEx
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $userName)) {
+            // echo "Tên đăng nhập không hợp lệ!";
+            exit();
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // echo "Email không hợp lệ!";
+            exit();
+        }
 
-        // if (!preg_match("/^0\d{9}$/", $phone)) {
-        //     // echo "Số điện thoại không hợp lệ!";
-        //     exit();
-        // }
-        // if (!preg_match("/^.{8,}$/", $passwd)) {
-        //     // echo "Mật khẩu không hợp lệ!";
-        //     exit();
-        // }
+        if (!preg_match("/^0\d{9}$/", $phone)) {
+            // echo "Số điện thoại không hợp lệ!";
+            exit();
+        }
+        if (!preg_match("/^.{8,}$/", $passwd)) {
+            // echo "Mật khẩu không hợp lệ!";
+            exit();
+        }
         
         // Kiểm tra email đã tồn tại
         $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
