@@ -984,7 +984,7 @@ function loadSubcategories() {
 
   if (!categoryId) {
     subcategorySelect.innerHTML = "<option value=''>Vui lòng chọn loại sản phẩm trước</option>";
-    return;
+    return; 
   }
 
   // Hiển thị đang tải

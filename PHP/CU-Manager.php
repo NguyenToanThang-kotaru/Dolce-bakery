@@ -9,7 +9,7 @@ if ($result->num_rows > 0) {
         $status = $row['status'];
         $cusId = $row['id'];
         echo "<tr data-id='$cusId'>";
-        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+        echo "<td><div style = 'max-height: 100px'>" . htmlspecialchars($row['id']) . "</div></td>";
         echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
         echo "<td>
                 <select class='customer-status' data-id='$cusId' data-current-status='$status'>

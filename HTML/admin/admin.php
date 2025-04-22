@@ -1,9 +1,4 @@
-<?php
-session_start();
-if (!isset($_SESSION['adminInfo'])) {
-  header("Location: login-admin.php");
-  exit();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
