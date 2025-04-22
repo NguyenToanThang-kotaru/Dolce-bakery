@@ -8,7 +8,7 @@
 
     // kiểm tra đầu vào
     if (empty($limit)) {
-        echo "<tr><td colspan='5' style='text-align: center;'><strong>Vui lòng nhập số sản phẩm muốn thống kế</strong></td></tr>";
+        echo "<tr><td colspan='5' style='text-align: center;'><strong>Vui lòng nhập số lượng khách hàng muốn thống kế</strong></td></tr>";
         return;
     }
     // lọc theo khoảng thời gian
@@ -28,52 +28,53 @@
         $whereSQL = "WHERE " . implode(" AND ", $where);
     }
 
-    // lấy top 5 sản phẩm bán chạy nhất, danh sách các đơn hàng tương ứng 
+    // lấy top 5 khách có tổng mua cao nhất, danh sách các đơn hàng tương ứng dưới dạng link
     $innerSQL = "
         SELECT 
-            products.id AS product_id,
-            products.pd_name,
-            products.price,
-            SUM(orderdetail.quantity) AS totalQuantity,
-            SUM(products.price * orderdetail.quantity) AS totalAmount,
-            GROUP_CONCAT(CONCAT('Đơn hàng ', orders.id, ': ', orderdetail.quantity , ' sản phẩm ','(',DATE_FORMAT(orders.orderDate, '%d/%m/%Y'),')' ) SEPARATOR '<br>') AS orderLinks
-        FROM products
-        LEFT JOIN orderdetail ON products.id = orderdetail.product_id
-        LEFT JOIN orders ON orderdetail.order_id=orders.id
+            customers.id AS customer_id,
+            customers.fullName,
+            SUM(orders.totalPrice) AS totalAmount,
+            GROUP_CONCAT(
+                CONCAT(
+                        '<a href=\"#\" class=\"order-info\" data-id=\"', orders.id, '\">#', orders.id, '</a>',
+                        ' (', DATE_FORMAT(orders.orderDate, '%d/%m/%Y'), ')'
+                )
+                SEPARATOR '<br>'
+            ) AS orderLinks
+        FROM customers
+        LEFT JOIN orders ON orders.customer_id = customers.id
         $whereSQL
-        GROUP BY products.id, products.pd_name, products.price
-        ORDER BY totalQuantity DESC
+        GROUP BY customers.id, customers.fullName
+        ORDER BY totalAmount DESC
         LIMIT $limit
     ";
 
     // sắp xếp lại theo yêu cầu người dùng
     $sortSQL = "";
     if ($sort == 1) {
-        $sortSQL = "ORDER BY totalQuantity ASC";
+        $sortSQL = "ORDER BY totalAmount ASC";
     } elseif ($sort == 2) {
-        $sortSQL = "ORDER BY totalQuantity DESC";
+        $sortSQL = "ORDER BY totalAmount DESC";
     }
 
     // gộp với phần sắp xếp
-    $sql = "SELECT * FROM ($innerSQL) AS top_products $sortSQL";
+    $sql = "SELECT * FROM ($innerSQL) AS top_customers $sortSQL";
 
     $temp = 0;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $productId = $row['product_id'];
-            echo "<tr data-id='$productId'>";
+            $cusId = $row['customer_id'];
+            echo "<tr data-id='$cusId'>";
             echo "<td>" . ++$temp . "</td>";
-            echo "<td>" . htmlspecialchars($row['product_id']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['pd_name']) . "</td>";
-            echo "<td>" . number_format($row['price']) . "</td>";
-            echo "<td>" . number_format($row['totalQuantity']) . "</td>";
-            echo "<td>" . number_format($row['totalAmount']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['customer_id']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
+            echo "<td>" . number_format($row['totalAmount']) . " đ</td>";
             echo "<td><div style='max-height: 80px; overflow-y: auto;'>"   . $row['orderLinks'] .   "</div></td>"; 
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='8' style='text-align: center;'>Không có sản phẩm nào</td></tr>";
+        echo "<tr><td colspan='8' style='text-align: center;'>Không có khách hàng nào</td></tr>";
     }
 ?>
 

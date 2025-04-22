@@ -49,7 +49,7 @@
         formData.append("sort", sort_statistic);
         formData.append("count", count);
 
-        fetch("../../PHP/ST-Manager.php", {
+        fetch("../../PHP/ST-customer-Manager.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -89,7 +89,7 @@
         formData.append("sort", sort_statistic);
         formData.append("count", count);
 
-        fetch("../../PHP/ST-customer-Manager.php", {
+        fetch("../../PHP/ST-product-Manager.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"

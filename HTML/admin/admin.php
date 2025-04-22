@@ -136,7 +136,7 @@ if (!isset($_SESSION['adminInfo'])) {
             </tr>
           </thead>
           <tbody>
-            <?php include '../../PHP/ST-Manager.php' ?>
+            <?php include '../../PHP/ST-customer-Manager.php' ?>
           </tbody>
         </table>
         <div class="order-detail-container1" style="display: none;"></div>
@@ -188,7 +188,7 @@ if (!isset($_SESSION['adminInfo'])) {
             </tr>
           </thead>
           <tbody>
-            <?php include '../../PHP/ST-customer-Manager.php' ?>
+            <?php include '../../PHP/ST-product-Manager.php' ?>
           </tbody>
         </table>
         
