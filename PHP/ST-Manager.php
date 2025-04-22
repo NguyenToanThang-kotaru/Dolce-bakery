@@ -70,7 +70,7 @@
             echo "<td>" . htmlspecialchars($row['customer_id']) . "</td>";
             echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
             echo "<td>" . number_format($row['totalAmount']) . " đ</td>";
-            echo "<td>"   . $row['orderLinks'] .   "</td>"; 
+            echo "<td><div style='max-height: 80px; overflow-y: auto;'>"   . $row['orderLinks'] .   "</div></td>"; 
             echo "</tr>";
         }
     } else {
