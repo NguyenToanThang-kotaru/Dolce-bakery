@@ -34,9 +34,9 @@
             products.id AS product_id,
             products.pd_name,
             products.price,
-            SUM(products.quantity) AS totalQuantity,
+            SUM(orderdetail.quantity) AS totalQuantity,
             SUM(products.price * orderdetail.quantity) AS totalAmount,
-            GROUP_CONCAT(CONCAT('Đơn hàng ', orders.id, ': ', products.quantity , ' sản phẩm ','(',DATE_FORMAT(orders.orderDate, '%d/%m/%Y'),')' ) SEPARATOR '<br>') AS orderLinks
+            GROUP_CONCAT(CONCAT('Đơn hàng ', orders.id, ': ', orderdetail.quantity , ' sản phẩm ','(',DATE_FORMAT(orders.orderDate, '%d/%m/%Y'),')' ) SEPARATOR '<br>') AS orderLinks
         FROM products
         LEFT JOIN orderdetail ON products.id = orderdetail.product_id
         LEFT JOIN orders ON orderdetail.order_id=orders.id
