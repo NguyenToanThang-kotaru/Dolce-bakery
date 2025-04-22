@@ -826,7 +826,7 @@ searchInput.addEventListener("input", function () {
     .then(response => response.json())
     .then(data => {
       console.log("Dữ liệu nhận được:", data);
-      
+
       suggestionBox.innerHTML = "";
       if (!data || data.length === 0) {
         suggestionBox.style.display = "none";
@@ -884,11 +884,12 @@ searchInput.addEventListener("input", function () {
 document.querySelectorAll(".product-img img").forEach(img => {
   //Chọn phần tử gần nhất với ảnh được click để lấy name của người con gái a yêu!!!!
   img.addEventListener("click", function () {
+    document.querySelector(".QuantityPD-container #quantity-value").textContent = "1";
     let productItem = this.closest(".product-item, .bread-product, .cake-product, .cookie-product");
     if (!productItem) return;
 
     let productName = productItem.querySelector(".product-name")?.textContent?.trim();
-    if (!productName) return;
+    if (!productName) return; 
 
     console.log("Click ảnh sản phẩm:", productName);
 
@@ -896,8 +897,8 @@ document.querySelectorAll(".product-img img").forEach(img => {
       .then(response => response.json())
       .then(product => {
         if (!product.error) {
-          document.querySelector(".PD-name h1").textContent = product.name;
-          document.querySelector(".Price").textContent = product.price + "đ";
+          document.querySelector(".PD-name h1").textContent = product.pd_name;
+          document.querySelector(".Price").textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
           document.querySelector("#PD-imgage img").src = product.image;
         }
       })

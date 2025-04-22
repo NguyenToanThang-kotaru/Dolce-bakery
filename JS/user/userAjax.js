@@ -74,8 +74,10 @@ $(document).ready(function () {
                 "rg-password": passWord
             },
             success: function (response) {
-                if (response.includes("Đăng ký thành công")) {
-                    window.location.href = "../../HTML/user/dolce.php";
+                if (response.includes("success")) {
+                    localStorage.setItem("isLoggedIn", "true");
+                    checkLoginStatus();
+                    location.reload();
                 }
                 else if (response.includes("Tên đăng nhập đã tồn tại")) {
                     showError(rgUserName, response);
@@ -108,7 +110,7 @@ $(document).ready(function () {
             success: function (response) {
                 var loginForm = document.querySelector("#login-form-son");
                 clearErrors(loginForm);
-
+                console.log(response);
                 if (response.status === "error") {
                     if (response.message === "Không tồn tại người dùng") {
                         var username = document.querySelector(".lg-username");
@@ -117,6 +119,7 @@ $(document).ready(function () {
                         return;
                     }
                     else if (response.message === "Sai mật khẩu") {
+                        console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
                         var passWord = document.querySelector(".lg-password");
                         showError(pwdContainer, "Sai mật khẩu")
@@ -183,49 +186,172 @@ function clearErrors(form) {
     });
 }
 
-function loadUserInfo() {
-    let userData = sessionStorage.getItem("userInfo");
+    function loadUserInfo() {
+        let userData = sessionStorage.getItem("userInfo");
 
-    if (!userData) {
-        console.log("No user info found");
-        return;
+        if (!userData) {
+            console.log("No user info found");
+            return;
+        }
+
+        let data = JSON.parse(userData);
+        console.log("User info loaded from Session Storage:", data);
+        let address;
+        if(data.address == null) address = "Chưa có";
+        else address = data.address;
+        let html = `
+            <div class="row">
+                <label for="account" class="Detail">Tài khoản: </label>
+                <span>${data.userName}</span>
+            </div>
+            <div class="row">
+                <label for="fullname" class="Detail">Họ và tên: </label>
+                <span>${data.fullName}</span>
+            </div>
+            <div class="row">
+                <label for="email" class="Detail">Email:</label>
+                <span>${data.email}</span>
+            </div>
+            <div class="row">
+                <label for="phone" class="Detail">Số điện thoại: </label>
+                <span>${data.phoneNumber}</span>
+            </div>
+            <div class="row">
+                <!-- Phần 1: Tên khung -->
+                <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
+
+                <!-- Phần 2: Nội dung + chữ thay đổi -->
+                <div class="value-wrapper">
+                    <span class="content no-margin">${address}</span>
+                    <span class="changed no-margin" onclick = "OnUpdateAddress()">Cập nhật</span>
+                </div>
+            </div>
+
+            <div id="Buy-history">
+                        <div class="History" onclick = "openOrderHistory()">Lịch sử mua hàng</div>
+            </div>
+        `;
+
+        document.querySelector('.InfoUser_Detail').innerHTML = html;
     }
 
-    let data = JSON.parse(userData);
-    console.log("User info loaded from Session Storage:", data);
 
-    let html = `
-        <div class="row">
-            <label for="account" class="Detail">Tài khoản: </label>
-            <span>${data.userName}</span>
-        </div>
-        <div class="row">
-            <label for="fullname" class="Detail">Họ và tên: </label>
-            <span>${data.fullName}</span>
-        </div>
-        <div class="row">
-            <label for="email" class="Detail">Email:</label>
-            <span>${data.email}</span>
-        </div>
-        <div class="row">
-            <label for="phone" class="Detail">Số điện thoại: </label>
-            <span>${data.numberPhone}</span>
-        </div>
-        <div id="Buy-history">
-                    <div class="History">Lịch sử mua hàng</div>
-        </div>
-    `;
+    $("#log-out").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "../../PHP/users/Logout.php",
+            success: function () {
+                window.location.href = "../../HTML/user/dolce.php";
+            }
+        });
+    });
 
-    document.querySelector('.InfoUser_Detail').innerHTML = html;
+
+    function saveAddress() {
+        var dc = $('.overlayAddress .address').val();
+        var tinh = $('.overlayAddress .province').val();
+        var quan = $('.overlayAddress .district').val();
+        if (!dc || !tinh || !quan) {
+            showToast("Vui lòng nhập đầy đủ thông tin!", false);
+            return;
+        }
+
+    
+        $.ajax({
+            type: "POST",
+            url: "../../PHP/users/saveAddress.php",  
+            data: {
+                "addressDetail": dc,
+                "province": tinh,
+                "district": quan
+            },
+            success: function (response) {
+                const res = JSON.parse(response);
+                if (res.status === "success") {
+                    sessionStorage.setItem("userInfo", JSON.stringify(res.user));
+                    showToast("Đã cập nhật địa chỉ thành công", true);
+                    $('.address').val('');
+                    $('.province').val('');
+                    $('.district').val('');
+                    loadUserInfo();
+                    setUserInfoPayment();
+                    document.querySelector(".overlayAddress").style.display = "none";
+                    document.getElementById("overlayInfo").style.display = "block";
+                    document.querySelector(".overlayInfoAddress").style.display = "none";
+                } else {
+                    alert("Lỗi: " + res.message);
+                }
+            }
+        });
+    }
+function changeAddress()
+{
+    var dc = $('.overlayAddressPayment .address').val();
+    var tinh = $('.overlayAddressPayment .province').val();
+    var quan = $('.overlayAddressPayment .district').val();
+    if (!dc || !tinh || !quan) {
+        showToast("Vui lòng nhập đầy đủ thông tin!", false);
+        return;
+    }
+    $.ajax({
+        type: "POST",
+        url: "../../PHP/users/getAddressName.php",  
+        data: {
+            "addressDetail": dc,
+            "province": tinh,
+            "district": quan
+        },
+        success: function (response) {
+            const res = JSON.parse(response);
+            if (res.status === "success") {
+                showToast("Đã thay đổi địa chỉ thành công", true);
+                $('.address').val('');
+                $('.province').val('');
+                $('.district').val('');
+                document.querySelector(".overlayAddressPayment").style.display = "none";
+                document.querySelector(".overlayInfoAddress").style.display = "none";
+
+                let provinceName = res.provinceName;
+                let districtName = res.districtName;
+                let address = dc + ", " + districtName + ", " + provinceName;
+
+                document.querySelector(".payment-customer-address").textContent = address;
+            } else {
+                alert("Lỗi: " + res.message);
+            }
+        }
+    });
+    let address = dc + ", " + quan + ", " + tinh;
+    document.querySelector(".payment-customer-address").textContent = address;
+    localStorage.setItem("userAddress", JSON.stringify({
+        addressDetail: dc,
+        province: tinh,
+        district: quan
+    }));
+}
+
+function showToast(message, isSuccess, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    toast.style.backgroundColor = isSuccess ? "#4caf50" : "#f44336";
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = "fadeout 0.3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+
+    return duration + 300; 
 }
 
 
-$("#log-out").click(function () {
-    $.ajax({
-        type: "POST",
-        url: "../../PHP/users/Logout.php",
-        success: function () {
-            window.location.href = "../../HTML/user/dolce.php";
-        }
-    });
-});
+function setUserInfoPayment() {
+    let userSession = sessionStorage.getItem("userInfo");
+    userSession = JSON.parse(userSession);
+    document.querySelector(".payment-customer-name").textContent = userSession.fullName;
+    document.querySelector(".payment-customer-email").textContent = userSession.email;
+    document.querySelector(".payment-customer-phone").textContent = userSession.phoneNumber + "";
+    document.querySelector(".payment-customer-address").textContent = userSession.address;
+}

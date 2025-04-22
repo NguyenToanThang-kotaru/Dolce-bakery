@@ -1,9 +1,11 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT users.*, permissions.name as p_name
-        FROM users 
-        LEFT JOIN permissions ON users.permission_id = permissions.id";
+$sql = "SELECT employeeaccount.*, permissions.name AS p_name, employees.fullName 
+        FROM employeeaccount 
+        LEFT JOIN permissions ON employeeaccount.permission_id = permissions.id
+        LEFT JOIN employees ON employeeaccount.userName = employees.id
+        ORDER BY employeeaccount.id ASC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -12,10 +14,9 @@ if ($result->num_rows > 0) {
         $userId = $row['id'];
         $permission_id = $row['permission_id'];
         $permission_name = $row['p_name'];
-        echo "<tr>";
+        echo "<tr data-id='$userId'>";
         echo "<td>" . htmlspecialchars($row['userName']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['password']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
         echo "<td>
                 <select class='account-status' data-id='$userId' data-current-status='$status'>
                     <option value='1' " . ($status == 1 ? "selected" : "") . ">Đang hoạt động</option>

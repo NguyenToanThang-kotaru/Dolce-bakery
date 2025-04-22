@@ -30,6 +30,44 @@ document.querySelector(".customer-table").addEventListener("click", function (ev
 document.getElementById("fix-form-customer").addEventListener("submit", function (event) {
     event.preventDefault(); 
 
+    clearErrors(this);
+
+    let username = document.getElementById("customer-uname-f").value;
+    let email = document.getElementById("customer-email-f").value;
+    let password = document.getElementById("customer-pass-f").value;
+    let phonenumber = document.getElementById("customer-phone-f").value;
+    let fullname = document.getElementById("customer-name-f").value;
+
+    let usernameRegex = /^[a-zA-Z0-9_]+$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let passwordRegex = /^.{8,}$/;
+    let phoneRegex = /^0\d{9}$/;
+    let fullnameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
+
+   
+    if (!passwordRegex.test(password)) {
+        showError(document.getElementById("customer-pass-f"), "Mật khẩu phải từ 8 ký tự trở lên.");
+        return;
+    }
+    if (!usernameRegex.test(username)) {
+        showError(document.getElementById("customer-uname-f"), "Tên đăng nhập không hợp lệ.");
+        return;
+    }
+    if (!emailRegex.test(email)) {
+        showError(document.getElementById("customer-email-f"), "Email không hợp lệ.");
+        return;
+    }
+    if (!fullnameRegex.test(fullname)) {
+        showError(document.getElementById("customer-name-f"), "Tên không hợp lệ.");
+        return;
+    }
+    if (!phoneRegex.test(phonenumber)) {
+        showError(document.getElementById("customer-phone-f"), "Số điện thoại không hợp lệ.");
+        return;
+    }
+
+    
+    
     let formData = new FormData(this); // Lấy dữ liệu form
     let customerId = document.getElementById("customer-id").value;
     console.log("ID khách hàng:", customerId);
@@ -56,7 +94,10 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                             <option value='2' ${data.customer.status == 2 ? "selected" : ""}>Đã khóa</option>
                         </select>
                     </td>
-                    <td><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id}" alt='Xem chi tiết'></td>
+                    <td style='text-align: center; vertical-align: middle;'><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id} " alt='Xem chi tiết' ></td>
+                    <td style='text-align: center; vertical-align: middle;'>
+                        <img src='../../assest/H-oder.png' class='history-order' alt='Xem lịch sử'>
+                    </td>
                     <td>
                         <div class='fix-customer'>
                             <i class='fa-solid fa-pen-to-square fix-btn-customer' data-id="${data.customer.id}"></i>
@@ -92,7 +133,10 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
             alert("Lỗi: " + data.message);
         }
     })
-    .catch(error => console.error("Lỗi:", error));
+    .catch(error => {
+        console.error('Fetch Error:', error);
+        alert('Đã xảy ra lỗi trong quá trình xử lý. Xem console để biết thêm chi tiết.');
+    });
 });
 
 document.addEventListener("click", function (event) {
@@ -108,7 +152,7 @@ document.addEventListener("click", function (event) {
                     document.getElementById("customer-name-f").value = data.fullName;
                     document.getElementById("customer-phone-f").value = data.phoneNumber;
                     document.getElementById("customer-email-f").value = data.email;
-                    document.getElementById("customer-address-f").value = data.address;
+                    // document.getElementById("customer-address-f").value = data.address;
                     document.getElementById("customer-uname-f").value = data.userName;
 
                     // Ẩn bảng khách hàng và nút thêm
@@ -133,5 +177,22 @@ function updateStatusColor(select) {
     else{
         select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
     }
+}
+
+function showError(inputElement, message) {
+    let errorDiv = inputElement.parentNode.querySelector(".error-msg");
+    if (!errorDiv) {
+        errorDiv = document.createElement("div");
+        errorDiv.className = "error-msg show";
+        inputElement.parentNode.appendChild(errorDiv);
+    }
+    errorDiv.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${message}`;
+    inputElement.focus();
+}
+
+function clearErrors(form) {
+    form.querySelectorAll(".error-msg").forEach((error) => {
+        error.remove();
+    });
 }
 

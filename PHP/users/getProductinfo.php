@@ -11,7 +11,7 @@ if (!isset($_GET['name']) || empty($_GET['name'])) {
 }
 
 $productName = $_GET['name'];
-$sql = "SELECT name, price, image FROM products WHERE name = ?";
+$sql = "SELECT pd_name, price, image FROM products WHERE pd_name = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $productName);
 $stmt->execute();

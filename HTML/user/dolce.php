@@ -165,7 +165,7 @@
         <div id="InfoPD-container">
             <div id="Left">
                 <div id="PD-imgage">
-                    <img src="../../assest/PD-Manager">
+                    <img id = "product-img" src="../../assest/PD-Manager">
                 </div>
 
             </div>
@@ -181,14 +181,14 @@
                 <div id="Quantity-Price">
                     <p class="Price">100.000đ</p>
                     <div class="QuantityPD-container">
-                        <i class="fa-solid fa-minus"></i>
-                        <p>1</p>
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-minus" onclick="changeQuantity(-1)"></i>
+                        <p id="quantity-value">1</p>
+                        <i class="fa-solid fa-plus" onclick="changeQuantity(1)"></i>
                     </div>
                 </div>
                 <div id="button">
                     <button class="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
-                    <button class="Buy" type="submit">Mua Ngay</button>
+                    <button class="Buy" type="submit">Mua Ngay</button> 
                 </div>
             </div>
 
@@ -551,34 +551,96 @@
                 
                 </div>
             <div class="InfoUser_Detail">
-                <div class="row">
-                    <label for="account" class="Detail">Tài khoản: </label>
-                    <span></span>
-                </div>
-                <div class="row">
-                    <label for="fullname" class="Detail" >Họ và tên: </label>
-                    <span></span>
-
-                </div>
-                
-                <div class="row">
-                    <label for="email" class="Detail" >Email:</label>
-                    <span></span>
-                </div>
-                    
-                <div class="row">
-                    <label for="phone" class="Detail" >Số điện thoại: </label>
-                    <span></span>
-                </div>
-
-                <div id="Buy-history">
-                    <div class="History">Lịch sử mua hàng</div>
-                </div>
 
             </div>
 
+        </div></div>
+        
+        <div class="overlayInfoAddress"></div>
+        <div class="overlayAddress">
+            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+
+            <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
+            <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
+
+            <label for="tinh" class="addr-label">Tỉnh / Thành phố:</label>
+            <select class="province addr-input">
+                <option value="">-- Chọn tỉnh / thành phố --</option>
+            </select>
+
+            <label for="quan" class="addr-label">Quận / Huyện:</label>
+            <select class="district addr-input">
+                <option value="">-- Chọn quận / huyện --</option>
+            </select>
+
+            <button class="addr-button" onclick="saveAddress()">Lưu địa chỉ</button>
         </div>
+        <div class="overlayAddressPayment">
+            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+
+            <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
+            <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
+
+            <label for="tinh" class="addr-label">Tỉnh / Thành phố:</label>
+            <select class="province addr-input">
+                <option value="">-- Chọn tỉnh / thành phố --</option>
+            </select>
+
+            <label for="quan" class="addr-label">Quận / Huyện:</label>
+            <select class="district addr-input">
+                <option value="">-- Chọn quận / huyện --</option>
+            </select>
+
+            <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
+        </div>
+
+        <div class="modal-overlay-history">
+            <div class="modal-content">
+                <span class="close-history-modal">&times;</span>
+                <h3 class="order-title">Đơn hàng đã mua</h3>
+
+                <div class="orders-scroll-area">
+                    <div class="order-box">
+                        <h4>Đơn hàng 15</h4>
+                        <div class="order-date"><strong>Ngày đặt:</strong> 2025-04-21</div>
+                        <table class="history-order-table">
+                        <thead>
+                            <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Thanh Xà Diệu Đà</td>
+                            <td>1</td>
+                            <td>700,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Bánh Kem Trà Xanh</td>
+                            <td>1</td>
+                            <td>250,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Tôm Phô Mai</td>
+                            <td>4</td>
+                            <td>25,000 đ</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="order-summary-history">
+                        <p><strong>Tổng tiền:</strong> 1,050,000 đ</p>
+                        <p><strong>Trạng thái:</strong> Chờ xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
     </div>
+        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
@@ -598,13 +660,15 @@
                         </div>
                         <br>
                         <div class="cus-phone">
-                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label><span class="payment-customer-phone"></span>
+                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label>
+                            <span class="payment-customer-phone"></span>
                         </div>
                         <br />
                         <div class="cus-address">
                             <label for="address-payment"><strong>Địa chỉ:</strong> </label>
-                            <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required />
-                                
+                            <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
+                            <span class="payment-customer-address content no-margin"></span>
+                            <span class="changed no-margin" onclick = "OnUpdateAddressPayment()">Thay đổi</span>    
                         </div>
                         <br />
                         <div class="payment-customer-note">
@@ -696,7 +760,6 @@
             </div>
 
         </div>    
-        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-invoice">
             <div id="invoice-container">
                 <div class="invoice-header">
@@ -732,57 +795,11 @@
                                 <span class="invoice-product-img">
                                     <img src>
                                 </span>
-                                <span class="invoice-product-name">Bánh kem trà xanh </span>
-                                <span class="invoice-product-quantity">x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
+                                <span class="invoice-product-name"></span>
+                                <span class="invoice-product-quantity"></span>
+                                <span class="space"></span>
+                                <span class="invoice-product-price"></span>
                             </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-                            <div class="invoice-product">
-                                <span class="invoice-product-name">Bánh kem trà xanh x2</span>
-                                <span class="space">........................................................................</span>
-                                <span class="invoice-product-price">9000000đ</span>
-                            </div>
-
                         </div>
                         
                         
@@ -790,7 +807,7 @@
                     <div class="invoice-process">
                         <div class="invoice-process-total">
                             Tổng cộng:
-                            <span class="invoice-total-price">12.000.000đ</span>
+                            <span class="invoice-total-price"></span>
                         </div>
                           
                         <div class="invoice-process-note"></div>
@@ -855,11 +872,9 @@
             <div id="copyright-section">
                 <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
             </div>
-        </footer>
-
-
-   
-
+        </footer>   
+    
+    <script src="../../JS/user/blockOrderHistory.js"></script>
     <script src="../../JS/user/invoice.js"></script>
     <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/clear.js"></script>
@@ -868,10 +883,8 @@
     <script src="../../JS/user/blockCart.js"></script>
     <script defer src="../../JS/user/pagination.js"></script>
     <script defer src="../../JS/user/paginationOfMainPD.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
-    <script src="../../JS/user/payment.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>
 </body>
 

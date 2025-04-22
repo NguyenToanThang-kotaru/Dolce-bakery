@@ -119,6 +119,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    border-top: 2px solid #074c77;
   }
   .invoice-total-price{
     font-size: 20px;

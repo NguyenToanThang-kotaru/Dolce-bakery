@@ -1,52 +1,74 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-const oder_part = document.querySelector(".oder-part");
+const statistic_part = document.querySelector(".statistic-part");
+const oder_part = document.querySelector(".order-part");
 const product_part = document.querySelector(".product-part");
 const customer_part = document.querySelector(".customer-part");
 const admin_main = document.querySelector(".admin-main");
+const admin_statistic = document.querySelector("#admin-statistic");
 const admin_oder = document.querySelector("#admin-oder");
 const admin_product = document.querySelector("#admin-product");
 const admin_customer = document.querySelector("#admin-customer");
 const admin_account = document.querySelector("#admin-account");
 const admin_role = document.querySelector("#admin-role");
+const admin_employee = document.querySelector("#admin-employee");
 const admin = document.querySelector("#admin");
 const profile_img =  document.querySelector("#profile");
 const profile_part = document.querySelector(".profile-part");
 const account_part = document.querySelector(".account-part");
 const role_part = document.querySelector(".role-part");
+const employee_part = document.querySelector(".employee-part");
 
-
-function oderToggle(){
-    oder_part.style.display = "block";
+function statisticToggle(){
+    statistic_part.style.display = "block";
+    oder_part.style.display = "none";
     admin_main.style.display = "none";
     customer_part.style.display = "none";
     product_part.style.display = "none";
     profile_part.style.display = "none";
     account_part.style.display = "none";
-    role_part.style.display = "none";     
+    role_part.style.display = "none";
+    employee_part.style.display = "none";
+}
+
+function oderToggle(){
+    oder_part.style.display = "block";
+    statistic_part.style.display = "none";
+    admin_main.style.display = "none";
+    customer_part.style.display = "none";
+    product_part.style.display = "none";
+    profile_part.style.display = "none";
+    account_part.style.display = "none";
+    role_part.style.display = "none";
+    employee_part.style.display = "none";
 }
 
 function customerToggle(){
     customer_part.style.display = "block";
+    statistic_part.style.display = "none";
     oder_part.style.display = "none";
     admin_main.style.display = "none";
     product_part.style.display = "none";
     profile_part.style.display = "none"; 
     account_part.style.display = "none";
     role_part.style.display = "none";
+    employee_part.style.display = "none";
 }
 
 function productToggle(){
     product_part.style.display = "block";
+    statistic_part.style.display = "none";
     admin_main.style.display = "none";
     customer_part.style.display = "none";
     oder_part.style.display = "none";
     profile_part.style.display = "none"; 
     account_part.style.display = "none";
-    role_part.style.display = "none";  
+    role_part.style.display = "none";
+    employee_part.style.display = "none";
 }
 
 function returnMain(){
+    statistic_part.style.display = "none";
     oder_part.style.display = "none";
     customer_part.style.display = "none";
     product_part.style.display = "none" 
@@ -54,6 +76,7 @@ function returnMain(){
     profile_part.style.display = "none";
     account_part.style.display = "none";
     role_part.style.display = "none";
+    employee_part.style.display = "none";
 }
 
 function accountToggle(){
@@ -64,6 +87,7 @@ function accountToggle(){
     profile_part.style.display = "none";
     account_part.style.display = "block";
     role_part.style.display = "none";
+    employee_part.style.display = "none";
 }
 
 function roleToggle(){
@@ -74,14 +98,28 @@ function roleToggle(){
     profile_part.style.display = "none";
     account_part.style.display = "none";
     role_part.style.display = "block";
+    employee_part.style.display = "none";
 }
 
+function employeeToggle(){
+    oder_part.style.display = "none";
+    customer_part.style.display = "none";
+    product_part.style.display = "none" 
+    admin_main.style.display = "none";
+    profile_part.style.display = "none";
+    account_part.style.display = "none";
+    role_part.style.display = "none";
+    employee_part.style.display = "block";
+}
+
+admin_statistic.addEventListener("click",statisticToggle);
 admin_oder.addEventListener("click",oderToggle);
 admin_product.addEventListener("click",productToggle);
 admin_customer.addEventListener("click",customerToggle);
 admin.addEventListener("click",returnMain);
 admin_account.addEventListener("click",accountToggle);
 admin_role.addEventListener("click",roleToggle);
+admin_employee.addEventListener("click",employeeToggle);
 // add product
 
 const add_form_1 = document.querySelector(".add-form-product");
@@ -106,6 +144,10 @@ const delete_btn_2 = document.querySelectorAll(".delete-btn-customer");
 const fix_btn_2 = document.querySelectorAll(".fix-btn-customer");
 const cancel_btn_2 = document.querySelector("#cancel-customer");
 
+const order_history = document.querySelector(".history-order-container");
+const show_order_btn = document.querySelectorAll(".history-order")
+const back_history = document.querySelector(".back-customer2");
+
 const add_form_3 = document.querySelector(".add-form-account");
 const plus_3 = document.querySelector("#account-plus");
 const account_table = document.querySelector(".account-table");
@@ -129,6 +171,17 @@ const fix_btn_4 = document.querySelectorAll(".fix-btn-role");
 const cancel_btn_4 = document.querySelector("#cancel-role");
 const account_ovl_4 = document.querySelector("#account-overlay-role");
 const show_userrole = document.querySelectorAll(".show-userrole");
+
+const add_form_5 = document.querySelector(".add-form-employee");
+const plus_5 = document.querySelector("#employee-plus");
+const employee_table = document.querySelector(".employee-table");
+const back_5 = document.querySelectorAll(".back-employee");
+const fix_form_5 = document.querySelector(".fix-form-employee");
+const fix_btn_5 = document.querySelectorAll(".fix-btn-employee");
+const delete_btn_5 = document.querySelectorAll(".delete-btn-employee");
+const delete_acp_5 = document.querySelector("#delete-acp-employee");
+const delete_ovl_5 = document.querySelector("#delete-overlay-employee");
+const cancel_btn_5 = document.querySelector("#cancel-employee");
 
 
 function addFormProduct(){
@@ -165,6 +218,14 @@ function addFormRole(){
 
 }
 
+function addFormEmployee(){
+    employee_table.style.display = "none";
+    add_form_5.style.display = "block";
+    plus_5.style.display = "none";
+    fix_form_5.style.display = "none";
+    profile_part.style.display = "none";
+}
+
 function fixFormProduct(){
     product_table.style.display = "none";
     fix_form_1.style.display = "block";
@@ -198,6 +259,15 @@ function fixFormRole(){
 }
 
 
+function fixFormEmployee(){
+    employee_table.style.display = "none";
+    fix_form_5.style.display = "block";
+    plus_5.style.display = "none";
+    add_form_5.style.display = "none";
+    profile_part.style.display = "none";
+}
+
+
 function returnProduct(){
     product_table.removeAttribute("style");
     add_form_1.style.display = "none";
@@ -213,6 +283,7 @@ function returnCustomer(){
     fix_form_2.style.display = "none";
     delete_ovl_2.style.display = "none";
     profile_part.style.display = "none";
+    order_history.style.display = "none";
 }
 
 function returnAcount(){
@@ -234,6 +305,20 @@ function returnRole(){
     account_ovl_4.style.display = "none";
 }
 
+function returnEmployee(){
+    employee_table.removeAttribute("style");
+    add_form_5.style.display = "none";
+    plus_5.style.display = "block";
+    fix_form_5.style.display = "none";
+    delete_ovl_5.style.display = "none";
+    profile_part.style.display = "none";
+}
+
+function showOrderHistory(){
+    order_history.style.display = "block";
+    customer_table.style.display = "none";
+}
+
 function showNofiProduct(){
     delete_ovl_1.style.display = "block";
 }
@@ -250,13 +335,24 @@ function showNofiRole(){
     delete_ovl_4.style.display = "block";
 }
 
+function showNofiEmployee(){
+    delete_ovl_5.style.display = "block";
+}
+
 function showUserRole(){
     account_ovl_4.style.display = "block";
 }
 
+
 plus_1.addEventListener("click",addFormProduct);
 plus_3.addEventListener("click",addFormAccount);
 plus_4.addEventListener("click",addFormRole);
+plus_5.addEventListener("click",addFormEmployee);
+
+
+show_order_btn.forEach(button =>{
+    button.addEventListener("click",showOrderHistory);
+})
 
 delete_btn_1.forEach(button =>{
     button.addEventListener("click",showNofiProduct);
@@ -274,6 +370,10 @@ delete_btn_4.forEach(button =>{
     button.addEventListener("click",showNofiRole);
 })
 
+delete_btn_5.forEach(button =>{
+    button.addEventListener("click",showNofiEmployee);
+})
+
 fix_btn_1.forEach(button =>{
     button.addEventListener("click",fixFormProduct);
 })
@@ -288,6 +388,10 @@ fix_btn_3.forEach(button =>{
 
 fix_btn_4.forEach(button =>{
     button.addEventListener("click",fixFormRole);
+})
+
+fix_btn_5.forEach(button =>{
+    button.addEventListener("click",fixFormEmployee);
 })
 
 back_1.forEach(button =>{
@@ -307,6 +411,12 @@ back_4.forEach(button =>{
     button.addEventListener("click",returnRole);
 })
 
+back_5.forEach(button =>{
+    button.addEventListener("click",returnEmployee);
+})
+
+back_history.addEventListener("click",returnCustomer);
+
 show_userrole.forEach(button =>{
     button.addEventListener("click",showUserRole);
 })
@@ -321,11 +431,13 @@ delete_acp_1.addEventListener("click",returnProduct);
 delete_acp_2.addEventListener("click",returnCustomer);
 delete_acp_3.addEventListener("click",returnAcount);
 delete_acp_4.addEventListener("click",returnRole);
+delete_acp_5.addEventListener("click",returnEmployee);
 
 cancel_btn_1.addEventListener("click",returnProduct);
 cancel_btn_2.addEventListener("click",returnCustomer);
 cancel_btn_3.addEventListener("click",returnAcount);
 cancel_btn_4.addEventListener("click",returnRole);
+cancel_btn_5.addEventListener("click",returnEmployee);
 
 // profile
 
