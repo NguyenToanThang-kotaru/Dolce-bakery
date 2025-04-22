@@ -146,7 +146,7 @@ const cancel_btn_2 = document.querySelector("#cancel-customer");
 
 const order_history = document.querySelector(".history-order-container");
 const show_order_btn = document.querySelectorAll(".history-order")
-const back_history = document.querySelector(".back-customer2");
+// const back_history = document.querySelector(".back-customer2");
 
 const add_form_3 = document.querySelector(".add-form-account");
 const plus_3 = document.querySelector("#account-plus");
@@ -182,6 +182,7 @@ const delete_btn_5 = document.querySelectorAll(".delete-btn-employee");
 const delete_acp_5 = document.querySelector("#delete-acp-employee");
 const delete_ovl_5 = document.querySelector("#delete-overlay-employee");
 const cancel_btn_5 = document.querySelector("#cancel-employee");
+console.log("cancel_btn_5 = ", cancel_btn_5);
 
 
 function addFormProduct(){
@@ -193,13 +194,13 @@ function addFormProduct(){
     
 }
 
-function addFormCustomer(){
-    customer_table.style.display = "none";
-    add_form_2.style.display = "block";
-    fix_form_2.style.display = "none";
-    profile_part.style.display = "none";
+// function addFormCustomer(){
+//     customer_table.style.display = "none";
+//     add_form_2.style.display = "block";
+//     fix_form_2.style.display = "none";
+//     profile_part.style.display = "none";
     
-}
+// }
 
 function addFormAccount(){
     account_table.style.display = "none";
@@ -306,6 +307,7 @@ function returnRole(){
 }
 
 function returnEmployee(){
+    // console.log("Hủy overlay nhân viên");
     employee_table.removeAttribute("style");
     add_form_5.style.display = "none";
     plus_5.style.display = "block";
@@ -415,7 +417,7 @@ back_5.forEach(button =>{
     button.addEventListener("click",returnEmployee);
 })
 
-back_history.addEventListener("click",returnCustomer);
+// back_history.addEventListener("click",returnCustomer);
 
 show_userrole.forEach(button =>{
     button.addEventListener("click",showUserRole);
