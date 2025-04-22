@@ -88,11 +88,17 @@ function getInfoSummary()
 }
 function checkConditionToPay()
 {
+    let address = document.querySelector(".payment-customer-address");
     let payByFTF= document.querySelector("#cash-on-delivery");
     let payByTrans = document.querySelector("#atm-payment");
     let atmPayment = document.querySelector("#atm-payment");
     let bankSelect = document.querySelector("#bank");
     let cardNumber = document.querySelector("#card-number");
+
+    if(address.textContent === "Chưa có"){
+        showToast("Vui lòng nhập địa chỉ.", false);
+        return false;
+    }
 
     if(!payByFTF.checked && !payByTrans.checked){
         showErrorPayment(payByFTF, "Vui lòng chọn phương thức thanh toán");
