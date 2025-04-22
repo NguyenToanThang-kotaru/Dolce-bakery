@@ -11,7 +11,7 @@ if (!isset($type)) {
 $sql = "SELECT pd.*, sct.*, ct.*
 FROM products pd
 JOIN subcategories sct ON pd.subcategory_id = sct.id
-JOIN categories ct ON sct.subcategory_id = ct.id
+JOIN categories ct ON sct.category_id = ct.id
 WHERE ct.name = ? ";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $type);

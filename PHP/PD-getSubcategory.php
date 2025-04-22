@@ -2,11 +2,11 @@
 include 'config.php';
 
 // Nếu được include từ các mục riêng (không có POST mà có $categoryId)
-if (!isset($_POST['subcategory_id']) && isset($categoryId)) {
+if (!isset($_POST['category_id']) && isset($categoryId)) {
     $categoryId = intval($categoryId);
 
     // Truy vấn
-    $sql = "SELECT id, name FROM subcategories WHERE subcategory_id = $categoryId";
+    $sql = "SELECT id, name FROM subcategories WHERE category_id = $categoryId";
     $result = $conn->query($sql);
 
     // In cả thẻ select và các option
@@ -24,10 +24,10 @@ if (!isset($_POST['subcategory_id']) && isset($categoryId)) {
 }
 
 // Nếu gọi bằng AJAX từ allproduct
-if (isset($_POST['subcategory_id'])) {
-    $categoryId = intval($_POST['subcategory_id']);
+if (isset($_POST['category_id'])) {
+    $categoryId = intval($_POST['category_id']);
 
-    $sql = "SELECT id, name FROM subcategories WHERE subcategory_id = $categoryId";
+    $sql = "SELECT id, name FROM subcategories WHERE category_id = $categoryId";
     $result = $conn->query($sql);
 
     if ($result && $result->num_rows > 0) {
