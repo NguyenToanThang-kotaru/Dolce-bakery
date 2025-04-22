@@ -1003,7 +1003,7 @@ function loadSubcategories() {
     }
   };
 
-  xhr.send("subcategory_id=" + encodeURIComponent(categoryId));
+  xhr.send("category_id=" + encodeURIComponent(categoryId));
 }
 
 
