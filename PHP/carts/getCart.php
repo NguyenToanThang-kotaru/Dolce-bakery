@@ -7,7 +7,7 @@
     }
 
     $userID = $_SESSION['userInfo']['userID'];
-    $sql = "SELECT products.id, products.image, products.name, products.price, cart.quantity 
+    $sql = "SELECT products.id, products.image, products.pd_name, products.price, cart.quantity 
             FROM cart 
             JOIN products ON cart.product_id = products.id
             WHERE cart.user_id = $userID";

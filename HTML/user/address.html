@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết đơn hàng</title>
+  <style>
+    /* === CSS Styling === */
+
+    body {
+      background-color: #fff6f2;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .history-order-container {
+      background-color: rgb(255, 246, 242);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .history-order-container h3 {
+      text-align: center;
+      color: #4b2e2e;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .history-order-container .order-date {
+      text-align: center;
+      font-weight: bold;
+      color: #4b2e2e;
+      margin-bottom: 20px;
+    }
+
+    .history-order-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .history-order-table th,
+    .history-order-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .history-order-table thead {
+      background-color: #ffccdd;
+      color: #4b2e2e;
+    }
+
+    .history-order-container .order-summary p {
+      margin: 6px 0;
+      font-size: 16px;
+      color: #4b2e2e;
+    }
+
+    .history-order-container .order-summary strong {
+      font-weight: bold;
+      color: #e055b2;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="history-order-container">
+    <h3>Chi tiết đơn hàng</h3>
+    <div class="order-date">Ngày đặt: 20/04/2025</div>
+
+    <table class="history-order-table">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bánh kem dâu</td>
+          <td>2</td>
+          <td>200.000đ</td>
+        </tr>
+        <tr>
+          <td>Bánh su kem</td>
+          <td>5</td>
+          <td>150.000đ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="order-summary">
+      <p><strong>Tổng tiền:</strong> 350.000đ</p>
+      <p><strong>Phí vận chuyển:</strong> 30.000đ</p>
+      <p><strong>Thành tiền:</strong> 380.000đ</p>
+    </div>
+  </div>
+</body>
+</html>

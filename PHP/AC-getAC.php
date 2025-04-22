@@ -5,7 +5,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];  
 
     $sql = "SELECT u.*, p.name AS permission_name 
-            FROM users u 
+            FROM employeeaccount u 
             LEFT JOIN permissions p ON u.permission_id = p.id 
             WHERE u.id = ?";
     $stmt = mysqli_prepare($conn, $sql);

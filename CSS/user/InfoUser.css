@@ -6,20 +6,14 @@
 
 }
 #overlayInfo{
-    display: none;
     position: fixed;
-    /* position: absolute; */
     top: 0;
-    
-    
-    background-color: rgba(0,0,0,0.5);
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
- 
- 
-   
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Lớp đen mờ */
+    z-index: 100; /* Đặt lớp overlay lên trên */
+    display: none; /* Mặc định ẩn */
 } 
 #InfoUser-container{
     display: none;
@@ -71,6 +65,9 @@
     margin-right: 50px;
     width: 50%;
 }
+.row label{
+    font-weight: bold;
+}
 #Detail{
     display: flex;
     align-items: center;
@@ -104,4 +101,208 @@
     cursor: pointer;
     scale: 1.2;
     transition: 0.5s;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.changed:hover{
+    cursor: pointer;
+}
+.value-wrapper {
+    display: flex;
+    align-items: center;
+    /* flex-wrap: wrap;  */
+    gap: 8px; /* Khoảng cách giữa nội dung và chữ thay đổi */
+}
+
+.content {
+    color: black;
+    
+}
+
+.changed {
+    color: red;
+    font-style: italic;
+    user-select: none;
+}
+
+.no-margin {
+    margin-right: 0 !important;
+}
+.titleAddressInfo {
+    width: 100px;           /* cố định chiều rộng */
+    white-space: nowrap;    /* KHÔNG cho xuống dòng */
+    font-weight: bold;
+    flex-shrink: 0;         /* không co lại khi thiếu chỗ */
+}
+
+.overlayInfoAddress{
+   position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Lớp đen mờ */
+    z-index: 100; /* Đặt lớp overlay lên trên */
+    display: none; /* Mặc định ẩn */
+} 
+.overlayAddressPayment,
+.overlayAddress {
+    position: fixed; /* Đảm bảo nó nổi lên */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Căn giữa theo cả chiều ngang và dọc */
+    background-color: rgb(255, 246, 242);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Đảm bảo nằm trên tất cả */
+    display: none; /* Ban đầu ẩn đi, khi cần thì show ra */
+}
+
+
+  .addr-title {
+    text-align: center;
+    color: #4b2e2e;
+    margin-bottom: 25px;
+    font-size: 22px;
+  }
+
+  .addr-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #4b2e2e;
+  }
+
+  .addr-input {
+    width: 700px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    margin-bottom: 18px;
+  }
+
+  .addr-input:focus {
+    border-color: #f48fb1;
+    outline: none;
+  }
+
+  .addr-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff66cc;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .addr-button:hover {
+    background-color: #e055b2;
+  }
+  
+  
+  .modal-overlay-history {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: rgb(255, 246, 242);
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .order-date{
+    margin-bottom: 10px;
+  }
+  .order-date strong{
+    color: #e055b2
+  }
+  
+  .order-title {
+    text-align: center;
+    color: #000;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .orders-scroll-area {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .order-box {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-box h4 {
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  .history-order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  
+  .history-order-table th,
+  .history-order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 15px;
+  }
+  
+  .history-order-table thead {
+    background-color: #ffccdd;
+    color: #4b2e2e;
+  }
+  
+  .order-summary-history {
+    font-size: 15px;
+    color: #4b2e2e;
+    padding: 10px 0px 10px;
+  }
+  .order-summary-history p{
+    margin-bottom: 10px;
+  }
+  .order-summary-history strong {
+    color: #e055b2;
+  }
+  .close-history-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
 }

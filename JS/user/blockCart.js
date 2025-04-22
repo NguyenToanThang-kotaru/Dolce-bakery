@@ -25,6 +25,14 @@ function blockShopCart() {
     }
 }
 
+cart.addEventListener('click', function () {
+    getCart(function (canOpen) {
+        if (!canOpen) return;
+        OnCart();
+    });
+});
+
+
 
 function noneShopCart() {
     slideshow.removeAttribute("style");
@@ -71,38 +79,52 @@ CartPhone.addEventListener("click", () => {
 
 let new_cart = [];
 
-function addToCart(productId) {
+function addToCart(productId, quantity = 1) {
     $.ajax({
-        url: "../../PHP/carts/addToCart.php",
+        url: "../../PHP/carts/addToCartById.php",
         type: "POST",
         data: {
-            'product_id': productId
+            'product_id': productId,
+            'quantity': quantity,
         },
         success: function (response) {
-            alert(response);
+            // alert(response);
+            if(response.includes("Bạn cần đăng nhập"))
+            {
+                showToast("Bạn cần đăng nhập để mua hàng.", false);
+            }
+            else{
+                $('.cart-count').text(response);
+                showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
+            }
         }
     });
+    
+    
 }
 
-function getCart() {
+function getCart(callback) {
     $.ajax({
         url: "../../PHP/carts/getCart.php",
         type: "POST",
         dataType: "json",
         success: function (response) {
             if (response.status === "error") {
-                alert("Bạn cần đăng nhập");
+                showToast("Bạn cần đăng nhập để xem giỏ hàng.", false);
+                callback(false);
                 return;
             }
 
             new_cart = response;
-            displayProductInCart();
-            OnCart();
+            sessionStorage.setItem("cart", JSON.stringify(new_cart));
+            displayItemInCart();
+            calculateTotal(new_cart);
+            callback(true);
         }
     })
 }
 
-function displayProductInCart() {
+function displayItemInCart() {
     let html = '';
     new_cart.forEach(item => {
         html += `
@@ -110,17 +132,17 @@ function displayProductInCart() {
                 <div id="PDCart1">
                     <img src="${item.image}" width="8%" height="100%" alt="">
                     <div id="PDCart-NP">
-                        <div id="PDCart-Name">${item.name}</div>
-                        <div id="PDCart-Price">${item.price}đ</div>
+                        <div id="PDCart-Name">${item.pd_name}</div>
+                        <div id="PDCart-Price">${parseInt(item.price).toLocaleString("vi-VN")}đ</div>
                     </div>
                 </div>
                 <div id="PDCart2">
                     <div id="quantity-container">
-                    <div id="downQuantity"><i class="fa-solid fa-minus"></i></div>
+                    <div id="downQuantity" onclick = "decreaseItemInCart(${item.id})"><i class="fa-solid fa-minus"></i></div>
                     <div id="PDCart-Quantity">${item.quantity}</div>
-                    <div id="upQuantity"><i class="fa-solid fa-plus"></i></div>
+                    <div id="upQuantity" onclick = "addItemToCart(${item.id},1)"><i class="fa-solid fa-plus"></i></div>
                 </div>
-                    <div id="delete-icon">
+                    <div id="delete-icon" onclick = "removeItemFromCart(${item.id})">
                         <i class="fa-regular fa-trash-can"></i>
                     </div>
                 </div>
@@ -130,3 +152,100 @@ function displayProductInCart() {
     document.querySelector('#cart-body #list-PD').innerHTML = html;
 }
 
+function calculateTotal(cart) {
+    let totalAmout = 0;
+    cart.forEach(item => {
+        totalAmout += item.price * item.quantity;
+    })
+    document.querySelector('#price-total').textContent = totalAmout.toLocaleString("vi-VN") + "đ";
+}
+
+function addItemToCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/addToCartById.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Them san pham: " + id);
+}
+
+function decreaseItemInCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/decreaseInCart.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Giam san pham: " + id);
+}
+
+function removeItemFromCart(id) {
+    $.ajax({
+        url: "../../PHP/carts/removeFromCart.php",
+        type: "POST",
+        data: {
+            'product_id': id
+        },
+        success: function () {
+            getCart();
+        }
+    });
+    console.log("Xoa san pham: " + id);
+}
+
+function showToast(message, isSuccess, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    toast.style.backgroundColor = isSuccess ? "#4caf50" : "#f44336";
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = "fadeout 0.3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+
+    return duration + 300; 
+}
+
+const addToCartButton = document.querySelector("#InfoPD-container .add-cart-info");
+addToCartButton.addEventListener("click", function () {
+    let imgUrl = document.querySelector("#InfoPD-container #product-img").getAttribute("src");
+    let quantity = parseInt(document.querySelector(".QuantityPD-container #quantity-value").textContent);
+    addToCartByImage(imgUrl, quantity);
+});
+
+function addToCartByImage(imageUrl, quantity = 1) {
+    $.ajax({
+        url: "../../PHP/carts/addToCartByImg.php",
+        type: "POST",
+        data: { image_url: imageUrl },
+        success: function (productId) {
+            if (productId === "not_found") {
+                showToast("Không tìm thấy sản phẩm.", false);
+                return;
+            }
+            addToCart(productId,quantity);
+        }
+    });
+}
+
+function changeQuantity(change) {
+    let quantityElement = document.getElementById('quantity-value');
+    let currentQuantity = parseInt(quantityElement.textContent);
+    let newQuantity = currentQuantity + change;
+
+    if (newQuantity >= 1) {
+        quantityElement.textContent = newQuantity;
+    }
+}

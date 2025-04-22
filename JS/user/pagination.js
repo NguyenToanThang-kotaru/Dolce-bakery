@@ -285,10 +285,11 @@ function toggleFilter(category) {
   filterSidebar.classList.toggle("active");
 
   if (filterSidebar.classList.contains("active")) {
-    productFilter.style.marginLeft = "300px";
-    filterShow.style.opacity = "0";
+    filterSidebar.style.marginLeft="0px"
+    productFilter.style.marginLeft = "650px";
+    filterShow.style.opacity = "0.5";
   } else {
-    productFilter.style.marginLeft = "0px";
+    productFilter.style.marginLeft = "-50px";
     filterShow.style.opacity = "1";
   }
 }
@@ -939,6 +940,7 @@ searchInput.addEventListener("input", function () {
 document.querySelectorAll(".product-img img").forEach(img => {
   //Chọn phần tử gần nhất với ảnh được click để lấy name của người con gái a yêu!!!!
   img.addEventListener("click", function () {
+    document.querySelector(".QuantityPD-container #quantity-value").textContent = "1";
     let productItem = this.closest(".product-item, .bread-product, .cake-product, .cookie-product");
     if (!productItem) return;
 
@@ -952,7 +954,11 @@ document.querySelectorAll(".product-img img").forEach(img => {
       .then(product => {
         if (!product.error) {
           document.querySelector(".PD-name h1").textContent = product.pd_name;
+<<<<<<< HEAD
           document.querySelector(".Price").textContent = product.price + "đ";
+=======
+          document.querySelector(".Price").textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
+>>>>>>> Huy_Khanh-testCase
           document.querySelector("#PD-imgage img").src = product.image;
         }
       })

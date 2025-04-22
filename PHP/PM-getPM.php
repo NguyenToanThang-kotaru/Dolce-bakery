@@ -27,7 +27,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         }
 
         // Lấy danh sách userName từ bảng users có permission_id = id của bảng permission
-        $sql = "SELECT userName FROM users WHERE permission_id = ?";
+        $sql = "SELECT userName FROM employeeaccount WHERE permission_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $permissionId);
         $stmt->execute();

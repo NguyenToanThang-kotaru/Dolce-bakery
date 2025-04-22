@@ -27,7 +27,7 @@
         // }
         
         // Kiểm tra email đã tồn tại
-        $checkEmail = "SELECT * FROM users WHERE (email = '$email' OR userName= '$userName')";
+        $checkEmail = "SELECT * FROM customers WHERE (email = '$email' OR userName= '$userName')";
         $result = $conn->query($checkEmail);
         if($result->num_rows>0){
             $row = $result->fetch_assoc();
@@ -43,11 +43,20 @@
             }
         }
         else {
-            $hasshedPassword = passWord_hash($passwd, PASSWORD_BCRYPT); 
-            $insertQuery = "INSERT INTO users (userName, email, fullName, numberPhone, password) 
+            $hasshedPassword = password_hash($passwd, PASSWORD_BCRYPT); 
+            $insertQuery = "INSERT INTO customers (userName, email, fullName, phoneNumber, password) 
                 VALUES ('$userName', '$email', '$fullName', '$phone', '$hasshedPassword')";
             if ($conn->query($insertQuery) === TRUE) {
-                echo "Đăng ký thành công";
+                session_start();    
+                $_SESSION['userInfo'] = [
+                    'userID' => $conn->insert_id,
+                    'userName' => $userName,
+                    'email' => $email,
+                    'fullName' => $fullName,
+                    'phoneNumber' => $phone,
+                    'status' => 'active'
+                ];
+                echo "success";
             } else {
                 echo "Lỗi: " . $conn->error;
             }
@@ -60,33 +69,63 @@
         $userName = $_POST['lg-username'];
         $passwd = $_POST['lg-password'];
     
-        $sql = "SELECT * FROM users WHERE userName = '$userName' OR email = '$userName'";
+        $sql = "SELECT * FROM customers WHERE userName = '$userName' OR email = '$userName'";
         $result = $conn->query($sql);
-    
-        if ($result->num_rows > 0) {
+        // $hasshedPassword1 = passWord_hash($passwd, PASSWORD_BCRYPT);
+        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        if ($result->num_rows > 0) { 
             $row = $result->fetch_assoc();
-            
+            $district_id=$row["district_id"];
             // Kiểm tra mật khẩu
-            $hasshedPassword = $row['password'];
-            if (password_verify($passwd, $hasshedPassword)) { 
+            $hasshedPasswordnew = $row['password'];
+            if (password_verify($passwd, $hasshedPasswordnew)) { 
+                $sqlAddress = "SELECT provinces.name AS province_name, districts.name AS district_name
+                FROM provinces
+                INNER JOIN districts ON districts.province_id = provinces.id
+                WHERE districts.id = ?";
+                $stmt = $conn->prepare($sqlAddress);
+                $stmt->bind_param("i", $district_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $rowAddress;
+                if ($rowAddress = $result->fetch_assoc()) {
+                $province_name = $rowAddress["province_name"];
+                $district_name = $rowAddress["district_name"];
+                }
+
+                $address = $row['addressDetail'] . ", " . $province_name . ", " . $district_name;
+                $stmt->close();
+
                 session_start();
                 $_SESSION['userInfo'] = [
                     'userID' => $row['id'],
                     'userName' => $row['userName'],
                     'email' => $row['email'],
                     'fullName' => $row['fullName'],
-                    'numberPhone' => $row['numberPhone'],
-                    'role' => $row['role'],
+                    'phoneNumber' => $row['phoneNumber'],
+                    'address' => $address,
+                    'addressDetail' => $row['addressDetail'],
+                    'province_name' => $province_name,
+                    'district_name' => $district_name,
+                    'province_id' => $row['province_id'],
+                    'district_id' => $row['district_id'],
+                    'status' => $row['status'],
                 ];
                 echo json_encode(['status' => 'success', 'user' => $_SESSION['userInfo']]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
+                echo json_encode([
+                    'status' => 'error', 
+                    'message' => 'Sai mật khẩu',
+                    'debug_info' => [
+                        'input_password_______' => $concac = password_verify($passwd, $hasshedPasswordnew),
+                        'hashed_password_in_db' => $hasshedPasswordnew
+                    ]
+                ]);
             }
+            
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Không tồn tại người dùng']);
         }
         exit();
     }
-
-
 ?>
