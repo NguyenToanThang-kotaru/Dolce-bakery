@@ -88,7 +88,6 @@ if (!isset($_SESSION['adminInfo'])) {
           <option value="">Lựa chọn thống kê</option>
           <option value="1">Thống kê khách hàng</option>
           <option value="2">Thống kê sản phẩm</option>
-          <option value="3">Thống kê khách hàng & sản phẩm</option>
         </select>
       </div>
 

@@ -263,7 +263,7 @@ body {
 .statistic-table th,
 .statistic-table td {
   padding: 10px 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
@@ -1354,4 +1354,20 @@ body {
   border: 0px solid rgb(17, 17, 17);
   border-radius: 10px;
   box-shadow: 0 0 5px 1px rgb(47, 218, 70);
+}
+
+.order-detail-div{
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 55%;
+  margin-left: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  min-width: 110px;
+  z-index: 999;               
 }

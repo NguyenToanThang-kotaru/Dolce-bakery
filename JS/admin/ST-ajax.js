@@ -16,10 +16,7 @@
             customerDiv.style.display = "block";
           } else if (value === "2") {
             productDiv.style.display = "block";
-          } else if (value === "3") {
-            customerDiv.style.display = "block";
-            productDiv.style.display = "block";
-          }
+          } 
         });
       });    
     
@@ -105,14 +102,30 @@
 
     // Hiện chi tiết đơn hàng khi click vào link, clone bên đơn hàng qua
     document.addEventListener("DOMContentLoaded", function () {
-        const table = document.querySelector(".statistic-table");
-        const filterForm = document.getElementById("filter-form-customer");
+        const table = document.querySelector(".statistic-customer-table");
+        const filterForm1 = document.getElementById("filter-form-customer");
         const detailContainer = document.querySelector(".order-detail-container1");
-        const title = document.querySelector(".statistic-title");
+        const title = document.querySelector(".statistic-title-customer");
 
         document.addEventListener("click", function (event) {
             let target = event.target;
 
+            // Hiển thị danh sách đơn hàng
+            if (event.target.classList.contains("order-toggle")) {
+                const cusId = event.target.getAttribute("data-id");
+                const detailDiv = document.getElementById("orders-" + cusId);
+                const isCurrentlyVisible = detailDiv && detailDiv.style.display === "block";
+            
+                document.querySelectorAll(".order-detail-div").forEach(div => {
+                    div.style.display = "none";
+                });
+            
+                if (!isCurrentlyVisible && detailDiv) {
+                    detailDiv.style.display = "block";
+                }
+            }
+            
+            // Hiển thị chi tiết đơn hàng
             if (target.classList.contains("order-info")) {
                 const orderId = target.getAttribute("data-id");
 
@@ -129,7 +142,7 @@
                 .then(html => {
                     detailContainer.innerHTML = html;
                     detailContainer.style.display = "block";
-                    filterForm.style.display = "none";
+                    filterForm1.style.display = "none";
                     title.style.display = "none";
                 })
                 .catch(error => console.error("Lỗi khi tải chi tiết đơn hàng:", error));
@@ -137,8 +150,8 @@
             if (target.classList.contains("back-orderdetail")) {
                     detailContainer.style.display = "none";
                     table.style.display = "table";
-                    filterForm.style.display = "flex";
                     title.style.display = "block";
+                    filterForm1.style.display = "flex";
                 }
         });
     });
