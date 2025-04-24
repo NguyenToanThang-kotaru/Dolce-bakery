@@ -969,7 +969,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <td>IP001</td>
             <td>NV001</td>
             <td>25-2-2025</td>
-            <td><select name='order-status' class='orderstatus-select form-select' id='filter-status' required></select>
+            <td><select name='import-status' class='importstatus-select form-select' id='filter-status' required></select>
             </td>
             <td style='text-align: center; vertical-align: middle;'>
               <i class='fa-solid fa-circle-info import-detail' style='cursor:pointer;'></i>
@@ -989,26 +989,26 @@ if (!isset($_SESSION['adminInfo'])) {
         <h2 class="receipt-title">Phiếu nhập hàng</h2>
 
         <!-- Tổng tiền -->
-        <div class="total-section">
-          <label for="total-price">Tổng tiền:</label>
-          <span id="total-price">0 VND</span>
+        <div class="total-section-ip">
+          <label for="total-price-ip">Tổng tiền:</label>
+          <span id="total-price-ip">0 VND</span>
         </div>
 
         <!-- Combobox Nhà cung cấp, Loại, Chủng loại -->
-        <div class="filter-section">
-          <select id="supplier" class="form-select">
+        <div class="filter-section-ip">
+          <select id="supplier-ip" class="form-select">
             <option value="">Chọn nhà cung cấp</option>
           </select>
-          <select id="type" class="form-select">
+          <select id="category-ip" class="form-select">
             <option value="">Chọn loại</option>
           </select>
-          <select id="category" class="form-select">
+          <select id="subcategory-ip" class="form-select">
             <option value="">Chọn chủng loại</option>
           </select>
         </div>
 
         <!-- Bảng sản phẩm -->
-        <div class="product-table-section">
+        <div class="product-table-section-ip">
           <table class="import-table-show">
             <thead>
               <tr>
@@ -1036,7 +1036,7 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <!-- Nhập số lượng, giá nhập, % lãi -->
-        <div class="selected-product-input">
+        <div class="selected-product-input-ip">
           <label for="quantity">Số lượng:</label>
           <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
 
@@ -1046,7 +1046,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="profit-percent">% Lãi:</label>
           <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
 
-          <button id="add-product-btn" class="form-button">Thêm sản phẩm</button>
+          <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
         </div>
 
         <!-- Bảng sản phẩm đã được thêm vào phiếu nhập -->
@@ -1079,7 +1079,7 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <!-- Nút thêm phiếu nhập -->
-        <div class="submit-section text-center">
+        <div class="submit-section-ip text-center">
           <button id="submit-import-btn" class="form-button">Thêm phiếu nhập</button>
         </div>
       </div>
@@ -1097,26 +1097,26 @@ if (!isset($_SESSION['adminInfo'])) {
         <h2 class="receipt-title"> Sửa phiếu nhập hàng</h2>
 
         <!-- Tổng tiền -->
-        <div class="total-section">
-          <label for="total-price">Tổng tiền:</label>
-          <span id="total-price">0 VND</span>
+        <div class="total-section-ip">
+          <label for="total-price-ip">Tổng tiền:</label>
+          <span id="total-price-ip">0 VND</span>
         </div>
 
         <!-- Combobox Nhà cung cấp, Loại, Chủng loại -->
-        <div class="filter-section">
-          <select id="supplier" class="form-select">
+        <div class="filter-section-ip">
+          <select id="supplier-ip" class="form-select">
             <option value="">Chọn nhà cung cấp</option>
           </select>
-          <select id="type" class="form-select">
+          <select id="category-ip" class="form-select">
             <option value="">Chọn loại</option>
           </select>
-          <select id="category" class="form-select">
+          <select id="subcategory-ip" class="form-select">
             <option value="">Chọn chủng loại</option>
           </select>
         </div>
 
         <!-- Bảng sản phẩm -->
-        <div class="product-table-section">
+        <div class="product-table-section-ip">
           <table class="import-table-show">
             <thead>
               <tr>
@@ -1144,7 +1144,7 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <!-- Nhập số lượng, giá nhập, % lãi -->
-        <div class="selected-product-input">
+        <div class="selected-product-input-ip">
           <label for="quantity">Số lượng:</label>
           <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
 
@@ -1195,17 +1195,17 @@ if (!isset($_SESSION['adminInfo'])) {
 
       <div class="import-detail-container">
         <i class="fa-solid fa-rotate-left back-import"></i>
-        <h3>Chi tiết phiếu nhập</h3>
+        <h3 style="margin-bottom: 10px;">Chi tiết phiếu nhập</h3>
         <div class="import-info">
-          <div class="info-row">
+          <div class="info-row-ip">
             <span><strong>Mã phiếu nhập:</strong> PN001</span>
             <span><strong>Mã nhân viên:</strong> NV123</span>
           </div>
-          <div class="info-row">
+          <div class="info-row-ip">
             <span><strong>Ngày nhập:</strong> 23/04/2025</span>
             <span><strong>Trạng thái:</strong> Đã duyệt</span>
           </div>
-          <div class="info-row">
+          <div class="info-row-ip">
             <span><strong>Tổng tiền:</strong> 5.000.000 VNĐ</span>
           </div>
         </div>

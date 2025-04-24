@@ -1530,7 +1530,7 @@ body {
   min-width: 180px;
 }
 
-.filter-section {
+.filter-section-ip {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
@@ -1555,7 +1555,7 @@ body {
   cursor: pointer;
 } */
 
-.selected-product-input {
+.selected-product-input-ip {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1617,14 +1617,21 @@ body {
 
 .import-info {
   margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+.import-info span {
+  color: #3C8DBC;
+  margin-right: 20px;
+  /* display: inline-block; */
 }
+
+.info-row-ip {
+  display: flex;
+  margin-bottom: 10px;
+}
+
 
 .imported-product-list-section h4 {
   margin-bottom: 10px;
