@@ -33,11 +33,11 @@ if ($stmt->execute()) {
         // Cập nhật lại session
         if (isset($_SESSION['userInfo'])) {
             $_SESSION['userInfo']['addressDetail'] = $addressDetail;
-            $_SESSION['userInfo']['province'] = $provinceId;
-            $_SESSION['userInfo']['district'] = $districtId;
+            $_SESSION['userInfo']['province_id'] = $provinceId;
+            $_SESSION['userInfo']['district_id'] = $districtId;
             $_SESSION['userInfo']['address'] = $addressDetail . ', ' . $districtName . ', ' . $provinceName;
         }
-
+        
         echo json_encode([
             "status" => "success",
             "user" => $_SESSION['userInfo']

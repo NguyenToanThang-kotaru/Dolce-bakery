@@ -954,7 +954,7 @@ document.querySelectorAll(".product-img img").forEach(img => {
       .then(product => {
         if (!product.error) {
           document.querySelector(".PD-name h1").textContent = product.pd_name;
-          document.querySelector(".Price").textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
+          document.querySelector(".Price").textContent = product.price + "đ";
           document.querySelector("#PD-imgage img").src = product.image;
         }
       })

@@ -276,7 +276,7 @@ body {
 .statistic-table th,
 .statistic-table td {
   padding: 10px 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }

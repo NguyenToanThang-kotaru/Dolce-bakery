@@ -80,7 +80,7 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
     .then(data => {
         if (data.success) {
             alert(data.message); 
-            console.log(data.customer.id);
+            console.log(data);
 
             // Cập nhật dòng khách hàng trên bảng nếu có
             let row = document.querySelector(`tr[data-id='${data.customer.id}']`);
@@ -94,7 +94,7 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                             <option value='2' ${data.customer.status == 2 ? "selected" : ""}>Đã khóa</option>
                         </select>
                     </td>
-                    <td style='text-align: center; vertical-align: middle;'><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id} " alt='Xem chi tiết' ></td>
+                    <td style='text-align: center; vertical-align: middle;'><img src='../../assest/ACdetail.png' class='customer-detail' data-id="${data.customer.id}" alt='Xem chi tiết'></td>
                     <td style='text-align: center; vertical-align: middle;'>
                         <img src='../../assest/H-oder.png' class='history-order' alt='Xem lịch sử'>
                     </td>
@@ -107,7 +107,20 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                 `;
 
                 let statusSelect = row.querySelector(".customer-status");
-                updateStatusColor(statusSelect);// Lấy lại màu trạng thái sau khi cập nhật
+                updateStatusColor(statusSelect);
+
+                // Thêm lại sự kiện click cho icon xem chi tiết
+                let detailIcon = row.querySelector(".customer-detail");
+                if (detailIcon) {
+                    detailIcon.addEventListener("click", function() {
+                        let customerId = this.getAttribute("data-id");
+                        document.querySelector(".customer-table").style.display = "none";
+                        let detailSection = document.getElementById(`detail-customer-${customerId}`);
+                        if (detailSection) {
+                            detailSection.style.display = "block";
+                        }
+                    });
+                }
 
                 console.log("Cập nhật thành công!");
             }
@@ -123,7 +136,7 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                     <div class='cus-info'><span class='cus-label'>Trạng thái tài khoản:</span><span class='cus-value'>${data.customer.status == 1 ? "Đang hoạt động" : "Đã khóa"}</span></div>
                     <div class='cus-info'><span class='cus-label'>Số điện thoại:</span><span class='cus-value'>${data.customer.phoneNumber}</span></div>
                     <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>${data.customer.email}</span></div>
-                    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>${data.customer.address}</span></div>
+                    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>${data.customer.addressDetail}, ${data.customer.district_name}, ${data.customer.province_name}</span></div>
                     <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>${data.customer.userName}</span></div>
                 `;
             }
