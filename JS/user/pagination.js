@@ -285,7 +285,7 @@ function toggleFilter(category) {
   filterSidebar.classList.toggle("active");
 
   if (filterSidebar.classList.contains("active")) {
-    filterSidebar.style.marginLeft="0px"
+    filterSidebar.style.marginLeft = "0px"
     productFilter.style.marginLeft = "650px";
     filterShow.style.opacity = "0.5";
   } else {
@@ -937,42 +937,56 @@ searchInput.addEventListener("input", function () {
 });
 
 //Click vào từng sản phẩm thì hiện ra thông tin
+// Hàm xử lý khi click vào ảnh, tên hoặc giá
+function ProductClickShowInfo(event) {
+  document.querySelector(".QuantityPD-container #quantity-value").textContent = "1";
+
+  let productItem = this.closest(".product-item, .bread-product, .cake-product, .cookie-product");
+  if (!productItem) return;
+
+  let productName = productItem.querySelector(".product-name")?.textContent?.trim();
+  if (!productName) return;
+
+  console.log("Click sản phẩm:", productName);
+
+  fetch(`../../PHP/users/getProductinfo.php?pd_name=${encodeURIComponent(productName)}`)
+    .then(response => response.json())
+    .then(product => {
+      if (!product.error) {
+        document.querySelector(".PD-name h1").textContent = product.pd_name;
+        document.querySelector(".Price").textContent = Number(product.price).toLocaleString("vi-VN") + "đ";
+        document.querySelector("#PD-imgage img").src = product.image;
+      }
+    })
+    .catch(error => console.error("Lỗi khi tải thông tin sản phẩm:", error));
+
+  infoproduct.style.display = "flex";
+  slide.style.display = "none";
+  mainmenu.style.display = "none";
+  brandstory.style.display = "none";
+  cake_catelouge.style.display = "none";
+  bread_catelouge.style.display = "none";
+  cookie_catelouge.style.display = "none";
+  main_container.style.display = "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Gắn sự kiện cho ảnh
 document.querySelectorAll(".product-img img").forEach(img => {
-  //Chọn phần tử gần nhất với ảnh được click để lấy name của người con gái a yêu!!!!
-  img.addEventListener("click", function () {
-    document.querySelector(".QuantityPD-container #quantity-value").textContent = "1";
-    let productItem = this.closest(".product-item, .bread-product, .cake-product, .cookie-product");
-    if (!productItem) return;
-
-    let productName = productItem.querySelector(".product-name")?.textContent?.trim();
-    if (!productName) return;
-
-    console.log("Click ảnh sản phẩm:", productName);
-
-    fetch(`../../PHP/users/getProductinfo.php?pd_name=${encodeURIComponent(productName)}`)
-      .then(response => response.json())
-      .then(product => {
-        if (!product.error) {
-          document.querySelector(".PD-name h1").textContent = product.pd_name;
-          document.querySelector(".Price").textContent = product.price + "đ";
-          document.querySelector("#PD-imgage img").src = product.image;
-        }
-      })
-      .catch(error => console.error("Lỗi khi tải thông tin sản phẩm:", error));
-
-    infoproduct.style.display = "flex";
-    slide.style.display = "none";
-    mainmenu.style.display = "none";
-    brandstory.style.display = "none";
-    cake_catelouge.style.display = "none";
-    bread_catelouge.style.display = "none";
-    cookie_catelouge.style.display = "none";
-    main_container.style.display = "none";
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-  });
+  img.addEventListener("click", ProductClickShowInfo);
 });
+
+// Gắn sự kiện cho tên
+document.querySelectorAll(".product-name").forEach(name => {
+  name.addEventListener("click", ProductClickShowInfo);
+});
+
+// Gắn sự kiện cho giá
+document.querySelectorAll(".product-end .price").forEach(price => {
+  price.addEventListener("click", ProductClickShowInfo);
+});
+
 
 
 // Lấy chủng loại từ PHP
@@ -986,7 +1000,7 @@ function loadSubcategories() {
 
   if (!categoryId) {
     subcategorySelect.innerHTML = "<option value=''>Vui lòng chọn loại sản phẩm trước</option>";
-    return; 
+    return;
   }
 
   // Hiển thị đang tải
