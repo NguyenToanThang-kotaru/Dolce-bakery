@@ -24,23 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt_get_status->close();
     $status = $current_status; 
 
-    $sql_get_address = "SELECT address FROM customers WHERE id = ?";
+    // Lấy thông tin địa chỉ chi tiết
+    $sql_get_address = "SELECT c.addressDetail, p.name as province_name, d.name as district_name 
+                       FROM customers c 
+                       JOIN provinces p ON c.province_id = p.id 
+                       JOIN districts d ON c.district_id = d.id 
+                       WHERE c.id = ?";
     $stmt_get_address = $conn->prepare($sql_get_address);
     $stmt_get_address->bind_param("i", $id);
     $stmt_get_address->execute();
-    $stmt_get_address->bind_result($current_address);
-    $stmt_get_address->fetch();
+    $result = $stmt_get_address->get_result();
+    $address_info = $result->fetch_assoc();
     $stmt_get_address->close();
-    $address = $current_address; 
 
-
-    
     // Cập nhật database
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT); 
     $sql = "UPDATE customers SET userName = ?, email = ?, fullName = ?, phoneNumber = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi",$userName, $email, $fullName, $phoneNumber, $hashedPassword, $id);
-
+    $stmt->bind_param("sssssi", $userName, $email, $fullName, $phoneNumber, $hashedPassword, $id);
 
     if ($stmt->execute()) {
         $response = [
@@ -50,7 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "id" => $id,
                 "fullName" => $fullName,
                 "status" => $status,
-                "address" => $address,
+                "addressDetail" => $address_info['addressDetail'],
+                "province_name" => $address_info['province_name'],
+                "district_name" => $address_info['district_name'],
                 "phoneNumber" => $phoneNumber,
                 "email" => $email,
                 "userName" => $userName
@@ -59,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $response = ["success" => false, "message" => "Lỗi cập nhật: " . $conn->error];
     }
-
 
     $stmt->close();
     $conn->close();
