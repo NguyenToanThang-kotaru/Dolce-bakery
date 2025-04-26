@@ -1569,6 +1569,13 @@ body {
   margin-bottom: 20px;
 }
 
+.import-status {
+  padding: 2px;
+  border: 0px solid rgb(17, 17, 17);
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgb(47, 218, 70);
+}
+
 .import-table-show th,
 .import-table-show td {
   padding: 10px 15px;

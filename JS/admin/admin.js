@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function importToggle() {
+        statistic_part.style.display = "none";
         oder_part.style.display = "none";
         customer_part.style.display = "none";
         product_part.style.display = "none"
