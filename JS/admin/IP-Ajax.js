@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 // Thêm vào cuối bảng thay vì đầu bảng
                 importTableBody.appendChild(newRow);
+                setImportStatusColor(newRow.querySelector('.import-status'));
                 // Reset bảng sản phẩm trong phiếu nhập
                 importListBody.innerHTML = '';
                 // Reset combobox và tổng tiền
@@ -391,4 +392,47 @@ document.addEventListener('change', function(e) {
             alert('Có lỗi khi kết nối server!');
         });
     }
-}); 
+});
+
+// Xử lý xóa phiếu nhập
+document.querySelectorAll('.delete-btn-import').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        const importId = row.getAttribute('data-id');
+        
+        document.getElementById('delete-overlay-import').style.display = 'block';
+        
+        document.getElementById('delete-acp-import').onclick = function() {
+            fetch('../../PHP/IP-Delete.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${importId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Xóa row khỏi bảng
+                    row.remove();
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+                // Ẩn overlay
+                document.getElementById('delete-overlay-import').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi xóa phiếu nhập!');
+                document.getElementById('delete-overlay-import').style.display = 'none';
+            });
+        };
+        
+        // Xử lý khi click nút hủy
+        document.getElementById('cancel-import').onclick = function() {
+            document.getElementById('delete-overlay-import').style.display = 'none';
+        };
+    });
+});
+

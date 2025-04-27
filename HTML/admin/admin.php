@@ -1163,18 +1163,18 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Tổng tiền -->
         <div class="total-section-ip">
           <label for="total-price-ip">Tổng tiền:</label>
-          <span id="total-price-ip">0 VND</span>
+          <span id="total-price-ipF">0 VND</span>
         </div>
 
         <!-- Combobox Nhà cung cấp, Loại, Chủng loại -->
         <div class="filter-section-ip">
-          <select id="supplier-ip" class="form-select">
+          <select id="supplier-ipF" class="form-select">
             <option value="">Chọn nhà cung cấp</option>
           </select>
-          <select id="category-ip" class="form-select">
+          <select id="category-ipF" class="form-select">
             <option value="">Chọn loại</option>
           </select>
-          <select id="subcategory-ip" class="form-select">
+          <select id="subcategory-ipF" class="form-select">
             <option value="">Chọn chủng loại</option>
           </select>
         </div>
@@ -1210,13 +1210,13 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Nhập số lượng, giá nhập, % lãi -->
         <div class="selected-product-input-ip">
           <label for="quantity">Số lượng:</label>
-          <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
+          <input type="number" id="quantityF" class="form-input" placeholder="Nhập số lượng" />
 
           <label for="import-price">Giá nhập:</label>
-          <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
+          <input type="number" id="import-priceF" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
+          <input type="number" id="profit-percentF" class="form-input" placeholder="" readonly/>
 
           <button id="add-product-btn" class="form-button">Thêm sản phẩm</button>
         </div>
@@ -1252,7 +1252,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
         <!-- Nút thêm phiếu nhập -->
         <div class="submit-section text-center">
-          <button id="submit-import-btn" class="form-button">Hoàn tất</button>
+          <button id="submit-import-fix-btn" class="form-button">Hoàn tất</button>
         </div>
       </div>
 
