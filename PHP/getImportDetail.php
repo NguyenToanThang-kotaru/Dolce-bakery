@@ -16,7 +16,7 @@ $sql = "SELECT i.*, e.fullName AS employee_name, s.name AS supplier_name, s.addr
         LEFT JOIN suppliers s ON i.supplier_id = s.id 
         WHERE i.id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $import_id);
+$stmt->bind_param("s", $import_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $import = $result->fetch_assoc();
@@ -32,7 +32,7 @@ $sql = "SELECT id.*, p.pd_name as product_name, p.price as product_price
         LEFT JOIN products p ON id.product_id = p.id
         WHERE id.importreceipt_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $import_id);
+$stmt->bind_param("s", $import_id);
 $stmt->execute();
 $details = $stmt->get_result();
 

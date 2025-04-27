@@ -4,7 +4,7 @@ include 'config.php';
 $sql = "SELECT ip.*, e.fullName AS employee_name, s.name AS supplier_name FROM importreceipts ip
         LEFT JOIN employees e ON ip.employee_id = e.id
         LEFT JOIN suppliers s ON ip.supplier_id = s.id
-        ORDER BY ip.importDate DESC";
+        ORDER BY ip.importDate ASC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

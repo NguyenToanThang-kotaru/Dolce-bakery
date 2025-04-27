@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const categorySelect = document.getElementById('category-ip');
     const subcategorySelect = document.getElementById('subcategory-ip');
     const productTableBody = document.querySelector('.import-table-show tbody');
+    let totalAmount = 0;
 
     // Load danh sách nhà cung cấp khi trang load
     fetch('../../PHP/IP-getSuppliers.php')
@@ -137,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Tính thành tiền
         const total = (parseFloat(importPrice) * parseInt(quantity)).toFixed(0);
+        totalAmount = totalAmount + parseFloat(total);
+
         // Thêm vào bảng sản phẩm trong phiếu nhập
         const importListBody = document.querySelector('.imported-product-list-section tbody');
         const newRow = document.createElement('tr');
@@ -149,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <td>${total}</td>
             <td style='text-align: center; vertical-align: middle;'><i class='fa-solid fa-trash' style='cursor:pointer'></i></td>
         `;
+        document.getElementById('total-price-ip').textContent = totalAmount.toLocaleString('vi-VN') + ' VND';
         importListBody.appendChild(newRow);
         // Reset chọn sản phẩm và input
         Array.from(productTableBody.children).forEach(r => r.classList.remove('selected'));
@@ -246,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <option value='2'>Đã duyệt</option>
                     </select></td>
                     <td style='text-align: center; vertical-align: middle;'>
-                         <i class='fa-solid fa-circle-info import-detail' data-id='${data.import.id}' style='cursor:pointer'></i>
+                          <i class='fa-solid fa-circle-info import-detail' data-id='${data.import.id}' style='cursor:pointer'></i>
                     </td>
                     <td>
                         <div class='fix-import'>
@@ -259,6 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 importTableBody.appendChild(newRow);
                 // Reset bảng sản phẩm trong phiếu nhập
                 importListBody.innerHTML = '';
+                // Reset combobox và tổng tiền
+                supplierSelect.value = '';
+                categorySelect.innerHTML = '<option value="">Chọn loại</option>';
+                subcategorySelect.innerHTML = '<option value="">Chọn chủng loại</option>';
+                productTableBody.innerHTML = '';
+                totalAmount = 0;
+                document.getElementById('total-price-ip').textContent = '0 VND';
                 alert('Thêm phiếu nhập thành công!');
             } else {
                 alert('Lỗi: ' + data.message);
@@ -269,72 +280,115 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Có lỗi xảy ra khi kết nối server!');
         });
     });
+
+    // Hàm set màu viền cho trạng thái phiếu nhập
+    function setImportStatusColor(select) {
+        if (select.value == "2") {
+            select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
+        } else {
+            select.style.boxShadow = "0 0 5px 1px #ff9800";
+        }
+    }
+    // Áp dụng cho tất cả combobox trạng thái phiếu nhập khi trang load
+    document.querySelectorAll('.import-status').forEach(setImportStatusColor);
 });
 
-// // Xử lý hiển thị chi tiết phiếu nhập
-// document.addEventListener('click', function(e) {
-//     if (e.target.classList.contains('import-detail')) {
-//         const importId = e.target.getAttribute('data-id');
+// Xử lý hiển thị chi tiết phiếu nhập
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('import-detail')) {
+        const importId = e.target.getAttribute('data-id');
         
-//         // Ẩn bảng danh sách phiếu nhập
-//         document.querySelector('.import-table').style.display = 'none';
+        document.querySelector('.import-table').style.display = 'none';
         
-//         // Hiển thị container chi tiết
-//         const detailContainer = document.querySelector('.import-detail-container');
-//         detailContainer.style.display = 'block';
+        const detailContainer = document.querySelector('.import-detail-container');
+        detailContainer.style.display = 'block';
         
-//         // Lấy thông tin chi tiết từ server
-//         fetch(`../../PHP/getImportDetail.php?id=${importId}`)
-//             .then(res => res.json())
-//             .then(data => {
-//                 if (data.success) {
-//                     // Cập nhật thông tin phiếu nhập
-//                     const importInfo = data.import;
-//                     const infoRows = detailContainer.querySelectorAll('.info-row-ip');
+        // Lấy thông tin chi tiết từ server
+        fetch(`../../PHP/getImportDetail.php?id=${importId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const importInfo = data.import;
+                    const infoRows = detailContainer.querySelectorAll('.info-row-ip');
                     
-//                     // Cập nhật thông tin cơ bản
-//                     infoRows[0].innerHTML = `
-//                         <span><strong>Mã phiếu nhập:</strong> ${importInfo.id}</span>
-//                         <span><strong>Mã nhân viên:</strong> ${importInfo.employee_id}</span>
-//                     `;
+                    infoRows[0].innerHTML = `
+                        <span><strong>Mã phiếu nhập:</strong> ${importInfo.id}</span>
+                        <span><strong>Mã nhân viên:</strong> ${importInfo.employee_id}</span>
+                    `;
                     
-//                     infoRows[1].innerHTML = `
-//                         <span><strong>Ngày nhập:</strong> ${importInfo.importDate}</span>
-//                         <span><strong>Trạng thái:</strong> ${importInfo.status == 1 ? 'Chưa duyệt' : 'Đã duyệt'}</span>
-//                     `;
+                    infoRows[1].innerHTML = `
+                        <span><strong>Ngày nhập:</strong> ${importInfo.importDate}</span>
+                        <span><strong>Trạng thái:</strong> ${importInfo.status == 1 ? 'Chưa duyệt' : 'Đã duyệt'}</span>
+                    `;
                     
-//                     infoRows[2].innerHTML = `
-//                         <span><strong>Tổng tiền:</strong> ${importInfo.total_amount.toLocaleString('vi-VN')} VNĐ</span>
-//                     `;
+                    infoRows[2].innerHTML = `
+                        <span><strong>Tổng tiền:</strong> ${importInfo.total_amount.toLocaleString('vi-VN')} VNĐ</span>
+                    `;
                     
-//                     // Cập nhật bảng chi tiết sản phẩm
-//                     const tbody = detailContainer.querySelector('.imported-product-list-section table tbody');
-//                     tbody.innerHTML = '';
+                    const tbody = detailContainer.querySelector('.imported-product-list-section table tbody');
+                    tbody.innerHTML = '';
                     
-//                     // Chỉ hiển thị sản phẩm của phiếu nhập hiện tại
-//                     if (data.details && data.details.length > 0) {
-//                         data.details.forEach(detail => {
-//                             const profitPercent = ((detail.product_price - detail.unitPrice) / detail.unitPrice * 100).toFixed(2);
-//                             tbody.innerHTML += `
-//                                 <tr>
-//                                     <td>${detail.product_name}</td>
-//                                     <td>${detail.quantity}</td>
-//                                     <td>${detail.unitPrice.toLocaleString('vi-VN')} VNĐ</td>
-//                                     <td>${profitPercent}%</td>
-//                                     <td>${detail.subtotal.toLocaleString('vi-VN')} VNĐ</td>
-//                                 </tr>
-//                             `;
-//                         });
-//                     } else {
-//                         tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Không có sản phẩm nào</td></tr>';
-//                     }
-//                 } else {
-//                     alert('Lỗi: ' + data.message);
-//                 }
-//             })
-//             .catch(err => {
-//                 console.error('Lỗi:', err);
-//                 alert('Có lỗi xảy ra khi lấy thông tin chi tiết!');
-//             });
-//     }
-// }); 
+                    // Chỉ hiển thị sản phẩm của phiếu nhập hiện tại
+                    if (data.details && data.details.length > 0) {
+                        data.details.forEach(detail => {
+                            const profitPercent = ((detail.product_price - detail.unitPrice) / detail.unitPrice * 100).toFixed(2);
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td>${detail.product_name}</td>
+                                    <td>${detail.quantity}</td>
+                                    <td>${detail.unitPrice.toLocaleString('vi-VN')} VNĐ</td>
+                                    <td>${profitPercent}%</td>
+                                    <td>${detail.subtotal.toLocaleString('vi-VN')} VNĐ</td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Không có sản phẩm nào</td></tr>';
+                    }
+                } else {
+                    alert('Lỗi: ' + data.message);
+                }
+            })
+            .catch(err => {
+                console.error('Lỗi:', err);
+                alert('Có lỗi xảy ra khi lấy thông tin chi tiết!');
+            });
+    }
+});
+
+// Xử lý thay đổi trạng thái phiếu nhập bằng AJAX
+
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('import-status')) {
+        const select = e.target;
+        const importId = select.getAttribute('data-id');
+        const newStatus = select.value;
+        // Nếu trạng thái hiện tại là Đã duyệt thì không cho chuyển về Chưa duyệt
+        if (select.getAttribute('data-current-status') === '2' && newStatus === '1') {
+            select.value = '2';
+            alert('Không thể thay đổi trạng thái!');
+            return;
+        }
+        fetch('../../PHP/IP-update_status.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `import_id=${encodeURIComponent(importId)}&status=${encodeURIComponent(newStatus)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                select.style.boxShadow = newStatus == "2"
+                    ? "0 0 5px 1px rgb(47, 218, 70)"
+                    : "0 0 5px 1px #ff9800";
+                // Cập nhật lại data-current-status
+                select.setAttribute('data-current-status', newStatus);
+                alert('Cập nhật trạng thái thành công!');
+            } else {
+                alert(data.message || 'Cập nhật trạng thái thất bại!');
+            }
+        })
+        .catch(() => {
+            alert('Có lỗi khi kết nối server!');
+        });
+    }
+}); 

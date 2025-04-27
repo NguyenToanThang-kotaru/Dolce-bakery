@@ -1023,7 +1023,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Ngày nhập</th>
             <th>Trạng thái</th>
             <th>Xem chi tiết</th>
-            <th id="setting-ip">Xóa</th>
+            <th id="setting-ip">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="import-table-body">
