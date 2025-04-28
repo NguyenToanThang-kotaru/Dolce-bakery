@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const productTableBody = document.querySelector('.import-table-show tbody');
     let totalAmount = 0;
 
-    // Load danh sách nhà cung cấp khi trang load
+    // Load danh sách nhà cung cấp
     fetch('../../PHP/IP-getSuppliers.php')
         .then(res => res.json())
         .then(data => {
@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const importTableBody = document.getElementById('import-table-body');
                 const currentRowCount = importTableBody.querySelectorAll('tr').length;
                 const newRow = document.createElement('tr');
+                newRow.setAttribute('data-id', data.import.id);
                 newRow.innerHTML = `
                     <td>${currentRowCount + 1}</td>
                     <td>${data.import.id}</td>
@@ -253,15 +254,55 @@ document.addEventListener('DOMContentLoaded', function() {
                           <i class='fa-solid fa-circle-info import-detail' data-id='${data.import.id}' style='cursor:pointer'></i>
                     </td>
                     <td>
-                        <div class='fix-import'>
-                            <i class='fa-solid fa-pen-to-square fix-btn-import'></i>
+                       <div class='fix-import' style='justify-content: center;'>
                             <i class='fa-solid fa-trash delete-btn-import' style='cursor:pointer'></i>
-                        </div>
+                       </div>
                     </td>
                 `;
                 // Thêm vào cuối bảng thay vì đầu bảng
                 importTableBody.appendChild(newRow);
                 setImportStatusColor(newRow.querySelector('.import-status'));
+                
+                // Xử lí việc xóa phiếu đuoc ngay sau khi thêm
+                newRow.querySelector('.delete-btn-import').addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const importId = row.getAttribute('data-id');
+                    
+                    document.getElementById('delete-overlay-import').style.display = 'block';
+                    
+                    document.getElementById('delete-acp-import').onclick = function() {
+                        fetch('../../PHP/IP-Delete.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `id=${importId}`
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Xóa row khỏi bảng
+                                row.remove();
+                                alert(data.message);
+                            } else {
+                                alert(data.message);
+                            }
+                            // Ẩn overlay
+                            document.getElementById('delete-overlay-import').style.display = 'none';
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi xóa phiếu nhập!');
+                            document.getElementById('delete-overlay-import').style.display = 'none';
+                        });
+                    };
+                    
+                    // Xử lý khi click nút hủy
+                    document.getElementById('cancel-import').onclick = function() {
+                        document.getElementById('delete-overlay-import').style.display = 'none';
+                    };
+                });
+
                 // Reset bảng sản phẩm trong phiếu nhập
                 importListBody.innerHTML = '';
                 // Reset combobox và tổng tiền
@@ -294,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.import-status').forEach(setImportStatusColor);
 });
 
-// Xử lý hiển thị chi tiết phiếu nhập
+// Hiển thị chi tiết phiếu nhập
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('import-detail')) {
         const importId = e.target.getAttribute('data-id');
@@ -305,7 +346,7 @@ document.addEventListener('click', function(e) {
         detailContainer.style.display = 'block';
         
         // Lấy thông tin chi tiết từ server
-        fetch(`../../PHP/getImportDetail.php?id=${importId}`)
+        fetch(`../../PHP/IP-getImportDetail.php?id=${importId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -357,8 +398,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Xử lý thay đổi trạng thái phiếu nhập bằng AJAX
-
+// Thay đổi trạng thái phiếu nhập bằng AJAX
 document.addEventListener('change', function(e) {
     if (e.target.classList.contains('import-status')) {
         const select = e.target;
@@ -394,7 +434,7 @@ document.addEventListener('change', function(e) {
     }
 });
 
-// Xử lý xóa phiếu nhập
+// Xóa phiếu nhập
 document.querySelectorAll('.delete-btn-import').forEach(btn => {
     btn.addEventListener('click', function() {
         const row = this.closest('tr');

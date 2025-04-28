@@ -23,8 +23,7 @@ if ($result->num_rows > 0) {
             . "</td>";
         echo "<td style='text-align: center; vertical-align: middle;'><i class='fa-solid fa-circle-info import-detail' data-id='" . htmlspecialchars($row['id']) . "' style='cursor:pointer'></i></td>";
         echo "<td>
-                <div class='fix-import'>
-                    <i class='fa-solid fa-pen-to-square fix-btn-import'></i>
+                <div class='fix-import' style='justify-content: center;'>
                     <i class='fa-solid fa-trash delete-btn-import' style='cursor:pointer'></i>
                 </div>
               </td>";
