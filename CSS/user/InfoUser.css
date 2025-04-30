@@ -280,13 +280,17 @@
     padding: 10px;
     text-align: left;
     font-size: 15px;
+    width: 95%;
   }
   
   .history-order-table thead {
     background-color: #ffccdd;
     color: #4b2e2e;
+    width: 100%;
   }
-  
+  .history-order-table tbody{
+    width: 100%;
+  }
   .order-summary-history {
     font-size: 15px;
     color: #4b2e2e;

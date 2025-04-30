@@ -708,7 +708,7 @@
 
                         </div>
                         <div class="payment-left-footer">
-                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 20px;">
                                 ← Quay lại giỏ hàng
                             </p>
                         </div>
