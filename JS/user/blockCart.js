@@ -1,3 +1,4 @@
+let new_cart = [];
 const slideshow = document.getElementById("slideshow");
 const mainMenu = document.getElementById("mainMenu");
 const brandStory = document.getElementById("brandStory");
@@ -77,7 +78,6 @@ CartPhone.addEventListener("click", () => {
     }
 })
 
-let new_cart = [];
 
 function addToCart(productId, quantity = 1) {
     $.ajax({
@@ -95,6 +95,7 @@ function addToCart(productId, quantity = 1) {
             }
             else{
                 $('.cart-count').text(response);
+                getCart();
                 showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
             }
         }
@@ -248,4 +249,22 @@ function changeQuantity(change) {
     if (newQuantity >= 1) {
         quantityElement.textContent = newQuantity;
     }
+}
+
+itemQuantityCount();
+function itemQuantityCount() {
+    if (!localStorage.getItem("isLoggedIn")) {
+        document.querySelector('.cart-count').textContent = 0;
+        return;
+    }
+
+    let cart = sessionStorage.getItem("cart");
+    if (!cart) return; 
+    let total = 0;
+    cart = JSON.parse(cart); 
+    cart.forEach(item => {
+        total += parseInt(item.quantity);
+    });
+    console.log(total);
+    document.querySelector('.cart-count').textContent = total;
 }
