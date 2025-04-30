@@ -6,9 +6,13 @@ include '../../PHP/config.php';
 
 if (!isset($type)) {
     die("Lỗi: Không xác định loại sản phẩm.");
-}
+}   
     
-$sql = "SELECT pd.*, ct.* FROM products pd JOIN subcategories ct ON pd.subcategory_id = ct.id WHERE ct.name = ?";
+$sql = "SELECT pd.*, sct.*, ct.*
+FROM products pd
+JOIN subcategories sct ON pd.subcategory_id = sct.id
+JOIN categories ct ON sct.category_id = ct.id
+WHERE ct.name = ? ";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $type);
 $stmt->execute();
@@ -33,4 +37,4 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-?>
+?> 

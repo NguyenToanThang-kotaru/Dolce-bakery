@@ -43,7 +43,8 @@
                 <input type="hidden" name="login-form-son" value="1">
                 <div class="login-username">
                     <label for="lg-username">Enter your username or email address</label><br>
-                    <input type="text" name="lg-username" class="username lg-username" placeholder="Username or email address"><br>
+                    <input type="text" name="lg-username" class="username lg-username"
+                        placeholder="Username or email address"><br>
                     <div class="error-msg"></div>
                 </div>
                 <div class="login-password">
@@ -71,8 +72,8 @@
                 <input type="hidden" name="register-form-son" value="1">
                 <div class="register-username">
                     <label for="rg-username">Enter your username</label><br>
-                    <input type="text" name="rg-username" class="username rg-username" placeholder="Username or email address"
-                        required><br>
+                    <input type="text" name="rg-username" class="username rg-username"
+                        placeholder="Username or email address" required><br>
                     <div class="error-msg"></div>
                 </div>
 
@@ -87,18 +88,21 @@
                 <div class="register-info">
                     <div class="username-info">
                         <label for="rg-fullName"> Enter your full name</label>
-                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name" required>
+                        <input type="text" name="rg-fullName" class="rg-info rg-fullName" placeholder="User name"
+                            required>
                         <div class="error-msg"></div>
                     </div>
                     <div class="contactnumber-info">
                         <label for="rg-phone">Contact Number</label>
-                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers" required>
+                        <input type="text" name="rg-phone" class="rg-info rg-phone" placeholder="Contact Numbers"
+                            required>
                         <div class="error-msg"></div>
                     </div>
                 </div>
                 <div class="register-password">
                     <label for="rg-password">Enter your Password</label><br>
-                    <input type="password" name="rg-password" class="password rg-password" placeholder="Password" required>
+                    <input type="password" name="rg-password" class="password rg-password" placeholder="Password"
+                        required>
                     <div class="error-msg"></div>
                 </div>
                 <div class="register-password">
@@ -205,14 +209,32 @@
                             onclick="toggleFilter('bread')">
                         <span>Bộ lọc tìm kiếm</span>
                     </div>
-                    <div class="level-price">
+                    <!-- <div class="level-price">
                         <h4>Mức giá</h4>
                         <div class="option-price"><input type="checkbox" value="0-50000"><span>Dưới 50.000đ</span></div>
                         <div class="option-price"><input type="checkbox" value="50000-100000"><span>Từ 50.000đ -
                                 100.000đ</span></div>
                         <div class="option-price"><input type="checkbox" value="100000-150000"><span>Từ 100.000đ -
                                 150.000đ</span></div>
+                    </div> -->
+
+                    <!-- Nhập tên sản phẩm -->
+                    <div class="name-search">
+                        <label for="product-name">Tên sản phẩm:</label>
+                        <input type="text" id="product-name-bread" placeholder="Nhập tên sản phẩm...">
                     </div>
+
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-bread">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-bread";
+                        $selectName = "product-subcategory";
+                        $categoryId = 1; // bread
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
+
+
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
@@ -237,7 +259,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
@@ -245,7 +267,7 @@
 
                     <img src="../../assest/backmain.png" alt="" class="backtomain">
 
-                    <div class="product-container" id="bread-container">
+                    <div class="product-container" id="bread-container" data-category="bread">
                         <?php $type = "bread";
                         include '../../PHP/users/uploadpd.php'; ?>
                     </div>
@@ -266,7 +288,7 @@
                             onclick="toggleFilter('cake')">
                         <span>Bộ lọc tìm kiếm</span>
                     </div>
-                    <div class="level-price">
+                    <!-- <div class="level-price">
                         <h4>Mức giá</h4>
                         <div class="option-price"><input type="checkbox" value="0-300000"><span>Dưới 300.000đ</span>
                         </div>
@@ -277,7 +299,24 @@
 
 
 
+                    </div> -->
+
+                    <!-- Nhập tên sản phẩm -->
+                    <div class="name-search">
+                        <label for="product-name">Tên sản phẩm:</label>
+                        <input type="text" id="product-name-cake" placeholder="Nhập tên sản phẩm...">
                     </div>
+
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-cake">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-cake";
+                        $selectName = "product-subcategory";
+                        $categoryId = 2; // cake
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
+
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
@@ -292,7 +331,7 @@
                                 value="1000000">
                         </div>
 
-                        <span class="acp-filter" onclick="render_filter()">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Tìm kiếm</span>
                     </div>
                 </div>
 
@@ -303,7 +342,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
@@ -311,7 +350,7 @@
 
                     <img src="../../assest/backmain.png" alt="" class="backtomain">
 
-                    <div class="product-container" id="cake-container">
+                    <div class="product-container" id="cake-container" data-category="cake">
 
                         <?php $type = "cake";
                         include '../../PHP/users/uploadpd.php'; ?>
@@ -338,7 +377,7 @@
                             onclick="toggleFilter('cookie')">
                         <span>Bộ lọc tìm kiếm</span>
                     </div>
-                    <div class="level-price">
+                    <!-- <div class="level-price">
                         <h4>Mức giá</h4>
                         <div class="option-price"><input type="checkbox" value="0-50000"><span>Dưới 50.000đ</span></div>
                         <div class="option-price"><input type="checkbox" value="50000-100000"><span>Từ 50.000đ -
@@ -349,7 +388,25 @@
 
 
 
+                    </div> -->
+
+                    <!-- Nhập tên sản phẩm -->
+                    <div class="name-search">
+                        <label for="product-name">Tên sản phẩm:</label>
+                        <input type="text" id="product-name-cookie" placeholder="Nhập tên sản phẩm...">
                     </div>
+
+                    <!-- Chọn chủng loại sản phẩm -->
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-cookie">Chủng loại sản phẩm:</label>
+                        <?php
+                        $selectId = "product-subcategory-cookie";
+                        $selectName = "product-subcategory";
+                        $categoryId = 3; // cookie
+                        include '../../PHP/PD-getSubcategory.php';
+                        ?>
+                    </div>
+
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
@@ -364,9 +421,9 @@
                                 value="100000">
                         </div>
 
-                        <span class="acp-filter" onclick="render_filter()">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Tìm kiếm</span>
                     </div>
-                </div>  
+                </div>
 
                 <div class="show-product" id="product-list">
                     <div class="title">
@@ -376,7 +433,7 @@
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
                             <option value="up">Giá cao nhất</option>
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
                     </div>
@@ -384,7 +441,7 @@
                     <img src="../../assest/backmain.png" alt="" class="backtomain">
 
 
-                    <div class="product-container" id="cookie-container">
+                    <div class="product-container" id="cookie-container" data-category="cookie">
 
                         <?php $type = "cookie";
                         include '../../PHP/users/uploadpd.php'; ?>
@@ -426,28 +483,34 @@
                             onclick="toggleFilter('allproduct')">
                         <span>Bộ lọc tìm kiếm</span>
                     </div>
-                    <div class="level-price">
-                        <h4>Mức giá</h4>
-                        <div class="option-price"><input type="checkbox" value="0-100000"><span>Dưới 100.000đ</span>
-                        </div>
-                        <div class="option-price"><input type="checkbox" value="100000-200000"><span>Từ 100.000đ -
-                                200.000đ</span></div>
-                        <div class="option-price"><input type="checkbox" value="200000-300000"><span>Từ 200.000đ -
-                                300.000đ</span></div>
-                        <div class="option-price"><input type="checkbox" value="300000-400000"><span>Từ 300.000đ -
-                                400.000đ</span></div>
-                        <div class="option-price"><input type="checkbox" value="400000-500000"><span>Từ 400.000đ -
-                                500.000đ</span></div>
-                        <div class="option-price"><input type="checkbox" value="500000-600000"><span>Từ 500.000đ -
-                                600.000đ</span></div>
-                        <div class="option-price"><input type="checkbox" value="600000-700000"><span>Từ 600.000đ -
-                                700.000đ</span></div>
 
-
-
-
-
+                    <!-- Nhập tên sản phẩm -->
+                    <div class="name-search">
+                        <label for="product-name-allproduct">Tên sản phẩm:</label>
+                        <input type="text" id="product-name-allproduct" placeholder="Nhập tên sản phẩm...">
                     </div>
+
+                    <!-- Chọn loại sản phẩm -->
+                    <div class="category-select">
+                        <label for="product-category">Loại sản phẩm:</label>
+                        <select id="product-category" onchange="loadSubcategories()">
+                            <option value="0">-- Tất cả --</option>
+                            <option value="1">Bánh mì</option>
+                            <option value="2">Bánh kem</option>
+                            <option value="3">Bánh quy</option>
+                            <!-- Thêm các loại khác nếu có -->
+                        </select>
+                    </div>
+
+                    <!-- Chọn chủng loại sản phẩm -->
+                    <div class="subcategory-select">
+                        <label for="product-subcategory-allproduct">Chủng loại sản phẩm:</label>
+                        <select id="product-subcategory-allproduct" class="subcategory-select">
+                            <option value="">-- Chọn chủng loại --</option>
+                        </select>
+                    </div>
+
+                    <!-- Khoảng giá -->
                     <div class="price-range">
                         <span>Nhập khoảng giá phù hợp:</span>
                         <div class="slider-value">
@@ -462,9 +525,10 @@
                                 value="700000">
                         </div>
 
-                        <span class="acp-filter" onclick="render_filter()">Done</span>
+                        <span class="acp-filter" onclick="render_filter()">Tìm kiếm</span>
                     </div>
                 </div>
+
                 <div class="show-allproduct">
                     <div class="titleallPD">
                         <div>Products</div>
@@ -472,7 +536,7 @@
                     <div class="arrange-filter">
                         <span>Sắp xếp theo:</span>
                         <select name="" class="arrange-sl">
-                            <option value="impression">Nổi bật</option>
+                            <option value="">Tất cả</option>
                             <option value="up">Giá cao nhất</option>
                             <option value="down">Giá thấp nhất</option>
                         </select>
@@ -481,7 +545,7 @@
 
                     <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('allproduct')">
 
-                    <div id="allproduct-container">
+                    <div id="allproduct-container" data-category="allproduct">
                         <?php include '../../PHP/users/displayProduct.php'; ?>
                     </div>
 

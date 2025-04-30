@@ -1,8 +1,10 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-.bread-catelouge-container , .cake-catelouge-container , .cookie-catelouge-container{
+.bread-catelouge-container,
+.cake-catelouge-container,
+.cookie-catelouge-container {
     width: 100%;
     margin-top: 102px;
     background-color: #FAEEE7;
@@ -12,7 +14,7 @@
     justify-content: center;
     flex-direction: column;
     display: none;
-}   
+}
 
 
 .title{
@@ -25,7 +27,7 @@
 }
 
 
-.product-container{
+.product-container {
     display: flex;
     max-width: 1000px;
     min-height: 700px;
@@ -35,26 +37,31 @@
     padding-left: 70px;
     padding-right: 70px;
     gap: calc(20%/3);
-    
+
 }
 
 
-.bread-product , .cake-product , .cookie-product{
+.bread-product,
+.cake-product,
+.cookie-product {
     display: flex;
     flex-direction: column;
     width: 20%;
-    height:  40%;
+    height: 40%;
     background-color: #FFEBD8;
 }
 
-.bread-product:hover, .cake-product:hover, .cookie-product:hover{
+.bread-product:hover,
+.cake-product:hover,
+.cookie-product:hover {
     box-shadow: 0px 0px 10px 5px rgb(198, 198, 198);
 }
-.cookie-product{
+
+.cookie-product {
     position: relative;
 }
 
-.product-img{
+.product-img {
     background-color: #f4f4f5;
     height: 200px;
     padding: 5px;
@@ -68,17 +75,17 @@
     padding: 25px 10px 25px 10px;
 } */
 
-.product-img img{
+.product-img img {
     width: 104px;
     height: 104px;
     cursor: pointer;
 }
 
-.product-img img:hover{
+.product-img img:hover {
     transform: scale(1.1);
 }
 
-.product-name{
+.product-name {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,15 +98,15 @@
     cursor: pointer;
 }
 
-.product-name:hover{
+.product-name:hover {
     color: #e9b451;
 }
 
-.product-end{
+.product-end {
     display: flex;
 }
 
-.price{
+.price {
     background-color: #BAD79D;
     width: 100px;
     height: 50px;
@@ -112,12 +119,12 @@
     cursor: pointer;
 }
 
-.price:hover{
+.price:hover {
     color: #e9b451;
 }
 
-.add-cart{
-    background-color: #AE7861;  
+.add-cart {
+    background-color: #AE7861;
     width: 100px;
     height: 50px;
     display: flex;
@@ -125,21 +132,24 @@
     align-items: center;
 }
 
-.product-end img{
+.product-end img {
     width: 28px;
     cursor: pointer;
 }
 
-.product-end img:hover{
+.product-end img:hover {
     transform: scale(1.1);
 }
-.bread-pagination , .cookie-pagination , .cake-pagination{
+
+.bread-pagination,
+.cookie-pagination,
+.cake-pagination {
     display: flex;
     margin-bottom: 20px;
     gap: 20px;
 }
 
-.page{
+.page {
     cursor: pointer;
     box-shadow: 0px 5px 5px 0px black;
     padding: 15px;
@@ -148,23 +158,23 @@
 .page:hover {
     background-color: #f3c6c6;
 }
-  
+
 .page.active {
     background-color: #C09898;
     color: white;
     font-weight: bold;
 }
 
-  /* slider-value */
+/* slider-value */
 
 
-  .price-range{
+.price-range {
     margin: 0 auto;
     margin-top: 20px;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(5px);   
+    backdrop-filter: blur(5px);
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -175,10 +185,10 @@
     justify-content: space-between;
     font-size: 16px;
     font-weight: bold;
-    color: #94b1f0; 
+    color: #94b1f0;
 }
 
-.slider-value span{
+.slider-value span {
     border: 1px solid gray;
     width: 120px;
     padding: 10px;
@@ -200,7 +210,7 @@
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
-    pointer-events: none;  
+    pointer-events: none;
 }
 
 .slider-container input[type="range"]::-webkit-slider-runnable-track {
@@ -223,7 +233,8 @@
     transform: translateY(-5px);
 
 }
-.filter-title{
+
+.filter-title {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -232,11 +243,11 @@
 
 }
 
-.option-price{
+.option-price {
     margin-bottom: 10px;
 }
 
-.level-price input[type = "checkbox"]{
+/* .level-price input[type = "checkbox"]{
     margin-right: 10px;
     width: 15px;
     height: 15px;
@@ -249,9 +260,40 @@
 
 .level-price input:hover{
     transform: scale(1.1);
+} */
+
+.filter .name-search,
+.filter .category-select {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
 }
 
-.filter{
+.filter .name-search label,
+.filter .category-select label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.filter .name-search input,
+.filter .category-select select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.filter .name-search input:focus,
+.filter .category-select select:focus {
+    border-color: #888;
+}
+
+
+.filter {
     display: flex;
     min-width: 25%;
     flex-direction: column;
@@ -264,13 +306,13 @@
     z-index: 1;
     transition: 0.5s;
     box-shadow: 0px 5px 30px 0px #B26161;
-}  
+}
 
-.filter.active{
+.filter.active {
     left: 0;
 }
 
-.filtershow{
+.filtershow {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -280,12 +322,12 @@
     /* top: 150px; */
 }
 
-.filtershow:hover{
+.filtershow:hover {
     transform: scale(1.1);
 }
-   
 
-.product-filter{
+
+.product-filter {
     /* display: flex; */
     margin-top: 40px;
     transition: margin 0.5s ease-in-out;
@@ -293,49 +335,49 @@
     /* position: relative; */
 }
 
-.show-product{      
+.show-product {
     display: flex;
     position: relative;
-    flex-direction: column;     
+    flex-direction: column;
     min-height: 780px;
     max-height: 780px;
     min-width: 1000px;
-    max-width: 1000px;                                                   
+    max-width: 1000px;
     padding: 20px;
     margin-bottom: 40px;
     background-color: #ffff;
     padding-left: 20px;
-    padding-right:20px; 
+    padding-right: 20px;
     box-shadow: 0px 5px 30px 0px #B26161;
     border-radius: 40px;
 
 }
 
-.arrange-filter{
+.arrange-filter {
     position: absolute;
     right: 50px;
     top: 25px;
 }
 
-.arrange-filter select{
+.arrange-filter select {
     padding: 5px;
     border-radius: 15px;
-}   
+}
 
-.acp-filter{
+.acp-filter {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0px 5px 5px 0px #555252;
-    margin-left: 44%;
     cursor: pointer;
+    margin-left: 37%;
 }
 
-.acp-filter:hover{
+.acp-filter:hover {
     background-color: rgb(150, 150, 142);
 }
 
 
-.backtomain{
+.backtomain {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -345,6 +387,6 @@
     /* top: 150px; */
 }
 
-.backtomain:hover{
+.backtomain:hover {
     transform: scale(1.1);
 }

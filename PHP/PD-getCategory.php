@@ -2,10 +2,10 @@
 include 'config.php';
 
 // Lấy id và name từ query string
-$selectId = isset($_GET['id']) ? $_GET['id'] : 'product-category';
-$selectName = isset($_GET['name']) ? $_GET['name'] : 'product-category';
+$selectId = isset($_GET['id']) ? $_GET['id'] : 'product-subcategory';
+$selectName = isset($_GET['name']) ? $_GET['name'] : 'product-subcategory';
 
-$sql = "SELECT id, name FROM categories";
+$sql = "SELECT id, name FROM subcategories";
 $result = $conn->query($sql);
 
 // Bắt đầu thẻ select
