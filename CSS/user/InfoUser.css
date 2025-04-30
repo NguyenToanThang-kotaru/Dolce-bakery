@@ -306,3 +306,18 @@
     cursor: pointer;
     color: #333;
 }
+.cancel-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #c0392b;
+}
