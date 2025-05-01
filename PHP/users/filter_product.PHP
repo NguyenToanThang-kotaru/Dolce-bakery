@@ -16,7 +16,7 @@ $type = (int) ($_POST['type'] ?? 0); // chỉ dùng với allproduct
 $sql = "SELECT p.*
         FROM products p 
         JOIN subcategories sc ON p.subcategory_id = sc.id 
-        JOIN categories c ON sc.subcategory_id = c.id 
+        JOIN categories c ON sc.category_id = c.id 
         WHERE p.price BETWEEN ? AND ?";
 
 $types = "dd";

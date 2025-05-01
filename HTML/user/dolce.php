@@ -132,8 +132,7 @@
                     <div id="suggestion"></div>
                 </div>
                 <div id="rightMenu">
-                    <div id="cart" style="margin-left: 60px;" onclick="getCart()"><img
-                            src="../../assest/Shopping cart.png" width="50%">
+                    <div id="cart" style="margin-left: 60px;"><img src="../../assest/Shopping cart.png" width="50%">
                     </div>
                     <div id="menu">
                         <img src="../../assest/menu.png" id="menu2" alt="">
@@ -613,29 +612,9 @@
                 <div class="InfoUser-Title">
                     <i id="Back" class="fa-solid fa-arrow-right-from-bracket"></i>
                     <h1 class="Title">Thông tin</h1>
-
+                
                 </div>
-                <div class="InfoUser_Detail">
-                    <div class="row">
-                        <label for="account" class="Detail">Tài khoản: </label>
-                        <span></span>
-                    </div>
-                    <div class="row">
-                        <label for="fullname" class="Detail">Họ và tên: </label>
-                        <span></span>
-
-                    </div>
-
-                    <div class="row">
-                        <label for="email" class="Detail">Email:</label>
-                        <span></span>
-                    </div>
-
-                    <div class="row">
-                        <label for="phone" class="Detail">Số điện thoại: </label>
-                        <span></span>
-                    </div>
-                </div>
+            <div class="InfoUser_Detail">
 
             </div>
 
@@ -679,6 +658,63 @@
             <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
         </div>
 
+        <div class="modal-overlay-history">
+            <div class="modal-content">
+                <span class="close-history-modal">&times;</span>
+                <h3 class="order-title">Đơn hàng đã mua</h3>
+
+                <div class="orders-scroll-area">
+                    
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
+        <div id="overlay-payment">
+            <div id="payment-container">
+                <div class="payment-left-container">
+                    <div class="payment-header">
+                        <button id="close-payment">x</button>
+                        <h3 class="header">THÔNG TIN THANH TOÁN</h3>
+                    </div>
+                    
+                    <form id="payment-left-form">
+                        <div class="cus-name">
+                            <label><strong>Tên:</strong> </label><span class="payment-customer-name"></span>
+                        </div>
+                        
+                        <br>
+                        <div class="cus-email">
+                            <label><strong>Email:</strong> </label><span class="payment-customer-email"></span>
+                        </div>
+                        <br>
+                        <div class="cus-phone">
+                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label>
+                            <span class="payment-customer-phone"></span>
+                        </div>
+                        <br />
+                        <div class="cus-address">
+                            <label for="address-payment"><strong>Địa chỉ:</strong> </label>
+                            <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
+                            <span class="payment-customer-address content no-margin"></span>
+                            <span class="changed no-margin" onclick = "OnUpdateAddressPayment()">Thay đổi</span>    
+                        </div>
+                        <br />
+                        <div class="payment-customer-note">
+                            <label for="note-payment"><strong>Ghi chú đơn hàng (tùy chọn)</strong></label> <br />
+                            <input style="width: 30vw;" type="text" id="note-payment" placeholder="Nhập ghi chú cho đơn hàng" />
+
+                        </div>
+                        <div class="payment-left-footer">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 20px;">
+                                ← Quay lại giỏ hàng
+                            </p>
+                        </div>
+                        
+                    </form>
+                </div>
 
                 <form class="order-summary">
                     <table class="payment-table">
@@ -867,22 +903,20 @@
             <div id="copyright-section">
                 <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
             </div>
-        </footer>
-
-
-
-
-
-
-        <script src="../../JS/user/clear.js"></script>
-        <script src="../../JS/user/slideShow.js"></script>
-        <script src="../../JS/user/blocklogin.js"></script>
-        <script src="../../JS/user/blockCart.js"></script>
-        <script defer src="../../JS/user/pagination.js"></script>
-        <script defer src="../../JS/user/paginationOfMainPD.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="../../JS/user/userAjax.js"></script>
-        <script src="../../JS/user/blockInfo.js"></script>
+        </footer>   
+    
+    <script src="../../JS/user/blockOrderHistory.js"></script>
+    <script src="../../JS/user/invoice.js"></script>
+    <script src="../../JS/user/payment.js"></script>
+    <script src="../../JS/user/clear.js"></script>
+    <script src="../../JS/user/slideShow.js"></script>
+    <script src="../../JS/user/blocklogin.js"></script>
+    <script src="../../JS/user/blockCart.js"></script>
+    <script defer src="../../JS/user/pagination.js"></script>
+    <script defer src="../../JS/user/paginationOfMainPD.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../JS/user/userAjax.js"></script>
+    <script src="../../JS/user/blockInfo.js"></script>
 </body>
 
 </html>

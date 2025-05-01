@@ -17,7 +17,8 @@
 }
 
 
-.title {
+.title{
+    display: flex;
     color: #C09898;
     font-weight: bold;
     font-size: 25px;
