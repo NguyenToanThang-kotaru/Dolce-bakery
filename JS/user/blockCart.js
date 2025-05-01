@@ -113,17 +113,17 @@ function getCart(callback) {
             if (response.status === "error") {
                 showToast("Bạn cần đăng nhập để xem giỏ hàng.", false);
                 callback(false);
-                return;
+            } else {
+                new_cart = response;
+                sessionStorage.setItem("cart", JSON.stringify(new_cart));
+                displayItemInCart();
+                calculateTotal(new_cart);
+                callback(true);
             }
-
-            new_cart = response;
-            sessionStorage.setItem("cart", JSON.stringify(new_cart));
-            displayItemInCart();
-            calculateTotal(new_cart);
-            callback(true);
-        }
-    })
+        },
+    });
 }
+
 
 function displayItemInCart() {
     let html = '';
