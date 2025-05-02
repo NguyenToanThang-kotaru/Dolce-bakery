@@ -13,7 +13,7 @@ document.addEventListener("click", function (event) {
                     document.getElementById("product-nameFIX").value = data.pd_name;
                     document.getElementById("product-categoryFIX").value = data.category_id;
                     document.getElementById("product-subcategoryFIX").value = data.subcategory_id;
-                    document.getElementById("product-quantityFIX").value = data.quantity;
+                    document.getElementById("product-supplierFIX").value = data.supplier_id;
                     document.getElementById("product-priceFIX").value = data.price;
 
                     // Ẩn bảng sản phẩm và nút thêm
