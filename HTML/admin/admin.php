@@ -1080,6 +1080,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Ảnh sản phẩm</th>
                 <th>Thể loại</th>
                 <th>Phân loại</th>
+                <th>Giá bán</th>
               </tr>
             </thead>
             <tbody>

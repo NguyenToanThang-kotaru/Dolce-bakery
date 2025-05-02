@@ -751,6 +751,7 @@ body {
 
 .order-summary {
   display: flex;
+  flex-wrap: wrap; 
   justify-content: space-between;
   margin-top: 15px;
   font-size: 16px;
