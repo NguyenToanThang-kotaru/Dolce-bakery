@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     checkLoginStatus();
     // Đăng ký'

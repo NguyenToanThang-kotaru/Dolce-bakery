@@ -760,61 +760,34 @@ if (!isset($_SESSION['adminInfo'])) {
             <!-- Tiêu đề cột -->
             <div class="role-header">
               <div class="role-item">Tên chức năng</div>
-              <div class="permission">Xem</div>
-              <div class="permission">Thêm</div>
-              <div class="permission">Sửa</div>
-              <div class="permission">Xóa</div>
+              <?php
+                require_once '../../PHP/config.php';
+                $actions_result = $conn->query("SELECT ActionID, ActionNameVN FROM action");
+                $actions = [];
+                while ($row = $actions_result->fetch_assoc()) {
+                  $actions[] = $row;
+                  echo "<div class='permission'>" . htmlspecialchars($row['ActionNameVN']) . "</div>";
+                }
+              ?>
             </div>
 
-            <!-- Dòng phân quyền dữ liệu ảo-->
+            <?php
+              $functions_result = $conn->query("SELECT id, name FROM functions");
+              while ($func = $functions_result->fetch_assoc()) {
+                echo "<div class='role-row'>";
+                echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
+                
+                foreach ($actions as $action) {
+                  // Checkbox value là dạng "functionId_actionId"
+                  $checkboxValue = $func['id'] . "_" . $action['ActionID'];
+                  echo "<div class='permission'>
+                          <input type='checkbox' name='permissions[]' value='{$checkboxValue}'>
+                        </div>";
+                }
 
-            <div class="role-row">
-              <div class="role-item">Quản lý quyền</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý sản phẩm</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý đơn hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý khách hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý đơn hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý tài khoản</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
+                echo "</div>";
+              }
+            ?>
           </div>
         </div>
 

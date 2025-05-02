@@ -614,7 +614,6 @@
                     <h1 class="Title">Thông tin</h1>
                 
                 </div>
-            </div>
             <div class="InfoUser_Detail">
 
             </div>
@@ -640,7 +639,6 @@
 
             <button class="addr-button" onclick="saveAddress()">Lưu địa chỉ</button>
         </div>
-<<<<<<< HEAD
         <div class="overlayAddressPayment">
             <h2 class="addr-title">Cập nhật địa chỉ</h2>
 
@@ -674,13 +672,6 @@
         
     </div>
         <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
-=======
-<<<<<<< HEAD
-    </div>
-=======
-        
->>>>>>> f69c09a650d26128c557d54d2bda31f4921d5159
->>>>>>> Khanh-testCase
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
