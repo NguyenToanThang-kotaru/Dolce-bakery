@@ -112,15 +112,16 @@ function getCart(callback) {
         success: function (response) {
             if (response.status === "error") {
                 showToast("Bạn cần đăng nhập để xem giỏ hàng.", false);
-                callback(false);
-            } else {
-                new_cart = response;
-                sessionStorage.setItem("cart", JSON.stringify(new_cart));
-                displayItemInCart();
-                calculateTotal(new_cart);
-                callback(true);
+                if (typeof callback === "function") callback(false);
+                return;
             }
-        },
+
+            new_cart = response;
+            sessionStorage.setItem("cart", JSON.stringify(new_cart));
+            displayItemInCart();
+            calculateTotal(new_cart);
+            if (typeof callback === "function") callback(true);
+        }
     });
 }
 
@@ -169,7 +170,9 @@ function addItemToCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Them san pham: " + id);
@@ -183,7 +186,9 @@ function decreaseItemInCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Giam san pham: " + id);
@@ -197,7 +202,9 @@ function removeItemFromCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Xoa san pham: " + id);
