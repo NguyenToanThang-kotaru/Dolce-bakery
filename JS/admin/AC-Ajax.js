@@ -229,12 +229,23 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
         return;
     }
 
-    if (!passwordRegex.test(password)) {
-        showError(document.getElementById("account-pass-f"), "Mật khẩu phải từ 8 ký tự trở lên.");
-        return;
+    if (password) {
+        if (!passwordRegex.test(password)) {
+            showError(document.getElementById("account-pass-f"), "Mật khẩu phải từ 8 ký tự trở lên.");
+            return;
+        }
+        else {
+            console.log("Mật khẩu hợp lệ");
+        }
+    }
+    else {
+        password = "";
+        console.log("Không thay đổi mật khẩu");
     }
 
+
     let formData = new FormData(this);
+    console.log("Form data:", formData);
     fetch("../../PHP/AC-Edit.php", {
         method: "POST",
         body: formData
@@ -245,37 +256,22 @@ document.getElementById("fix-form-account").addEventListener("submit", function 
         if (data.success) {
             alert(data.message);
             console.log(data);
-            // Tạo một dòng mới với dữ liệu từ server
-            let newRow = document.querySelector(`tr[data-id='${data.user.id}']`);
-            newRow.innerHTML = `
-                <td>${data.user.userName}</td>
-                <td>${data.user.fullName}</td>
-                <td>
-                    <select class='account-status'>
-                        <option value='1' ${data.user.status == 1 ? 'selected' : ''}>Đang hoạt động</option>
-                        <option value='2' ${data.user.status == 2 ? 'selected' : ''}>Đã khóa</option>
-                    </select>
-                </td>
-                <td>
-                    <div style='display: flex;'>
-                        <span style='margin-left: 10px; font-weight: bold;'>${data.user.permission_name}</span>
-                    </div>
-                </td>
-                <td>
-                    <div class='fix-account'>
-                        <i class='fa-solid fa-pen-to-square fix-btn-account' data-id='${data.user.id}'></i>
-                        <i class='fa-solid fa-trash delete-btn-account' data-id='${data.user.id}'></i>
-                    </div>
-                </td>
-            `;
-            tableBody.appendChild(newRow);  // Thêm dòng mới vào bảng
-            document.querySelector(".add-form-account").reset();  // Reset form
+
+            // Gọi lại file AC-Manager.php để lấy lại bảng dữ liệu tài khoản
+            fetch("../../PHP/AC-Manager.php")
+            .then(response => response.text())
+            .then(html => {
+                // Cập nhật lại nội dung bảng
+                tableBody.innerHTML = html; 
+            })
+            .catch(error => console.error("Lỗi khi tải lại bảng:", error));
         } else {
             alert("Lỗi: " + data.message);
         }
     })
     .catch(error => console.error("Lỗi:", error));
-  });
+});
+
 
 
 

@@ -729,8 +729,8 @@ if (!isset($_SESSION['adminInfo'])) {
         <thead>
           <tr>
             <th style="text-align: center">Quyền</th>
-            <th>Chức năng</th>
-            <th>Số lượng TK</th>
+            <th>Số lượng chức năng</th>
+            <th>Số lượng tài khoản</th>
             <th>Danh sách tài khoản</th>
             <th id="setting-pm">Cài đặt</th>
           </tr>
@@ -749,7 +749,7 @@ if (!isset($_SESSION['adminInfo'])) {
         <i class="fa-solid fa-rotate-left back-role"></i>
         <div class="form-group">
           <label for="role-name" class="form-label">Tên quyền</label>
-          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" required />
+          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
         </div>
 
         <!-- Danh sách chức năng -->
@@ -809,25 +809,41 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="role-name" class="form-label">Tên quyền</label>
           <input type="text" id="role-name-f" name="role-name" placeholder="Nhập tên" class="form-input" />
         </div>
-        <div class="form-group">
-          <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
+                <!-- Danh sách chức năng -->
+                <div class="form-group">
+          <label class="form-label" style="color: red;">Chức năng</label>
           <div class="role-container">
+
+            <!-- Tiêu đề cột -->
+            <div class="role-header">
+              <div class="role-item">Tên chức năng</div>
+              <?php
+                require_once '../../PHP/config.php';
+                $actions_result = $conn->query("SELECT ActionID, ActionNameVN FROM action");
+                $actions = [];
+                while ($row = $actions_result->fetch_assoc()) {
+                  $actions[] = $row;
+                  echo "<div class='permission'>" . htmlspecialchars($row['ActionNameVN']) . "</div>";
+                }
+              ?>
+            </div>
+
             <?php
-            require_once '../../PHP/PM-Manager.php'; // Kết nối database
-            // Lấy chức năng từ database
-            $sql = "SELECT id, name FROM functions ORDER BY id ASC";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                echo "
-                    <div class='check-role'>
-                        <input type='checkbox' class='permission-checkbox' value='{$row['id']}' name='permissions[]'>
-                        <label>{$row['name']}</label>
-                    </div>";
+              $functions_result = $conn->query("SELECT id, name FROM functions");
+              while ($func = $functions_result->fetch_assoc()) {
+                echo "<div class='role-row'>";
+                echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
+                
+                foreach ($actions as $action) {
+                  // Checkbox value là dạng "functionId_actionId"
+                  $checkboxValue = $func['id'] . "_" . $action['ActionID'];
+                  echo "<div class='permission'>
+                          <input type='checkbox' class = 'permission-checkbox' name='permissions[]' value='{$checkboxValue}'>
+                        </div>";
+                }
+
+                echo "</div>";
               }
-            } else {
-              echo "<p>Không có chức năng nào!</p>";
-            }
             ?>
           </div>
         </div>

@@ -8,8 +8,8 @@ $response = [];
 if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
     $accountId = $_POST['account-id'];
     $userName = $_POST['account-name'];
-    $password = $_POST['account-pass'];
-    $permissionId = $_POST['permission_id']; 
+    $password = $_POST['account-pass']??'';
+    $permissionId = $_POST['permission_id']??''; 
     $permission_name = null;
 
     // Lấy trạng thái hiện tại và tên nhân viên
@@ -38,24 +38,47 @@ if (isset($_POST['account-id']) && isset($_POST['account-name'])) {
     $permission_name=$update_permission;
 
     // Cập nhật thông tin tài khoản
-    $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
-    $sql = "UPDATE employeeaccount SET userName = ?, password = ?, permission_id = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssii", $userName, $hasshedPassword, $permissionId, $accountId);
+    if($password == ''){
+        $sql = "UPDATE employeeaccount SET userName = ?, permission_id = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sii", $userName, $permissionId, $accountId);
+    }
+    else{
+        $hasshedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $sql = "UPDATE employeeaccount SET userName = ?, password = ?, permission_id = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssii", $userName, $hasshedPassword, $permissionId, $accountId);
+    }
 
     if ($stmt->execute()) {
-        $response = [
-            "success" =>true,
-            "message" => "Cập nhật tài khoản thành công!",
-            "user" => [
-                "id" => $accountId,
-                "userName" => $userName,
-                "password" => $hasshedPassword,
-                "permission_name" => $permission_name,
-                "fullName" => $fullName,
-                "status" => $status
-            ]
-            ];
+        if($password == ''){
+            $response = [
+                "success" =>true,
+                "message" => "Cập nhật tài khoản thành công!",
+                "user" => [
+                    "id" => $accountId,
+                    "userName" => $userName,
+                    "permission_name" => $permission_name,
+                    "fullName" => $fullName,
+                    "status" => $status
+                    ]
+                ];
+        }
+        else{
+            $response = [
+                "success" =>true,
+                "message" => "Cập nhật tài khoản thành công!",
+                "user" => [
+                    "id" => $accountId,
+                    "userName" => $userName,
+                    "password" => $hasshedPassword,
+                    "permission_name" => $permission_name,
+                    "fullName" => $fullName,
+                    "status" => $status
+                    ]
+                ];
+        }
+
 
     } else {
         $response = ["success" => false, "message" => "Lỗi cập nhật: " . $conn->error];
