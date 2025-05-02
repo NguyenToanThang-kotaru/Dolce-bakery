@@ -1023,11 +1023,11 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Ngày nhập</th>
             <th>Trạng thái</th>
             <th>Xem chi tiết</th>
-            <th id="setting-ip">Xóa</th>
+            <th id="setting-ip">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="import-table-body">
-          <tr>
+          <!-- <tr>
             <td>1</td>
             <td>IP001</td>
             <td>NV001</td>
@@ -1043,7 +1043,8 @@ if (!isset($_SESSION['adminInfo'])) {
                 <i class='fa-solid fa-trash delete-btn-import' style='cursor:pointer'></i>
               </div>
             </td>
-          </tr>
+          </tr> -->
+          <?php include '../../PHP/IP-Manager.php' ?>
         </tbody>
       </table>
 
@@ -1082,7 +1083,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>*</td>
                 <td>Bánh ngọt</td>
@@ -1093,7 +1094,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td>*</td>
                 <td>Bánh ngọt</td>
                 <td>Bánh sinh nhật</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1107,7 +1108,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
+          <input type="number" id="profit-percent" class="form-input" placeholder="" readonly/>
 
           <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
         </div>
@@ -1127,7 +1128,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
@@ -1136,7 +1137,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td style='text-align: center; vertical-align: middle;'>
                   <i class='fa-solid fa-trash' style='cursor:pointer'></i>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1162,18 +1163,18 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Tổng tiền -->
         <div class="total-section-ip">
           <label for="total-price-ip">Tổng tiền:</label>
-          <span id="total-price-ip">0 VND</span>
+          <span id="total-price-ipF">0 VND</span>
         </div>
 
         <!-- Combobox Nhà cung cấp, Loại, Chủng loại -->
         <div class="filter-section-ip">
-          <select id="supplier-ip" class="form-select">
+          <select id="supplier-ipF" class="form-select">
             <option value="">Chọn nhà cung cấp</option>
           </select>
-          <select id="category-ip" class="form-select">
+          <select id="category-ipF" class="form-select">
             <option value="">Chọn loại</option>
           </select>
-          <select id="subcategory-ip" class="form-select">
+          <select id="subcategory-ipF" class="form-select">
             <option value="">Chọn chủng loại</option>
           </select>
         </div>
@@ -1190,7 +1191,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>*</td>
                 <td>Bánh ngọt</td>
@@ -1201,7 +1202,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td>*</td>
                 <td>Bánh ngọt</td>
                 <td>Bánh sinh nhật</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1209,13 +1210,13 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Nhập số lượng, giá nhập, % lãi -->
         <div class="selected-product-input-ip">
           <label for="quantity">Số lượng:</label>
-          <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
+          <input type="number" id="quantityF" class="form-input" placeholder="Nhập số lượng" />
 
           <label for="import-price">Giá nhập:</label>
-          <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
+          <input type="number" id="import-priceF" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
+          <input type="number" id="profit-percentF" class="form-input" placeholder="" readonly/>
 
           <button id="add-product-btn" class="form-button">Thêm sản phẩm</button>
         </div>
@@ -1235,7 +1236,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
@@ -1244,32 +1245,32 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td style='text-align: center; vertical-align: middle;'>
                   <i class='fa-solid fa-trash' style='cursor:pointer'></i>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
 
         <!-- Nút thêm phiếu nhập -->
         <div class="submit-section text-center">
-          <button id="submit-import-btn" class="form-button">Hoàn tất</button>
+          <button id="submit-import-fix-btn" class="form-button">Hoàn tất</button>
         </div>
       </div>
 
 
       <div class="import-detail-container">
         <i class="fa-solid fa-rotate-left back-import"></i>
-        <h3 style="margin-bottom: 10px;">Chi tiết phiếu nhập</h3>
+        <h3 style="margin-bottom: 10px;">Chi tiết</h3>
         <div class="import-info">
           <div class="info-row-ip">
-            <span><strong>Mã phiếu nhập:</strong> PN001</span>
-            <span><strong>Mã nhân viên:</strong> NV123</span>
+            <span><strong>Mã phiếu nhập:</strong></span>
+            <span><strong>Mã nhân viên:</strong></span>
           </div>
           <div class="info-row-ip">
-            <span><strong>Ngày nhập:</strong> 23/04/2025</span>
-            <span><strong>Trạng thái:</strong> Đã duyệt</span>
+            <span><strong>Ngày nhập:</strong></span>
+            <span><strong>Trạng thái:</strong></span>
           </div>
           <div class="info-row-ip">
-            <span><strong>Tổng tiền:</strong> 5.000.000 VNĐ</span>
+            <span><strong>Tổng tiền:</strong></span>
           </div>
         </div>
 
@@ -1287,11 +1288,11 @@ if (!isset($_SESSION['adminInfo'])) {
             </thead>
             <tbody>
               <tr>
-                <td>Bánh kem</td>
+                <!-- <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
                 <td>30</td>
-                <td>500000</td>
+                <td>500000</td> -->
               </tr>
 
             </tbody>
@@ -1315,17 +1316,19 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/OD-ajax.js"></script>
   <script src="../../JS/admin/OD-getAddress_ajax.js"></script>
   <script src="../../JS/admin/ST-ajax.js"></script>
+  <script src="../../JS/admin/IP-Ajax.js"></script>
 
 
   <script>
+    // Truyền thông tin session từ PHP sang JavaScript
+    window.adminInfo = <?php echo json_encode($_SESSION['adminInfo']); ?>;
+    console.log('Admin Info:', window.adminInfo);
+
     const adminFunctions = <?php echo json_encode($_SESSION['adminInfo']['function_ids']); ?>;
-    console.log(adminFunctions);
+    console.log('Admin Functions:', adminFunctions);
     adminFunctions.forEach(funcId => {
-
-
+      // Xử lý các chức năng
     });
-
-
   </script>
 
 
