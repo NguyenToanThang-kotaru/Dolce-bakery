@@ -13,7 +13,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     if ($row = $result->fetch_assoc()) {
         $roleName = $row['name'];
 
-        // ✅ Lấy cả function_id và action_id (action_id là VARCHAR)
         $stmt = $conn->prepare("SELECT function_id, ActionID FROM permission_function WHERE permission_id = ?");
         $stmt->bind_param("i", $permissionId);
         $stmt->execute();
@@ -49,3 +48,4 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     echo json_encode(["error" => "ID không hợp lệ!"]);
 }
 ?>
+

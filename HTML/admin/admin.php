@@ -18,6 +18,15 @@ if (!isset($_SESSION['adminInfo'])) {
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #ad-menu a {
+      display: none;
+    }
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 
 <body>
@@ -698,31 +707,6 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="role-part">
     <div class="role-table-container">
-      <!-- <div id="account-overlay-role">
-        <div class="account-role-container">
-          <img src="../../assest/Chevron down.png" alt="">
-          <div class="list-user-role">
-            <div class="user-role">user1</div>
-            <div class="user-role">user2</div>
-            <div class="user-role">user4</div>
-            <div class="user-role">user5</div>
-            <div class="user-role">user6</div>
-            <div class="user-role">user7</div>
-            <div class="user-role">user8</div>
-            <div class="user-role">user9</div>
-            <div class="user-role">usera</div>
-            <div class="user-role">userb</div>
-            <div class="user-role">userc</div>
-            <div class="user-role">userd</div>
-            <div class="user-role">usere</div>
-            <div class="user-role">userf</div>
-            <div class="user-role">userg</div>
-            <div class="user-role">userh</div>
-            <div class="user-role">userj</div>
-          </div>
-        </div> -->
-      <!-- </div> -->
-
       <div id="role-plus">Thêm quyền</div>
 
       <table class="role-table">
@@ -778,6 +762,9 @@ if (!isset($_SESSION['adminInfo'])) {
                 echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
                 
                 foreach ($actions as $action) {
+                  if ($func['name'] == "Thống kê" && $action['ActionID'] != 'AC1') {
+                    continue; // bỏ qua các action khác
+                }
                   // Checkbox value là dạng "functionId_actionId"
                   $checkboxValue = $func['id'] . "_" . $action['ActionID'];
                   echo "<div class='permission'>
@@ -835,6 +822,9 @@ if (!isset($_SESSION['adminInfo'])) {
                 echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
                 
                 foreach ($actions as $action) {
+                if ($func['name'] == "Thống kê" && $action['ActionID'] != 'AC1') {
+                    continue; // bỏ qua các action khác
+                }
                   // Checkbox value là dạng "functionId_actionId"
                   $checkboxValue = $func['id'] . "_" . $action['ActionID'];
                   echo "<div class='permission'>
@@ -1002,7 +992,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="import-part">
     <div class="import-table-container">
-      <div id="import-plus">Thêm phiếu nhập</div>
+      <div id="import-plus" class = "disabled">Thêm phiếu nhập</div>
       <table class="import-table">
         <thead>
           <tr>
@@ -1099,7 +1089,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="profit-percent">% Lãi:</label>
           <input type="number" id="profit-percent" class="form-input" placeholder="" readonly/>
 
-          <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
+          <button id="add-product-btn-ip" class = "disabled"class="form-button">Thêm sản phẩm</button>
         </div>
 
         <!-- Bảng sản phẩm đã được thêm vào phiếu nhập -->
@@ -1133,7 +1123,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
         <!-- Nút thêm phiếu nhập -->
         <div class="submit-section-ip text-center">
-          <button id="submit-import-btn" class="form-button">Thêm phiếu nhập</button>
+          <button id="submit-import-btn"  class="form-button">Thêm phiếu nhập</button>
         </div>
       </div>
 
@@ -1207,7 +1197,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="profit-percent">% Lãi:</label>
           <input type="number" id="profit-percentF" class="form-input" placeholder="" readonly/>
 
-          <button id="add-product-btn" class="form-button">Thêm sản phẩm</button>
+          <button id="add-btn-product" class="form-button">Thêm sản phẩm</button>
         </div>
 
         <!-- Bảng sản phẩm đã được thêm vào phiếu nhập -->
@@ -1308,17 +1298,75 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/IP-Ajax.js"></script>
 
 
-  <script>
-    // Truyền thông tin session từ PHP sang JavaScript
-    window.adminInfo = <?php echo json_encode($_SESSION['adminInfo']); ?>;
-    console.log('Admin Info:', window.adminInfo);
+<script>
+  window.adminInfo = <?php echo json_encode($_SESSION['adminInfo']); ?>;
+  console.log('Admin Info:', window.adminInfo);
 
-    const adminFunctions = <?php echo json_encode($_SESSION['adminInfo']['function_ids']); ?>;
-    console.log('Admin Functions:', adminFunctions);
-    adminFunctions.forEach(funcId => {
-      // Xử lý các chức năng
-    });
-  </script>
+  const functionsMap = window.adminInfo.functions_map;
+  console.log('Admin Functions Map:', functionsMap);
+
+  // Mapping tên chức năng -> ID menu tương ứng
+  const functionToMenuId = {
+      "Thống kê": "admin-statistic",
+      "Đơn hàng": "admin-oder",
+      "Sản phẩm": "admin-product",
+      "Khách hàng": "admin-customer",
+      "Nhân viên": "admin-employee",
+      "Quản lí tài khoản": "admin-account",
+      "Quản lí quyền": "admin-role",
+      "Nhập hàng": "admin-import"
+  };
+
+  // Mapping chức năng -> tiền tố id
+  const functionPrefix = {
+      "Nhân viên": "employee",
+      "Sản phẩm": "product",
+      "Đơn hàng": "order",
+      "Khách hàng": "customer",
+      "Quản lí tài khoản": "account",
+      "Quản lí quyền": "role",
+      "Nhập hàng": "import"
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+      for (const [functionName, actions] of Object.entries(functionsMap)) {
+          console.log(`Function: ${functionName}`);
+          console.log(`Actions: ${actions.join(', ')}`);
+
+          // Nếu có quyền xem (AC1), hiển thị menu
+          if (actions.includes("AC1")) {
+              const menuId = functionToMenuId[functionName];
+              if (menuId) {
+                  document.getElementById(menuId)?.style.setProperty("display", "inline-block");
+              }
+          }
+
+          // Xử lý các quyền còn lại
+          const prefix = functionPrefix[functionName];
+          if (prefix) {
+            // AC2: Add
+            const addBtn = document.getElementById(`${prefix}-plus`);
+            if (addBtn) {
+                addBtn.style.display = actions.includes("AC2") ? "block" : "none";
+            }
+
+          // AC3: Edit
+          const editBtns = document.getElementsByClassName(`fix-btn-${prefix}`);
+          for (let btn of editBtns) {
+              btn.style.display = actions.includes("AC3") ? "inline-block" : "none";
+          }
+
+          // AC4: Delete
+          const deleteBtns = document.getElementsByClassName(`delete-btn-${prefix}`);
+          for (let btn of deleteBtns) {
+              btn.style.display = actions.includes("AC4") ? "inline-block" : "none";
+          }
+        }
+
+      }
+  });
+
+</script>
 
 
 </body>

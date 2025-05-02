@@ -1,4 +1,4 @@
-document.querySelector(".add-form-role").addEventListener("submit", function(e) {
+document.querySelector(".add-form-role").addEventListener("submit", function (e) {
     e.preventDefault(); // Ngăn form load lại trang
     const checkboxes = document.querySelectorAll("input[name='permissions[]']:checked");
     const roleName = document.getElementById("role-name").value;
@@ -10,7 +10,7 @@ document.querySelector(".add-form-role").addEventListener("submit", function(e) 
         alert("Vui lòng chọn ít nhất một quyền!");
         return false; // Dừng việc submit form
     }
-    
+
 
     let formData = new FormData(this);
     console.log([...formData.entries()]); // Kiểm tra dữ liệu gửi đi
@@ -19,24 +19,24 @@ document.querySelector(".add-form-role").addEventListener("submit", function(e) 
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Kiểm tra dữ liệu trả về
-        let tableBody = document.querySelector("#role-table-body");
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Kiểm tra dữ liệu trả về
+            let tableBody = document.querySelector("#role-table-body");
 
-        if (data.success) {
-            // Xử lý khi thêm thành công
-            alert(data.message);
+            if (data.success) {
+                // Xử lý khi thêm thành công
+                alert(data.message);
 
-            // Thêm dòng mới vào bảng
-            let newRow = document.createElement("tr");
-            newRow.setAttribute("data-id", data.role.id); 
+                // Thêm dòng mới vào bảng
+                let newRow = document.createElement("tr");
+                newRow.setAttribute("data-id", data.role.id);
 
-            // Inner danh sách tên chức năng
-            let functionsHTML = '';
-            functionsHTML += `<div class='role-function'>${data.function_count}</div>`;
+                // Inner danh sách tên chức năng
+                let functionsHTML = '';
+                functionsHTML += `<div class='role-function'>${data.function_count}</div>`;
 
-            newRow.innerHTML = `
+                newRow.innerHTML = `
                 <td>${data.role.name}</td>
                 <td>${functionsHTML}</td>
                 <td>0</td>
@@ -51,25 +51,25 @@ document.querySelector(".add-form-role").addEventListener("submit", function(e) 
                 </td>
             `;
 
-            tableBody.appendChild(newRow);
+                tableBody.appendChild(newRow);
 
-            // Cập nhật lại danh sách quyền trong dropdown
-            let permissionSelect = document.querySelector("#permissionSelect-f");
-            let newOption = document.createElement("option");
-            newOption.value = data.role.id;
-            newOption.textContent = data.role.name;
-            permissionSelect.appendChild(newOption);
+                // Cập nhật lại danh sách quyền trong dropdown
+                let permissionSelect = document.querySelector("#permissionSelect-f");
+                let newOption = document.createElement("option");
+                newOption.value = data.role.id;
+                newOption.textContent = data.role.name;
+                permissionSelect.appendChild(newOption);
 
-            // Xóa dữ liệu trong form
-            document.querySelector(".add-form-role").reset();
-        } else {
-            // Xử lý khi thêm thất bại
-            alert("Lỗi: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Lỗi khi gửi yêu cầu:', error);
-    });
+                // Xóa dữ liệu trong form
+                document.querySelector(".add-form-role").reset();
+            } else {
+                // Xử lý khi thêm thất bại
+                alert("Lỗi: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi khi gửi yêu cầu:', error);
+        });
 });
 
 
@@ -89,16 +89,17 @@ document.querySelector(".role-table").addEventListener("click", function (event)
                 },
                 body: 'id=' + permissionId,
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log("da xoa");
-                    event.target.closest("tr").remove();
-                } else {
-                    alert('Xóa quyền thất bại!');
-                }
-                deleteOverlay.style.display = 'none';
-            })};
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log("da xoa");
+                        event.target.closest("tr").remove();
+                    } else {
+                        alert('Xóa quyền thất bại!');
+                    }
+                    deleteOverlay.style.display = 'none';
+                })
+        };
     };
 });
 
@@ -128,6 +129,7 @@ document.addEventListener("click", function (event) {
                     document.querySelector(".role-table").style.display = "none";
                     document.getElementById("role-plus").style.display = "none";
                     document.querySelector(".fix-form-role").style.display = "block";
+        
                 } else {
                     alert("Không tìm thấy quyền!");
                 }
@@ -139,7 +141,7 @@ document.addEventListener("click", function (event) {
 
 
 document.getElementById("fix-form-role").addEventListener("submit", function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     let formData = new FormData(this);
 
@@ -147,22 +149,25 @@ document.getElementById("fix-form-role").addEventListener("submit", function (ev
         method: "POST",
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert("Cập nhật quyền thành công!");
-            // Cập nhật giao diện người dùng 
-            document.querySelector(".fix-form-role").style.display = "none";
-            document.querySelector(".role-table").removeAttribute("style");
-            document.getElementById("role-plus").style.display = "block";
-            document.getElementById("fix-form-role").reset();// Reset lại form
-            updateRoleTable();// Cập nhật lại dữ liệu bảng quyền 
-        } else {
-            alert("Có lỗi xảy ra: " + data.error);
-        }
-    })
-    .catch(error => console.error("Lỗi:", error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Cập nhật quyền thành công!");
+                // Cập nhật giao diện người dùng 
+                document.querySelector(".fix-form-role").style.display = "none";
+                document.querySelector(".role-table").removeAttribute("style");
+                document.getElementById("role-plus").style.display = "block";
+                document.getElementById("fix-form-role").reset();// Reset lại form
+                updateRoleTable();// Cập nhật lại dữ liệu bảng quyền 
+            } else {
+                alert("Có lỗi xảy ra: " + data.error);
+            }
+        })
+        .catch(error => console.error("Lỗi:", error));
 });
+
+
+
 
 function updateRoleTable() {
     fetch('../../PHP/PM-Manager.php')
