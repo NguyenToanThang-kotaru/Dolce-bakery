@@ -167,7 +167,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.imported-product-list-section tbody').addEventListener('click', function(e) {
         if (e.target.classList.contains('fa-trash')) {
             const row = e.target.closest('tr');
-            if (row) row.remove();
+            if (row) {
+                const totalCell = row.querySelector('td:nth-child(5)');
+                if (totalCell) {
+                    totalAmount -= parseFloat(totalCell.textContent);
+                    document.getElementById('total-price-ip').textContent = totalAmount.toLocaleString('vi-VN') + ' VND';
+                }
+                row.remove();
+            }
         }
     });
 
