@@ -22,10 +22,10 @@ if (!isset($_SESSION['adminInfo'])) {
     #ad-menu a {
       display: none;
     }
-    .disabled {
+    /* .disabled {
       pointer-events: none;
       opacity: 0.5;
-    }
+    } */
   </style>
 </head>
 
@@ -992,7 +992,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="import-part">
     <div class="import-table-container">
-      <div id="import-plus" class = "disabled">Thêm phiếu nhập</div>
+      <div id="import-plus" >Thêm phiếu nhập</div>
       <table class="import-table">
         <thead>
           <tr>
@@ -1089,7 +1089,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="profit-percent">% Lãi:</label>
           <input type="number" id="profit-percent" class="form-input" placeholder="" readonly/>
 
-          <button id="add-product-btn-ip" class = "disabled"class="form-button">Thêm sản phẩm</button>
+          <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
         </div>
 
         <!-- Bảng sản phẩm đã được thêm vào phiếu nhập -->
