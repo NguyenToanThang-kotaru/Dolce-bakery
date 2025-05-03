@@ -91,7 +91,15 @@ document.querySelector(".add-form-employee").addEventListener("submit", function
 document.querySelector(".employee-table").addEventListener("click", function (event) {
     if (event.target.classList.contains("delete-btn-employee")) {
         let empId = event.target.getAttribute("data-id");
+        const currentAccountId = window.adminInfo.userName;
         console.log("employee ID:", empId);
+        console.log("currentAccountId: ",currentAccountId);
+
+        if (currentAccountId === empId){
+            alert("Không thể xóa nhân viên liên kết với đang đăng nhập!");
+            document.getElementById("delete-overlay-employee").style.display = "none";
+            return;
+        }
 
         let deleteOverlay = document.getElementById('delete-overlay-employee');
         deleteOverlay.style.display = 'block';

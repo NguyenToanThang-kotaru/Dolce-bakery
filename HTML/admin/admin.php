@@ -1333,8 +1333,8 @@ if (!isset($_SESSION['adminInfo'])) {
           console.log(`Function: ${functionName}`);
           console.log(`Actions: ${actions.join(', ')}`);
 
-          // Nếu có quyền xem (AC1), hiển thị menu
-          if (actions.includes("AC1")) {
+          // Hiển thị module nếu có bất kỳ quyền nào (AC1, AC2, AC3, AC4)
+          if (actions.includes("AC1") || actions.includes("AC2") || actions.includes("AC3") || actions.includes("AC4")) {
               const menuId = functionToMenuId[functionName];
               if (menuId) {
                   document.getElementById(menuId)?.style.setProperty("display", "inline-block");
@@ -1350,21 +1350,22 @@ if (!isset($_SESSION['adminInfo'])) {
                 addBtn.style.display = actions.includes("AC2") ? "block" : "none";
             }
 
-          // AC3: Edit
-          const editBtns = document.getElementsByClassName(`fix-btn-${prefix}`);
-          for (let btn of editBtns) {
-              btn.style.display = actions.includes("AC3") ? "inline-block" : "none";
-          }
+            // AC3: Edit
+            const editBtns = document.getElementsByClassName(`fix-btn-${prefix}`);
+            for (let btn of editBtns) {
+                btn.style.display = actions.includes("AC3") ? "inline-block" : "none";
+            }
 
-          // AC4: Delete
-          const deleteBtns = document.getElementsByClassName(`delete-btn-${prefix}`);
-          for (let btn of deleteBtns) {
-              btn.style.display = actions.includes("AC4") ? "inline-block" : "none";
+            // AC4: Delete
+            const deleteBtns = document.getElementsByClassName(`delete-btn-${prefix}`);
+            for (let btn of deleteBtns) {
+                btn.style.display = actions.includes("AC4") ? "inline-block" : "none";
+            }
           }
-        }
-
       }
   });
+  // document.getElementById("admin-account").style.display = "block";
+  // document.getElementById("admin-role").style.display = "block";
 
 </script>
 

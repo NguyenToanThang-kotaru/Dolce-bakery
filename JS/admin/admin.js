@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function accountToggle() {
         oder_part.style.display = "none";
+        statistic_part.style.display = "none";
         customer_part.style.display = "none";
         product_part.style.display = "none"
         admin_main.style.display = "none";
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function roleToggle() {
         oder_part.style.display = "none";
+        statistic_part.style.display = "none";
         customer_part.style.display = "none";
         product_part.style.display = "none"
         admin_main.style.display = "none";
@@ -112,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function employeeToggle() {
         oder_part.style.display = "none";
+        statistic_part.style.display = "none";
         customer_part.style.display = "none";
         product_part.style.display = "none"
         admin_main.style.display = "none";
