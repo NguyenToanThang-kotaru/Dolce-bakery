@@ -49,12 +49,12 @@ if(isset($_POST['register-form-son'])){
     $result = $conn->query($checkEmail);
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
-        if ($row['email'] == $email) {
-            echo json_encode(['status' => 'error', 'message' => 'Email đã tồn tại!']);
+        if ($row['userName'] == $userName) {
+            echo json_encode(['status' => 'error', 'message' => 'Tên đăng nhập đã tồn tại.']);
             exit();
         }
-        if ($row['userName'] == $userName) {
-            echo json_encode(['status' => 'error', 'message' => 'Tên đăng nhập đã tồn tại!']);
+        if ($row['email'] == $email) {
+            echo json_encode(['status' => 'error', 'message' => 'Email đã tồn tại.']);
             exit();
         }
     } else {

@@ -460,6 +460,18 @@ function render_filter() {
       const container = document.getElementById(`${activeCategory}-container`);
       if (container) {
         container.innerHTML = xhr.responseText;
+        // Gắn lại sự kiện click sau khi lọc
+document.querySelectorAll(".product-img img").forEach(img => {
+  img.addEventListener("click", ProductClickShowInfo);
+});
+
+document.querySelectorAll(".product-name").forEach(name => {
+  name.addEventListener("click", ProductClickShowInfo);
+});
+
+document.querySelectorAll(".product-end .price").forEach(price => {
+  price.addEventListener("click", ProductClickShowInfo);
+});
 
         // ✅ Phân trang lại sau khi cập nhật HTML
         if (activeCategory === "bread") {

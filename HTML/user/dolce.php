@@ -192,7 +192,6 @@
                 </div>
                 <div id="button">
                     <button class="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
-                    <button class="Buy" type="submit">Mua Ngay</button> 
                 </div>
             </div>
 
