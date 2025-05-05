@@ -286,10 +286,10 @@ function toggleFilter(category) {
 
   if (filterSidebar.classList.contains("active")) {
     filterSidebar.style.marginLeft = "0px"
-    productFilter.style.marginLeft = "650px";
+    productFilter.style.marginLeft = "350px";
     filterShow.style.opacity = "0.5";
   } else {
-    productFilter.style.marginLeft = "-50px";
+    productFilter.style.marginLeft = "0px";
     filterShow.style.opacity = "1";
   }
 }
