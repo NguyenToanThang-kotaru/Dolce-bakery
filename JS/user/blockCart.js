@@ -27,8 +27,10 @@ function blockShopCart() {
 }
 
 cart.addEventListener('click', function () {
+
     getCart(function (canOpen) {
         if (!canOpen) return;
+        document.getElementById("InfoPD-container").style.display = "none";
         OnCart();
     });
 });

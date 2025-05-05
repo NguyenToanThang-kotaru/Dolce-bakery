@@ -65,6 +65,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "../../PHP/users/UserCtrl.php",
+            dataType: "json",
             data: {
                 "register-form-son": true,
                 "rg-username": userName,
@@ -74,17 +75,20 @@ $(document).ready(function () {
                 "rg-password": passWord
             },
             success: function (response) {
-                if (response.includes("success")) {
+                if (response.status === 'success') {
                     localStorage.setItem("isLoggedIn", "true");
                     checkLoginStatus();
-                    location.reload();
+                    const timeShown = showToast("Đăng kí thành công.", true, 1000);
+                    setTimeout(() => {
+                        location.reload();
+                    }, timeShown); 
                 }
-                else if (response.includes("Tên đăng nhập đã tồn tại")) {
-                    showError(rgUserName, response);
+                else if (response.message === 'Tên đăng nhập đã tồn tại.') {
+                    showError(rgUserName, response.message);
                     rgUserName.focus();
                 }
-                else if (response.includes("Email đã tồn tại")) {
-                    showError(rgEmail, response);
+                else if (response.message === 'Email đã tồn tại.') {
+                    showError(rgEmail, response.message);
                     rgEmail.focus();
                 }
                 console.log(response);
@@ -129,7 +133,10 @@ $(document).ready(function () {
                 }
                 localStorage.setItem("isLoggedIn", "true");
                 checkLoginStatus();
-                location.reload();
+                const timeShown = showToast("Đăng nhập thành công.", true, 1000);
+                setTimeout(() => {
+                    location.reload();
+                }, timeShown);               
             }
 
         });
@@ -165,9 +172,18 @@ $(document).ready(function () {
     //bấm logout thì trả về trạng thái ban đầu
     checkLoginStatus();
     $("#log-out").click(function () {
-        localStorage.removeItem("isLoggedIn");
-        window.location.href = "../../HTML/user/dolce.php";
-        // checkLoginStatus(); 
+        $.ajax({
+            type: "POST",
+            url: "../../PHP/users/Logout.php",
+            success: function () {
+                localStorage.removeItem("isLoggedIn");
+                const timeShown = showToast("Đang đăng xuất.......", false, 1000);
+                    setTimeout(() => {
+                        window.location.href = "../../HTML/user/dolce.php";
+                    }, timeShown); 
+                
+            }
+        });
     });
 });
 
@@ -236,15 +252,7 @@ function clearErrors(form) {
     }
 
 
-    $("#log-out").click(function () {
-        $.ajax({
-            type: "POST",
-            url: "../../PHP/users/Logout.php",
-            success: function () {
-                window.location.href = "../../HTML/user/dolce.php";
-            }
-        });
-    });
+    
 
 
     function saveAddress() {
