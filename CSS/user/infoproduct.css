@@ -73,17 +73,19 @@
     margin-top: 170px;
     text-align: center;
     display: flex;
-    margin-left:100px ;
+    margin-left:150px ;
+    align-items: center;
     
 }
 .add-cart-info{
-    width: 50%;
+    width: 60%;
     margin-right: 100px;
     padding: 20px;
     text-wrap: nowrap;
     border: none;
     box-shadow: 2px 2px 5px grey ;
     
+    text-align: center;
     
 }
 .Buy{
