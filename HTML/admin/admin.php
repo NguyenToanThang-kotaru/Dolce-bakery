@@ -43,6 +43,7 @@ if (!isset($_SESSION['adminInfo'])) {
       <a href="#" id="admin-account">Quản lí tài khoản</a>
       <a href="#" id="admin-role">Quản lí quyền</a>
       <a href="#" id="admin-import">Nhập hàng</a>
+      <a href="#" id="admin-supplier">Nhà cung cấp</a>
     </div>
 
     <img src="../../assest/Dolce.png" alt="hahaha" />
@@ -312,14 +313,29 @@ if (!isset($_SESSION['adminInfo'])) {
         <div class="form-group">
           <label for="subcategory" class="form-label">Phân loại sản phẩm</label>
           <select name="product-subcategory" id="product-subcategory" class="form-select" required>
-            <option value="">-- Chọn phân loại sản phẩm --</option>
+          <?php
+            include '../../PHP/PD-getSubcategory.php';
+          ?> 
           </select>
         </div>
 
         <div class="form-group">
-          <label for="product-quantity" class="form-label">Số Lượng</label>
-          <input type="number" id="product-quantity" name="product-quantity" placeholder="Nhập số lượng"
-            class="form-input" />
+          <label for="product-supplier" class="form-label">Nhà cung cấp</label>
+          <select name="product-supplier" id="product-supplier" class="form-select" required>
+            <?php
+              include '../../PHP/config.php';
+              $sql = "SELECT id, name FROM suppliers ORDER BY id ASC";
+              $result = $conn->query($sql);
+              echo "  <option value=''>-- Chọn nhà cung cấp --</option>";
+              if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+              } else {
+                echo "<option value=''>Không nhà cung cấp nào!</option>";
+              }
+              ?>
+            </select>  
         </div>
 
         <div class="form-group">
@@ -387,9 +403,22 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-quantity" class="form-label">*Số Lượng</label>
-          <input type="number" id="product-quantityFIX" name="product-quantity" placeholder="Nhập số lượng"
-            class="form-input" />
+          <label for="product-supplier" class="form-label">Nhà cung cấp</label>
+          <select name="product-supplier" id="product-supplierFIX" class="form-select" required>
+            <?php
+              include '../../PHP/config.php';
+              $sql = "SELECT id, name FROM suppliers ORDER BY id ASC";
+              $result = $conn->query($sql);
+              echo "  <option value=''>-- Chọn nhà cung cấp --</option>";
+              if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+              } else {
+                echo "<option value=''>Không nhà cung cấp nào!</option>";
+              }
+              ?>
+            </select>  
         </div>
 
         <div class="form-group">
@@ -1059,6 +1088,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Ảnh sản phẩm</th>
                 <th>Thể loại</th>
                 <th>Phân loại</th>
+                <th>Giá bán</th>
               </tr>
             </thead>
             <tbody>
@@ -1281,6 +1311,79 @@ if (!isset($_SESSION['adminInfo'])) {
     </div>
   </div>
 
+  <!-- Nhà cung cấp -->
+  <div class="supplier-part">
+    <div class="supplier-table-container">
+      <div id="supplier-plus">Thêm nhà cung câp</div>
+      <table class="supplier-table">
+        <thead>
+          <tr>
+            <th>Mã nhà cung cấp</th>
+            <th>Tên nhà cung cấp</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th id="setting-emp">Cài đặt</th>
+          </tr>
+        </thead>
+        <tbody id="supplier-table-body">
+            <?php include '../../PHP/SP-Manager.php'?>
+        </tbody>
+      </table>
+
+      <form class="add-form-supplier" action="../../PHP/SP-Add.php" method="POST" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-supplier"></i>
+
+        <div class="form-group">
+          <label for="supplier-name" class="form-label">Tên nhà cung cấp</label>
+          <input type="text" id="supplier-name" name="supplier-name" placeholder="Nhập tên nhà cung cấp"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="supplier-phone" name="supplier-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="supplier-address" name="supplier-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button" id="accept-addEP">Thêm nhà cung cấp</button>
+        </div>
+      </form>
+
+      <form class="fix-form-supplier" id="fix-form-supplier" enctype="multipart/form-data">
+        <input type="hidden" id="supplier-id" name="supplier-id">
+        <i class="fa-solid fa-rotate-left back-supplier"></i>
+        <div class="form-group">
+          <label for="supplier-name" class="form-label">Tên nhà cung cấp</label>
+          <input type="text" id="supplier-nameFIX" name="supplier-name" placeholder="Nhập tên nhà cung cấp"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="supplier-phoneFIX" name="supplier-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="supplier-addressFIX" name="supplier-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" id="accept-fixSP" class="form-button">Hoàn tất</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 
 
   <script src="../../JS/admin/admin.js"></script>
@@ -1296,6 +1399,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/OD-getAddress_ajax.js"></script>
   <script src="../../JS/admin/ST-ajax.js"></script>
   <script src="../../JS/admin/IP-Ajax.js"></script>
+  <script src="../../JS/admin/SP-Ajax.js"></script>
 
 
 <script>

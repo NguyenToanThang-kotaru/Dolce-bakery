@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <td><img src="${product.image}" alt="" style="max-width:60px;max-height:60px;"></td>
                                     <td>${categorySelect.options[categorySelect.selectedIndex].text}</td>
                                     <td>${subcategorySelect.options[subcategorySelect.selectedIndex].text}</td>
-                                    <td style="display: none;">${product.price}</td>
+                                    <td>${product.price}</td>
                                 </tr>
                             `;
                         });
@@ -111,16 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const importPriceInput = document.getElementById('import-price');
     const profitPercent = document.getElementById('profit-percent');
-    // Tính lãi khi nhập giá bán
+    // Tính lãi khi nhập giá nhập
     importPriceInput.addEventListener('blur', function() {
         const importPrice = parseFloat(importPriceInput.value);
         if (selectedProduct && !isNaN(importPrice) && importPrice > 0) {
+            if (importPrice > selectedProduct.price) {
+                alert('Giá nhập không được lớn hơn giá bán!');
+                setTimeout(() => {
+                    importPriceInput.focus();
+                }, 0);
+                return;
+            }
             const percent = ((selectedProduct.price - importPrice) / importPrice) * 100;
             profitPercent.value = percent.toFixed(2);
         } else {
             profitPercent.value = '';
         }
     });
+    
 
     // Khi click nút thêm sản phẩm
     document.getElementById('add-product-btn-ip').addEventListener('click', function(e) {

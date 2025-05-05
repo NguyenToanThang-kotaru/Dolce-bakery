@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT products.*, subcategories.name AS subcategory_name, categories.name AS category_name 
+$sql = "SELECT products.*, subcategories.name AS subcategory_name, categories.name AS category_name
         FROM products 
         INNER JOIN subcategories ON products.subcategory_id = subcategories.id
         INNER JOIN categories ON subcategories.category_id = categories.id

@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const customer_part = document.querySelector(".customer-part");
     const admin_main = document.querySelector(".admin-main");
     const admin_statistic = document.querySelector("#admin-statistic");
+    const admin_supplier = document.querySelector("#admin-supplier");
     const admin_oder = document.querySelector("#admin-oder");
     const admin_product = document.querySelector("#admin-product");
     const admin_customer = document.querySelector("#admin-customer");
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const account_part = document.querySelector(".account-part");
     const role_part = document.querySelector(".role-part");
     const employee_part = document.querySelector(".employee-part");
+    const supplier_part = document.querySelector(".supplier-part");
     const import_part = this.documentElement.querySelector(".import-part")
 
     function statisticToggle() {
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function oderToggle() {
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function customerToggle() {
@@ -58,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function productToggle() {
@@ -71,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function returnMain() {
@@ -84,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function accountToggle() {
@@ -97,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function roleToggle() {
@@ -110,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "block";
         employee_part.style.display = "none";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function employeeToggle() {
@@ -123,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         role_part.style.display = "none";
         employee_part.style.display = "block";
         import_part.style.display = "none";
+        supplier_part.style.display = "none";
     }
 
     function importToggle() {
@@ -135,7 +145,22 @@ document.addEventListener("DOMContentLoaded", function () {
         account_part.style.display = "none";
         role_part.style.display = "none";
         employee_part.style.display = "none";
+        supplier_part.style.display = "none";
         import_part.style.display = "block";
+    }
+
+    function supplierToggle() {
+        statistic_part.style.display = "none";
+        oder_part.style.display = "none";
+        customer_part.style.display = "none";
+        product_part.style.display = "none"
+        admin_main.style.display = "none";
+        profile_part.style.display = "none";
+        account_part.style.display = "none";
+        role_part.style.display = "none";
+        employee_part.style.display = "none";
+        import_part.style.display = "none";
+        supplier_part.style.display = "block";
     }
 
     admin_statistic.addEventListener("click", statisticToggle);
@@ -147,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     admin_role.addEventListener("click", roleToggle);
     admin_employee.addEventListener("click", employeeToggle);
     admin_import.addEventListener("click", importToggle);
+    admin_supplier.addEventListener("click", supplierToggle);
     // add product
 
     const add_form_1 = document.querySelector(".add-form-product");
@@ -224,6 +250,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const import_detail_btn = document.querySelectorAll(".import-detail");
     const import_detail = document.querySelector(".import-detail-container");
 
+    const add_form_7 = document.querySelector(".add-form-supplier");
+    const plus_7 = document.querySelector("#supplier-plus");
+    const supplier_table = document.querySelector(".supplier-table");
+    const back_7 = document.querySelectorAll(".back-supplier");
+    const fix_form_7 = document.querySelector(".fix-form-supplier");
+    const fix_btn_7 = document.querySelectorAll(".fix-btn-supplier");
+    const delete_btn_7 = document.querySelectorAll(".delete-btn-supplier");
+    const delete_acp_7 = document.querySelector("#delete-acp-supplier");
+    const delete_ovl_7 = document.querySelector("#delete-overlay-supplier");
+    const cancel_btn_7 = document.querySelector("#cancel-supplier");
+
+
 
     function addFormProduct() {
         product_table.style.display = "none";
@@ -275,6 +313,14 @@ document.addEventListener("DOMContentLoaded", function () {
         profile_part.style.display = "none";
     }
 
+    function addFormSupplier() {
+        supplier_table.style.display = "none";
+        add_form_7.style.display = "block";
+        plus_7.style.display = "none";
+        fix_form_7.style.display = "none";
+        profile_part.style.display = "none";
+    }
+
     function fixFormProduct() {
         product_table.style.display = "none";
         fix_form_1.style.display = "block";
@@ -321,6 +367,14 @@ document.addEventListener("DOMContentLoaded", function () {
         fix_form_6.style.display = "block";
         plus_6.style.display = "none";
         add_form_6.style.display = "none";
+        profile_part.style.display = "none";
+    }
+
+    function fixFormSupplier() {
+        supplier_table.style.display = "none";
+        fix_form_7.style.display = "block";
+        plus_7.style.display = "none";
+        add_form_7.style.display = "none";
         profile_part.style.display = "none";
     }
 
@@ -382,6 +436,15 @@ document.addEventListener("DOMContentLoaded", function () {
         import_detail.style.display = "none";
     }
 
+    function returnSupplier() {
+        supplier_table.removeAttribute("style");
+        add_form_7.style.display = "none";
+        plus_7.style.display = "block";
+        fix_form_7.style.display = "none";
+        delete_ovl_7.style.display = "none";
+        profile_part.style.display = "none";
+    }
+
     function showOrderHistory() {
         order_history.style.display = "block";
         customer_table.style.display = "none";
@@ -418,9 +481,15 @@ document.addEventListener("DOMContentLoaded", function () {
         delete_ovl_6.style.display = "block";
     }
 
+    function showNofiSupplier() {
+        delete_ovl_7.style.display = "block";
+    }
+
     function showUserRole() {
         account_ovl_4.style.display = "block";
     }
+
+    
 
 
     plus_1.addEventListener("click", addFormProduct);
@@ -428,6 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
     plus_4.addEventListener("click", addFormRole);
     plus_5.addEventListener("click", addFormEmployee);
     plus_6.addEventListener("click", addFormImport);
+    plus_7.addEventListener("click", addFormSupplier);
 
 
     show_order_btn.forEach(button => {
@@ -464,6 +534,10 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", showNofiImport);
     })
 
+    delete_btn_7.forEach(button => {
+        button.addEventListener("click", showNofiSupplier);
+    })
+
     fix_btn_1.forEach(button => {
         button.addEventListener("click", fixFormProduct);
     })
@@ -486,6 +560,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fix_btn_6.forEach(button => {
         button.addEventListener("click", fixFormImport);
+    })
+
+    fix_btn_7.forEach(button => {
+        button.addEventListener("click", fixFormSupplier);
     })
 
     back_1.forEach(button => {
@@ -513,6 +591,10 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", returnImport);
     })
 
+    back_7.forEach(button => {
+        button.addEventListener("click", returnSupplier);
+    })
+
     // back_history.addEventListener("click",returnCustomer);
 
     show_userrole.forEach(button => {
@@ -531,6 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
     delete_acp_4.addEventListener("click", returnRole);
     delete_acp_5.addEventListener("click", returnEmployee);
     delete_acp_6.addEventListener("click", returnImport);
+    delete_acp_7.addEventListener("click", returnSupplier);
 
     cancel_btn_1.addEventListener("click", returnProduct);
     cancel_btn_2.addEventListener("click", returnCustomer);
@@ -538,6 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cancel_btn_4.addEventListener("click", returnRole);
     cancel_btn_5.addEventListener("click", returnEmployee);
     cancel_btn_6.addEventListener("click", returnImport);
+    cancel_btn_7.addEventListener("click", returnSupplier);
 
     // profile
 

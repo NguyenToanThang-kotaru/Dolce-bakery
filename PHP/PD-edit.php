@@ -7,8 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['product-id']; // Lấy ID sản phẩm
     $name = $_POST['product-name'];
     $subcategory_id = $_POST['product-subcategory'];
-    $quantity = $_POST['product-quantity'];
     $price = $_POST['product-price'];
+    $supplier_id = $_POST['product-supplier'];
 
     $noneIMG = "/Dolce-bakery/assest/PD-Manager/Default.jpg";  // Ảnh mặc định
     $target_file = $noneIMG;
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     // Cập nhật database
-    $sql = "UPDATE products SET image = ?, pd_name = ?, subcategory_id = ?, quantity = ?, price = ? WHERE id = ?";
+    $sql = "UPDATE products SET image = ?, pd_name = ?, subcategory_id = ?, supplier_id = ?, price = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssiiii", $target_file, $name, $subcategory_id, $quantity, $price, $id);
+    $stmt->bind_param("ssiiii", $target_file, $name, $subcategory_id, $supplier_id, $price, $id);
 
     if ($stmt->execute()) {
         $response = [
@@ -67,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "name" => $name,
                 "category_name" => $category_name,
                 "subcategory_name" => $subcategory_name,
-                "quantity" => $quantity,
                 "price" => number_format($price, 0, ',', '.') . " VND"
             ]
         ];

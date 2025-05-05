@@ -7,17 +7,22 @@ $sql = "SELECT
             o.id AS order_id,
             o.orderDate,
             o.totalPrice,
+            o.addressDetail,
             os.name AS order_status,
             od.product_id,
             p.pd_name,
             od.quantity,
             od.price,
-            c.fullName
+            c.fullName,
+            pv.name AS province_name,
+            d.name AS district_name
         FROM `orders` o
         JOIN orderdetail od ON o.id = od.order_id
         JOIN products p ON od.product_id = p.id
         JOIN customers c ON o.customer_id = c.id
         JOIN orderstatus os ON o.status = os.id
+        JOIN provinces pv ON o.province_id = pv.id
+        JOIN districts d ON o.district_id = d.id
         WHERE c.id = ?
         ORDER BY o.id ASC";
 
@@ -42,6 +47,10 @@ while ($row = $result->fetch_assoc()) {
     $quantity = $row['quantity'];
     $price = number_format($row['price']);
     $customerName = $row['fullName'];
+    $addressDetail = $row['addressDetail'];
+    $district_name = $row['district_name'];
+    $province_name = $row['province_name'];
+
 
     // Khi gặp một đơn hàng mới
     if ($currentOrderId != $orderId) {
@@ -52,6 +61,8 @@ while ($row = $result->fetch_assoc()) {
                     <p><strong>Tổng tiền:</strong> {$currentTotalPrice} đ</p>
                     <p><strong>Ngày đặt:</strong> {$orderDate}</p>
                     <p><strong>Trạng thái đơn hàng:</strong> {$currentOrderStatus}</p>
+                    <br>
+                    <p style='margin-top: 5px;'><strong>Địa chỉ giao hàng:</strong> $addressDetail, $district_name, $province_name</p>
                   </div>
                 </div>";
         }
@@ -101,6 +112,8 @@ if ($currentOrderId != 0) {
             <p><strong>Tổng tiền:</strong> {$currentTotalPrice} đ</p>
             <p><strong>Ngày đặt:</strong> {$orderDate}</p>
             <p><strong>Trạng thái đơn hàng:</strong> {$currentOrderStatus}</p>
+            <br>
+            <p style='margin-top: 5px;'><strong>Địa chỉ giao hàng:</strong> $addressDetail, $district_name, $province_name</p>
           </div>
         </div>";
 }

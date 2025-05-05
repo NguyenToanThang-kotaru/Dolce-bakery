@@ -751,6 +751,7 @@ body {
 
 .order-summary {
   display: flex;
+  flex-wrap: wrap; 
   justify-content: space-between;
   margin-top: 15px;
   font-size: 16px;
@@ -1658,4 +1659,122 @@ body {
   border-radius: 6px;
   min-width: 110px;
   z-index: 999;               
+}
+
+/* supplier-part */
+.supplier-part {
+  flex: 1;
+  background-color: #f4f0f4;
+  display: none;
+}
+
+.supplier-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.supplier-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.supplier-table th,
+.supplier-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.supplier-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+.supplier-table td {
+  background-color: #f9f5f0;
+}
+
+.supplier-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+#supplier-plus {
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+#supplier-plus:hover {
+  color: #ea9029;
+  transform: scale(1.1);
+}
+
+.supplier-table img {
+  width: 100px;
+  height: 100px;
+}
+
+.fix-supplier {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.supplier-table i:hover {
+  color: #8b5a5a;
+}
+
+/* add supplier */
+
+.add-form-supplier,
+.fix-form-supplier {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f5f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-supplier i,
+.fix-form-supplier i {
+  margin-left: 740px;
+  cursor: pointer;
+}
+
+.add-form-supplier i:hover,
+.fix-form-supplier i:hover {
+  color: #ef9b09;
+  transform: scale(1.2);
+}
+
+#delete-overlay-supplier {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
 }
