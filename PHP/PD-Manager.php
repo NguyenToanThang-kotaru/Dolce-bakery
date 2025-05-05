@@ -9,15 +9,39 @@ $sql = "SELECT products.*, subcategories.name AS subcategory_name, categories.na
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $id = $row['id'];
+    while ($product = $result->fetch_assoc()) {
+        $id = $product['id'];
+
+        // Truy vấn số lượng sản phẩm từ bảng inventory
+        $sql_inventory = "SELECT COUNT(*) AS quantity
+                          FROM inventory
+                          WHERE product_id = ? ";
+        $stmt = $conn->prepare($sql_inventory);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $inventory_result = $stmt->get_result();
+        $quantity = 0; // Mặc định là 0
+
+        if ($inventory_row = $inventory_result->fetch_assoc()) {
+            $quantity = $inventory_row["quantity"];
+        }
+        $stmt->close();
+
+        $sql = "UPDATE products SET quantity = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $quantity, $id);
+        $stmt->execute();
+        $stmt->close();
+
+
+        // Hiển thị thông tin sản phẩm
         echo "<tr data-id='$id'>";
-        echo "<td class='img-admin'><img src='" . $row['image'] . "' alt=''></td>";
-        echo "<td>" . $row['pd_name'] . "</td>";
-        echo "<td>" . $row['category_name'] . "</td>";
-        echo "<td>" . $row['subcategory_name'] . "</td>";
-        echo "<td>" . $row['quantity'] . "</td>";
-        echo "<td>" . number_format($row['price'], 0, ',', '.') . " VND</td>";
+        echo "<td class='img-admin'><img src='" . $product['image'] . "' alt=''></td>";
+        echo "<td>" . $product['pd_name'] . "</td>";
+        echo "<td>" . $product['category_name'] . "</td>";
+        echo "<td>" . $product['subcategory_name'] . "</td>";
+        echo "<td>" . $quantity . "</td>";
+        echo "<td>" . number_format($product['price'], 0, ',', '.') . " VND</td>";
         echo "<td><div class='fix-product'>
               <i class='fa-solid fa-pen-to-square fix-btn-product' data-id='$id'></i>
               <i class='fa-solid fa-trash delete-btn-product' data-id='$id'></i>
@@ -25,8 +49,9 @@ if ($result->num_rows > 0) {
         echo "</tr>";
     }
 } else {
-    echo "<tr><td style= 'text-align: center;'  colspan='6'>Không có sản phẩm nào</td></tr>";
+    echo "<tr><td style='text-align: center;' colspan='6'>Không có sản phẩm nào</td></tr>";
 }
+
 $conn->close();
 ?>
 <div id='delete-overlay-product'>

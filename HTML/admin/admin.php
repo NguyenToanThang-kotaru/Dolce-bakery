@@ -1418,7 +1418,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Nhân viên": "admin-employee",
       "Quản lí tài khoản": "admin-account",
       "Quản lí quyền": "admin-role",
-      "Nhập hàng": "admin-import"
+      "Nhập hàng": "admin-import",
+      "Nhà cung cấp": "admin-supplier"
   };
 
   // Mapping chức năng -> tiền tố id
@@ -1429,7 +1430,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Khách hàng": "customer",
       "Quản lí tài khoản": "account",
       "Quản lí quyền": "role",
-      "Nhập hàng": "import"
+      "Nhập hàng": "import",
+      "Nhà cung cấp": "supplier"
   };
 
   document.addEventListener("DOMContentLoaded", () => {

@@ -18,21 +18,37 @@ $stmt->bind_result($current_status);
 $stmt->fetch();
 $stmt->close();
 
-// Duyệt thành công thì tăng số lượng trong bảng products lên
 if ($current_status == '1' && $status == '2') {
+    // Lấy serial lớn nhất đang có trong bảng inventory
+    $serial_result = $conn->query("SELECT MAX(CAST(SUBSTRING(serialNumber, 3) AS UNSIGNED)) as max_serial FROM inventory");
+    $serial_row = $serial_result->fetch_assoc();
+    $max_serial = $serial_row['max_serial'] ?? 0;
+
     // Lấy danh sách sản phẩm và số lượng trong phiếu nhập
     $sql = "SELECT product_id, quantity FROM importreceipt_detail WHERE importreceipt_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $import_id);
     $stmt->execute();
     $result = $stmt->get_result();
+
     while ($row = $result->fetch_assoc()) {
-        // Tăng số lượng sản phẩm
-        $update = $conn->prepare("UPDATE products SET quantity = quantity + ? WHERE id = ?");
-        $update->bind_param('ii', $row['quantity'], $row['product_id']);
-        $update->execute();
-        $update->close();
+        $product_id = $row['product_id'];
+        $quantity = $row['quantity'];
+
+        // Ghi từng serialNumber vào bảng inventory
+        for ($i = 1; $i <= $quantity; $i++) {
+            $current_serial = $max_serial + 1;
+            $serialNumber = 'SE' . str_pad($current_serial, 4, '0', STR_PAD_LEFT);
+
+            $insert = $conn->prepare("INSERT INTO inventory (importID, product_id, serialNumber) VALUES (?, ?, ?)");
+            $insert->bind_param('sis', $import_id, $product_id, $serialNumber);
+            $insert->execute();
+            $insert->close();
+
+            $max_serial++; // tăng số seria
+        }
     }
+
     $stmt->close();
 }
 
@@ -47,4 +63,4 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close(); 
+$conn->close();

@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
         $temp=$temp+1;
     }
 } else {
-    echo "<tr><td colspan='5'>Không có tài khoản nào</td></tr>";
+    echo "<tr><td colspan='5'>Không có nhà cung cấp</td></tr>";
 }
 ?>
     <div id="delete-overlay-supplier">
