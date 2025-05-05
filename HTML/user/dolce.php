@@ -1,3 +1,4 @@
+<?php include '../../PHP/check_expired_products.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 

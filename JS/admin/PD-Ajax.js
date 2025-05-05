@@ -15,6 +15,7 @@ document.addEventListener("click", function (event) {
                     document.getElementById("product-subcategoryFIX").value = data.subcategory_id;
                     document.getElementById("product-supplierFIX").value = data.supplier_id;
                     document.getElementById("product-priceFIX").value = data.price;
+                    document.getElementById("product-shelflifeFIX").value = data.shelfLife;
 
                     // Ẩn bảng sản phẩm và nút thêm
                     document.querySelector(".product-table").style.display = "none";
@@ -80,9 +81,10 @@ document.querySelector(".product-table").addEventListener("click", function (eve
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
+                        alert("Xóa sản phẩm thành công");
                         event.target.closest("tr").remove();
                     } else {
-                        alert("Xóa sản phẩm thất bại!");
+                        alert(data.message);
                     }
                     deleteOverlay.style.display = "none";
                 });

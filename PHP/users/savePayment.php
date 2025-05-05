@@ -30,18 +30,6 @@ if ($conn->query($insertQuery) === TRUE) {
         $insertDetail->bind_param("iiid", $order_id, $product_id, $quantity, $price);
         $insertDetail->execute();
         $insertDetail->close();
-
-        // Giảm tồn kho bằng cách xóa các serial từ inventory
-        $reducestock = $conn->prepare("DELETE FROM inventory WHERE product_id = ? ORDER BY id ASC LIMIT ?");
-        $reducestock->bind_param("ii", $product_id, $quantity);
-        $reducestock->execute();
-        $reducestock->close();
-
-        // Cập nhật lại số lượng tổng trong bảng products
-        $updateStock = $conn->prepare("UPDATE products SET quantity = quantity - ? WHERE id = ?");
-        $updateStock->bind_param("ii", $quantity, $product_id);
-        $updateStock->execute();
-        $updateStock->close();
     }
 
     if($paymentMethod == 2){

@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['adminInfo'])) {
   header("Location: login_admin.php");
+  include '../../PHP/check_expired_products.php';
   exit();
 }
 ?>
@@ -339,8 +340,13 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-price" class="form-label">Giá Tiền (VNĐ)</label>
-          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá tiền" class="form-input" />
+          <label for="product-price" class="form-label">Giá bán (VNĐ)</label>
+          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá bán" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="product-shelflife" class="form-label">Hạn sử dụng</label>
+          <input type="number" id="product-shelflife" name="product-shelflife" placeholder="Nhập hạn sử dụng" class="form-input" />
         </div>
 
         <div class="form-group text-center">
@@ -422,9 +428,14 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-price" class="form-label">*Giá Tiền (VNĐ)</label>
-          <input type="number" id="product-priceFIX" name="product-price" placeholder="Nhập giá tiền"
+          <label for="product-price" class="form-label">*Giá bán (VNĐ)</label>
+          <input type="number" id="product-priceFIX" name="product-price" placeholder="Nhập giá bán"
             class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="product-shelflife" class="form-label">Hạn sử dụng</label>
+          <input type="number" id="product-shelflifeFIX" name="product-shelflife" placeholder="Nhập hạn sử dụng" class="form-input" />
         </div>
 
         <div class="form-group text-center">
