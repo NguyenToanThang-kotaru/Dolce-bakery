@@ -18,6 +18,15 @@ if (!isset($_SESSION['adminInfo'])) {
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../CSS/user/notificationRegist.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #ad-menu a {
+      display: none;
+    }
+    /* .disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    } */
+  </style>
 </head>
 
 <body>
@@ -34,6 +43,7 @@ if (!isset($_SESSION['adminInfo'])) {
       <a href="#" id="admin-account">Quản lí tài khoản</a>
       <a href="#" id="admin-role">Quản lí quyền</a>
       <a href="#" id="admin-import">Nhập hàng</a>
+      <a href="#" id="admin-supplier">Nhà cung cấp</a>
     </div>
 
     <img src="../../assest/Dolce.png" alt="hahaha" />
@@ -303,14 +313,29 @@ if (!isset($_SESSION['adminInfo'])) {
         <div class="form-group">
           <label for="subcategory" class="form-label">Phân loại sản phẩm</label>
           <select name="product-subcategory" id="product-subcategory" class="form-select" required>
-            <option value="">-- Chọn phân loại sản phẩm --</option>
+          <?php
+            include '../../PHP/PD-getSubcategory.php';
+          ?> 
           </select>
         </div>
 
         <div class="form-group">
-          <label for="product-quantity" class="form-label">Số Lượng</label>
-          <input type="number" id="product-quantity" name="product-quantity" placeholder="Nhập số lượng"
-            class="form-input" />
+          <label for="product-supplier" class="form-label">Nhà cung cấp</label>
+          <select name="product-supplier" id="product-supplier" class="form-select" required>
+            <?php
+              include '../../PHP/config.php';
+              $sql = "SELECT id, name FROM suppliers ORDER BY id ASC";
+              $result = $conn->query($sql);
+              echo "  <option value=''>-- Chọn nhà cung cấp --</option>";
+              if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+              } else {
+                echo "<option value=''>Không nhà cung cấp nào!</option>";
+              }
+              ?>
+            </select>  
         </div>
 
         <div class="form-group">
@@ -378,9 +403,22 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-quantity" class="form-label">*Số Lượng</label>
-          <input type="number" id="product-quantityFIX" name="product-quantity" placeholder="Nhập số lượng"
-            class="form-input" />
+          <label for="product-supplier" class="form-label">Nhà cung cấp</label>
+          <select name="product-supplier" id="product-supplierFIX" class="form-select" required>
+            <?php
+              include '../../PHP/config.php';
+              $sql = "SELECT id, name FROM suppliers ORDER BY id ASC";
+              $result = $conn->query($sql);
+              echo "  <option value=''>-- Chọn nhà cung cấp --</option>";
+              if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                }
+              } else {
+                echo "<option value=''>Không nhà cung cấp nào!</option>";
+              }
+              ?>
+            </select>  
         </div>
 
         <div class="form-group">
@@ -698,39 +736,14 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="role-part">
     <div class="role-table-container">
-      <!-- <div id="account-overlay-role">
-        <div class="account-role-container">
-          <img src="../../assest/Chevron down.png" alt="">
-          <div class="list-user-role">
-            <div class="user-role">user1</div>
-            <div class="user-role">user2</div>
-            <div class="user-role">user4</div>
-            <div class="user-role">user5</div>
-            <div class="user-role">user6</div>
-            <div class="user-role">user7</div>
-            <div class="user-role">user8</div>
-            <div class="user-role">user9</div>
-            <div class="user-role">usera</div>
-            <div class="user-role">userb</div>
-            <div class="user-role">userc</div>
-            <div class="user-role">userd</div>
-            <div class="user-role">usere</div>
-            <div class="user-role">userf</div>
-            <div class="user-role">userg</div>
-            <div class="user-role">userh</div>
-            <div class="user-role">userj</div>
-          </div>
-        </div> -->
-      <!-- </div> -->
-
       <div id="role-plus">Thêm quyền</div>
 
       <table class="role-table">
         <thead>
           <tr>
             <th style="text-align: center">Quyền</th>
-            <th>Chức năng</th>
-            <th>Số lượng TK</th>
+            <th>Số lượng chức năng</th>
+            <th>Số lượng tài khoản</th>
             <th>Danh sách tài khoản</th>
             <th id="setting-pm">Cài đặt</th>
           </tr>
@@ -749,7 +762,7 @@ if (!isset($_SESSION['adminInfo'])) {
         <i class="fa-solid fa-rotate-left back-role"></i>
         <div class="form-group">
           <label for="role-name" class="form-label">Tên quyền</label>
-          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" required />
+          <input type="text" id="role-name" name="role-name" placeholder="Nhập tên" class="form-input" />
         </div>
 
         <!-- Danh sách chức năng -->
@@ -760,61 +773,37 @@ if (!isset($_SESSION['adminInfo'])) {
             <!-- Tiêu đề cột -->
             <div class="role-header">
               <div class="role-item">Tên chức năng</div>
-              <div class="permission">Xem</div>
-              <div class="permission">Thêm</div>
-              <div class="permission">Sửa</div>
-              <div class="permission">Xóa</div>
+              <?php
+                require_once '../../PHP/config.php';
+                $actions_result = $conn->query("SELECT ActionID, ActionNameVN FROM action");
+                $actions = [];
+                while ($row = $actions_result->fetch_assoc()) {
+                  $actions[] = $row;
+                  echo "<div class='permission'>" . htmlspecialchars($row['ActionNameVN']) . "</div>";
+                }
+              ?>
             </div>
 
-            <!-- Dòng phân quyền dữ liệu ảo-->
+            <?php
+              $functions_result = $conn->query("SELECT id, name FROM functions");
+              while ($func = $functions_result->fetch_assoc()) {
+                echo "<div class='role-row'>";
+                echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
+                
+                foreach ($actions as $action) {
+                  if ($func['name'] == "Thống kê" && $action['ActionID'] != 'AC1') {
+                    continue; // bỏ qua các action khác
+                }
+                  // Checkbox value là dạng "functionId_actionId"
+                  $checkboxValue = $func['id'] . "_" . $action['ActionID'];
+                  echo "<div class='permission'>
+                          <input type='checkbox' name='permissions[]' value='{$checkboxValue}'>
+                        </div>";
+                }
 
-            <div class="role-row">
-              <div class="role-item">Quản lý quyền</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý sản phẩm</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý đơn hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý khách hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý đơn hàng</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
-
-            <div class="role-row">
-              <div class="role-item">Quản lý tài khoản</div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-              <div class="permission"><input type="checkbox"></div>
-            </div>
+                echo "</div>";
+              }
+            ?>
           </div>
         </div>
 
@@ -836,25 +825,44 @@ if (!isset($_SESSION['adminInfo'])) {
           <label for="role-name" class="form-label">Tên quyền</label>
           <input type="text" id="role-name-f" name="role-name" placeholder="Nhập tên" class="form-input" />
         </div>
-        <div class="form-group">
-          <label for="account-role" class="form-label" style="color: red;">Chức năng</label>
+                <!-- Danh sách chức năng -->
+                <div class="form-group">
+          <label class="form-label" style="color: red;">Chức năng</label>
           <div class="role-container">
+
+            <!-- Tiêu đề cột -->
+            <div class="role-header">
+              <div class="role-item">Tên chức năng</div>
+              <?php
+                require_once '../../PHP/config.php';
+                $actions_result = $conn->query("SELECT ActionID, ActionNameVN FROM action");
+                $actions = [];
+                while ($row = $actions_result->fetch_assoc()) {
+                  $actions[] = $row;
+                  echo "<div class='permission'>" . htmlspecialchars($row['ActionNameVN']) . "</div>";
+                }
+              ?>
+            </div>
+
             <?php
-            require_once '../../PHP/PM-Manager.php'; // Kết nối database
-            // Lấy chức năng từ database
-            $sql = "SELECT id, name FROM functions ORDER BY id ASC";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                echo "
-                    <div class='check-role'>
-                        <input type='checkbox' class='permission-checkbox' value='{$row['id']}' name='permissions[]'>
-                        <label>{$row['name']}</label>
-                    </div>";
+              $functions_result = $conn->query("SELECT id, name FROM functions");
+              while ($func = $functions_result->fetch_assoc()) {
+                echo "<div class='role-row'>";
+                echo "<div class='role-item'>" . htmlspecialchars($func['name']) . "</div>";
+                
+                foreach ($actions as $action) {
+                if ($func['name'] == "Thống kê" && $action['ActionID'] != 'AC1') {
+                    continue; // bỏ qua các action khác
+                }
+                  // Checkbox value là dạng "functionId_actionId"
+                  $checkboxValue = $func['id'] . "_" . $action['ActionID'];
+                  echo "<div class='permission'>
+                          <input type='checkbox' class = 'permission-checkbox' name='permissions[]' value='{$checkboxValue}'>
+                        </div>";
+                }
+
+                echo "</div>";
               }
-            } else {
-              echo "<p>Không có chức năng nào!</p>";
-            }
             ?>
           </div>
         </div>
@@ -1013,7 +1021,7 @@ if (!isset($_SESSION['adminInfo'])) {
 
   <div class="import-part">
     <div class="import-table-container">
-      <div id="import-plus">Thêm phiếu nhập</div>
+      <div id="import-plus" >Thêm phiếu nhập</div>
       <table class="import-table">
         <thead>
           <tr>
@@ -1023,11 +1031,11 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Ngày nhập</th>
             <th>Trạng thái</th>
             <th>Xem chi tiết</th>
-            <th id="setting-ip">Xóa</th>
+            <th id="setting-ip">Cài đặt</th>
           </tr>
         </thead>
         <tbody id="import-table-body">
-          <tr>
+          <!-- <tr>
             <td>1</td>
             <td>IP001</td>
             <td>NV001</td>
@@ -1043,7 +1051,8 @@ if (!isset($_SESSION['adminInfo'])) {
                 <i class='fa-solid fa-trash delete-btn-import' style='cursor:pointer'></i>
               </div>
             </td>
-          </tr>
+          </tr> -->
+          <?php include '../../PHP/IP-Manager.php' ?>
         </tbody>
       </table>
 
@@ -1079,10 +1088,11 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Ảnh sản phẩm</th>
                 <th>Thể loại</th>
                 <th>Phân loại</th>
+                <th>Giá bán</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>*</td>
                 <td>Bánh ngọt</td>
@@ -1093,7 +1103,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td>*</td>
                 <td>Bánh ngọt</td>
                 <td>Bánh sinh nhật</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1107,7 +1117,7 @@ if (!isset($_SESSION['adminInfo'])) {
           <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
+          <input type="number" id="profit-percent" class="form-input" placeholder="" readonly/>
 
           <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
         </div>
@@ -1127,7 +1137,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
@@ -1136,14 +1146,14 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td style='text-align: center; vertical-align: middle;'>
                   <i class='fa-solid fa-trash' style='cursor:pointer'></i>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
 
         <!-- Nút thêm phiếu nhập -->
         <div class="submit-section-ip text-center">
-          <button id="submit-import-btn" class="form-button">Thêm phiếu nhập</button>
+          <button id="submit-import-btn"  class="form-button">Thêm phiếu nhập</button>
         </div>
       </div>
 
@@ -1162,18 +1172,18 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Tổng tiền -->
         <div class="total-section-ip">
           <label for="total-price-ip">Tổng tiền:</label>
-          <span id="total-price-ip">0 VND</span>
+          <span id="total-price-ipF">0 VND</span>
         </div>
 
         <!-- Combobox Nhà cung cấp, Loại, Chủng loại -->
         <div class="filter-section-ip">
-          <select id="supplier-ip" class="form-select">
+          <select id="supplier-ipF" class="form-select">
             <option value="">Chọn nhà cung cấp</option>
           </select>
-          <select id="category-ip" class="form-select">
+          <select id="category-ipF" class="form-select">
             <option value="">Chọn loại</option>
           </select>
-          <select id="subcategory-ip" class="form-select">
+          <select id="subcategory-ipF" class="form-select">
             <option value="">Chọn chủng loại</option>
           </select>
         </div>
@@ -1190,7 +1200,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>*</td>
                 <td>Bánh ngọt</td>
@@ -1201,7 +1211,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td>*</td>
                 <td>Bánh ngọt</td>
                 <td>Bánh sinh nhật</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1209,15 +1219,15 @@ if (!isset($_SESSION['adminInfo'])) {
         <!-- Nhập số lượng, giá nhập, % lãi -->
         <div class="selected-product-input-ip">
           <label for="quantity">Số lượng:</label>
-          <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
+          <input type="number" id="quantityF" class="form-input" placeholder="Nhập số lượng" />
 
           <label for="import-price">Giá nhập:</label>
-          <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
+          <input type="number" id="import-priceF" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="Nhập % lãi" />
+          <input type="number" id="profit-percentF" class="form-input" placeholder="" readonly/>
 
-          <button id="add-product-btn" class="form-button">Thêm sản phẩm</button>
+          <button id="add-btn-product" class="form-button">Thêm sản phẩm</button>
         </div>
 
         <!-- Bảng sản phẩm đã được thêm vào phiếu nhập -->
@@ -1235,7 +1245,7 @@ if (!isset($_SESSION['adminInfo'])) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
@@ -1244,32 +1254,32 @@ if (!isset($_SESSION['adminInfo'])) {
                 <td style='text-align: center; vertical-align: middle;'>
                   <i class='fa-solid fa-trash' style='cursor:pointer'></i>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
 
         <!-- Nút thêm phiếu nhập -->
         <div class="submit-section text-center">
-          <button id="submit-import-btn" class="form-button">Hoàn tất</button>
+          <button id="submit-import-fix-btn" class="form-button">Hoàn tất</button>
         </div>
       </div>
 
 
       <div class="import-detail-container">
         <i class="fa-solid fa-rotate-left back-import"></i>
-        <h3 style="margin-bottom: 10px;">Chi tiết phiếu nhập</h3>
+        <h3 style="margin-bottom: 10px;">Chi tiết</h3>
         <div class="import-info">
           <div class="info-row-ip">
-            <span><strong>Mã phiếu nhập:</strong> PN001</span>
-            <span><strong>Mã nhân viên:</strong> NV123</span>
+            <span><strong>Mã phiếu nhập:</strong></span>
+            <span><strong>Mã nhân viên:</strong></span>
           </div>
           <div class="info-row-ip">
-            <span><strong>Ngày nhập:</strong> 23/04/2025</span>
-            <span><strong>Trạng thái:</strong> Đã duyệt</span>
+            <span><strong>Ngày nhập:</strong></span>
+            <span><strong>Trạng thái:</strong></span>
           </div>
           <div class="info-row-ip">
-            <span><strong>Tổng tiền:</strong> 5.000.000 VNĐ</span>
+            <span><strong>Tổng tiền:</strong></span>
           </div>
         </div>
 
@@ -1287,17 +1297,90 @@ if (!isset($_SESSION['adminInfo'])) {
             </thead>
             <tbody>
               <tr>
-                <td>Bánh kem</td>
+                <!-- <td>Bánh kem</td>
                 <td>20</td>
                 <td>400000</td>
                 <td>30</td>
-                <td>500000</td>
+                <td>500000</td> -->
               </tr>
 
             </tbody>
           </table>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Nhà cung cấp -->
+  <div class="supplier-part">
+    <div class="supplier-table-container">
+      <div id="supplier-plus">Thêm nhà cung câp</div>
+      <table class="supplier-table">
+        <thead>
+          <tr>
+            <th>Mã nhà cung cấp</th>
+            <th>Tên nhà cung cấp</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th id="setting-emp">Cài đặt</th>
+          </tr>
+        </thead>
+        <tbody id="supplier-table-body">
+            <?php include '../../PHP/SP-Manager.php'?>
+        </tbody>
+      </table>
+
+      <form class="add-form-supplier" action="../../PHP/SP-Add.php" method="POST" enctype="multipart/form-data">
+        <i class="fa-solid fa-rotate-left back-supplier"></i>
+
+        <div class="form-group">
+          <label for="supplier-name" class="form-label">Tên nhà cung cấp</label>
+          <input type="text" id="supplier-name" name="supplier-name" placeholder="Nhập tên nhà cung cấp"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="supplier-phone" name="supplier-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="supplier-address" name="supplier-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="form-button" id="accept-addEP">Thêm nhà cung cấp</button>
+        </div>
+      </form>
+
+      <form class="fix-form-supplier" id="fix-form-supplier" enctype="multipart/form-data">
+        <input type="hidden" id="supplier-id" name="supplier-id">
+        <i class="fa-solid fa-rotate-left back-supplier"></i>
+        <div class="form-group">
+          <label for="supplier-name" class="form-label">Tên nhà cung cấp</label>
+          <input type="text" id="supplier-nameFIX" name="supplier-name" placeholder="Nhập tên nhà cung cấp"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-phone" class="form-label">Số điện thoại</label>
+          <input type="number" id="supplier-phoneFIX" name="supplier-phone" placeholder="Nhập số điện thoại"
+            class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-address" class="form-label">Địa chỉ</label>
+          <input type="text" id="supplier-addressFIX" name="supplier-address" placeholder="Nhập địa chỉ"
+            class="form-input" />
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" id="accept-fixSP" class="form-button">Hoàn tất</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1315,18 +1398,82 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/OD-ajax.js"></script>
   <script src="../../JS/admin/OD-getAddress_ajax.js"></script>
   <script src="../../JS/admin/ST-ajax.js"></script>
+  <script src="../../JS/admin/IP-Ajax.js"></script>
+  <script src="../../JS/admin/SP-Ajax.js"></script>
 
 
-  <script>
-    const adminFunctions = <?php echo json_encode($_SESSION['adminInfo']['function_ids']); ?>;
-    console.log(adminFunctions);
-    adminFunctions.forEach(funcId => {
+<script>
+  window.adminInfo = <?php echo json_encode($_SESSION['adminInfo']); ?>;
+  console.log('Admin Info:', window.adminInfo);
 
+  const functionsMap = window.adminInfo.functions_map;
+  console.log('Admin Functions Map:', functionsMap);
 
-    });
+  // Mapping tên chức năng -> ID menu tương ứng
+  const functionToMenuId = {
+      "Thống kê": "admin-statistic",
+      "Đơn hàng": "admin-oder",
+      "Sản phẩm": "admin-product",
+      "Khách hàng": "admin-customer",
+      "Nhân viên": "admin-employee",
+      "Quản lí tài khoản": "admin-account",
+      "Quản lí quyền": "admin-role",
+      "Nhập hàng": "admin-import",
+      "Nhà cung cấp": "admin-supplier"
+  };
 
+  // Mapping chức năng -> tiền tố id
+  const functionPrefix = {
+      "Nhân viên": "employee",
+      "Sản phẩm": "product",
+      "Đơn hàng": "order",
+      "Khách hàng": "customer",
+      "Quản lí tài khoản": "account",
+      "Quản lí quyền": "role",
+      "Nhập hàng": "import",
+      "Nhà cung cấp": "supplier"
+  };
 
-  </script>
+  document.addEventListener("DOMContentLoaded", () => {
+      for (const [functionName, actions] of Object.entries(functionsMap)) {
+          console.log(`Function: ${functionName}`);
+          console.log(`Actions: ${actions.join(', ')}`);
+
+          // Hiển thị module nếu có bất kỳ quyền nào (AC1, AC2, AC3, AC4)
+          if (actions.includes("AC1") || actions.includes("AC2") || actions.includes("AC3") || actions.includes("AC4")) {
+              const menuId = functionToMenuId[functionName];
+              if (menuId) {
+                  document.getElementById(menuId)?.style.setProperty("display", "inline-block");
+              }
+          }
+
+          // Xử lý các quyền còn lại
+          const prefix = functionPrefix[functionName];
+          if (prefix) {
+            // AC2: Add
+            const addBtn = document.getElementById(`${prefix}-plus`);
+            if (addBtn) {
+                addBtn.style.display = actions.includes("AC2") ? "block" : "none";
+            }
+
+            // AC3: Edit
+            const editBtns = document.getElementsByClassName(`fix-btn-${prefix}`);
+            for (let btn of editBtns) {
+                btn.style.display = actions.includes("AC3") ? "inline-block" : "none";
+            }
+
+            // AC4: Delete
+            const deleteBtns = document.getElementsByClassName(`delete-btn-${prefix}`);
+            for (let btn of deleteBtns) {
+                btn.style.display = actions.includes("AC4") ? "inline-block" : "none";
+            }
+          }
+      }
+  });
+  // document.getElementById("admin-account").style.display = "block";
+  // document.getElementById("admin-role").style.display = "block";
+
+</script>
 
 
 </body>

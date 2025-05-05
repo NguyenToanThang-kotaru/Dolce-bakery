@@ -15,6 +15,6 @@ if (isset($_POST['category_id'])) {
         echo "<option value=''>Không có phân loại</option>";
     }
 } else {
-    echo "<option value=''>Thiếu category_id</option>";
+    echo "<option value=''>-- Chọn phân loại sản phẩm --</option>";
 }
 ?>

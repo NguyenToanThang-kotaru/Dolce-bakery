@@ -8,38 +8,66 @@ if (isset($_POST['admin-login'])) {
 
     $userName = mysqli_real_escape_string($conn, $userName);
 
-    // Lấy thông tin của tài khoản nhân viên và danh sách các chức năng.
-    $sql = "SELECT ea.*, e.fullName, GROUP_CONCAT(pf.function_id) AS function_ids
-        FROM employeeaccount ea
-        JOIN employees e ON ea.userName = e.id
-        JOIN permissions p ON ea.permission_id = p.id
-        JOIN permission_function pf ON p.id = pf.permission_id
-        WHERE ea.userName = '$userName'
-        GROUP BY ea.id";
-    $result = $conn->query($sql);
+    $sqlAccount = "SELECT * FROM employeeaccount WHERE userName = ?";
+    $stmtAcc = $conn->prepare($sqlAccount);
+    $stmtAcc->bind_param("s", $userName);
+    $stmtAcc->execute();
+    $resultAcc = $stmtAcc->get_result();
 
+    if ($resultAcc->num_rows === 0) {
+        echo json_encode(['status' => 'error', 'message' => 'Tài khoản không tồn tại']);
+        exit;
+    }
 
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+    $accountRow = $resultAcc->fetch_assoc();
+    $hashedPassword = $accountRow['password'];
 
-        if (password_verify($passwd, $row['password'])) {
-            $functionIds = explode(',', $row['function_ids']);
-            $_SESSION['adminInfo'] = [
+    // Kiểm tra mật khẩu
+    if (!password_verify($passwd, $hashedPassword)) {
+        echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
+        exit;
+    }
+
+    $sql = "SELECT ea.*, e.fullName, pf.function_id, pf.ActionID, f.name AS function_name
+            FROM employeeaccount ea
+            JOIN employees e ON ea.userName = e.id
+            JOIN permissions p ON ea.permission_id = p.id
+            JOIN permission_function pf ON p.id = pf.permission_id
+            JOIN functions f ON pf.function_id = f.id
+            WHERE ea.userName = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $userName);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $adminInfo = null;
+    $functions_map = [];
+
+    while ($row = $result->fetch_assoc()) {
+        if (!$adminInfo) {
+            $adminInfo = [
                 'adminID' => $row['id'],
                 'userName' => $row['userName'],
                 'permission_id' => $row['permission_id'],
                 'fullName' => $row['fullName'],
-                'function_ids' => $functionIds
             ];
-
-            echo json_encode(['status' => 'success']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
         }
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Không tồn tại tài khoản admin']);
+
+        $fname = $row['function_name'];
+        $action = $row['ActionID'];
+
+        if (!isset($functions_map[$fname])) {
+            $functions_map[$fname] = [];
+        }
+
+        $functions_map[$fname][] = $action;
     }
 
-    exit();
+    if ($adminInfo) {
+        $_SESSION['adminInfo'] = $adminInfo + ['functions_map' => $functions_map];
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Không lấy được phân quyền']);
+    }
 }
 ?>

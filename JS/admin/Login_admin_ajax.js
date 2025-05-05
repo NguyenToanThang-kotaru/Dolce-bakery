@@ -18,6 +18,7 @@ $(document).ready(function () {
             },
             success: function (res) {
                 if (res.status === "success") {
+                    console.log(res);
                     window.location.href = "../../HTML/admin/admin.php";
                 } else {
                     $(".error-msg-ad").text(res.message).addClass("show");

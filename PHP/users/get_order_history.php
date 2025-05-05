@@ -19,6 +19,7 @@ while ($order = $result->fetch_assoc()) {
     $orderID = $order['id'];
     $orderDate = $order['orderDate'];
     $status = $order['status_name'];
+    $statusID = $order['status']; 
 
     $sqlDetail = "SELECT od.quantity, od.price, p.pd_name AS product_name
                   FROM orderdetail od
@@ -43,7 +44,7 @@ while ($order = $result->fetch_assoc()) {
     while ($item = $detailResult->fetch_assoc()) {
         $productName = $item['product_name'];
         $quantity = $item['quantity'];
-        $price = $item['price'] * $item['quantity'];
+        $price = $item['price'];
         $subtotal = $quantity * $price;
         $total += $subtotal;
 
@@ -57,9 +58,13 @@ while ($order = $result->fetch_assoc()) {
     $html .= "</tbody></table>
               <div class='order-summary-history'>
                 <p><strong>Tổng tiền:</strong> " . number_format($total, 0, ',', '.') . " đ</p>
-                <p><strong>Trạng thái:</strong> $status</p>
-              </div>
-              </div>";
+                <p><strong>Trạng thái:</strong> $status";
+
+    if ($statusID == 1) {
+        $html .= " <button class='cancel-btn' data-order-id='$orderID'>Hủy đơn</button>";
+    }
+
+    $html .= "</p></div></div>";
 }
 
 echo $html;

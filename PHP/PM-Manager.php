@@ -5,17 +5,23 @@ $sql = "SELECT
     p.id AS permission_id,
     p.name AS 'P_NAME', 
     GROUP_CONCAT(DISTINCT f.name ORDER BY f.name SEPARATOR '|') AS 'F_NAME',
+    COUNT(DISTINCT CONCAT(pf.function_id, ':', pf.ActionID)) AS ACTION_COUNT,  -- Đếm tổng số ActionID duy nhất
+    GROUP_CONCAT(DISTINCT pf.ActionID ORDER BY pf.ActionID SEPARATOR '|') AS 'ACTION_LIST',
     COUNT(DISTINCT u.id) AS 'AC_COUNT',
     GROUP_CONCAT(DISTINCT u.userName ORDER BY u.userName SEPARATOR '|') AS 'USER_LIST'
 FROM permissions p
 LEFT JOIN permission_function pf ON p.id = pf.permission_id
 LEFT JOIN functions f ON pf.function_id = f.id
 LEFT JOIN employeeaccount u ON p.id = u.permission_id
-GROUP BY p.id";
+GROUP BY p.id, p.name";
+
+
 
 $result = $conn->query($sql);
 
 $usersList = []; // Mảng chứa danh sách user theo permission_id
+
+
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -26,12 +32,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['P_NAME']) . "</td>";
 
         // Chức năng
-        echo "<td class='list-role-function'>";
-        $functions = explode('|', $row['F_NAME']);
-        foreach ($functions as $function) {
-            echo "<div class='role-function'>" . htmlspecialchars($function) . "</div>";
-        }
-        echo "</td>";
+        echo "<td class='list-role-function'>" . $row['ACTION_COUNT'] . "</td>";
 
         // Số lượng tài khoản
         echo "<td>" . $row['AC_COUNT'] . "</td>";

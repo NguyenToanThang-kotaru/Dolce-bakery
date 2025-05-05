@@ -256,6 +256,7 @@ function savePaymentIntoDatabase()
                 setTimeout(() => {
                     location.reload();
                 }, timeShown);
+                sessionStorage.removeItem("cart");
             } else {
                 console.log("Fail");
                 showToast("Thanh toán thất bại.", false);

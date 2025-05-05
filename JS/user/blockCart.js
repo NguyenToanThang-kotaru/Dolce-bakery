@@ -1,3 +1,4 @@
+let new_cart = [];
 const slideshow = document.getElementById("slideshow");
 const mainMenu = document.getElementById("mainMenu");
 const brandStory = document.getElementById("brandStory");
@@ -26,8 +27,10 @@ function blockShopCart() {
 }
 
 cart.addEventListener('click', function () {
+
     getCart(function (canOpen) {
         if (!canOpen) return;
+        document.getElementById("InfoPD-container").style.display = "none";
         OnCart();
     });
 });
@@ -77,7 +80,6 @@ CartPhone.addEventListener("click", () => {
     }
 })
 
-let new_cart = [];
 
 function addToCart(productId, quantity = 1) {
     $.ajax({
@@ -95,6 +97,7 @@ function addToCart(productId, quantity = 1) {
             }
             else{
                 $('.cart-count').text(response);
+                getCart();
                 showToast("Đã thêm sản phẩm vào giỏ hàng.", true);
             }
         }
@@ -111,7 +114,7 @@ function getCart(callback) {
         success: function (response) {
             if (response.status === "error") {
                 showToast("Bạn cần đăng nhập để xem giỏ hàng.", false);
-                callback(false);
+                if (typeof callback === "function") callback(false);
                 return;
             }
 
@@ -119,10 +122,11 @@ function getCart(callback) {
             sessionStorage.setItem("cart", JSON.stringify(new_cart));
             displayItemInCart();
             calculateTotal(new_cart);
-            callback(true);
+            if (typeof callback === "function") callback(true);
         }
-    })
+    });
 }
+
 
 function displayItemInCart() {
     let html = '';
@@ -168,7 +172,9 @@ function addItemToCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Them san pham: " + id);
@@ -182,7 +188,9 @@ function decreaseItemInCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Giam san pham: " + id);
@@ -196,7 +204,9 @@ function removeItemFromCart(id) {
             'product_id': id
         },
         success: function () {
-            getCart();
+            getCart(() => {
+                itemQuantityCount();
+            });
         }
     });
     console.log("Xoa san pham: " + id);
@@ -248,4 +258,22 @@ function changeQuantity(change) {
     if (newQuantity >= 1) {
         quantityElement.textContent = newQuantity;
     }
+}
+
+itemQuantityCount();
+function itemQuantityCount() {
+    if (!localStorage.getItem("isLoggedIn")) {
+        document.querySelector('.cart-count').textContent = 0;
+        return;
+    }
+
+    let cart = sessionStorage.getItem("cart");
+    if (!cart) return; 
+    let total = 0;
+    cart = JSON.parse(cart); 
+    cart.forEach(item => {
+        total += parseInt(item.quantity);
+    });
+    console.log(total);
+    document.querySelector('.cart-count').textContent = total;
 }
