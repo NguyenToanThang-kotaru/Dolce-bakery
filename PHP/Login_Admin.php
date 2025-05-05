@@ -28,7 +28,7 @@ if (isset($_POST['admin-login'])) {
         exit;
     }
 
-    $sql = "SELECT ea.*, e.fullName, pf.function_id, pf.ActionID, f.name AS function_name
+    $sql = "SELECT ea.*, e.fullName, e.email, e.phoneNumber, e.address,pf.function_id, pf.ActionID, f.name AS function_name, p.name AS permission_name
             FROM employeeaccount ea
             JOIN employees e ON ea.userName = e.id
             JOIN permissions p ON ea.permission_id = p.id
@@ -50,6 +50,10 @@ if (isset($_POST['admin-login'])) {
                 'userName' => $row['userName'],
                 'permission_id' => $row['permission_id'],
                 'fullName' => $row['fullName'],
+                'permission_name' => $row['permission_name'],
+                'email' => $row['email'],
+                'phoneNumber' => $row['phoneNumber'],
+                'address' => $row['address'],
             ];
         }
 
