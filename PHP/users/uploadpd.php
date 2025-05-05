@@ -6,8 +6,8 @@ include '../../PHP/config.php';
 
 if (!isset($type)) {
     die("Lỗi: Không xác định loại sản phẩm.");
-}   
-    
+}
+
 $sql = "SELECT pd.*, sct.*, ct.*
 FROM products pd
 JOIN subcategories sct ON pd.subcategory_id = sct.id
@@ -21,15 +21,20 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<div class='" . $type . "-product'>
-                <div class='product-img'>
-                    <div class='img-effect'><img src='" . $row['image'] . "' alt=''></div>
-                </div>
-                <div class='product-name'>" . $row['pd_name'] . "</div>    
-                <div class='product-end'>
-                    <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
-                    <div class='add-cart'><img src='../../assest/cart.png' alt=''></div>
-                </div>
-              </div>";
+        <div class='product-img'>
+            <div class='img-effect'>
+                <img src='" . $row['image'] . "' alt=''>
+                <div class='product-quantity'>Còn lại: " . $row['quantity'] . " sản phẩm</div>
+            </div>
+        </div>
+        <div class='product-name'>" . $row['pd_name'] . "</div>   
+        <div class='product-end'>
+            <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
+            <div class='add-cart'><img src='../../assest/cart.png' alt=''></div>
+        </div>
+      </div>";
+
+
     }
 } else {
     echo "<p style='text-align: center;'>Không có sản phẩm nào</p>";
@@ -37,4 +42,4 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-?> 
+?>
