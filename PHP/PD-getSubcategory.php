@@ -6,7 +6,7 @@ if (isset($_POST['category_id'])) {
 } elseif (isset($categoryId)) {
     $categoryId = intval($categoryId); // Được gán từ bên ngoài trước khi include
 } else {
-    echo "<select name='subcategory' class='form-select'><option value=''>-- Không có danh mục --</option></select>";
+    
     return;
 }
 
