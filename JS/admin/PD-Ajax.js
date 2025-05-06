@@ -1,3 +1,20 @@
+function showError(inputElement, message) {
+    let errorDiv = inputElement.parentNode.querySelector(".error-msg");
+    if (!errorDiv) {
+        errorDiv = document.createElement("div");
+        errorDiv.className = "error-msg show";
+        inputElement.parentNode.appendChild(errorDiv);
+    }
+    errorDiv.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${message}`;
+    inputElement.focus();
+}
+
+function clearErrors(form) {
+    form.querySelectorAll(".error-msg").forEach((error) => {
+        error.remove();
+    });
+}
+
 document.addEventListener("click", function (event) {
     if (event.target.classList.contains("fix-btn-product")) {
         let productId = event.target.getAttribute("data-id");
@@ -95,6 +112,17 @@ document.querySelector(".product-table").addEventListener("click", function (eve
 document.querySelector(".add-form-product").addEventListener("submit", function(e) {
     e.preventDefault(); // Ngăn form load lại trang
 
+    clearErrors(this);
+
+    let productName = document.getElementById("product-name").value;
+
+    let productNameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
+   
+    if (!productNameRegex.test(productName)) {
+        showError(document.getElementById("product-name"), "Tên sản phẩm không hợp lệ.");
+        return;
+    }
+
     let formData = new FormData(this);
 
     fetch('../../PHP/PD-Add.php', {
@@ -136,6 +164,17 @@ document.querySelector(".add-form-product").addEventListener("submit", function(
 
 document.getElementById("update-form-product").addEventListener("submit", function (event) {
     event.preventDefault(); // Ngăn form gửi theo cách mặc định
+
+    clearErrors(this);
+
+    let productName = document.getElementById("product-nameFIX").value;
+
+    let productNameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/;
+   
+    if (!productNameRegex.test(productName)) {
+        showError(document.getElementById("product-nameFIX"), "Tên sản phẩm không hợp lệ.");
+        return;
+    }
 
     let formData = new FormData(this); // Lấy dữ liệu form
     let productId = document.getElementById("product-id").value;

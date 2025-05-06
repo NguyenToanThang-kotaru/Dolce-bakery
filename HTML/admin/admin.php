@@ -60,15 +60,15 @@ if (!isset($_SESSION['adminInfo'])) {
     <div class="business-process">
       <div class="card">
         <h3>Số đơn hàng</h3>
-        <p>0</p>
+        <p class="order-count"></p>
       </div>
       <div class="card">
-        <h3>Doanh thu</h3>
-        <p>0</p>
+        <h3 class="revenue">Doanh thu</h3>
+        <p></p>
       </div>
       <div class="card">
-        <h3>Tỷ lệ tăng trưởng</h3>
-        <p>0</p>
+        <h3>Lãi</h3>
+        <p class="profit"></p>
       </div>
     </div>
   </div>
@@ -82,12 +82,18 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
       </div>
       <ul class="menu-profile">
-        <li><a href="#">Thông tin cá nhân</a></li>
         <li>
-          <a href="#">Quyền hạn: <span>...</span></a>
+          <a href="#">Quyền hạn: <span><?php echo $_SESSION['adminInfo']['permission_name']; ?></span></a>
         </li>
-        <li><a href="#">Lịch sử hoạt động</a></li>
-        <li><a href="#">Quản lý quyền</a></li>
+        <li>
+          <a href="#">Địa chỉ mail: <span><?php echo $_SESSION['adminInfo']['email']; ?></span></a>
+        </li>
+        <li>
+          <a href="#">Số điện thoại: <span><?php echo $_SESSION['adminInfo']['phoneNumber']; ?></span></a>
+        </li>
+        <li>
+          <a href="#">Địa chỉ: <span><?php echo $_SESSION['adminInfo']['address']; ?></span></a>
+        </li>
       </ul>
       <button class="logout-btn-admin">Đăng xuất</button>
     </div>
@@ -1411,6 +1417,9 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/ST-ajax.js"></script>
   <script src="../../JS/admin/IP-Ajax.js"></script>
   <script src="../../JS/admin/SP-Ajax.js"></script>
+  <script src="../../JS/admin/business-process.js"></script>
+  
+  
 
 
 <script>
