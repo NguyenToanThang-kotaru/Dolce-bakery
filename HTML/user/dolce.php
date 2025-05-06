@@ -193,6 +193,7 @@
                 </div>
                 <div id="button">
                     <button class="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
+                    <button class="Buy" type="submit">Mua Ngay</button> 
                 </div>
             </div>
 
@@ -265,7 +266,7 @@
                         </select>
                     </div>
 
-                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+                    <img src="../../assest/backtomain.png" alt="" class="backtomain">
 
                     <div class="product-container" id="bread-container" data-category="bread">
                         <?php $type = "bread";
@@ -348,7 +349,7 @@
                         </select>
                     </div>
 
-                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+                    <img src="../../assest/backtomain.png" alt="" class="backtomain">
 
                     <div class="product-container" id="cake-container" data-category="cake">
 
@@ -438,7 +439,7 @@
                         </select>
                     </div>
 
-                    <img src="../../assest/backmain.png" alt="" class="backtomain">
+                    <img src="../../assest/backtomain.png" alt="" class="backtomain">
 
 
                     <div class="product-container" id="cookie-container" data-category="cookie">
@@ -664,7 +665,40 @@
                 <h3 class="order-title">Đơn hàng đã mua</h3>
 
                 <div class="orders-scroll-area">
-                    
+                    <div class="order-box">
+                        <h4>Đơn hàng 15</h4>
+                        <div class="order-date"><strong>Ngày đặt:</strong> 2025-04-21</div>
+                        <table class="history-order-table">
+                        <thead>
+                            <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Thanh Xà Diệu Đà</td>
+                            <td>1</td>
+                            <td>700,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Bánh Kem Trà Xanh</td>
+                            <td>1</td>
+                            <td>250,000 đ</td>
+                            </tr>
+                            <tr>
+                            <td>Tôm Phô Mai</td>
+                            <td>4</td>
+                            <td>25,000 đ</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="order-summary-history">
+                        <p><strong>Tổng tiền:</strong> 1,050,000 đ</p>
+                        <p><strong>Trạng thái:</strong> Chờ xử lý</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -708,7 +742,7 @@
 
                         </div>
                         <div class="payment-left-footer">
-                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 20px;">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
                                 ← Quay lại giỏ hàng
                             </p>
                         </div>

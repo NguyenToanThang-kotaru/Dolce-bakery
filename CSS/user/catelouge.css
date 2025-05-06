@@ -17,7 +17,7 @@
 }
 
 
-.title{
+.title {
     display: flex;
     color: #C09898;
     font-weight: bold;
@@ -140,6 +140,31 @@
 .product-end img:hover {
     transform: scale(1.1);
 }
+
+.img-effect {
+    position: relative;
+}
+
+.product-quantity {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(148, 89, 17, 0.8);
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 6px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.img-effect:hover .product-quantity {
+    opacity: 1;
+}
+
+
 
 .bread-pagination,
 .cookie-pagination,
