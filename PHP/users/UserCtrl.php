@@ -85,6 +85,10 @@ if (isset($_POST['login-form-son'])) {
         $row = $result->fetch_assoc();
         $hashedPasswordInDB = $row['password'];
         if (password_verify($passwd, $hashedPasswordInDB)) { 
+            if ($row['status'] == 2){
+                echo json_encode(['status' => 'error', 'message' => 'Tài khoản đã bị khóa']);
+                exit();
+            }
             $userSession = loginUser($conn, $row);
             echo json_encode(['status' => 'success', 'user' => $userSession]);
         } else {

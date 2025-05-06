@@ -21,12 +21,18 @@ if (isset($_POST['admin-login'])) {
 
     $accountRow = $resultAcc->fetch_assoc();
     $hashedPassword = $accountRow['password'];
+    $status = $accountRow['status'];
 
     // Kiểm tra mật khẩu
     if (!password_verify($passwd, $hashedPassword)) {
         echo json_encode(['status' => 'error', 'message' => 'Sai mật khẩu']);
         exit;
     }
+    if ($status == 2){
+        echo json_encode(['status' => 'error', 'message' => 'Tài khoản đã bị khóa']);
+        exit;
+    }
+
 
     $sql = "SELECT ea.*, e.fullName, e.email, e.phoneNumber, e.address,pf.function_id, pf.ActionID, f.name AS function_name, p.name AS permission_name
             FROM employeeaccount ea
@@ -54,6 +60,7 @@ if (isset($_POST['admin-login'])) {
                 'email' => $row['email'],
                 'phoneNumber' => $row['phoneNumber'],
                 'address' => $row['address'],
+                'status' => $row['status'],
             ];
         }
 

@@ -61,8 +61,18 @@ if ($result->num_rows > 0) {
     document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("change", function (event) {
     if (event.target.classList.contains("account-status")) {
+        let selectEl = event.target;
         let userId = event.target.getAttribute("data-id");
         let newStatus = event.target.value;
+        const currentAccountId = window.adminInfo.adminID;
+
+        if (parseInt(currentAccountId) === parseInt(userId) && newStatus==2) {
+            alert("Không thể xóa khóa tài khoản đang đăng nhập");
+            event.target.value = 1;
+            selectEl.classList.remove("changed");
+            selectEl.blur();
+            return;
+        }
 
         fetch("../../PHP/AC-update_status.php", {
             method: "POST",

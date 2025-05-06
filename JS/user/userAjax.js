@@ -121,6 +121,10 @@ $(document).ready(function () {
                         username.focus();
                         return;
                     }
+                    else if (response.message === "Tài khoản đã bị khóa") {
+                        console.log(response);
+                        showToast("Tai khoan bi khoa", false);
+                    }
                     else if (response.message === "Sai mật khẩu") {
                         console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
