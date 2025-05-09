@@ -123,7 +123,7 @@ document.querySelector(".account-table").addEventListener("click", function (eve
                     console.log("da xoa");
                     event.target.closest("tr").remove();
                 } else {
-                    alert('Xóa tài khoản phẩm thất bại!');
+                    alert(data.message);
                 }
                 deleteOverlay.style.display = 'none';
             })};

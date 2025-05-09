@@ -1779,6 +1779,83 @@ body {
   display: none;
 }
 
+/* inventory part */
+.inventory-part {
+  flex: 1;
+  background-color: #f0f8ff;
+  display: none;
+}
+
+.inventory-table-container {
+  width: 90%;
+  height: 600px;
+  background-color: #ddd;
+  margin-left: 60px;
+  padding: 30px;
+  border-radius: 30px;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+
+.inventory-table th,
+.inventory-table td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.inventory-table th {
+  background-color: #feead7;
+  color: #6b4f4f;
+  font-size: 16px;
+}
+
+#inventory-plus {
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #514b4b;
+  opacity: 0.8;
+  width: fit-content;
+  padding: 10px;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+#inventory-plus:hover {
+  color: #ea9029;
+  transform: scale(1.1);
+}
+
+.inventory-table td {
+  background-color: #f9f5f0;
+}
+
+.inventory-table td {
+  color: #4f3c3c;
+  font-size: 14px;
+}
+
+.fix-inventory {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.inventory-table i:hover {
+  color: #8b5a5a;
+}
+
 /* căn lề bảng */
 .statistic-table th,
 .statistic-table td,
@@ -1801,7 +1878,9 @@ body {
 .supplier-table th,
 .supplier-table td,
 .import-table th,
-.import-table td {
+.import-table td,
+.inventory-table th,
+.inventory-table td {
     text-align: center !important;
     vertical-align: middle !important;
 }
@@ -1820,6 +1899,7 @@ body {
 .supplier-table td:nth-child(3), 
 .supplier-table td:nth-child(2), 
 .role-table td:nth-child(1), 
+.inventory-table td:nth-child(3), 
 .history-order-table td:nth-child(1), 
 .order-detail-table td:nth-child(1) { 
     text-align: left !important;

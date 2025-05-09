@@ -45,6 +45,7 @@ if (!isset($_SESSION['adminInfo'])) {
       <a href="#" id="admin-role">Quản lí quyền</a>
       <a href="#" id="admin-import">Nhập hàng</a>
       <a href="#" id="admin-supplier">Nhà cung cấp</a>
+      <a href="#" id="admin-inventory">Quản lí tồn kho</a>
     </div>
 
     <img src="../../assest/Dolce.png" alt="hahaha" />
@@ -1401,6 +1402,25 @@ if (!isset($_SESSION['adminInfo'])) {
     </div>
   </div>
 
+  <!-- inventory part -->
+  <div class="inventory-part">
+    <div class="inventory-table-container">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Mã phiếu nhập</th>
+            <th>Ngày nhập</th>
+          </tr>
+        </thead>
+        <tbody id="inventory-table-body">
+          <?php include '../../PHP/IV-Manager.php'?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
   <script src="../../JS/admin/admin.js"></script>
@@ -1439,7 +1459,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Quản lí tài khoản": "admin-account",
       "Quản lí quyền": "admin-role",
       "Nhập hàng": "admin-import",
-      "Nhà cung cấp": "admin-supplier"
+      "Nhà cung cấp": "admin-supplier",
+      "Quản lí tồn kho": "admin-inventory"
   };
 
   // Mapping chức năng -> tiền tố id
@@ -1451,7 +1472,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Quản lí tài khoản": "account",
       "Quản lí quyền": "role",
       "Nhập hàng": "import",
-      "Nhà cung cấp": "supplier"
+      "Nhà cung cấp": "supplier",
+      "Quản lí tồn kho": "inventory"
   };
 
   document.addEventListener("DOMContentLoaded", () => {
