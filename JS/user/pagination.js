@@ -419,16 +419,25 @@ function updateDisplayAllproductSlider() {
 }
 
 
-function render_filter() {
-  // Xác định danh mục hiện tại
-  let activeCategory = "allproduct";
-  if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
-    activeCategory = "bread";
-  } else if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
-    activeCategory = "cake";
-  } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex") {
-    activeCategory = "cookie";
+function render_filter(subcategory = '', categoryName = '') {
+  console.log(categoryName)
+  let activeCategory = categoryName
+  if (categoryName === '') {
+    activeCategory = "allproduct";
+    if (document.querySelector(".bread-catelouge-container").style.display === "flex") {
+      activeCategory = "bread";
+    } else if (document.querySelector(".cake-catelouge-container").style.display === "flex") {
+      activeCategory = "cake";
+    } else if (document.querySelector(".cookie-catelouge-container").style.display === "flex") {
+      activeCategory = "cookie";
+    }
   }
+  else {
+    console.log("day la", categoryName)
+    activeCategory = categoryName
+    console.log(activeCategory)
+  }
+  // Xác định danh mục hiện tại
 
   // Lấy keyword từ input tương ứng
   const keywordInput = document.getElementById(`product-name-${activeCategory}`);
@@ -439,15 +448,27 @@ function render_filter() {
   const maxVal = document.getElementById(`max-price-${activeCategory}`)?.value || 1000000;
 
   // Lấy subcategory tương ứng
-  const subcategory = document.getElementById(`product-subcategory-${activeCategory}`)?.value || "";
-
+  let subcategorySelect;
+  if (subcategory == '') {
+    subcategorySelect = document.getElementById(`product-subcategory-${activeCategory}`)?.value || "";
+  }
+  else if(subcategory == 'all'){
+     subcategorySelect=''
+    const selectshowsubcate = document.getElementById(`product-subcategory-${activeCategory}`);
+    selectshowsubcate.value = subcategory;
+  }
+  else {
+    subcategorySelect = subcategory;
+    const selectshowsubcate = document.getElementById(`product-subcategory-${activeCategory}`);
+    selectshowsubcate.value = subcategory;
+  }
   // Lấy loại nếu là allproduct
   const type = activeCategory === "allproduct"
     ? document.getElementById("product-category")?.value || 0
     : 0;
 
   // Chuẩn bị dữ liệu gửi
-  const data = `category=${activeCategory}&keyword=${encodeURIComponent(keyword)}&min=${minVal}&max=${maxVal}&subcategory=${subcategory}&type=${type}`;
+  const data = `category=${activeCategory}&keyword=${encodeURIComponent(keyword)}&min=${minVal}&max=${maxVal}&subcategory=${subcategorySelect}&type=${type}`;
   console.log("📤 Dữ liệu gửi:", data);
 
   // Gửi AJAX
@@ -461,17 +482,17 @@ function render_filter() {
       if (container) {
         container.innerHTML = xhr.responseText;
         // Gắn lại sự kiện click sau khi lọc
-document.querySelectorAll(".product-img img").forEach(img => {
-  img.addEventListener("click", ProductClickShowInfo);
-});
+        document.querySelectorAll(".product-img img").forEach(img => {
+          img.addEventListener("click", ProductClickShowInfo);
+        });
 
-document.querySelectorAll(".product-name").forEach(name => {
-  name.addEventListener("click", ProductClickShowInfo);
-});
+        document.querySelectorAll(".product-name").forEach(name => {
+          name.addEventListener("click", ProductClickShowInfo);
+        });
 
-document.querySelectorAll(".product-end .price").forEach(price => {
-  price.addEventListener("click", ProductClickShowInfo);
-});
+        document.querySelectorAll(".product-end .price").forEach(price => {
+          price.addEventListener("click", ProductClickShowInfo);
+        });
 
         // ✅ Phân trang lại sau khi cập nhật HTML
         if (activeCategory === "bread") {
@@ -1066,6 +1087,35 @@ function loadSubcategories() {
 
   xhr.send("category_id=" + encodeURIComponent(categoryId));
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuItems = document.querySelectorAll(".category-item");
+  const catalogueContainers = document.querySelectorAll("[class$='catelouge-container']");
+
+  menuItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const selectedCategory = item.getAttribute("data-category");
+
+      // Ẩn tất cả container
+      catalogueContainers.forEach(container => {
+        container.style.display = "none";
+      });
+
+      // Hiển thị container tương ứng dựa trên selectedCategory
+      const matchedContainer = document.querySelector(`.${selectedCategory}-catelouge-container`);
+      if (matchedContainer) {
+        matchedContainer.style.display = "flex";  // Hiển thị container tương ứng
+        slide.style.display = "none"; // Ẩn các phần tử không cần thiết
+        mainmenu.style.display = "none";
+        brandstory.style.display = "none";
+        main_container.style.display = "none";
+        // render_filter("all","")
+      }
+    });
+  });
+});
+
 
 
 
