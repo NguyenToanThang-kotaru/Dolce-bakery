@@ -225,13 +225,11 @@ function getCartSummary() {
 }
 function savePaymentIntoDatabase()
 {
-    let addressData = JSON.parse(localStorage.getItem("userAddress") || "null");
     let userSession = JSON.parse(sessionStorage.getItem("userInfo") || "null");
 
-    // Ưu tiên localStorage, fallback sang session
-    let addressDetail = addressData?.addressDetail || userSession?.addressDetail;
-    let province_id = addressData?.province || userSession?.province_id;
-    let district_id = addressData?.district || userSession?.district_id;
+    let addressDetail = userSession?.addressDetail;
+    let province_id = userSession?.province_id;
+    let district_id = userSession?.district_id;
     $.ajax({
         type: "POST",
         url: "../../PHP/users/savePayment.php",

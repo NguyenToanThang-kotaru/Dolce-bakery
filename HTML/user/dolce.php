@@ -618,10 +618,20 @@
             </div>
 
         </div></div>
+    <div class="overlaySelectAddress"></div>
+    <div class="modal-select-address">
         
+
+        <div class="add-new-btn" onclick = "OnUpdateAddress()">
+        <div>Thêm địa chỉ mới</div>
+        <div class="add-icon">+</div>
+        </div>
+
+        <button class="continue-btn" onclick = "getAddressToPaying();">Tiếp tục</button>
+    </div>    
         <div class="overlayInfoAddress"></div>
         <div class="overlayAddress">
-            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+            <h2 class="addr-title">Thêm địa chỉ mới</h2>
 
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
@@ -635,12 +645,21 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="saveAddress()">Lưu địa chỉ</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="addAddress()">Thêm mới</button>
         </div>
         <div class="overlayAddressPayment">
             <h2 class="addr-title">Cập nhật địa chỉ</h2>
-
+            <div class = "address_id" style = "display: none"></div>
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
 
@@ -653,8 +672,17 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="submitEditAddress()">Cập nhật</button>
         </div>
 
         <div class="modal-overlay-history">
@@ -698,7 +726,7 @@
                             <label for="address-payment"><strong>Địa chỉ:</strong> </label>
                             <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
                             <span class="payment-customer-address content no-margin"></span>
-                            <span class="changed no-margin" onclick = "OnUpdateAddressPayment()">Thay đổi</span>    
+                            <span class="changed no-margin" onclick = "OnSelectAddress()">Thay đổi</span>    
                         </div>
                         <br />
                         <div class="payment-customer-note">
@@ -903,7 +931,7 @@
                 <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
             </div>
         </footer>   
-    
+
     <script src="../../JS/user/blockOrderHistory.js"></script>
     <script src="../../JS/user/invoice.js"></script>
     <script src="../../JS/user/payment.js"></script>
@@ -916,6 +944,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>
+    <script src="../../JS/user/addressManage.js"></script>
 </body>
 
 </html>

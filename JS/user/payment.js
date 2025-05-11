@@ -27,8 +27,12 @@ buy.addEventListener("click", function () {
     }
     if (flag_payment === 0) {
 
+       loadCustomerAddressToSessionStorageAndThen(() => {
+        GoToPayProcess();
+        loadCustomerAddress();
         blockPayment.style.display = "block";
         flag_payment = 1;
+    });
     }
 
     else {
@@ -56,8 +60,6 @@ buy.addEventListener("click", function () {
         flag_payment = 0;
        
     })
-    localStorage.removeItem("userAddress");
-    GoToPayProcess();
 })
 // const payment = document.getElementById('submit-payment-btn');
 // const blockInvoice = document.getElementById('overlay-invoice');
@@ -94,8 +96,8 @@ buy.addEventListener("click", function () {
 
 function GoToPayProcess() {
     getPayDate();
-    setUserInfoPayment();
     displayItemReadyPaying();
+    setUserInfoPayment();
 }
 function getPayDate() {
     const today = new Date(); // Lấy ngày tháng năm hiện tại
@@ -108,6 +110,7 @@ function getPayDate() {
     return formattedDate;
 }
 function setUserInfoPayment() {
+    console.log("hello");
     userSession = sessionStorage.getItem("userInfo");
     userSession = JSON.parse(userSession);
     document.querySelector(".payment-customer-name").textContent = userSession.fullName;
