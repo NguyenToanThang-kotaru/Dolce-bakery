@@ -471,12 +471,28 @@ document.addEventListener('change', function(e) {
         })
         .then(res => res.json())
         .then(data => {
+            let producttableBody = document.querySelector("#product-table-body");
+            let inventorytableBody = document.querySelector("#inventory-table-body");
             if (data.success) {
                 select.style.boxShadow = newStatus == "2"
                     ? "0 0 5px 1px rgb(47, 218, 70)"
                     : "0 0 5px 1px #ff9800";
                 // Cập nhật lại data-current-status
                 select.setAttribute('data-current-status', newStatus);
+            fetch("../../PHP/PD-Manager.php")
+            .then(response => response.text())
+            .then(html => {
+                // Cập nhật lại nội dung bảng
+                producttableBody.innerHTML = html; 
+            })
+            .catch(error => console.error("Lỗi khi tải lại bảng:", error));
+            fetch("../../PHP/IV-Manager.php")
+            .then(response => response.text())
+            .then(html => {
+                // Cập nhật lại nội dung bảng
+                inventorytableBody.innerHTML = html; 
+            })
+            .catch(error => console.error("Lỗi khi tải lại bảng:", error));
                 alert('Cập nhật trạng thái thành công!');
             } else {
                 alert(data.message || 'Cập nhật trạng thái thất bại!');

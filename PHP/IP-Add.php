@@ -86,6 +86,7 @@ try {
     // Trả về dữ liệu để render ra bảng
     $response = [
         'success' => true,
+        'message' => 'Thêm phiếu nhập thành công!',
         'import' => [
             'id' => $new_id,
             'employee_id' => $employee_id,
