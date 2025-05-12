@@ -76,11 +76,26 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status === 'success') {
                     localStorage.setItem("isLoggedIn", "true");
+
+                    if (response.user) {
+
+                        const time1 = showToast("Đăng kí thành công.", true, 1000);
+
+                        setTimeout(() => {
+                            const userName = response.user.userName;
+                            const time2 = showToast(`Bạn đang đăng nhập bằng tài khoản: ${userName}`, true, 2000);
+
+                            setTimeout(() => {
+                                location.reload();
+                            }, time2);
+                        }, time1);
+
+                    } else {
+                        const time = showToast("Đăng kí thành công.", true, 1500);
+                        setTimeout(() => location.reload(), time);
+                    }
+
                     checkLoginStatus();
-                    const timeShown = showToast("Đăng kí thành công.", true, 1000);
-                    setTimeout(() => {
-                        location.reload();
-                    }, timeShown); 
                 }
                 else if (response.message === 'Tên đăng nhập đã tồn tại.') {
                     showError(rgUserName, response.message);
@@ -114,6 +129,7 @@ $(document).ready(function () {
                 var loginForm = document.querySelector("#login-form-son");
                 clearErrors(loginForm);
                 console.log(response);
+
                 if (response.status === "error") {
                     if (response.message === "Không tồn tại người dùng") {
                         var username = document.querySelector(".lg-username");
@@ -122,7 +138,6 @@ $(document).ready(function () {
                         return;
                     }
                     else if (response.message === "Sai mật khẩu") {
-                        console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
                         var passWord = document.querySelector(".lg-password");
                         showError(pwdContainer, "Sai mật khẩu")
@@ -130,13 +145,25 @@ $(document).ready(function () {
                     }
                     return;
                 }
+
                 localStorage.setItem("isLoggedIn", "true");
+
+                if (response.user) {
+                    const userName = response.user.userName;
+                    const timeShown = showToast(`Bạn đang đăng nhập bằng tài khoản: ${userName}`, true, 2000);
+                    setTimeout(() => {
+                        location.reload();
+                    }, timeShown);
+                } else {
+                    const timeShown = showToast("Đăng nhập thành công.", true, 1000);
+                    setTimeout(() => {
+                        location.reload();
+                    }, timeShown);
+                }
+
                 checkLoginStatus();
-                const timeShown = showToast("Đăng nhập thành công.", true, 1000);
-                setTimeout(() => {
-                    location.reload();
-                }, timeShown);               
             }
+
 
         });
     });

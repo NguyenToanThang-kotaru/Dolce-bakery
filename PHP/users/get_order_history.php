@@ -21,7 +21,7 @@ while ($order = $result->fetch_assoc()) {
     $status = $order['status_name'];
     $statusID = $order['status']; 
 
-    $sqlDetail = "SELECT od.quantity, od.price, p.pd_name AS product_name
+    $sqlDetail = "SELECT od.quantity, od.price, p.pd_name AS product_name, p.image AS img
                   FROM orderdetail od
                   JOIN products p ON od.product_id = p.id
                   WHERE od.order_id = ?";
@@ -45,11 +45,15 @@ while ($order = $result->fetch_assoc()) {
         $productName = $item['product_name'];
         $quantity = $item['quantity'];
         $price = $item['price'];
+        $image = $item['img'];
         $subtotal = $quantity * $price;
         $total += $subtotal;
 
         $html .= "<tr>
-                    <td>$productName</td>
+                    <td>
+                        <img src='$image' alt='$productName' style='width:50px;height:50px;margin-right:8px;vertical-align:middle;'>
+                        $productName
+                    </td>
                     <td>$quantity</td>
                     <td>" . number_format($subtotal, 0, ',', '.') . " đ</td>
                   </tr>";
