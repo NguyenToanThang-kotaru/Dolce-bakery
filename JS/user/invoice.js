@@ -263,9 +263,9 @@ function savePaymentIntoDatabase()
                 })
                 console.log("Success");
                 const timeShown = showToast("Thanh toán thành công.", true);
-                // setTimeout(() => {
-                //     location.reload();
-                // }, timeShown);
+                setTimeout(() => {
+                    location.reload();
+                }, timeShown);
                 sessionStorage.removeItem("cart");
             } else {
                 console.log("Fail");
