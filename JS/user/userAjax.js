@@ -201,25 +201,23 @@ function clearErrors(form) {
     });
 }
 
-    function loadUserInfo() {
-        let address;
-        let userData = sessionStorage.getItem("userInfo");
+function loadUserInfo() {
+    let userData = sessionStorage.getItem("userInfo");
 
-        if (!userData) {
-            console.log("No user info found");
-            return;
-        }
+    if (!userData) {
+        console.log("No user info found");
+        return;
+    }
 
-        let data = JSON.parse(userData);
-        console.log("User info loaded from Session Storage:", data);
-        
-        const defaultAddress = localStorage.getItem("defaultAddress");
+    let data = JSON.parse(userData);
+    console.log("User info loaded from Session Storage:", data);
+
+    getDefaultAddressFromServer(function(defaultAddress) {
+        let address = "Chưa có";
         if (defaultAddress) {
-            address = JSON.parse(defaultAddress);
+            address = `${defaultAddress.addressDetail}, ${defaultAddress.districtName}, ${defaultAddress.provinceName}`;
         }
-        
-        if(data.address == null) address = "Chưa có";
-        
+
         let html = `
             <div class="row">
                 <label for="account" class="Detail">Tài khoản: </label>
@@ -239,20 +237,21 @@ function clearErrors(form) {
             </div>
             <div class="row">
                 <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
-
                 <div class="value-wrapper">
                     <span class="content no-margin">${address}</span>
-                    <span class="changed no-margin" >Mặc định</span>
+                    <span class="changed no-margin">Mặc định</span>
                 </div>
             </div>
 
             <div id="Buy-history">
-                        <div class="History" onclick = "openOrderHistory()">Lịch sử mua hàng</div>
+                <div class="History" onclick="openOrderHistory()">Lịch sử mua hàng</div>
             </div>
         `;
 
         document.querySelector('.InfoUser_Detail').innerHTML = html;
-    }
+    });
+}
+
 
 
 function showToast(message, isSuccess, duration = 2000) {
@@ -293,7 +292,7 @@ function loadCustomerAddressToSessionStorageAndThen(callback) {
                 sessionStorage.setItem('userInfo', JSON.stringify(customerInfo));
                 console.log("Địa chỉ đã được cập nhật vào sessionStorage.");
 
-                if (callback) callback(); // Gọi callback sau khi cập nhật xong
+                if (callback) callback(); 
             } else {
                 console.error("Không có dữ liệu địa chỉ.");
             }
@@ -305,3 +304,22 @@ function loadCustomerAddressToSessionStorageAndThen(callback) {
 }
 
 
+function getDefaultAddressFromServer(callback) {
+    $.ajax({
+        url: '../../PHP/users/getDefaultAddress.php', 
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                callback(response.data); 
+            } else {
+                console.warn("Không lấy được địa chỉ mặc định:", response.message);
+                callback(null);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Lỗi khi gọi getDefaultAddress:", error);
+            callback(null);
+        }
+    });
+}
