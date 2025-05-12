@@ -1,214 +1,161 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Địa chỉ nhận hàng</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh Toán Thành Công</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: rgba(0, 0, 0, 0.5);
+    #container-success-invoice {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.1);
     }
 
-    .modal-select-address {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgb(255, 246, 242);
+    #payment-success {
+      background-color: #ffffff;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal-select-address .modal-header {
-      color: rgb(75, 46, 46);
-      font-size: 20px;
-      font-weight: bold;
       text-align: center;
-      margin-bottom: 20px;
+      z-index: 3;
     }
 
-    .modal-select-address .address-card {
-      display: flex;
-      align-items: center;
-      padding: 16px;
-      margin-bottom: 10px;
-      border: 1px solid rgb(255, 102, 204);
-      border-radius: 10px;
-      background-color: white;
-      cursor: pointer;
-    }
-
-    .modal-select-address .radio {
-      margin-right: 12px;
-      width: 20px;
-      height: 20px;
-    }
-
-    .modal-select-address .address-content {
-      flex: 1;
-      color: rgb(75, 46, 46);
-    }
-
-    .modal-select-address .edit-button {
-      background-color: rgb(204, 228, 255);
-      border: none;
-      color: rgb(0, 102, 204);
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-
-    .modal-select-address .edit-button:hover {
-      background-color: rgb(173, 207, 255);
-    }
-
-    .modal-select-address .default-label {
-      margin-top: 6px;
-      display: inline-block;
-      padding: 4px 10px;
-      border: 1px solid rgb(255, 102, 204);
-      color: rgb(255, 102, 204);
-      border-radius: 20px;
-      font-size: 13px;
-      user-select: none;
-    }
-
-    .modal-select-address .add-new-btn {
+    .success-header {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
       margin-bottom: 20px;
-      cursor: pointer;
-      border: 2px dashed rgb(255, 102, 204);
-      border-radius: 10px;
+    }
+
+    .checkmark {
+      font-size: 30px;
+      color: green;
+      margin-right: 10px;
+    }
+
+    h3 {
+      font-size: 20px;
+      color: #074c77;
+      font-weight: bold;
+    }
+
+    .invoice-table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
       padding: 10px;
-      color: rgb(255, 102, 204);
-      background-color: white;
-      font-size: 16px;
-      user-select: none;
+      text-align: left;
+      border: 1px solid #ccc;
     }
 
-    .modal-select-address .add-icon {
-      width: 20px;
-      height: 20px;
+    .invoice-table th {
+      background-color: #f0f0f0;
+    }
+
+    .total {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgb(255, 102, 204);
-      border-radius: 4px;
+      justify-content: space-between;
       font-size: 18px;
       font-weight: bold;
-      user-select: none;
+      color: #cc1d1d;
     }
 
-    .modal-select-address .continue-btn {
-      width: 100%;
-      background-color: rgb(255, 102, 204);
+    .total-price {
+      color: #cc1d1d;
+    }
+
+    #close-success-invoice {
+      padding: 10px;
       color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
+      background-color: rgb(37, 76, 232);
+      border-radius: 20px;
+      margin-top: 10px;
       cursor: pointer;
-      user-select: none;
     }
 
-    .modal-select-address .continue-btn:hover {
-      background-color: rgb(235, 80, 190);
+    #close-success-invoice:hover {
+      background-color: #9d98f7;
     }
 
-    .modal-select-address .add-new-btn:hover {
-      background-color: #fef0f5;
+    .customer-info {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .customer-info span {
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
-  <div class="modal-select-address">
-    <div class="modal-header">Địa chỉ nhận hàng</div>
-
-<<<<<<< HEAD
-    <table class="history-order-table">
-      <thead>
-        <tr>
-          <th>Sản phẩm</th>
-          <th>Số lượng</th>
-          <th>Giá</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bánh kem dâu</td>
-          <td>2</td>
-          <td>200.000đ</td>
-        </tr>
-        <tr>
-          <td>Bánh su kem</td>
-          <td>5</td>
-          <td>150.000đ</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="order-summary" >
-      <p><strong>Tổng tiền:</strong> 350.000đ</p>
-      <p><strong>Phí vận chuyển:</strong> 30.000đ</p>
-      <p><strong>Thành tiền:</strong> 380.000đ</p>
-=======
-    <div class="address-card">
-      <input class="radio" type="radio" name="address" checked />
-      <div class="address-content">
-        <div>286/21 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh</div>
-        <div class="default-label">Địa chỉ mặc định</div>
+  <div id="container-success-invoice">
+    <div id="payment-success">
+      <div class="success-header">
+        <h3>THANH TOÁN THÀNH CÔNG:</h3>
       </div>
-      <button class="edit-button">Sửa</button>
->>>>>>> Khanh-newVersion
-    </div>
 
-    <div class="address-card">
-      <input class="radio" type="radio" name="address" />
-      <div class="address-content">
-        <div>123, Thị trấn Phước Hải, Huyện Đất Đỏ, Bà Rịa Vũng Tàu</div>
+      <!-- Thông tin khách hàng -->
+      <div class="customer-info">
+        <p><span>Tên khách hàng:</span> Nguyễn Văn A</p>
+        <p><span>Số điện thoại:</span> 0987 654 321</p>
+        <p><span>Địa chỉ:</span> 123 Đường ABC, Quận XYZ, Thành phố Hà Nội</p>
       </div>
-      <button class="edit-button">Sửa</button>
-    </div>
 
-    <div class="add-new-btn">
-      <div>Thêm địa chỉ mới</div>
-      <div class="add-icon">+</div>
-    </div>
+      <!-- Danh sách sản phẩm -->
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bánh</td>
+            <td>1</td>
+            <td>200.000 đ</td>
+          </tr>
+          <tr>
+            <td>Cái</td>
+            <td>2</td>
+            <td>300.660 đ</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>1</td>
+            <td>400.000 đ</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <button class="continue-btn">Tiếp tục</button>
+      <!-- Tổng cộng và phương thức thanh toán -->
+      <div class="total">
+        <span><strong>Tổng cộng:</strong></span>
+        <span class="total-price">900.660 đ</span>
+      </div>
+
+      <div style="font-size: 18px; display: flex; justify-content: space-between;">
+        <span><strong>Phương thức thanh toán: </strong></span>
+        <span>Tiền mặt</span>
+      </div>
+
+      <!-- Nút đóng -->
+      <div id="close-success-invoice">
+        Đóng
+      </div>
+    </div>
   </div>
-
-  <script>
-    // Thêm sự kiện click cho các dòng trong danh sách địa chỉ
-    document.querySelectorAll('.address-card').forEach(card => {
-      card.addEventListener('click', function() {
-        // Tìm checkbox trong dòng và thay đổi trạng thái checked
-        const checkbox = this.querySelector('input[type="radio"]');
-        // Đảm bảo không ảnh hưởng đến việc chọn checkbox
-        checkbox.checked = true;
-      });
-    });
-
-    // Ngăn chặn việc click vào nút "Sửa" ảnh hưởng đến checkbox
-    document.querySelectorAll('.edit-button').forEach(button => {
-      button.addEventListener('click', function(e) {
-        // Ngăn chặn sự kiện click nổi lên từ nút "Sửa"
-        e.stopPropagation();
-      });
-    });
-  </script>
 </body>
+
 </html>
-  
