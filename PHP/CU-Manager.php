@@ -5,10 +5,13 @@ include 'config.php';
 $sql = "SELECT 
             customers.*, 
             provinces.name AS province_name, 
-            districts.name AS district_name 
+            districts.name AS district_name,
+            customeraddress.addressDetail AS addressDetail
         FROM customers
-        LEFT JOIN provinces ON customers.province_id = provinces.id
-        LEFT JOIN districts ON customers.district_id = districts.id";
+        LEFT JOIN customeraddress ON customers.id = customeraddress.customer_id
+        LEFT JOIN provinces ON customeraddress.province_id = provinces.id
+        LEFT JOIN districts ON customeraddress.district_id = districts.id
+        WHERE customeraddress.default_id = 1";
 
 $result = $conn->query($sql);
 
