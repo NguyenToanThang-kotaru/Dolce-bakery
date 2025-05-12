@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['adminInfo'])) {
   header("Location: login_admin.php");
+  include '../../PHP/check_expired_products.php';
   exit();
 }
 ?>
@@ -44,6 +45,7 @@ if (!isset($_SESSION['adminInfo'])) {
       <a href="#" id="admin-role">Quản lí quyền</a>
       <a href="#" id="admin-import">Nhập hàng</a>
       <a href="#" id="admin-supplier">Nhà cung cấp</a>
+      <a href="#" id="admin-inventory">Quản lí tồn kho</a>
     </div>
 
     <img src="../../assest/Dolce.png" alt="hahaha" />
@@ -59,15 +61,15 @@ if (!isset($_SESSION['adminInfo'])) {
     <div class="business-process">
       <div class="card">
         <h3>Số đơn hàng</h3>
-        <p>0</p>
+        <p class="order-count"></p>
       </div>
       <div class="card">
-        <h3>Doanh thu</h3>
-        <p>0</p>
+        <h3 class="revenue">Doanh thu</h3>
+        <p></p>
       </div>
       <div class="card">
-        <h3>Tỷ lệ tăng trưởng</h3>
-        <p>0</p>
+        <h3>Lãi</h3>
+        <p class="profit"></p>
       </div>
     </div>
   </div>
@@ -81,12 +83,18 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
       </div>
       <ul class="menu-profile">
-        <li><a href="#">Thông tin cá nhân</a></li>
         <li>
-          <a href="#">Quyền hạn: <span>...</span></a>
+          <a href="#">Quyền hạn: <span><?php echo $_SESSION['adminInfo']['permission_name']; ?></span></a>
         </li>
-        <li><a href="#">Lịch sử hoạt động</a></li>
-        <li><a href="#">Quản lý quyền</a></li>
+        <li>
+          <a href="#">Địa chỉ mail: <span><?php echo $_SESSION['adminInfo']['email']; ?></span></a>
+        </li>
+        <li>
+          <a href="#">Số điện thoại: <span><?php echo $_SESSION['adminInfo']['phoneNumber']; ?></span></a>
+        </li>
+        <li>
+          <a href="#">Địa chỉ: <span><?php echo $_SESSION['adminInfo']['address']; ?></span></a>
+        </li>
       </ul>
       <button class="logout-btn-admin">Đăng xuất</button>
     </div>
@@ -339,8 +347,13 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-price" class="form-label">Giá Tiền (VNĐ)</label>
-          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá tiền" class="form-input" />
+          <label for="product-price" class="form-label">Giá bán (VNĐ)</label>
+          <input type="number" id="product-price" name="product-price" placeholder="Nhập giá bán" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="product-shelflife" class="form-label">Hạn sử dụng</label>
+          <input type="number" id="product-shelflife" name="product-shelflife" placeholder="Nhập hạn sử dụng" class="form-input" />
         </div>
 
         <div class="form-group text-center">
@@ -422,9 +435,14 @@ if (!isset($_SESSION['adminInfo'])) {
         </div>
 
         <div class="form-group">
-          <label for="product-price" class="form-label">*Giá Tiền (VNĐ)</label>
-          <input type="number" id="product-priceFIX" name="product-price" placeholder="Nhập giá tiền"
+          <label for="product-price" class="form-label">*Giá bán (VNĐ)</label>
+          <input type="number" id="product-priceFIX" name="product-price" placeholder="Nhập giá bán"
             class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="product-shelflife" class="form-label">Hạn sử dụng</label>
+          <input type="number" id="product-shelflifeFIX" name="product-shelflife" placeholder="Nhập hạn sử dụng" class="form-input" />
         </div>
 
         <div class="form-group text-center">
@@ -1089,6 +1107,7 @@ if (!isset($_SESSION['adminInfo'])) {
                 <th>Thể loại</th>
                 <th>Phân loại</th>
                 <th>Giá bán</th>
+                <th>Tồn kho</th>
               </tr>
             </thead>
             <tbody>
@@ -1114,10 +1133,10 @@ if (!isset($_SESSION['adminInfo'])) {
           <input type="number" id="quantity" class="form-input" placeholder="Nhập số lượng" />
 
           <label for="import-price">Giá nhập:</label>
-          <input type="number" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
+          <input type="text" id="import-price" class="form-input" placeholder="Nhập giá nhập" />
 
           <label for="profit-percent">% Lãi:</label>
-          <input type="number" id="profit-percent" class="form-input" placeholder="" readonly/>
+          <input type="text" id="profit-percent" class="form-input" placeholder="" readonly/>
 
           <button id="add-product-btn-ip" class="form-button">Thêm sản phẩm</button>
         </div>
@@ -1384,6 +1403,25 @@ if (!isset($_SESSION['adminInfo'])) {
     </div>
   </div>
 
+  <!-- inventory part -->
+  <div class="inventory-part">
+    <div class="inventory-table-container">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Mã phiếu nhập</th>
+            <th>Ngày nhập</th>
+          </tr>
+        </thead>
+        <tbody id="inventory-table-body">
+          <?php include '../../PHP/IV-Manager.php'?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
   <script src="../../JS/admin/admin.js"></script>
@@ -1400,6 +1438,9 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/ST-ajax.js"></script>
   <script src="../../JS/admin/IP-Ajax.js"></script>
   <script src="../../JS/admin/SP-Ajax.js"></script>
+  <script src="../../JS/admin/business-process.js"></script>
+  
+  
 
 
 <script>
@@ -1419,7 +1460,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Quản lí tài khoản": "admin-account",
       "Quản lí quyền": "admin-role",
       "Nhập hàng": "admin-import",
-      "Nhà cung cấp": "admin-supplier"
+      "Nhà cung cấp": "admin-supplier",
+      "Quản lí tồn kho": "admin-inventory"
   };
 
   // Mapping chức năng -> tiền tố id
@@ -1431,7 +1473,8 @@ if (!isset($_SESSION['adminInfo'])) {
       "Quản lí tài khoản": "account",
       "Quản lí quyền": "role",
       "Nhập hàng": "import",
-      "Nhà cung cấp": "supplier"
+      "Nhà cung cấp": "supplier",
+      "Quản lí tồn kho": "inventory"
   };
 
   document.addEventListener("DOMContentLoaded", () => {

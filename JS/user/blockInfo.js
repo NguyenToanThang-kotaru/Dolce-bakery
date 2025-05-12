@@ -32,16 +32,22 @@ a.addEventListener("click",function(){
         }
     })
 })
-
+function OnSelectAddress() {
+    $(".overlaySelectAddress").show();
+    $(".modal-select-address").show();
+}
 function OnUpdateAddress() {
     e.style.display = "block";
     document.querySelector(".overlayAddress").style.display = "block";
+    $(".overlaySelectAddress").hide();
+    $(".modal-select-address").hide();
 }
 
 e.addEventListener("click",function(){
     e.style.display = "none";
     document.querySelector(".overlayAddress").style.display = "none";
     document.querySelector(".overlayAddressPayment").style.display = "none";
+    OnSelectAddress();
 })
 
 $(document).ready(function() {
@@ -67,10 +73,4 @@ $(document).ready(function() {
         }
     });
 });
-
-
-function OnUpdateAddressPayment() {
-    e.style.display = "block";
-    document.querySelector(".overlayAddressPayment").style.display = "block";
-}
 

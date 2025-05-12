@@ -2,23 +2,33 @@
 include '../config.php';
 
 function loginUser($conn, $row) {
-    $district_id = $row["district_id"];
-    
-    $sqlAddress = "SELECT provinces.name AS province_name, districts.name AS district_name
-                   FROM provinces
-                   INNER JOIN districts ON districts.province_id = provinces.id
-                   WHERE districts.id = ?";
+    $customer_id = $row["id"];
+
+    $sqlAddress = "SELECT ca.addressDetail, ca.district_id, ca.province_id, 
+                          d.name AS district_name, p.name AS province_name
+                   FROM customeraddress ca
+                   JOIN districts d ON ca.district_id = d.id
+                   JOIN provinces p ON ca.province_id = p.id
+                   WHERE ca.customer_id = ? AND ca.default_id = 1
+                   LIMIT 1";
+
     $stmt = $conn->prepare($sqlAddress);
-    $stmt->bind_param("i", $district_id);
+    $stmt->bind_param("i", $customer_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $rowAddress = $result->fetch_assoc();
+    $addressData = $result->fetch_assoc();
     $stmt->close();
 
-    $province_name = $rowAddress["province_name"] ?? '';
-    $district_name = $rowAddress["district_name"] ?? '';
-    $address = $row['addressDetail'] . ", " . $province_name . ", " . $district_name;
-    if($row['addressDetail'] == null) $address = "Chưa có";
+    if ($addressData) {
+        $province_name = $addressData["province_name"] ?? '';
+        $district_name = $addressData["district_name"] ?? '';
+        $addressDetail = $addressData["addressDetail"] ?? '';
+        $address = $addressDetail . ", " . $district_name . ", " . $province_name;
+        if (empty($addressDetail)) $address = "Chưa có";
+    } else {
+        $province_name = $district_name = $addressDetail = '';
+        $address = "Chưa có";
+    }
 
     session_start();
     $_SESSION['userInfo'] = [
@@ -28,14 +38,16 @@ function loginUser($conn, $row) {
         'fullName' => $row['fullName'],
         'phoneNumber' => $row['phoneNumber'],
         'address' => $address,
-        'addressDetail' => $row['addressDetail'],
-        'province_id' => $row['province_id'],
-        'district_id' => $row['district_id'],
+        'addressDetail' => $addressDetail,
+        'province_id' => $addressData['province_id'] ?? null,
+        'district_id' => $addressData['district_id'] ?? null,
         'status' => $row['status'],
     ];
 
     return $_SESSION['userInfo'];
 }
+
+
 
 // --- ĐĂNG KÝ ---
 if(isset($_POST['register-form-son'])){
@@ -85,6 +97,10 @@ if (isset($_POST['login-form-son'])) {
         $row = $result->fetch_assoc();
         $hashedPasswordInDB = $row['password'];
         if (password_verify($passwd, $hashedPasswordInDB)) { 
+            if ($row['status'] == 2){
+                echo json_encode(['status' => 'error', 'message' => 'Tài khoản đã bị khóa']);
+                exit();
+            }
             $userSession = loginUser($conn, $row);
             echo json_encode(['status' => 'success', 'user' => $userSession]);
         } else {

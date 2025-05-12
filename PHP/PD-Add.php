@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $quantity = 0;
     $price = $_POST['product-price'] ?? null;
     $supplier_id = $_POST['product-supplier'] ?? null;
+    $shelflife =  $_POST['product-shelflife'] ?? null;
 
     $noneIMG = "/Dolce-bakery/assest/PD-Manager/Default.jpg";
 
@@ -42,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
 
 
-    $sql = "INSERT INTO products (pd_name, subcategory_id, quantity, price, image, supplier_id) 
-            VALUES ('$name', '$subcategory_id', '$quantity', '$price', '$target_file', $supplier_id)";
+    $sql = "INSERT INTO products (pd_name, subcategory_id, quantity, price, image, supplier_id, shelfLife) 
+            VALUES ('$name', '$subcategory_id', '$quantity', '$price', '$target_file', $supplier_id, $shelflife)";
 
     if ($conn->query($sql) === TRUE) {
         $response = [

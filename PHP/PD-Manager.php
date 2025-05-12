@@ -5,6 +5,7 @@ $sql = "SELECT products.*, subcategories.name AS subcategory_name, categories.na
         FROM products 
         INNER JOIN subcategories ON products.subcategory_id = subcategories.id
         INNER JOIN categories ON subcategories.category_id = categories.id
+        WHERE products.is_deleted = 0
         ORDER BY products.id ASC";
 $result = $conn->query($sql);
 

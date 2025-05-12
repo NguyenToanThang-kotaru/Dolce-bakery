@@ -1,78 +1,142 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Chi tiết đơn hàng</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Địa chỉ nhận hàng</title>
   <style>
-    /* === CSS Styling === */
-
     body {
-      background-color: #fff6f2;
       margin: 0;
-      padding: 20px;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
-    .history-order-container {
+    .modal-select-address {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background-color: rgb(255, 246, 242);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      max-width: 800px;
-      margin: auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
-    .history-order-container h3 {
+    .modal-select-address .modal-header {
+      color: rgb(75, 46, 46);
+      font-size: 20px;
+      font-weight: bold;
       text-align: center;
-      color: #4b2e2e;
+      margin-bottom: 20px;
+    }
+
+    .modal-select-address .address-card {
+      display: flex;
+      align-items: center;
+      padding: 16px;
       margin-bottom: 10px;
-      font-size: 24px;
+      border: 1px solid rgb(255, 102, 204);
+      border-radius: 10px;
+      background-color: white;
+      cursor: pointer;
     }
 
-    .history-order-container .order-date {
-      text-align: center;
-      font-weight: bold;
-      color: #4b2e2e;
+    .modal-select-address .radio {
+      margin-right: 12px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .modal-select-address .address-content {
+      flex: 1;
+      color: rgb(75, 46, 46);
+    }
+
+    .modal-select-address .edit-button {
+      background-color: rgb(204, 228, 255);
+      border: none;
+      color: rgb(0, 102, 204);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .modal-select-address .edit-button:hover {
+      background-color: rgb(173, 207, 255);
+    }
+
+    .modal-select-address .default-label {
+      margin-top: 6px;
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid rgb(255, 102, 204);
+      color: rgb(255, 102, 204);
+      border-radius: 20px;
+      font-size: 13px;
+      user-select: none;
+    }
+
+    .modal-select-address .add-new-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
       margin-bottom: 20px;
-    }
-
-    .history-order-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    .history-order-table th,
-    .history-order-table td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: center;
-      font-size: 15px;
-    }
-
-    .history-order-table thead {
-      background-color: #ffccdd;
-      color: #4b2e2e;
-    }
-
-    .history-order-container .order-summary p {
-      margin: 6px 0;
+      cursor: pointer;
+      border: 2px dashed rgb(255, 102, 204);
+      border-radius: 10px;
+      padding: 10px;
+      color: rgb(255, 102, 204);
+      background-color: white;
       font-size: 16px;
-      color: #4b2e2e;
+      user-select: none;
     }
 
-    .history-order-container .order-summary strong {
+    .modal-select-address .add-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgb(255, 102, 204);
+      border-radius: 4px;
+      font-size: 18px;
       font-weight: bold;
-      color: #e055b2;
+      user-select: none;
     }
 
+    .modal-select-address .continue-btn {
+      width: 100%;
+      background-color: rgb(255, 102, 204);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .modal-select-address .continue-btn:hover {
+      background-color: rgb(235, 80, 190);
+    }
+
+    .modal-select-address .add-new-btn:hover {
+      background-color: #fef0f5;
+    }
   </style>
 </head>
 <body>
-  <div class="history-order-container">
-    <h3>Chi tiết đơn hàng</h3>
-    <div class="order-date">Ngày đặt: 20/04/2025</div>
+  <div class="modal-select-address">
+    <div class="modal-header">Địa chỉ nhận hàng</div>
 
+<<<<<<< HEAD
     <table class="history-order-table">
       <thead>
         <tr>
@@ -99,7 +163,52 @@
       <p><strong>Tổng tiền:</strong> 350.000đ</p>
       <p><strong>Phí vận chuyển:</strong> 30.000đ</p>
       <p><strong>Thành tiền:</strong> 380.000đ</p>
+=======
+    <div class="address-card">
+      <input class="radio" type="radio" name="address" checked />
+      <div class="address-content">
+        <div>286/21 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh</div>
+        <div class="default-label">Địa chỉ mặc định</div>
+      </div>
+      <button class="edit-button">Sửa</button>
+>>>>>>> Khanh-newVersion
     </div>
+
+    <div class="address-card">
+      <input class="radio" type="radio" name="address" />
+      <div class="address-content">
+        <div>123, Thị trấn Phước Hải, Huyện Đất Đỏ, Bà Rịa Vũng Tàu</div>
+      </div>
+      <button class="edit-button">Sửa</button>
+    </div>
+
+    <div class="add-new-btn">
+      <div>Thêm địa chỉ mới</div>
+      <div class="add-icon">+</div>
+    </div>
+
+    <button class="continue-btn">Tiếp tục</button>
   </div>
+
+  <script>
+    // Thêm sự kiện click cho các dòng trong danh sách địa chỉ
+    document.querySelectorAll('.address-card').forEach(card => {
+      card.addEventListener('click', function() {
+        // Tìm checkbox trong dòng và thay đổi trạng thái checked
+        const checkbox = this.querySelector('input[type="radio"]');
+        // Đảm bảo không ảnh hưởng đến việc chọn checkbox
+        checkbox.checked = true;
+      });
+    });
+
+    // Ngăn chặn việc click vào nút "Sửa" ảnh hưởng đến checkbox
+    document.querySelectorAll('.edit-button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Ngăn chặn sự kiện click nổi lên từ nút "Sửa"
+        e.stopPropagation();
+      });
+    });
+  </script>
 </body>
 </html>
+  

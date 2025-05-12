@@ -1,3 +1,4 @@
+<?php include '../../PHP/check_expired_products.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -628,9 +629,21 @@
             </div>
         </div>
 
+        </div></div>
+    <div class="overlaySelectAddress"></div>
+    <div class="modal-select-address">
+        
+
+        <div class="add-new-btn" onclick = "OnUpdateAddress()">
+        <div>Thêm địa chỉ mới</div>
+        <div class="add-icon">+</div>
+        </div>
+
+        <button class="continue-btn" onclick = "getAddressToPaying();">Tiếp tục</button>
+    </div>    
         <div class="overlayInfoAddress"></div>
         <div class="overlayAddress">
-            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+            <h2 class="addr-title">Thêm địa chỉ mới</h2>
 
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
@@ -644,12 +657,21 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="saveAddress()">Lưu địa chỉ</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="addAddress()">Thêm mới</button>
         </div>
         <div class="overlayAddressPayment">
             <h2 class="addr-title">Cập nhật địa chỉ</h2>
-
+            <div class = "address_id" style = "display: none"></div>
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
 
@@ -662,8 +684,17 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="submitEditAddress()">Cập nhật</button>
         </div>
 
         <div class="modal-overlay-history">
@@ -710,82 +741,80 @@
             </div>
         </div>
 
-
+        
     </div>
-    <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
-    <div id="overlay-payment">
-        <div id="payment-container">
-            <div class="payment-left-container">
-                <div class="payment-header">
-                    <button id="close-payment">x</button>
-                    <h3 class="header">THÔNG TIN THANH TOÁN</h3>
+ <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
+        <div id="overlay-payment">
+            <div id="payment-container">
+                <div class="payment-left-container">
+                    <div class="payment-header">
+                        <button id="close-payment">x</button>
+                        <h3 class="header">THÔNG TIN THANH TOÁN</h3>
+                    </div>
+                    
+                    <form id="payment-left-form">
+                        <div class="cus-name">
+                            <label><strong>Tên:</strong> </label><span class="payment-customer-name"></span>
+                        </div>
+                        
+                        <br>
+                        <div class="cus-email">
+                            <label><strong>Email:</strong> </label><span class="payment-customer-email"></span>
+                        </div>
+                        <br>
+                        <div class="cus-phone">
+                            <label for="phone-payment" ><strong>Số điện thoại:</strong></label>
+                            <span class="payment-customer-phone"></span>
+                        </div>
+                        <br />
+                        <div class="cus-address">
+                            <label for="address-payment"><strong>Địa chỉ:</strong> </label>
+                            <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
+                            <span class="payment-customer-address content no-margin"></span>
+                            <span class="changed no-margin" onclick = "OnSelectAddress()">Thay đổi</span>    
+                        </div>
+                        <br />
+                        <div class="payment-customer-note">
+                            <label for="note-payment"><strong>Ghi chú đơn hàng (tùy chọn)</strong></label> <br />
+                            <input style="width: 30vw;" type="text" id="note-payment" placeholder="Nhập ghi chú cho đơn hàng" />
+
+                        </div>
+                        <div class="payment-left-footer">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 20px;">
+                                ← Quay lại giỏ hàng
+                            </p>
+                        </div>
+                        
+                    </form>
                 </div>
 
-                <form id="payment-left-form">
-                    <div class="cus-name">
-                        <label><strong>Tên:</strong> </label><span class="payment-customer-name"></span>
-                    </div>
-
-                    <br>
-                    <div class="cus-email">
-                        <label><strong>Email:</strong> </label><span class="payment-customer-email"></span>
-                    </div>
-                    <br>
-                    <div class="cus-phone">
-                        <label for="phone-payment"><strong>Số điện thoại:</strong></label>
-                        <span class="payment-customer-phone"></span>
-                    </div>
-                    <br />
-                    <div class="cus-address">
-                        <label for="address-payment"><strong>Địa chỉ:</strong> </label>
-                        <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
-                        <span class="payment-customer-address content no-margin"></span>
-                        <span class="changed no-margin" onclick="OnUpdateAddressPayment()">Thay đổi</span>
-                    </div>
-                    <br />
-                    <div class="payment-customer-note">
-                        <label for="note-payment"><strong>Ghi chú đơn hàng (tùy chọn)</strong></label> <br />
-                        <input style="width: 30vw;" type="text" id="note-payment"
-                            placeholder="Nhập ghi chú cho đơn hàng" />
-
-                    </div>
-                    <div class="payment-left-footer">
-                        <p id="payment-back-cart"
-                            style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
-                            ← Quay lại giỏ hàng
-                        </p>
-                    </div>
-
-                </form>
-            </div>
-
-            <form class="order-summary">
-                <table class="payment-table">
-                    <thead>
-                        <tr style="border-bottom: 1px solid #ddd">
-                            <th colspan="2" class="payment-heading">ĐƠN HÀNG CỦA BẠN</th>
-                            <th>
+                <form class="order-summary">
+                    <table class="payment-table">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #ddd">
+                                <th colspan="2" class="payment-heading">ĐƠN HÀNG CỦA BẠN</th>
+                                <th>
                                 <strong>Ngày đặt:
                                     <span class="payment-date">22/09/2005</span>
                                 </strong>
-                            </th>
-                        </tr>
-                        <tr class="order-header">
-                            <th colspan="2"><strong>SẢN PHẨM</strong></th>
-                            <th><strong>TẠM TÍNH</strong></th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd">
-                            <th class="payment-product-name">Tên sản phẩm</th>
-                            <th class="payment-quantity">Số lượng</th>
-                            <th class="payment-price">Giá</th>
-                        </tr>
-                    </thead>
+                                </th>
+                            </tr>
+                            <tr class="order-header">
+                                <th colspan="2"><strong>SẢN PHẨM</strong></th>
+                                <th><strong>TẠM TÍNH</strong></th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd">
+                                <th class="payment-product-name">Tên sản phẩm</th>
+                                <th class="payment-quantity">Số lượng</th>
+                                <th class="payment-price">Giá</th>
+                            </tr>
+                        </thead>
 
-                    <tbody id="product-list">
+                        <tbody id="product-list">
+                            
+                        </tbody>
 
-                    </tbody>
-
-                    <tfoot>
+                        <tfoot>
                         <tr style="border-top: 1px solid #ddd">
                             <td colspan="2">Tổng tạm tính:</td>
                             <td><span class="payment-total-product-price-value">1.200.200</span><sup>đ</sup></td>
@@ -798,156 +827,155 @@
                             <td colspan="2">Tổng đơn:</td>
                             <td><span class="payment-total-price-value">12.000.000<sup>đ</sup></span></td>
                         </tr>
-                    </tfoot>
-                </table>
-
-                <h3>Phương thức thanh toán</h3>
-                <div>
-                    <input type="radio" id="cash-on-delivery" name="payment" value="tm" />
-                    <label for="cash-on-delivery">Thanh toán khi nhận hàng</label>
-                </div>
-                <div>
-                    <input type="radio" id="atm-payment" name="payment" value="atm" />
-                    <label for="atm-payment">Thanh toán bằng ATM</label>
-                    <div id="atm-options">
-                        <label for="bank">Chọn ngân hàng:</label>
-                        <select id="bank">
-                            <option value="">Chọn ngân hàng</option>
-                            <option value="vietcombank">Vietcombank</option>
-                            <option value="techcombank">Techcombank</option>
-                            <option value="vpbank">VPBank</option>
-                            <option value="agribank">Agribank</option>
-                        </select>
-                        <div id="select-bank" class="error-msg-payment"></div>
-                        <br /><br />
-                        <label for="card-number">Số thẻ:</label>
-                        <input type="number" id="card-number" placeholder="Nhập số thẻ ATM" required />
-                        <div id="payment-card-method-error" class="error-msg-payment"></div>
+                        </tfoot>
+                    </table>
+                    
+                    <h3>Phương thức thanh toán</h3>
+                    <div>
+                        <input type="radio" id="cash-on-delivery" name="payment" value="tm" />
+                        <label for="cash-on-delivery">Thanh toán khi nhận hàng</label>
                     </div>
-                </div>
-                <div id="payment-method-error" class="error-msg-payment"></div>
-                <div class="payment-submit-background">
-                    <button type="submit" id="submit-payment-btn">Thanh toán</button>
-                </div>
-            </form>
-
-        </div>
-
-    </div>
-    <div id="overlay-invoice">
-        <div id="invoice-container">
-            <div class="invoice-header">
-                <button id="close-invoice">x</button>
-                <h3 class="header">HÓA ĐƠN THANH TOÁN</h3>
-            </div>
-            <div class="invoice-body">
-                <div class="invoice-customer-info">
-                    <div class="invoice-customer-left">
-                        <label><strong>Tên khách hàng:</strong></label>
-                        <span class="invoice-customer-name"></span> <br />
-                        <label><strong>Số điện thoại:</strong></label>
-                        <span class="invoice-customer-phone"></span> <br />
-                        <label><strong>Địa chỉ:</strong></label>
-                        <span class="invoice-customer-address"></span> <br />
-                        <label><strong>Email:</strong></label>
-                        <span class="invoice-customer-email"></span> <br />
-                        <label><strong>Voucher(nếu có):</strong></label>
-                        <span class="invoice-customer-voucher"></span> <br />
-                    </div>
-                    <div class="invoice-customer-right">
-                        <label><strong>Ngày đặt:</strong></label>
-                        <span class="invoice-date"></span> <br />
-                    </div>
-
-
-                </div>
-                <div class="invoice-product-list">
-                    <h3 class="invoice-product-list-header">Sản phẩm</h3>
-                    <!-- <span class="payment-product"></span> -->
-                    <div class="invoice-product-list-container">
-                        <div class="invoice-product">
-                            <span class="invoice-product-img">
-                                <img src>
-                            </span>
-                            <span class="invoice-product-name"></span>
-                            <span class="invoice-product-quantity"></span>
-                            <span class="space"></span>
-                            <span class="invoice-product-price"></span>
+                    <div>
+                        <input type="radio" id="atm-payment" name="payment" value="atm" />
+                        <label for="atm-payment">Thanh toán bằng ATM</label>
+                        <div id="atm-options">
+                            <label for="bank">Chọn ngân hàng:</label>
+                            <select id="bank">
+                                <option value="">Chọn ngân hàng</option>
+                                <option value="vietcombank">Vietcombank</option>
+                                <option value="techcombank">Techcombank</option>
+                                <option value="vpbank">VPBank</option>
+                                <option value="agribank">Agribank</option>
+                            </select>
+                            <div id="select-bank" class="error-msg-payment"></div>
+                            <br /><br />
+                            <label for="card-number">Số thẻ:</label>
+                            <input type="number" id="card-number" placeholder="Nhập số thẻ ATM" required />
+                            <div id="payment-card-method-error" class="error-msg-payment"></div>
                         </div>
                     </div>
+                    <div id="payment-method-error" class="error-msg-payment"></div>
+                    <div class="payment-submit-background">
+                        <button type="submit" id="submit-payment-btn">Thanh toán</button>
+                    </div>
+                </form>
 
+            </div>
 
+        </div>    
+        <div id="overlay-invoice">
+            <div id="invoice-container">
+                <div class="invoice-header">
+                    <button id="close-invoice">x</button>
+                    <h3 class="header">HÓA ĐƠN THANH TOÁN</h3>
                 </div>
-                <div class="invoice-process">
-                    <div class="invoice-process-total">
-                        Tổng cộng:
-                        <span class="invoice-total-price"></span>
+                <div class="invoice-body">
+                    <div class="invoice-customer-info">
+                        <div class="invoice-customer-left">
+                            <label><strong>Tên khách hàng:</strong></label>
+                            <span class="invoice-customer-name"></span> <br />
+                            <label><strong>Số điện thoại:</strong></label>
+                            <span class="invoice-customer-phone"></span> <br />
+                            <label><strong>Địa chỉ:</strong></label>
+                            <span class="invoice-customer-address"></span> <br />
+                            <label><strong>Email:</strong></label>
+                            <span class="invoice-customer-email"></span> <br />
+                            <label><strong>Voucher(nếu có):</strong></label>
+                            <span class="invoice-customer-voucher"></span> <br />
+                        </div>
+                        <div class="invoice-customer-right">
+                            <label><strong>Ngày đặt:</strong></label>
+                            <span class="invoice-date"></span> <br />
+                        </div>
+                            
+                    
+                    </div>
+                    <div class="invoice-product-list">
+                        <h3 class="invoice-product-list-header">Sản phẩm</h3>
+                        <!-- <span class="payment-product"></span> -->
+                        <div class="invoice-product-list-container">
+                            <div class="invoice-product">
+                                <span class="invoice-product-img">
+                                    <img src>
+                                </span>
+                                <span class="invoice-product-name"></span>
+                                <span class="invoice-product-quantity"></span>
+                                <span class="space"></span>
+                                <span class="invoice-product-price"></span>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="invoice-process">
+                        <div class="invoice-process-total">
+                            Tổng cộng:
+                            <span class="invoice-total-price"></span>
+                        </div>
+                          
+                        <div class="invoice-process-note"></div>
+                        <div class="invoice-process-payment"></div>
                     </div>
 
-                    <div class="invoice-process-note"></div>
-                    <div class="invoice-process-payment"></div>
                 </div>
-
-            </div>
-            <div class="invoice-footer">
-                <div class="invoice-submit">
-
-                    <input type="checkbox" id="invoice-submit-checkbox" required />
-                    <label class="invoice-submit-title" for="invoice-submit-checkbox">Tôi đã đọc và kiểm tra trước khi
-                        thanh toán.</label>
-                    <br>
-                    <button id="submit-invoice" type="submit">Xác nhận thanh toán</button>
+                <div class="invoice-footer">
+                    <div class="invoice-submit">
+                        
+                        <input type="checkbox" id="invoice-submit-checkbox" required />
+                        <label class="invoice-submit-title"for="invoice-submit-checkbox">Tôi đã đọc và kiểm tra trước khi thanh toán.</label>
+                        <br>
+                        <button id="submit-invoice" type="submit">Xác nhận thanh toán</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- -------------------------------------FOoter------------------------------------- -->
-    <footer class="container-footer">
-        <div style="display: flex;justify-content: space-between;width: 100%;">
-            <div id="logo-section">
-                <img src="../../assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
-            </div>
-            <div id="links-section">
-                <div id="learn-more">
-                    <h3>Learn More</h3>
-                    <ul>
-                        <li><a href="#">About Lift</a></li>
-                        <li><a href="#">Press Releases</a></li>
-                        <li><a href="#">Environment</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
+        <!-- -------------------------------------FOoter------------------------------------- -->
+        <footer class="container-footer">
+            <div style="display: flex;justify-content: space-between;width: 100%;">
+                <div id="logo-section">
+                    <img src="../../assest/Dolce.png" width="40%" alt="Logo" id="footer-logo">
                 </div>
-                <div id="tickets-booking">
-                    <h3>Tickets & Booking</h3>
-                    <ul>
-                        <li><a href="#">Lift Tickets</a></li>
-                        <li><a href="#">Season Passes</a></li>
-                        <li><a href="#">Vacation Packages</a></li>
-                    </ul>
-                </div>
-                <div id="contact-section">
-                    <h3>Contact Us</h3>
-                    <p>Address: XX/ XX/ XX/ HCM</p>
-                    <p>Phone: <a href="#" style="color: red;">123-456-7890</a></p>
-                </div>
+                <div id="links-section">
+                    <div id="learn-more">
+                        <h3>Learn More</h3>
+                        <ul>
+                            <li><a href="#">About Lift</a></li>
+                            <li><a href="#">Press Releases</a></li>
+                            <li><a href="#">Environment</a></li>
+                            <li><a href="#">Jobs</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div id="tickets-booking">
+                        <h3>Tickets & Booking</h3>
+                        <ul>
+                            <li><a href="#">Lift Tickets</a></li>
+                            <li><a href="#">Season Passes</a></li>
+                            <li><a href="#">Vacation Packages</a></li>
+                        </ul>
+                    </div>
+                    <div id="contact-section">
+                        <h3>Contact Us</h3>
+                        <p>Address: XX/ XX/ XX/ HCM</p>
+                        <p>Phone: <a href="#" style="color: red;">123-456-7890</a></p>
+                    </div>
 
-            </div>
-            <div id="social-section">
-                <h3>Social</h3>
-                <div style="display: flex;">
-                    <a href="#"><img src="../../assest/fb.png" alt="Facebook"></a>
-                    <a href="#"><img src="../../assest/ins.png" alt="Twitter"></a>
-                    <a href="#"><img src="../../assest/Twitter.png" alt="YouTube"></a>
+                </div>
+                <div id="social-section">
+                    <h3>Social</h3>
+                    <div style="display: flex;">
+                        <a href="#"><img src="../../assest/fb.png" alt="Facebook"></a>
+                        <a href="#"><img src="../../assest/ins.png" alt="Twitter"></a>
+                        <a href="#"><img src="../../assest/Twitter.png" alt="YouTube"></a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="copyright-section">
-            <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
-        </div>
-    </footer>
+            <div id="copyright-section">
+                <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
+            </div>
+        </footer>   
 
     <script src="../../JS/user/blockOrderHistory.js"></script>
     <script src="../../JS/user/invoice.js"></script>
@@ -961,6 +989,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>
+    <script src="../../JS/user/addressManage.js"></script>
+
     <script src="../../JS/admin/PD-getSubcategory"></script>
 </body>
 

@@ -61,8 +61,19 @@ if ($result->num_rows > 0) {
     document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("change", function (event) {
     if (event.target.classList.contains("account-status")) {
+        let selectEl = event.target;
         let userId = event.target.getAttribute("data-id");
         let newStatus = event.target.value;
+        const currentAccountId = window.adminInfo.adminID;
+
+        if (parseInt(currentAccountId) === parseInt(userId) && newStatus==2) {
+            alert("Không thể xóa khóa tài khoản đang đăng nhập");
+            event.target.value = 1;
+            ChangeStatus({ target: event.target }); 
+            selectEl.classList.remove("changed");
+            selectEl.blur();
+            return;
+        }
 
         fetch("../../PHP/AC-update_status.php", {
             method: "POST",
@@ -77,11 +88,25 @@ if ($result->num_rows > 0) {
                 alert(`Trạng thái của tài khoản ${userId} đã được cập nhật!`);
             } else {
                 alert("Lỗi khi cập nhật trạng thái: " + data.message);
+                event.target.value = 1;
+                ChangeStatus({ target: event.target }); 
+                event.target.classList.remove("changed");
+                event.target.blur();
             }
         })
         .catch(error => console.error("Lỗi:", error));
     }
 });
+    function ChangeStatus(event) {
+        let select = event.target;
+
+        if (select.value == "2") {
+            select.style.boxShadow = "0 0 5px 1px red";
+        }
+        else {
+            select.style.boxShadow = "0 0 5px 1px rgb(47, 218, 70)";
+        }
+        }
 });
    
 

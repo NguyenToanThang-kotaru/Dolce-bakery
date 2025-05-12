@@ -1,12 +1,17 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT customers.*, 
-               provinces.name AS province_name, 
-               districts.name AS district_name
+// JOIN để lấy cả tên tỉnh và huyện trong một truy vấn duy nhất
+$sql = "SELECT 
+            customers.*, 
+            provinces.name AS province_name, 
+            districts.name AS district_name,
+            customeraddress.addressDetail AS addressDetail
         FROM customers
-        JOIN provinces ON customers.province_id = provinces.id
-        JOIN districts ON customers.district_id = districts.id";
+        LEFT JOIN customeraddress ON customers.id = customeraddress.customer_id
+        LEFT JOIN provinces ON customeraddress.province_id = provinces.id
+        LEFT JOIN districts ON customeraddress.district_id = districts.id
+        WHERE customeraddress.default_id = 1";
 
 $result = $conn->query($sql);
 
@@ -14,8 +19,9 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $status = $row['status'];
         $cusId = $row['id'];
+
         echo "<tr data-id='$cusId'>";
-        echo "<td><div style = 'max-height: 100px'>" . htmlspecialchars($row['id']) . "</div></td>";
+        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
         echo "<td>" . htmlspecialchars($row['fullName']) . "</td>";
         echo "<td>
                 <select class='customer-status' data-id='$cusId' data-current-status='$status'>
@@ -24,11 +30,11 @@ if ($result->num_rows > 0) {
                 </select>
               </td>";
         echo "<td style='text-align: center; vertical-align: middle;'>
-                <img src='../../assest/ACdetail.png' class='customer-detail' data-id='$cusId' alt='Xem chi tiết'>
+                <img src='/project_HTTT/Html/img/ACdetail.png' class='customer-detail' data-id='$cusId' alt='Xem chi tiết' style='width: 20px; height: 20px; cursor: pointer;'>
               </td>";
         echo "<td style='text-align: center; vertical-align: middle;'>
-              <img src='../../assest/H-oder.png' class='history-order' alt='Xem lịch sử'>
-            </td>";
+                <img src='/project_HTTT/Html/img/H-oder.png' class='history-order' data-id='$cusId' alt='Xem lịch sử' style='width: 20px; height: 20px; cursor: pointer;'>
+              </td>";
         echo "<td>
                 <div class='fix-customer'>
                     <i class='fa-solid fa-pen-to-square fix-btn-customer' data-id='$cusId'></i>
@@ -37,22 +43,35 @@ if ($result->num_rows > 0) {
               </td>";
         echo "</tr>";
 
-        // Phần hiển thị chi tiết khách hàng 
-        echo "<div class='detail-customer-container' id='detail-customer-$cusId' >";
+        // Phần hiển thị chi tiết khách hàng
+        echo "<div class='detail-customer-container' id='detail-customer-$cusId'>";
         echo "    <i class='fa-solid fa-rotate-left back-customer1' data-id='$cusId'></i>";
         echo "    <h2>Thông Tin Tài Khoản</h2>";
-        echo "    <div class='cus-info'><span class='cus-label'>Mã Khách Hàng:</span><span class='cus-value'>" . $row['id'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Tên khách hàng:</span><span class='cus-value'>" . $row['fullName'] . "</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Mã Khách Hàng:</span><span class='cus-value'>" . htmlspecialchars($row['id']) . "</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Tên khách hàng:</span><span class='cus-value'>" . htmlspecialchars($row['fullName']) . "</span></div>";
         echo "    <div class='cus-info'><span class='cus-label'>Trạng thái tài khoản:</span><span class='cus-value'>" . ($status == 1 ? "Đang hoạt động" : "Đã khóa") . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Số điện thoại:</span><span class='cus-value'>" . $row['phoneNumber'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>" . $row['email'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . $row['addressDetail'] .", ". $row['district_name'] .", ". $row['province_name'] . "</span></div>";
-        echo "    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>" . $row['userName'] . "</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Số điện thoại:</span><span class='cus-value'>" . htmlspecialchars($row['phoneNumber']) . "</span></div>";
+        echo "    <div class='cus-info'><span class='cus-label'>Email:</span><span class='cus-value'>" . htmlspecialchars($row['email']) . "</span></div>";
+
+        // Địa chỉ: kiểm tra xem tỉnh/huyện có hay không
+        if (!empty($row['province_name']) && !empty($row['district_name'])) {
+            echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>" . 
+                htmlspecialchars($row['addressDetail']) . ", " . 
+                htmlspecialchars($row['district_name']) . ", " . 
+                htmlspecialchars($row['province_name']) . 
+                "</span></div>";
+        } else {
+            echo "    <div class='cus-info'><span class='cus-label'>Địa chỉ:</span><span class='cus-value'>Chưa có địa chỉ</span></div>";
+        }
+
+        echo "    <div class='cus-info'><span class='cus-label'>Tên đăng nhập:</span><span class='cus-value'>" . htmlspecialchars($row['userName']) . "</span></div>";
         echo "</div>";
     }
 } else {
-    echo "<tr><td colspan='5' style='text-align: center;'>Không có tài khoản nào</td></tr>";
+    echo "<tr><td colspan='6' style='text-align: center;'>Không có khách hàng nào</td></tr>";
 }
+
+$conn->close();
 ?>
 
 <div id="delete-overlay-customer">

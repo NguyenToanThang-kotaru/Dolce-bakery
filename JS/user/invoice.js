@@ -30,6 +30,9 @@ function openSummary()
         blockInvoice.style.display="none";
         mainInvoice.style.display="none";
         flag_invoice = 0;
+        totalAmount = 0;
+        console.log("close invoice");
+        console.log(totalAmount);
     })
     window.addEventListener("click",function(event){
         if(event.target === blockInvoice){
@@ -55,7 +58,7 @@ let province_id;
 let district_id;
 let bankName = "";
 let cardNumber = "";
-let totalAmount = 0;
+let totalAmount;
 let orderItems = [];
 
 function getInfoSummary()
@@ -152,6 +155,7 @@ function clearErrorPayment() {
 
 
 function displayItemInSummary() {
+    totalAmount = 0;
     let html = '';
     let cart = sessionStorage.getItem("cart");
     cart = JSON.parse(cart);
@@ -225,13 +229,11 @@ function getCartSummary() {
 }
 function savePaymentIntoDatabase()
 {
-    let addressData = JSON.parse(localStorage.getItem("userAddress") || "null");
     let userSession = JSON.parse(sessionStorage.getItem("userInfo") || "null");
 
-    // Ưu tiên localStorage, fallback sang session
-    let addressDetail = addressData?.addressDetail || userSession?.addressDetail;
-    let province_id = addressData?.province || userSession?.province_id;
-    let district_id = addressData?.district || userSession?.district_id;
+    let addressDetail = userSession?.addressDetail;
+    let province_id = userSession?.province_id;
+    let district_id = userSession?.district_id;
     $.ajax({
         type: "POST",
         url: "../../PHP/users/savePayment.php",

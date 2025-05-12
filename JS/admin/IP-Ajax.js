@@ -66,13 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     if (data.success) {
                         data.products.forEach(product => {
+                             const formattedPrice = parseFloat(product.price)
+                            .toLocaleString('vi-VN', {
+                                maximumFractionDigits: 0
+                            }) + 'VNĐ';
                             productTableBody.innerHTML += `
                                 <tr data-product-id="${product.id}">
                                     <td>${product.pd_name}</td>
                                     <td><img src="${product.image}" alt="" style="max-width:60px;max-height:60px;"></td>
                                     <td>${categorySelect.options[categorySelect.selectedIndex].text}</td>
                                     <td>${subcategorySelect.options[subcategorySelect.selectedIndex].text}</td>
-                                    <td>${product.price}</td>
+                                    <td>${formattedPrice}</td>
+                                    <td>${product.quantity}</td>
                                 </tr>
                             `;
                         });
@@ -91,12 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!row) return;
         // Lấy thông tin sản phẩm từ row
         const cells = row.children;
+        const priceText = cells[4].textContent;
+        const price = parseFloat(priceText.replace(/\D/g, ''));
         selectedProduct = {
             name: cells[0].textContent,
             image: cells[1].querySelector('img').src,
             category: cells[2].textContent,
             subcategory: cells[3].textContent,
-            price: parseFloat(cells[4].textContent)
+            price: price
         };
         // Lấy product_id 
         selectedProductId = row.getAttribute('data-product-id');
@@ -109,16 +116,44 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profit-percent').value = '';
     });
 
+    // Tính lãi
     const importPriceInput = document.getElementById('import-price');
     const profitPercent = document.getElementById('profit-percent');
-    // Tính lãi khi nhập giá nhập
-    importPriceInput.addEventListener('blur', function() {
-        const importPrice = parseFloat(importPriceInput.value);
-        if (selectedProduct && !isNaN(importPrice) && importPrice > 0) {
+
+   
+
+    // Hàm lấy số nguyên thô từ chuỗi có định dạng tiền tệ
+    function getRawPrice(value) {
+        return parseFloat(value.replace(/\D/g, '')) || 0;
+    }
+
+    // Định dạng tiền khi người dùng nhập
+    importPriceInput.addEventListener('input', function () {
+        let raw = this.value.replace(/\D/g, '');
+        if (!raw) {
+            this.value = '';
+            return;
+        }
+        this.value = Number(raw).toLocaleString('vi-VN') + ' VNĐ';
+    });
+
+    // Chọn toàn bộ khi click vào input để dễ sửa
+    importPriceInput.addEventListener('focus', function () {
+        setTimeout(() => {
+            this.select();
+        }, 0);
+    });
+
+    // Tính phần trăm lợi nhuận khi rời khỏi ô nhập
+    importPriceInput.addEventListener('blur', function () {
+        const importPrice = getRawPrice(this.value);
+        if (selectedProduct && importPrice > 0) {
             if (importPrice > selectedProduct.price) {
+                console.log(importPrice);
+                console.log(selectedProduct.price);
                 alert('Giá nhập không được lớn hơn giá bán!');
                 setTimeout(() => {
-                    importPriceInput.focus();
+                    this.focus();
                 }, 0);
                 return;
             }
@@ -128,11 +163,13 @@ document.addEventListener('DOMContentLoaded', function() {
             profitPercent.value = '';
         }
     });
+
     
 
     // Khi click nút thêm sản phẩm
     document.getElementById('add-product-btn-ip').addEventListener('click', function(e) {
         e.preventDefault();
+        clearErrors(this);
         if (!selectedProduct) {
             alert('Vui lòng chọn sản phẩm!');
             return;
@@ -144,9 +181,16 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Vui lòng nhập đủ số lượng và giá nhập!');
             return;
         }
+
+        let quantityRegex = /^.{8,}$/;
+        if (!quantityRegex.test(quantity)) {
+            showError(document.getElementById("quantity"), "Số lượng phải là số nguyên dương.");
+            return;
+        }
         // Tính thành tiền
-        const total = (parseFloat(importPrice) * parseInt(quantity)).toFixed(0);
-        totalAmount = totalAmount + parseFloat(total);
+        const cleanImportPrice = getRawPrice(importPrice);
+        const total = (cleanImportPrice * parseInt(quantity)).toFixed(0);
+        totalAmount += parseFloat(total);
 
         // Thêm vào bảng sản phẩm trong phiếu nhập
         const importListBody = document.querySelector('.imported-product-list-section tbody');
@@ -155,9 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
         newRow.innerHTML = `
             <td>${selectedProduct.name}</td>
             <td>${quantity}</td>
-            <td>${importPrice}</td>
+            <td>${parseFloat(importPrice.replace(/\D/g, ''))}</td>
             <td>${profitPercent}%</td>
-            <td>${total}</td>
+            <td>${totalAmount}</td>
             <td style='text-align: center; vertical-align: middle;'><i class='fa-solid fa-trash' style='cursor:pointer'></i></td>
         `;
         document.getElementById('total-price-ip').textContent = totalAmount.toLocaleString('vi-VN') + ' VND';
@@ -322,8 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 importListBody.innerHTML = '';
                 // Reset combobox và tổng tiền
                 supplierSelect.value = '';
-                categorySelect.innerHTML = '<option value="">Chọn loại</option>';
-                subcategorySelect.innerHTML = '<option value="">Chọn chủng loại</option>';
                 productTableBody.innerHTML = '';
                 totalAmount = 0;
                 document.getElementById('total-price-ip').textContent = '0 VND';
@@ -388,14 +430,20 @@ document.addEventListener('click', function(e) {
                     // Chỉ hiển thị sản phẩm của phiếu nhập hiện tại
                     if (data.details && data.details.length > 0) {
                         data.details.forEach(detail => {
-                            const profitPercent = ((detail.product_price - detail.unitPrice) / detail.unitPrice * 100).toFixed(2);
+                            const unitPrice = parseFloat(detail.unitPrice);
+                            const productPrice = parseFloat(detail.product_price);
+
+                            let profitPercent = '0.00';
+                            if (unitPrice > 0 && productPrice > 0) {
+                                profitPercent = (((productPrice - unitPrice) / unitPrice) * 100).toFixed(2);
+                            }
                             tbody.innerHTML += `
                                 <tr>
                                     <td>${detail.product_name}</td>
                                     <td>${detail.quantity}</td>
-                                    <td>${detail.unitPrice.toLocaleString('vi-VN')} VNĐ</td>
+                                    <td>${unitPrice.toLocaleString('vi-VN')} VNĐ</td>
                                     <td>${profitPercent}%</td>
-                                    <td>${detail.subtotal.toLocaleString('vi-VN')} VNĐ</td>
+                                    <td>${detail.subtotal.toLocaleString('vi-VN')}VNĐ</td>
                                 </tr>
                             `;
                         });
@@ -432,12 +480,28 @@ document.addEventListener('change', function(e) {
         })
         .then(res => res.json())
         .then(data => {
+            let producttableBody = document.querySelector("#product-table-body");
+            let inventorytableBody = document.querySelector("#inventory-table-body");
             if (data.success) {
                 select.style.boxShadow = newStatus == "2"
                     ? "0 0 5px 1px rgb(47, 218, 70)"
                     : "0 0 5px 1px #ff9800";
                 // Cập nhật lại data-current-status
                 select.setAttribute('data-current-status', newStatus);
+            fetch("../../PHP/PD-Manager.php")
+            .then(response => response.text())
+            .then(html => {
+                // Cập nhật lại nội dung bảng
+                producttableBody.innerHTML = html; 
+            })
+            .catch(error => console.error("Lỗi khi tải lại bảng:", error));
+            fetch("../../PHP/IV-Manager.php")
+            .then(response => response.text())
+            .then(html => {
+                // Cập nhật lại nội dung bảng
+                inventorytableBody.innerHTML = html; 
+            })
+            .catch(error => console.error("Lỗi khi tải lại bảng:", error));
                 alert('Cập nhật trạng thái thành công!');
             } else {
                 alert(data.message || 'Cập nhật trạng thái thất bại!');
@@ -490,4 +554,22 @@ document.querySelectorAll('.delete-btn-import').forEach(btn => {
         };
     });
 });
+
+
+function showError(inputElement, message) {
+    let errorDiv = inputElement.parentNode.querySelector(".error-msg");
+    if (!errorDiv) {
+        errorDiv = document.createElement("div");
+        errorDiv.className = "error-msg show";
+        inputElement.parentNode.appendChild(errorDiv);
+    }
+    errorDiv.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${message}`;
+    inputElement.focus();
+}
+
+function clearErrors(form) {
+    form.querySelectorAll(".error-msg").forEach((error) => {
+        error.remove();
+    });
+}
 

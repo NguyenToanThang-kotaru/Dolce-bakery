@@ -121,6 +121,10 @@ $(document).ready(function () {
                         username.focus();
                         return;
                     }
+                    else if (response.message === "Tài khoản đã bị khóa") {
+                        console.log(response);
+                        showToast("Tai khoan bi khoa", false);
+                    }
                     else if (response.message === "Sai mật khẩu") {
                         console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
@@ -231,16 +235,7 @@ function clearErrors(form) {
                 <label for="phone" class="Detail">Số điện thoại: </label>
                 <span>${data.phoneNumber}</span>
             </div>
-            <div class="row">
-                <!-- Phần 1: Tên khung -->
-                <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
-
-                <!-- Phần 2: Nội dung + chữ thay đổi -->
-                <div class="value-wrapper">
-                    <span class="content no-margin">${address}</span>
-                    <span class="changed no-margin" onclick = "OnUpdateAddress()">Cập nhật</span>
-                </div>
-            </div>
+            
 
             <div id="Buy-history">
                         <div class="History" onclick = "openOrderHistory()">Lịch sử mua hàng</div>
@@ -250,92 +245,6 @@ function clearErrors(form) {
         document.querySelector('.InfoUser_Detail').innerHTML = html;
     }
 
-
-    
-
-
-    function saveAddress() {
-        var dc = $('.overlayAddress .address').val();
-        var tinh = $('.overlayAddress .province').val();
-        var quan = $('.overlayAddress .district').val();
-        if (!dc || !tinh || !quan) {
-            showToast("Vui lòng nhập đầy đủ thông tin!", false);
-            return;
-        }
-
-    
-        $.ajax({
-            type: "POST",
-            url: "../../PHP/users/saveAddress.php",  
-            data: {
-                "addressDetail": dc,
-                "province": tinh,
-                "district": quan
-            },
-            success: function (response) {
-                const res = JSON.parse(response);
-                if (res.status === "success") {
-                    sessionStorage.setItem("userInfo", JSON.stringify(res.user));
-                    showToast("Đã cập nhật địa chỉ thành công", true);
-                    $('.address').val('');
-                    $('.province').val('');
-                    $('.district').val('');
-                    loadUserInfo();
-                    setUserInfoPayment();
-                    document.querySelector(".overlayAddress").style.display = "none";
-                    document.getElementById("overlayInfo").style.display = "block";
-                    document.querySelector(".overlayInfoAddress").style.display = "none";
-                } else {
-                    alert("Lỗi: " + res.message);
-                }
-            }
-        });
-    }
-function changeAddress()
-{
-    var dc = $('.overlayAddressPayment .address').val();
-    var tinh = $('.overlayAddressPayment .province').val();
-    var quan = $('.overlayAddressPayment .district').val();
-    if (!dc || !tinh || !quan) {
-        showToast("Vui lòng nhập đầy đủ thông tin!", false);
-        return;
-    }
-    $.ajax({
-        type: "POST",
-        url: "../../PHP/users/getAddressName.php",  
-        data: {
-            "addressDetail": dc,
-            "province": tinh,
-            "district": quan
-        },
-        success: function (response) {
-            const res = JSON.parse(response);
-            if (res.status === "success") {
-                showToast("Đã thay đổi địa chỉ thành công", true);
-                $('.address').val('');
-                $('.province').val('');
-                $('.district').val('');
-                document.querySelector(".overlayAddressPayment").style.display = "none";
-                document.querySelector(".overlayInfoAddress").style.display = "none";
-
-                let provinceName = res.provinceName;
-                let districtName = res.districtName;
-                let address = dc + ", " + districtName + ", " + provinceName;
-
-                document.querySelector(".payment-customer-address").textContent = address;
-            } else {
-                alert("Lỗi: " + res.message);
-            }
-        }
-    });
-    let address = dc + ", " + quan + ", " + tinh;
-    document.querySelector(".payment-customer-address").textContent = address;
-    localStorage.setItem("userAddress", JSON.stringify({
-        addressDetail: dc,
-        province: tinh,
-        district: quan
-    }));
-}
 
 function showToast(message, isSuccess, duration = 2000) {
     const toast = document.createElement("div");
@@ -353,12 +262,37 @@ function showToast(message, isSuccess, duration = 2000) {
     return duration + 300; 
 }
 
+function loadCustomerAddressToSessionStorageAndThen(callback) {
+    const customerInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+    const customerId = customerInfo.userID;
 
-function setUserInfoPayment() {
-    let userSession = sessionStorage.getItem("userInfo");
-    userSession = JSON.parse(userSession);
-    document.querySelector(".payment-customer-name").textContent = userSession.fullName;
-    document.querySelector(".payment-customer-email").textContent = userSession.email;
-    document.querySelector(".payment-customer-phone").textContent = userSession.phoneNumber + "";
-    document.querySelector(".payment-customer-address").textContent = userSession.address;
+    $.ajax({
+        url: '../../PHP/users/loadInfoCustomer.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            customer_id: customerId
+        },
+        success: function(response) {
+            if (response) {
+                const customer = response.customer;
+                customerInfo.address = customer.address;
+                customerInfo.addressDetail = customer.addressDetail;
+                customerInfo.province_id = customer.province_id;
+                customerInfo.district_id = customer.district_id;
+
+                sessionStorage.setItem('userInfo', JSON.stringify(customerInfo));
+                console.log("Địa chỉ đã được cập nhật vào sessionStorage.");
+
+                if (callback) callback(); // Gọi callback sau khi cập nhật xong
+            } else {
+                console.error("Không có dữ liệu địa chỉ.");
+            }
+        },
+        error: function() {
+            console.error("Lỗi khi lấy địa chỉ từ server.");
+        }
+    });
 }
+
+
