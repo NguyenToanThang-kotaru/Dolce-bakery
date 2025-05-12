@@ -179,8 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         // Tính thành tiền
-        const total = (parseFloat(importPrice) * parseInt(quantity)).toFixed(0);
-        totalAmount = totalAmount + parseFloat(total);
+        const cleanImportPrice = getRawPrice(importPrice);
+        const total = (cleanImportPrice * parseInt(quantity)).toFixed(0);
+        totalAmount += parseFloat(total);
 
         // Thêm vào bảng sản phẩm trong phiếu nhập
         const importListBody = document.querySelector('.imported-product-list-section tbody');
@@ -191,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <td>${quantity}</td>
             <td>${parseFloat(importPrice.replace(/\D/g, ''))}</td>
             <td>${profitPercent}%</td>
-            <td>${total}</td>
+            <td>${totalAmount}</td>
             <td style='text-align: center; vertical-align: middle;'><i class='fa-solid fa-trash' style='cursor:pointer'></i></td>
         `;
         document.getElementById('total-price-ip').textContent = totalAmount.toLocaleString('vi-VN') + ' VND';
