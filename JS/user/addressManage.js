@@ -11,7 +11,7 @@ function loadCustomerAddress() {
                 let addresses = response.data;
 
                 addresses.sort((a, b) => b.default_id - a.default_id);
-
+                
                 let addressHTML = `
                     <div class="modal-header">Địa chỉ nhận hàng</div>
                     <div class="address-scroll-wrapper">
@@ -279,9 +279,7 @@ function getAddressToPaying() {
                             const districtName = res.districtName;
 
                             const address = addressData.addressDetail + ", " + districtName + ", " + provinceName;
-                            if (addressData.default_id == 1) {
-                                localStorage.setItem('defaultAddress', JSON.stringify(address));
-                            }
+                            
                             let userInfo = sessionStorage.getItem("userInfo");
                             userInfo = userInfo ? JSON.parse(userInfo) : {};
                             userInfo.address = address;

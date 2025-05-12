@@ -126,7 +126,9 @@
     font-style: italic;
     user-select: none;
 }
-
+.changed2{
+  cursor: pointer;
+}
 .no-margin {
     margin-right: 0 !important;
 }

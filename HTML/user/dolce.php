@@ -771,7 +771,7 @@
                             <label for="address-payment"><strong>Địa chỉ:</strong> </label>
                             <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
                             <span class="payment-customer-address content no-margin"></span>
-                            <span class="changed no-margin" onclick = "OnSelectAddress()">Thay đổi</span>    
+                            <span class="changed no-margin changed2" onclick = "OnSelectAddress()">Thay đổi</span>    
                         </div>
                         <br />
                         <div class="payment-customer-note">
