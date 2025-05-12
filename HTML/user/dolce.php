@@ -931,6 +931,64 @@
                 </div>
             </div>
         </div>
+        <div id="container-success-invoice">
+            <div id="payment-success">
+                <div class="success-header">
+                    <h3>THANH TOÁN THÀNH CÔNG</h3>
+                </div>
+
+                <!-- Thông tin khách hàng -->
+                <div class="customer-info">
+                    <p><span class="label">Ngày đặt:</span> <span class="invoice-date">13/5/2025</span></p>
+                    <p><span class="label">Tên khách hàng:</span> <span class="invoice-customer-name">Nguyễn Văn A</span></p>
+                    <p><span class="label">Số điện thoại:</span> <span class="invoice-phone">0987 654 321</span></p>
+                    <p><span class="label">Địa chỉ:</span> <span class="invoice-address">123 Đường ABC, Quận XYZ, Thành phố Hà Nội</span></p>
+                    <p><span class="label">Ghi chú:</span> <span class="invoice-note">Giao hàng trong giờ hành chính</span></p>
+                </div>
+
+                <!-- Danh sách sản phẩm -->
+                <table class="invoice-table">
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Bánh</td>
+                        <td>1</td>
+                        <td>200.000 đ</td>
+                    </tr>
+                    <tr>
+                        <td>Cái</td>
+                        <td>2</td>
+                        <td>300.660 đ</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>1</td>
+                        <td>400.000 đ</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tổng cộng và phương thức thanh toán -->
+                <div class="total">
+                    <span><strong>Tổng cộng:</strong></span>
+                    <span class="total-price">900.660 đ</span>
+                </div>
+
+                <div class="payment-method">
+                    <span><strong>Phương thức thanh toán: </strong></span>
+                    <span class = "cd">Tiền mặt</span>
+                </div>
+
+                <!-- Nút đóng -->
+                <button id="close-success-invoice" onclick = "continueShopping()">Tiếp tục mua hàng</button>
+            </div>
+        </div>
         <!-- -------------------------------------FOoter------------------------------------- -->
         <footer class="container-footer">
             <div style="display: flex;justify-content: space-between;width: 100%;">

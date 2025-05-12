@@ -88,6 +88,15 @@ function getInfoSummary()
     paymentMethod_toString = paymentMethod_toString + " " + bankName + " " + cardNumber;
     document.querySelector(".invoice-process-payment").textContent = "Phương thức thanh toán: " + paymentMethod_toString;
     displayItemInSummary();
+
+
+    $("#payment-success .invoice-date").text(paymentDate);
+    $("#payment-success .invoice-customer-name").text(userName);
+    $("#payment-success .invoice-phone").text(phone);
+    $("#payment-success .invoice-address").text(address);
+    $("#payment-success .invoice-note").text(note);
+    $("#payment-success .payment-method .cd").text(paymentMethod_toString);
+    displayItemFinal();
 }
 function checkConditionToPay()
 {
@@ -262,9 +271,14 @@ function savePaymentIntoDatabase()
                     tenbal.innerHTML = html; 
                 })
                 console.log("Success");
-                const timeShown = showToast("Thanh toán thành công.", true);
+                const timeShown = showToast("Đang tiến hành thanh toán ...", false);
                 setTimeout(() => {
-                    location.reload();
+                    $("#topMenu-container").hide();
+                    $("#overlay-invoice").hide();
+                    $("#shopcart-container").hide();
+                    $(".container-footer").hide();
+                    document.getElementById("container-success-invoice").style.display = "flex";
+                    showToast("Thanh toán thành công.", true);
                 }, timeShown);
                 sessionStorage.removeItem("cart");
             } else {
@@ -276,3 +290,33 @@ function savePaymentIntoDatabase()
         
     });
 }
+
+
+function displayItemFinal() {
+    let totalAmount = 0;
+    let html = '';
+    let cart = sessionStorage.getItem("cart");
+    cart = JSON.parse(cart);
+
+    cart.forEach(item => {
+        totalAmount += item.price * item.quantity;
+        html += `
+            <tr>
+                <td>
+                    <img src="${item.image}" style="width: 30px; object-fit: cover; vertical-align: middle; margin-right: 8px">
+                    ${item.pd_name}
+                </td>
+                <td>${item.quantity}</td>
+                <td>${(item.price * item.quantity).toLocaleString("vi-VN")} đ</td>
+            </tr>
+        `;
+    });
+
+    document.querySelector(".invoice-table tbody").innerHTML = html;
+    document.querySelector("#payment-success .total-price").textContent = totalAmount.toLocaleString('vi-VN') + " đ";
+}
+
+
+document.querySelector("#close-success-invoice").addEventListener("click", function() {
+    location.reload();
+});

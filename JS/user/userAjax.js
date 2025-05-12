@@ -143,6 +143,9 @@ $(document).ready(function () {
                         showError(pwdContainer, "Sai mật khẩu")
                         passWord.focus();
                     }
+                    else if(response.message === "Tài khoản đã bị khóa"){
+                        showToast("Tài khoản đã bị khóa", true, 2000);                        
+                    }
                     return;
                 }
 

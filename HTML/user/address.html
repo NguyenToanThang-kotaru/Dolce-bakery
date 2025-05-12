@@ -1,47 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thanh Toán Thành Công</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      background-color: #fff6f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
     #container-success-invoice {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
     #payment-success {
       background-color: #ffffff;
-      width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+      width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
       text-align: center;
-      z-index: 3;
     }
 
-    .success-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .success-header h3 {
+      font-size: 24px;
+      color: #d63384;
+      font-weight: bold;
       margin-bottom: 20px;
     }
 
-    .checkmark {
-      font-size: 30px;
-      color: green;
-      margin-right: 10px;
+    .customer-info {
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #333;
     }
 
-    h3 {
-      font-size: 20px;
-      color: #074c77;
+    .customer-info span {
       font-weight: bold;
+      color: #d63384;
     }
 
     .invoice-table {
@@ -52,13 +57,18 @@
 
     .invoice-table th,
     .invoice-table td {
-      padding: 10px;
+      padding: 12px;
+      border: 1px solid #f8d7e3;
       text-align: left;
-      border: 1px solid #ccc;
     }
 
     .invoice-table th {
-      background-color: #f0f0f0;
+      background-color: #fcb1cf;
+      color: #5a0d41;
+    }
+
+    .invoice-table td {
+      color: #333;
     }
 
     .total {
@@ -66,33 +76,35 @@
       justify-content: space-between;
       font-size: 18px;
       font-weight: bold;
-      color: #cc1d1d;
+      color: #d63384;
+      margin-bottom: 10px;
     }
 
     .total-price {
-      color: #cc1d1d;
+      color: #d63384;
     }
 
-    #close-success-invoice {
-      padding: 10px;
-      color: white;
-      background-color: rgb(37, 76, 232);
-      border-radius: 20px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
-    #close-success-invoice:hover {
-      background-color: #9d98f7;
-    }
-
-    .customer-info {
-      text-align: left;
+    .payment-method {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      color: #333;
       margin-bottom: 20px;
     }
 
-    .customer-info span {
-      font-weight: bold;
+    #close-success-invoice {
+      padding: 10px 20px;
+      color: white;
+      background-color: #d63384;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #close-success-invoice:hover {
+      background-color: #f28cb1;
     }
   </style>
 </head>
@@ -145,15 +157,15 @@
         <span class="total-price">900.660 đ</span>
       </div>
 
-      <div style="font-size: 18px; display: flex; justify-content: space-between;">
+      <div class="payment-method">
         <span><strong>Phương thức thanh toán: </strong></span>
         <span>Tiền mặt</span>
       </div>
 
       <!-- Nút đóng -->
-      <div id="close-success-invoice">
+      <button id="close-success-invoice">
         Đóng
-      </div>
+      </button>
     </div>
   </div>
 </body>

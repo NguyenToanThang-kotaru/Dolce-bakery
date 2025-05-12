@@ -156,3 +156,98 @@
     transition: all 0.3s ease;
   }
   
+  #container-success-invoice {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    #payment-success {
+      background-color: #ffffff;
+      width: 1000px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .success-header h3 {
+      font-size: 24px;
+      color: #d63384;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .customer-info {
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .customer-info .label {
+      font-weight: bold;
+      color: #d63384;
+    }
+    .customer-info p {
+      margin-top: 10px;
+    }
+    .invoice-table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      padding: 12px;
+      border: 1px solid #f8d7e3;
+      text-align: left;
+    }
+
+    .invoice-table th {
+      background-color: #fcb1cf;
+      color: #5a0d41;
+    }
+
+    .invoice-table td {
+      color: #333;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: bold;
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    .total-price {
+      color: #d63384;
+    }
+
+    .payment-method {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #close-success-invoice {
+      padding: 10px 20px;
+      color: white;
+      background-color: #d63384;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #close-success-invoice:hover {
+      background-color: #f28cb1;
+    }
