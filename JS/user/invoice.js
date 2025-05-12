@@ -253,11 +253,19 @@ function savePaymentIntoDatabase()
         dataType: "json",
         success: function (response) {
             if (response.status === "success") {
+                let tenbal =document.querySelector("#orderTable")
+                fetch("../../PHP/OD-Manager.php")
+                .then(response => response.text())
+                .then(html => {
+                    // Cập nhật lại nội dung bảng
+                    console.log("da vo")
+                    tenbal.innerHTML = html; 
+                })
                 console.log("Success");
                 const timeShown = showToast("Thanh toán thành công.", true);
-                setTimeout(() => {
-                    location.reload();
-                }, timeShown);
+                // setTimeout(() => {
+                //     location.reload();
+                // }, timeShown);
                 sessionStorage.removeItem("cart");
             } else {
                 console.log("Fail");

@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
                 <div class='product-name'>" . htmlspecialchars($row['pd_name']) . "</div>    
                 <div class='product-end'>
                     <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
-                    <div class='add-cart' onclick='addToCart(" . $row['product_id'] . ")'>
+                    <div class='add-cart' onclick='addToCart(" . $row['id'] . ")'>
                         <img src='../../assest/cart.png' alt=''>
                     </div>
                 </div>

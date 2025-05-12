@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $delete->bind_param("ii", $product_id, $quantity);
                 $delete->execute();
                 $delete->close();
+                
             }
             $stmt2->close();
         }

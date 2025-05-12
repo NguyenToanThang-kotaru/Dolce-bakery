@@ -108,7 +108,13 @@
                 .then(data => {
                     if (data.success) {
                         const currentFilter = document.getElementById("filter-status").value;
-    
+                        let producttableBody = document.querySelector("#product-table-body");
+                        fetch("../../PHP/PD-Manager.php")
+                        .then(response => response.text())
+                        .then(html => {
+                            // Cập nhật lại nội dung bảng
+                            producttableBody.innerHTML = html; 
+                        })
                         if (currentFilter !== "0") {
                             fetch("../../PHP/OD-Manager.php", {
                                 method: "POST",

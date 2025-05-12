@@ -14,7 +14,9 @@
     $quantityCheck = $_POST['quantityCheck'];
     $quantity = $_POST['quantity'];
     // Lấy thông tin số lượng sản phẩm còn lại trong kho
-    $product_sql = "SELECT quantity FROM products WHERE id = $product_id";
+    $product_sql = "SELECT COUNT(*) AS quantity
+FROM inventory
+WHERE product_id = $product_id AND is_deleted = 0;";
     $product_result = $conn->query($product_sql);
     $product_row = $product_result->fetch_assoc();
 

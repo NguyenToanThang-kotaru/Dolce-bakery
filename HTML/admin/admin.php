@@ -269,7 +269,7 @@ if (!isset($_SESSION['adminInfo'])) {
             <th>Trạng thái</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id = "orderTable">
           <?php include '../../PHP/OD-Manager.php' ?>
         </tbody>
       </table>
@@ -1439,7 +1439,7 @@ if (!isset($_SESSION['adminInfo'])) {
   <script src="../../JS/admin/IP-Ajax.js"></script>
   <script src="../../JS/admin/SP-Ajax.js"></script>
   <script src="../../JS/admin/business-process.js"></script>
-  
+  <script src="../../JS/user/invoice.js"></script>
   
 
 
@@ -1517,7 +1517,6 @@ if (!isset($_SESSION['adminInfo'])) {
   // document.getElementById("admin-role").style.display = "block";
 
 </script>
-
 
 </body>
 

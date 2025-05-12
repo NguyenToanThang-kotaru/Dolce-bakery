@@ -1,4 +1,6 @@
-<?php include '../../PHP/check_expired_products.php'; ?>
+<?php include '../../PHP/check_expired_products.php'; 
+?>
+<? include '../admin/admin.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
