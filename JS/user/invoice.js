@@ -30,6 +30,9 @@ function openSummary()
         blockInvoice.style.display="none";
         mainInvoice.style.display="none";
         flag_invoice = 0;
+        totalAmount = 0;
+        console.log("close invoice");
+        console.log(totalAmount);
     })
     window.addEventListener("click",function(event){
         if(event.target === blockInvoice){
