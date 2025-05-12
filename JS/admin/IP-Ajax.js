@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        let quantityRegex = /^.{8,}$/;
+        let quantityRegex = /^[1-9][0-9]*$/;
         if (!quantityRegex.test(quantity)) {
             showError(document.getElementById("quantity"), "Số lượng phải là số nguyên dương.");
             return;
