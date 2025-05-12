@@ -55,7 +55,7 @@ let province_id;
 let district_id;
 let bankName = "";
 let cardNumber = "";
-let totalAmount = 0;
+let totalAmount;
 let orderItems = [];
 
 function getInfoSummary()
@@ -152,6 +152,7 @@ function clearErrorPayment() {
 
 
 function displayItemInSummary() {
+    totalAmount = 0;
     let html = '';
     let cart = sessionStorage.getItem("cart");
     cart = JSON.parse(cart);
