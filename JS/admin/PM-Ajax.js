@@ -159,6 +159,14 @@ document.getElementById("fix-form-role").addEventListener("submit", function (ev
                 document.getElementById("role-plus").style.display = "block";
                 document.getElementById("fix-form-role").reset();// Reset lại form
                 updateRoleTable();// Cập nhật lại dữ liệu bảng quyền 
+                let tableBody = document.querySelector("#account-table-body");
+                fetch("../../PHP/AC-Manager.php")
+                .then(response => response.text())
+                .then(html => {
+                    // Cập nhật lại nội dung bảng
+                    tableBody.innerHTML = html; 
+                })
+                .catch(error => console.error("Lỗi khi tải lại bảng:", error));
             } else {
                 alert("Có lỗi xảy ra: " + data.error);
             }
