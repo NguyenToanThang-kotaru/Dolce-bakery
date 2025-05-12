@@ -1,8 +1,9 @@
 * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-  }
-#search{
+}
+
+#search {
     border-radius: 1000px;
     padding: 10px;
     width: 100%;
@@ -14,7 +15,7 @@
     top: 100%;
     left: 0;
     width: 100%;
-    max-height: 200px;  
+    max-height: 200px;
     overflow-y: auto;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -30,10 +31,11 @@
     background: #FFF0F5
 }
 
-#search:focus{
+#search:focus {
     outline: none;
 }
-#delete{
+
+#delete {
     position: absolute;
     right: 3%;
     cursor: pointer;
@@ -42,18 +44,20 @@
 }
 
 #delete::before {
-    content:"";
+    content: "";
     background-color: none;
     width: 20px;
     height: 30px;
     position: absolute;
     top: -2px;
-    cursor: pointer;  
+    cursor: pointer;
 }
-#delete:hover{
+
+#delete:hover {
     scale: 1.1;
 }
-#overlay{
+
+#overlay {
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
@@ -63,22 +67,28 @@
     z-index: 1;
     display: none;
 }
-#menu{
+
+#menu {
     padding: 0;
 
     border: none;
     margin: 0;
 }
-#menu2{
-    width: 50%;background-color: #33272A; border: none;
+
+#menu2 {
+    width: 50%;
+    background-color: #33272A;
+    border: none;
 }
 
-#menu:hover #menudacap{
+#menu:hover #menudacap {
     animation: scale 0.3s;
     display: block;
     transform-origin: top right;
 }
-#menudacap{
+
+/* Cấu trúc chính của menu */
+#menudacap {
     position: absolute;
     right: 0;
     text-align: center;
@@ -101,27 +111,142 @@
     right: 0.5px;
     top: -30px;
 }
-.signin-btn{
+
+/* Item menu cấp 1 */
+.item-submenu {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    width: 150px;
+}
+
+.item-submenu:hover {
+    color: rgb(241, 79, 201);
+}
+
+/* Hover cho các li trong submenu */
+.item-submenu li:hover {
+    color: goldenrod;
+}
+
+/* Submenu cấp 1 (menu con của item cấp 1) */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: -150px;
+    /* Đặt submenu cấp 1 bên trái menu cấp 1 */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 100;
+    min-width: 150px;
+}
+
+.item-submenu:hover>.submenu {
+    display: block;
+    /* Hiển thị submenu cấp 1 khi hover vào item */
+}
+
+/* Submenu cấp 2 (menu con của submenu cấp 1) */
+.submenu-2 {
+    display: none;
+    position: absolute;
+    top: -10 ;
+    left: -150px;
+    /* Đặt submenu cấp 2 bên trái submenu cấp 1 */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 200;
+    min-width: 150px;
+}
+
+.submenu li {
+    position: relative;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Hover cho các li trong submenu cấp 2 */
+.submenu-2 li:hover {
+    color: rgb(161, 221, 149);
+}
+
+/* Khi hover vào các item submenu cấp 1, hiển thị submenu cấp 2 */
+.submenu li:hover>.submenu-2 {
+    display: block;
+}
+
+.submenu li:last-child,
+.submenu-2 li:last-child {
+    border-bottom: none;
+}
+
+/* Thẻ div ẩn để tạo vùng hover mở rộng */
+.hover-area {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    /* Đặt nó ra ngoài bên trái */
+    width: 20px;
+    height: 100%;
+    /* Chiều cao thẻ li */
+    background-color: transparent;
+    /* Không hiển thị */
+    z-index: 2;
+    /* Đảm bảo nó ở trên cùng */
+    cursor: pointer;
+}
+
+/* Hiển thị menu con khi hover vào thẻ div */
+.item-submenu:hover>.submenu,
+.item-submenu:hover>.submenu-2 {
+    display: block;
+}
+
+
+.bipthu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0);
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+.signin-btn {
     margin: 0 auto;
     width: 80%;
 }
 
-#menu2:hover{
+#menu2:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-#cart{
+
+#cart {
     cursor: pointer;
 }
-#cart:hover{
+
+#cart:hover {
     opacity: 0.7;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 
 }
-li{
+
+li {
     list-style-type: none;
     width: 100%;
     white-space: nowrap;
@@ -129,22 +254,26 @@ li{
     border-bottom: 1px solid black;
     cursor: pointer;
 }
-#Page:hover{
+
+#Page:hover {
     color: #Ecbc76;
 }
-li:hover{
+
+li:hover {
     color: #Ecbc76;
 }
+
 @keyframes scale {
-    0%{
+    0% {
         transform: scale(0);
     }
-    100%{
+
+    100% {
         transform: scale(1);
     }
 }
 
-#CartPhone{
+#CartPhone {
     display: none;
     border-top: 1px solid black;
     border-bottom: none;

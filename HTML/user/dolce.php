@@ -119,7 +119,8 @@
         <header style="position: fixed;width: 100%;top: 0px;z-index: 100;">
             <nav id="topMenu-container"
                 style="background-color: #33272A; display: flex;padding: 16px; justify-content: space-between; align-items: center;flex-basis: 33.33%;">
-                <div id="main-page" style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
+                <div id="main-page"
+                    style="display: flex; align-items: center; color: white; cursor: pointer; width: fit-content; ">
                     <a href="#">
                         <img src="../../assest/Dolce.png" alt="" height="70px" id="return-mainshop">
                         <span class="cart-count">0</span>
@@ -147,9 +148,15 @@
                             <a href="#">
                                 <li style="display: none;" id="infor">Thông tin</li>
                             </a>
-                            <a href="#">
-                                <li>Thực đơn</li>
-                            </a>
+
+                            <li class="item-submenu">Thực đơn
+                                <ul class="submenu">
+                                    <?php include '../../PHP/users/get_categoryforMenu.php'; ?>
+                                </ul>
+                            </li>
+
+
+
                             <a href="#">
                                 <li style="border-bottom:none;">Tin tức</li>
                             </a>
@@ -170,7 +177,7 @@
         <div id="InfoPD-container">
             <div id="Left">
                 <div id="PD-imgage">
-                    <img id = "product-img" src="../../assest/PD-Manager">
+                    <img id="product-img" src="../../assest/PD-Manager">
                 </div>
 
             </div>
@@ -193,13 +200,13 @@
                 </div>
                 <div id="button">
                     <button class="add-cart-info" type="submit">Thêm vào giỏ hàng</button>
-                    <button class="Buy" type="submit">Mua Ngay</button> 
+                    <button class="Buy" type="submit">Mua Ngay</button>
                 </div>
             </div>
 
         </div>
 
-        <div class="bread-catelouge-container">
+        <div class="bread-catelouge-container" data-category="bread">
 
             <div class="product-filter">
                 <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('bread')">
@@ -279,7 +286,7 @@
             <div class="bread-pagination">
             </div>
         </div>
-        <div class="cake-catelouge-container">
+        <div class="cake-catelouge-container" data-category="cake">
             <div class="product-filter">
                 <img src="../../assest/Star.png" alt="" class="filtershow" onclick="toggleFilter('cake')">
 
@@ -366,7 +373,7 @@
             <div class="cake-pagination">
             </div>
         </div>
-        <div class="cookie-catelouge-container">
+        <div class="cookie-catelouge-container" data-category="cookie">
 
             <div class="product-filter">
                 <!-- <button id="filtershow" onclick="toggleFilter()">Filter</button> -->
@@ -596,7 +603,7 @@
             <div id="cart-body">
                 <p id="Title">Products</p>
                 <div id="list-PD">
-                    
+
                 </div>
             </div>
             <div id="cart-footer">
@@ -604,7 +611,7 @@
                     <p>Tạm tính:</p>
                     <p id="price-total"></p>
                 </div>
-                <button  id="buy">Mua Ngay</button>
+                <button id="buy">Mua Ngay</button>
             </div>
         </div>
         <!-- ------------------------------------infor-------------------------------------- -->
@@ -613,17 +620,30 @@
                 <div class="InfoUser-Title">
                     <i id="Back" class="fa-solid fa-arrow-right-from-bracket"></i>
                     <h1 class="Title">Thông tin</h1>
-                
+
                 </div>
-            <div class="InfoUser_Detail">
+                <div class="InfoUser_Detail">
+
+                </div>
 
             </div>
+        </div>
 
         </div></div>
+    <div class="overlaySelectAddress"></div>
+    <div class="modal-select-address">
         
+
+        <div class="add-new-btn" onclick = "OnUpdateAddress()">
+        <div>Thêm địa chỉ mới</div>
+        <div class="add-icon">+</div>
+        </div>
+
+        <button class="continue-btn" onclick = "getAddressToPaying();">Tiếp tục</button>
+    </div>    
         <div class="overlayInfoAddress"></div>
         <div class="overlayAddress">
-            <h2 class="addr-title">Cập nhật địa chỉ</h2>
+            <h2 class="addr-title">Thêm địa chỉ mới</h2>
 
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
@@ -637,12 +657,21 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="saveAddress()">Lưu địa chỉ</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="addAddress()">Thêm mới</button>
         </div>
         <div class="overlayAddressPayment">
             <h2 class="addr-title">Cập nhật địa chỉ</h2>
-
+            <div class = "address_id" style = "display: none"></div>
             <label for="diaChi" class="addr-label">Địa chỉ cụ thể:</label>
             <input type="text" class="address addr-input" placeholder="Số nhà, tên đường...">
 
@@ -655,8 +684,17 @@
             <select class="district addr-input">
                 <option value="">-- Chọn quận / huyện --</option>
             </select>
-
-            <button class="addr-button" onclick="changeAddress()">Thay đổi</button>
+            
+            <div class="default-address">
+                <label>Địa chỉ mặc định</label>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" id="toggleDefaultAddress">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="addr-button" onclick="submitEditAddress()">Cập nhật</button>
         </div>
 
         <div class="modal-overlay-history">
@@ -669,34 +707,34 @@
                         <h4>Đơn hàng 15</h4>
                         <div class="order-date"><strong>Ngày đặt:</strong> 2025-04-21</div>
                         <table class="history-order-table">
-                        <thead>
-                            <tr>
-                            <th>Sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>Thanh Xà Diệu Đà</td>
-                            <td>1</td>
-                            <td>700,000 đ</td>
-                            </tr>
-                            <tr>
-                            <td>Bánh Kem Trà Xanh</td>
-                            <td>1</td>
-                            <td>250,000 đ</td>
-                            </tr>
-                            <tr>
-                            <td>Tôm Phô Mai</td>
-                            <td>4</td>
-                            <td>25,000 đ</td>
-                            </tr>
-                        </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Thanh Xà Diệu Đà</td>
+                                    <td>1</td>
+                                    <td>700,000 đ</td>
+                                </tr>
+                                <tr>
+                                    <td>Bánh Kem Trà Xanh</td>
+                                    <td>1</td>
+                                    <td>250,000 đ</td>
+                                </tr>
+                                <tr>
+                                    <td>Tôm Phô Mai</td>
+                                    <td>4</td>
+                                    <td>25,000 đ</td>
+                                </tr>
+                            </tbody>
                         </table>
                         <div class="order-summary-history">
-                        <p><strong>Tổng tiền:</strong> 1,050,000 đ</p>
-                        <p><strong>Trạng thái:</strong> Chờ xử lý</p>
+                            <p><strong>Tổng tiền:</strong> 1,050,000 đ</p>
+                            <p><strong>Trạng thái:</strong> Chờ xử lý</p>
                         </div>
                     </div>
                 </div>
@@ -705,7 +743,7 @@
 
         
     </div>
-        <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
+ <!-- -------------------------------------Hóa đơn thanh toán------------------------------------- -->
         <div id="overlay-payment">
             <div id="payment-container">
                 <div class="payment-left-container">
@@ -733,7 +771,7 @@
                             <label for="address-payment"><strong>Địa chỉ:</strong> </label>
                             <!-- <input type="text" id="address-payment" placeholder="Nhập địa chỉ giao hàng" required /> -->
                             <span class="payment-customer-address content no-margin"></span>
-                            <span class="changed no-margin" onclick = "OnUpdateAddressPayment()">Thay đổi</span>    
+                            <span class="changed no-margin" onclick = "OnSelectAddress()">Thay đổi</span>    
                         </div>
                         <br />
                         <div class="payment-customer-note">
@@ -742,7 +780,7 @@
 
                         </div>
                         <div class="payment-left-footer">
-                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 80px;">
+                            <p id="payment-back-cart" style="display: inline-block; margin-top: 200px; color: #007BFF; text-decoration: none;text-align:left;cursor:pointer;margin-left: 0px;position:relative;top: 20px;">
                                 ← Quay lại giỏ hàng
                             </p>
                         </div>
@@ -938,7 +976,7 @@
                 <p>© 2025 Nguyen Toan Thang | All Rights Reserved</p>
             </div>
         </footer>   
-    
+
     <script src="../../JS/user/blockOrderHistory.js"></script>
     <script src="../../JS/user/invoice.js"></script>
     <script src="../../JS/user/payment.js"></script>
@@ -951,6 +989,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../JS/user/userAjax.js"></script>
     <script src="../../JS/user/blockInfo.js"></script>
+    <script src="../../JS/user/addressManage.js"></script>
+
+    <script src="../../JS/admin/PD-getSubcategory"></script>
 </body>
 
 </html>

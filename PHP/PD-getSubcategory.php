@@ -17,7 +17,7 @@ $sql = "SELECT id, name FROM subcategories WHERE category_id = $categoryId";
 $result = $conn->query($sql);
 
 echo "<select name='$selectName' class='form-select' id='$selectId' required>";
-echo "  <option value=''>-- Chọn phân loại sản phẩm --</option>";
+echo "  <option value='0'>-- Chọn phân loại sản phẩm --</option>";
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
