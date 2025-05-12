@@ -132,34 +132,39 @@ function getCart(callback) {
     });
 }
 
-
 function displayItemInCart() {
     let html = '';
-    new_cart.forEach(item => {
-        html += `
-            <div class="PDCart">
-                <div id="PDCart1">
-                    <img src="${item.image}" width="8%" height="100%" alt="">
-                    <div id="PDCart-NP">
-                        <div id="PDCart-Name">${item.pd_name}</div>
-                        <div id="PDCart-Price">${parseInt(item.price).toLocaleString("vi-VN")}đ</div>
+
+    if (new_cart.length === 0) {
+        html = `<div class="empty-cart-message">Giỏ hàng của bạn đang trống.</div>`;
+    } else {
+        new_cart.forEach(item => {
+            html += `
+                <div class="PDCart">
+                    <div id="PDCart1">
+                        <img src="${item.image}" width="8%" height="100%" alt="">
+                        <div id="PDCart-NP">
+                            <div id="PDCart-Name">${item.pd_name}</div>
+                            <div id="PDCart-Price">${parseInt(item.price).toLocaleString("vi-VN")}đ</div>
+                        </div>
                     </div>
-                </div>
-                <div id="PDCart2">
-                    <div id="quantity-container">
-                    <div id="downQuantity" onclick = "decreaseItemInCart(${item.id})"><i class="fa-solid fa-minus"></i></div>
-                    <div id="PDCart-Quantity">${item.quantity}</div>
-                    <div id="upQuantity" onclick = "addItemToCart(${item.id}, ${item.quantity})"><i class="fa-solid fa-plus"></i></div>
-                </div>
-                    <div id="delete-icon" onclick = "removeItemFromCart(${item.id})">
-                        <i class="fa-regular fa-trash-can"></i>
+                    <div id="PDCart2">
+                        <div id="quantity-container">
+                            <div id="downQuantity" onclick="decreaseItemInCart(${item.id})"><i class="fa-solid fa-minus"></i></div>
+                            <div id="PDCart-Quantity">${item.quantity}</div>
+                            <div id="upQuantity" onclick="addItemToCart(${item.id}, ${item.quantity})"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <div id="delete-icon" onclick="removeItemFromCart(${item.id})">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </div>
                     </div>
-                </div>
-            </div>`
-        ;
-    })
+                </div>`;
+        });
+    }
+
     document.querySelector('#cart-body #list-PD').innerHTML = html;
 }
+
 
 function calculateTotal(cart) {
     let totalAmout = 0;

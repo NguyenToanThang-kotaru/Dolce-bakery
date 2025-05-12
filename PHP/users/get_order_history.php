@@ -67,5 +67,8 @@ while ($order = $result->fetch_assoc()) {
     $html .= "</p></div></div>";
 }
 
+if (empty($html)) {
+    $html = "<div class='no-orders'>Bạn chưa có đơn hàng nào.</div>";
+}
 echo $html;
 ?>

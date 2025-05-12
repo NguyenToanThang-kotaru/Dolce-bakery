@@ -22,7 +22,7 @@ let userSession;
 buy.addEventListener("click", function () {
     let cart = JSON.parse(sessionStorage.getItem("cart"));
     if(cart.length === 0){
-        showToast("Chưa có sản phẩm trong giỏ.", false);
+        showToast("Giỏ hàng của bạn đang trống.", false);
         return;
     }
     if (flag_payment === 0) {
