@@ -20,21 +20,20 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<div class='" . $type . "-product'>
-        <div class='product-img'>
-            <div class='img-effect'>
-                <img src='" . $row['image'] . "' alt=''>
-                <div class='product-quantity'>Còn lại: " . $row['quantity'] . " sản phẩm</div>
-            </div>
-        </div>
-        <div class='product-name'>" . $row['pd_name'] . "</div>   
-        <div class='product-end'>
-            <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
-            <div class='add-cart'><img src='../../assest/cart.png' alt=''></div>
-        </div>
-      </div>";
-
-
+        echo "<div class='" . htmlspecialchars($type) . "-product'>
+                <div class='product-img'>
+                    <div class='img-effect'>
+                        <img src='" . htmlspecialchars($row['image']) . "' alt=''>
+                    </div>
+                </div>
+                <div class='product-name'>" . htmlspecialchars($row['pd_name']) . "</div>    
+                <div class='product-end'>
+                    <div class='price'>" . number_format($row['price'], 0, ',', '.') . " đ</div>
+                    <div class='add-cart' onclick='addToCart(" . $row['product_id'] . ")'>
+                        <img src='../../assest/cart.png' alt=''>
+                    </div>
+                </div>
+              </div>";
     }
 } else {
     echo "<p style='text-align: center;'>Không có sản phẩm nào</p>";

@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     loadCustomerAddress();
 });
@@ -265,6 +264,7 @@ function getAddressToPaying() {
                 const addressData = response.data;
                 const provinceId = addressData.province_id;
                 const districtId = addressData.district_id;
+                
                 $.ajax({
                     url: '../../PHP/users/getAddressName.php',
                     type: 'POST',
@@ -279,6 +279,9 @@ function getAddressToPaying() {
                             const districtName = res.districtName;
 
                             const address = addressData.addressDetail + ", " + districtName + ", " + provinceName;
+                            if (addressData.default_id == 1) {
+                                localStorage.setItem('defaultAddress', JSON.stringify(address));
+                            }
                             let userInfo = sessionStorage.getItem("userInfo");
                             userInfo = userInfo ? JSON.parse(userInfo) : {};
                             userInfo.address = address;
@@ -287,6 +290,7 @@ function getAddressToPaying() {
                             userInfo.province_id = provinceId;
                             sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
                             setUserInfoPayment();
+                            loadUserInfo();
                         } else {
                             console.warn("Không lấy được tên tỉnh/huyện:", res.message);
                         }
@@ -303,5 +307,7 @@ function getAddressToPaying() {
             console.error("Lỗi khi lấy địa chỉ theo ID:", error);
         }
     });
+
+  
 }
 

@@ -108,9 +108,7 @@
     align-items: center;
     margin-bottom: 8px;
 }
-.changed:hover{
-    cursor: pointer;
-}
+
 .value-wrapper {
     display: flex;
     align-items: center;
@@ -234,7 +232,15 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    min-height: 200px;
   }
+  .no-orders {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 18px;
+    color: #666;
+}
+
   .order-date{
     margin-bottom: 10px;
   }
@@ -537,4 +543,10 @@ input:checked + .slider:before {
 .slider {
   transition: 0.4s;
   border-radius: 34px;
+}
+.empty-cart-message {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 18px;
+    color: #888;
 }

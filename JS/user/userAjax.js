@@ -121,10 +121,6 @@ $(document).ready(function () {
                         username.focus();
                         return;
                     }
-                    else if (response.message === "Tài khoản đã bị khóa") {
-                        console.log(response);
-                        showToast("Tai khoan bi khoa", false);
-                    }
                     else if (response.message === "Sai mật khẩu") {
                         console.log(response);
                         var pwdContainer = document.querySelector(".password-container");
@@ -206,6 +202,7 @@ function clearErrors(form) {
 }
 
     function loadUserInfo() {
+        let address;
         let userData = sessionStorage.getItem("userInfo");
 
         if (!userData) {
@@ -215,9 +212,14 @@ function clearErrors(form) {
 
         let data = JSON.parse(userData);
         console.log("User info loaded from Session Storage:", data);
-        let address;
+        
+        const defaultAddress = localStorage.getItem("defaultAddress");
+        if (defaultAddress) {
+            address = JSON.parse(defaultAddress);
+        }
+        
         if(data.address == null) address = "Chưa có";
-        else address = data.address;
+        
         let html = `
             <div class="row">
                 <label for="account" class="Detail">Tài khoản: </label>
@@ -235,7 +237,14 @@ function clearErrors(form) {
                 <label for="phone" class="Detail">Số điện thoại: </label>
                 <span>${data.phoneNumber}</span>
             </div>
-            
+            <div class="row">
+                <label for="address" class="Detail titleAddressInfo">Địa chỉ:</label>
+
+                <div class="value-wrapper">
+                    <span class="content no-margin">${address}</span>
+                    <span class="changed no-margin" >Mặc định</span>
+                </div>
+            </div>
 
             <div id="Buy-history">
                         <div class="History" onclick = "openOrderHistory()">Lịch sử mua hàng</div>
