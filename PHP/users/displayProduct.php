@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include '../../PHP/config.php';
-$query = 'SELECT * FROM products';
+$query = 'SELECT * FROM products WHERE is_deleted = 0';
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {

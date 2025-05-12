@@ -17,7 +17,7 @@ $sql = "SELECT p.*
         FROM products p 
         JOIN subcategories sc ON p.subcategory_id = sc.id 
         JOIN categories c ON sc.category_id = c.id 
-        WHERE p.price BETWEEN ? AND ?";
+        WHERE p.price BETWEEN ? AND ? AND p.is_deleted = 0";
 
 $types = "dd";
 $params = [$minPrice, $maxPrice];

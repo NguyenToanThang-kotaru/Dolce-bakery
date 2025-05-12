@@ -12,7 +12,7 @@ $sql = "SELECT pd.*, sct.*, ct.*
 FROM products pd
 JOIN subcategories sct ON pd.subcategory_id = sct.id
 JOIN categories ct ON sct.category_id = ct.id
-WHERE ct.name = ? ";
+WHERE ct.name = ? AND pd.is_deleted = 0";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $type);
 $stmt->execute();
