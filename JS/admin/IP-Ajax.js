@@ -120,6 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const importPriceInput = document.getElementById('import-price');
     const profitPercent = document.getElementById('profit-percent');
 
+   
+
     // Hàm lấy số nguyên thô từ chuỗi có định dạng tiền tệ
     function getRawPrice(value) {
         return parseFloat(value.replace(/\D/g, '')) || 0;
@@ -167,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Khi click nút thêm sản phẩm
     document.getElementById('add-product-btn-ip').addEventListener('click', function(e) {
         e.preventDefault();
+        clearErrors(this);
         if (!selectedProduct) {
             alert('Vui lòng chọn sản phẩm!');
             return;
@@ -176,6 +179,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const profitPercent = document.getElementById('profit-percent').value;
         if (!quantity || !importPrice) {
             alert('Vui lòng nhập đủ số lượng và giá nhập!');
+            return;
+        }
+
+        let quantityRegex = /^.{8,}$/;
+        if (!quantityRegex.test(quantity)) {
+            showError(document.getElementById("quantity"), "Số lượng phải là số nguyên dương.");
             return;
         }
         // Tính thành tiền
@@ -545,4 +554,22 @@ document.querySelectorAll('.delete-btn-import').forEach(btn => {
         };
     });
 });
+
+
+function showError(inputElement, message) {
+    let errorDiv = inputElement.parentNode.querySelector(".error-msg");
+    if (!errorDiv) {
+        errorDiv = document.createElement("div");
+        errorDiv.className = "error-msg show";
+        inputElement.parentNode.appendChild(errorDiv);
+    }
+    errorDiv.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${message}`;
+    inputElement.focus();
+}
+
+function clearErrors(form) {
+    form.querySelectorAll(".error-msg").forEach((error) => {
+        error.remove();
+    });
+}
 

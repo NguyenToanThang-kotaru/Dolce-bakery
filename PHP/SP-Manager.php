@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM suppliers";
+$sql = "SELECT * FROM suppliers WHERE is_deleted = 0";
 
 $result = $conn->query($sql);
 
