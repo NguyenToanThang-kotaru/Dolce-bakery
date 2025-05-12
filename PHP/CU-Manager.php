@@ -8,10 +8,9 @@ $sql = "SELECT
             districts.name AS district_name,
             customeraddress.addressDetail AS addressDetail
         FROM customers
-        LEFT JOIN customeraddress ON customers.id = customeraddress.customer_id
+        LEFT JOIN customeraddress ON customers.id = customeraddress.customer_id AND customeraddress.default_id = 1
         LEFT JOIN provinces ON customeraddress.province_id = provinces.id
-        LEFT JOIN districts ON customeraddress.district_id = districts.id
-        WHERE customeraddress.default_id = 1";
+        LEFT JOIN districts ON customeraddress.district_id = districts.id";
 
 $result = $conn->query($sql);
 
