@@ -1929,3 +1929,8 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+.order-info{
+  color: rgba(141, 55, 69, 0.957);
+  text-decoration: none;
+}
