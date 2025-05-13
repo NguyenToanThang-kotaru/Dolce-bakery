@@ -144,7 +144,7 @@ $(document).ready(function () {
                         passWord.focus();
                     }
                     else if(response.message === "Tài khoản đã bị khóa"){
-                        showToast("Tài khoản đã bị khóa", true, 2000);                        
+                        showToast(`Tài khoản đã bị khóa`, true, 2000);                        
                     }
                     return;
                 }
