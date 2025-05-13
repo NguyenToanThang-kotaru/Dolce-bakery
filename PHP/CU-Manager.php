@@ -29,10 +29,10 @@ if ($result->num_rows > 0) {
                 </select>
               </td>";
         echo "<td style='text-align: center; vertical-align: middle;'>
-                <img src='/project_HTTT/Html/img/ACdetail.png' class='customer-detail' data-id='$cusId' alt='Xem chi tiết' style='width: 20px; height: 20px; cursor: pointer;'>
+                <img src='../../assest/ACdetail.png' class='customer-detail' data-id='$cusId' alt='Xem chi tiết' style='width: 20px; height: 20px; cursor: pointer;'>
               </td>";
         echo "<td style='text-align: center; vertical-align: middle;'>
-                <img src='/project_HTTT/Html/img/H-oder.png' class='history-order' data-id='$cusId' alt='Xem lịch sử' style='width: 20px; height: 20px; cursor: pointer;'>
+                <img src='../../assest/H-oder.png' class='history-order' data-id='$cusId' alt='Xem lịch sử' style='width: 20px; height: 20px; cursor: pointer;'>
               </td>";
         echo "<td>
                 <div class='fix-customer'>

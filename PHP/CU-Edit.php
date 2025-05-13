@@ -25,11 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $current_status; 
 
     // Lấy thông tin địa chỉ chi tiết
-    $sql_get_address = "SELECT c.addressDetail, p.name as province_name, d.name as district_name 
-                       FROM customers c 
-                       JOIN provinces p ON c.province_id = p.id 
-                       JOIN districts d ON c.district_id = d.id 
-                       WHERE c.id = ?";
+    $sql_get_address = "SELECT 
+                            customers.*, 
+                            provinces.name AS province_name, 
+                            districts.name AS district_name,
+                            customeraddress.addressDetail AS addressDetail
+                        FROM customers
+                        LEFT JOIN customeraddress ON customers.id = customeraddress.customer_id AND customeraddress.default_id = 1
+                        LEFT JOIN provinces ON customeraddress.province_id = provinces.id
+                        LEFT JOIN districts ON customeraddress.district_id = districts.id
+                        WHERE customers.id = ?";
     $stmt_get_address = $conn->prepare($sql_get_address);
     $stmt_get_address->bind_param("i", $id);
     $stmt_get_address->execute();

@@ -121,9 +121,18 @@ document.getElementById("fix-form-customer").addEventListener("submit", function
                         }
                     });
                 }
-
                 console.log("Cập nhật thành công!");
+                let tableBody = document.querySelector("#customer-table-body");
+                fetch("../../PHP/CU-Manager.php")
+                .then(response => response.text())
+                .then(html => {
+                    // Cập nhật lại nội dung bảng
+                    tableBody.innerHTML = html; 
+                })
+                .catch(error => console.error("Lỗi khi tải lại bảng:", error));
             }
+
+            
             
             // Cập nhật phần hiển thị chi tiết
             let detailSection = document.getElementById(`detail-customer-${customerId}`);
