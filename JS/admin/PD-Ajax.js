@@ -208,7 +208,14 @@ document.getElementById("update-form-product").addEventListener("submit", functi
                     </td>
                 `;
                 console.log("Cập nhật thành công!");
+                fetch("../../PHP/PD-Manager.php")
+                .then(response => response.text())
+                .then(html => {
+                    // Cập nhật lại nội dung bảng
+                    document.querySelector("#product-table-body").innerHTML = html; 
+                })
             }
+            
             else
                 console.log("Không tìm thấy sản phẩm cần cập nhật!");
         } else {

@@ -40,6 +40,15 @@
     
     
   }
+
+  .invoice-table thead{
+    width: 100%;
+  }
+
+  .invoice-table tbody{
+    width: 100%;
+  }
+
   #close-invoice{
     justify-items: flex-start;
     top: 10px;
